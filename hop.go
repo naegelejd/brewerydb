@@ -78,7 +78,7 @@ func (c *Client) NewHopList() *HopList {
 func (hl *HopList) getPage(pageNum int) error {
 	v := url.Values{}
 	v.Set("p", fmt.Sprintf("%d", pageNum))
-	u := hl.c.URL("/hops", &v)
+	u := hl.c.url("/hops", &v)
 
 	resp, err := hl.c.Get(u)
 	if err != nil {
@@ -141,7 +141,7 @@ func (hl *HopList) Next() (*Hop, error) {
 
 // GET: /hop/:hopId
 func (c *Client) Hop(id int) (hop *Hop, err error) {
-	u := c.URL(fmt.Sprintf("/hop/%d", id), nil)
+	u := c.url(fmt.Sprintf("/hop/%d", id), nil)
 	var resp *http.Response
 	resp, err = c.Get(u)
 	if err != nil {

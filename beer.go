@@ -11,10 +11,6 @@ import (
 // POST: /beer/:beerId/adjuncts
 // DELETE: /beer/:beerId/adjunct/:adjunctId
 
-// GET: /beer/:beerId/breweries
-// POST: /beer/:beerId/breweries
-// DELETE: /beer/:beerId/brewery/:breweryId
-
 // GET: /beer/:beerId/events
 
 // GET: /beer/:beerId/fermentables
@@ -48,13 +44,57 @@ type BeerList struct {
 	curBeer int
 }
 
+type ListOrder string
+type ListSort string
+
+const (
+	NameOrder        ListOrder = "name"
+	DescriptionOrder           = "description"
+	AbvOrder                   = "abv"
+	IbuOrder                   = "ibu"
+	GlasswareIDOrder           = "glasswareId"
+	SrmIDOrder                 = "smrID"
+	AvailableIDOrder           = "availableId"
+	StyleIDOrder               = "styleId"
+	IsOrganicOrder             = "isOrganic"
+	StatusOrder                = "status"
+	CreateDateOrder            = "createDate"
+	UpdateDateOrder            = "updateDate"
+	RandomOrder                = "random"
+)
+
+const (
+	AscendingSort  ListSort = "ASC"
+	DescendingSort          = "DESC"
+)
+
 type BeerListRequest struct {
+	IDs                string `json:"ids"` // IDs of the beers to return, comma separated. Max 10.
+	Name               string `json:"name"`
+	ABV                string `json:"abv"`
+	IBU                string `json:"ibu"`
+	GlasswareId        string `json:"glasswareId"`
+	SrmId              string `json:"srmId"`
+	AvailableId        string `json:"availableId"`
+	StyleId            string `json:"styleId"`
+	IsOrganic          string `json:"isOrganic"` // Y/N
+	HasLabels          string `json:"hasLabels"` // Y/N
+	Year               string `json:"year"`      // YYYY
+	Since              string `json:"since"`     // UNIX timestamp format. Max 30 days
+	Status             string `json:"status"`
+	Order              string `json:"order"`
+	Sort               string `json:"sort"`
+	RandomCount        string `json:"randomCount"`        // how many random beers to return. Max 10
+	WithBreweries      string `json:"withBreweries"`      // Y/N
+	WithSocialAccounts string `json:"withSocialAccounts"` // Premium. Y/N
+	WithIngredients    string `json:"withIngredients"`    // Premium. Y/N
 }
 
 type beerListResponse struct {
 	Status        string
 	CurrentPage   int
 	NumberOfPages int
+	TotalResults  int
 	Beers         []Beer `json:"data"`
 }
 
@@ -68,22 +108,25 @@ type Beer struct {
 	IBU             string
 	GlasswareID     float64
 	Glass           struct {
-		UpdateDate  string
 		ID          float64
+		Name        string
 		Description string
 		CreateDate  string
-		Name        string
+		UpdateDate  string
 	}
 	StyleID float64
 	Style   struct {
-		ID       float64
-		Category struct {
-			UpdateDate  string
+		ID         float64
+		CategoryID float64
+		Category   struct {
 			ID          float64
-			Description float64
-			CreateDate  string
 			Name        string
+			Description string
+			CreateDate  string
+			UpdateDate  string
 		}
+		Name        string
+		ShortName   string
 		Description string
 		IbuMin      string
 		IbuMax      string
@@ -97,8 +140,6 @@ type Beer struct {
 		AbvMax      string
 		CreateDate  string
 		UpdateDate  string
-		Name        string
-		CategoryID  float64
 	}
 	IsOrganic string
 	Labels    struct {
@@ -110,26 +151,24 @@ type Beer struct {
 	ServingTemperatureDisplay string
 	Status                    string
 	StatusDisplay             string
-	AvailableID               string
+	AvailableID               float64
 	Available                 struct {
-		Description string
+		ID          float64
 		Name        string
+		Description string
 	}
 	BeerVariationID string
 	BeerVariation   struct {
 		// TODO: instance of a Beer??
 	}
-	SrmID string
+	SrmID float64
 	Srm   struct {
-		// TODO: empty array??
+		ID   float64
+		Name string
+		Hex  string
+		// TODO: anything else?
 	}
 	Year string
-}
-
-type beerResponse struct {
-	Message string
-	Beer    Beer `json:"data"`
-	Status  string
 }
 
 // GET: /beers
@@ -138,10 +177,15 @@ func (c *Client) NewBeerList(req *BeerListRequest) *BeerList {
 }
 
 func (bl *BeerList) getPage(pageNum int) error {
-	v := url.Values{}
+	var v url.Values
+	if bl.req != nil {
+		v = encode(bl.req)
+	} else {
+		v = url.Values{}
+	}
 	v.Set("p", fmt.Sprintf("%d", pageNum))
-	// TODO: encode bl.req (BeerListRequest)
-	u := bl.c.URL("/beers", &v)
+
+	u := bl.c.url("/beers", &v)
 
 	resp, err := bl.c.Get(u)
 	if err != nil {
@@ -153,6 +197,9 @@ func (bl *BeerList) getPage(pageNum int) error {
 
 	beerListResp := &beerListResponse{}
 	if err := json.NewDecoder(resp.Body).Decode(beerListResp); err != nil {
+		// if e, ok := err.(*json.UnmarshalTypeError); ok == true {
+		// 	fmt.Printf("(JSON error) Value: %s, Type: %s", e.Value, e.Type.Kind())
+		// }
 		return err
 	}
 
@@ -202,8 +249,9 @@ func (bl *BeerList) Next() (*Beer, error) {
 }
 
 // GET: /beer/:beerId
+// TODO: add withBreweries, withSocialAccounts, withIngredients request parameters
 func (c *Client) Beer(id string) (beer *Beer, err error) {
-	u := c.URL("/beer/"+id, nil)
+	u := c.url("/beer/"+id, nil)
 	var resp *http.Response
 	resp, err = c.Get(u)
 	if err != nil {
@@ -214,7 +262,12 @@ func (c *Client) Beer(id string) (beer *Beer, err error) {
 	}
 	defer resp.Body.Close()
 
-	beerResp := beerResponse{}
+	beerResp := struct {
+		Message string
+		Beer    Beer `json:"data"`
+		Status  string
+	}{}
+
 	if err = json.NewDecoder(resp.Body).Decode(&beerResp); err != nil {
 		return
 	}
@@ -222,17 +275,90 @@ func (c *Client) Beer(id string) (beer *Beer, err error) {
 	return
 }
 
+type BeerChangeRequest struct {
+	Name               string `json:"name"`    // Required
+	StyleId            int    `json:"styleId"` // Required
+	Description        string `json:"description"`
+	ABV                string `json:"abv"`
+	IBU                string `json:"ibu"`
+	GlasswareId        int    `json:"glasswareId"`
+	SrmId              string `json:"srmID"`
+	AvailableId        string `json:"availableId"`
+	IsOrganic          string `json:"isOrganic"`
+	BeerVariationId    string `json:"beerVariationId"`
+	Year               string `json:"year"`
+	FoodPairings       string `json:"foodPairings"`
+	ServingTemperature string `json:"servingTemperature"`
+	OriginalGravity    string `json:"originalGravity"`
+	Brewery            string `json:"brewery"` // Comma separated list of existing brewery IDs
+	Label              string `json:"label"`   // Base 64 encoded image
+}
+
 // POST: /beers
-func (c *Client) AddBeer( /* params */ ) (id string, err error) {
+func (c *Client) AddBeer(req *BeerChangeRequest) (id string, err error) {
+	u := c.url("/beers", nil)
+
+	var resp *http.Response
+	resp, err = c.PostForm(u, encode(req))
+	if err != nil {
+		return
+	} else if resp.StatusCode != http.StatusOK {
+		err = fmt.Errorf("unable to create beer")
+		return
+	}
+	defer resp.Body.Close()
+
+	out := struct{ Data struct{ ID string } }{}
+	if err = json.NewDecoder(resp.Body).Decode(&out); err != nil {
+		return
+	}
+
+	id = out.Data.ID
 	return
 }
 
 // PUT: /beer/:beerId
-func (c *Client) UpdateBeer( /* params */ ) error {
+func (c *Client) UpdateBeer(id string, req *BeerChangeRequest) error {
+	u := c.url("/beer/"+id, nil)
+
+	resp, err := c.PostForm(u, encode(req))
+	if err != nil {
+		return err
+	} else if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("unable to update beer")
+	}
+	defer resp.Body.Close()
+
+	// TODO: check "status"=="success" in JSON response body?
+
 	return nil
 }
 
 // DELETE: /beer/:beerId
 func (c *Client) DeleteBeer(id string) error {
+	u := c.url("/beer/"+id, nil)
+	req, err := http.NewRequest("DELETE", u, nil)
+	if err != nil {
+		return err
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return err
+	} else if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("beer not found")
+	}
+
+	defer resp.Body.Close()
+
+	// TODO: Move to unit test and mock
+	// m := make(map[string]string)
+	// if err := json.NewDecoder(resp.Body).Decode(&m); err != nil {
+	// 	return err
+	// }
+	// if m["status"] != "success" {
+	// 	return fmt.Errorf("delete unsuccessful")
+	// }
+
 	return nil
 }

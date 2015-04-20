@@ -1,11 +1,5 @@
 package brewerydb
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
-
 type RandomBeerRequest struct {
 	ABV                string `json:"abv"`
 	IBU                string `json:"ibu"`
@@ -31,20 +25,10 @@ type randomBeerResponse struct {
 func (c *Client) RandomBeer(req *RandomBeerRequest) (b *Beer, err error) {
 	vals := encode(req)
 
-	u := c.URL("/beer/random", &vals)
-
-	var resp *http.Response
-	resp, err = c.Get(u)
-	if err != nil {
-		return
-	} else if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("bad status code: %d", resp.StatusCode)
-	}
-
-	defer resp.Body.Close()
+	u := c.url("/beer/random", &vals)
 
 	r := &randomBeerResponse{}
-	if err = json.NewDecoder(resp.Body).Decode(r); err != nil {
+	if err = c.getJSON(u, r); err != nil {
 		return
 	}
 

@@ -63,9 +63,17 @@ func encode(data interface{}) url.Values {
 
 		val := v.Field(i)
 
-		if !isEncodableValue(val) {
-			sval := toString(val)
-			query.Set(key, sval)
+		switch val.Kind() {
+		case reflect.Array, reflect.Slice:
+			for i := 0; i < val.Len(); i++ {
+				sval := toString(val.Index(i))
+				query.Add(key, sval)
+			}
+		default:
+			if isEncodableValue(val) {
+				sval := toString(val)
+				query.Set(key, sval)
+			}
 		}
 
 	}
@@ -77,13 +85,6 @@ func toString(v reflect.Value) string {
 	switch v.Kind() {
 	case reflect.String:
 		sval = v.String()
-	case reflect.Array, reflect.Slice:
-		if v.Len() > 0 {
-			sval += toString(v.Index(0))
-		}
-		for i := 1; i < v.Len(); i++ {
-			sval += "," + toString(v.Index(i))
-		}
 	case reflect.Bool:
 		if v.Bool() {
 			sval = "true"
@@ -108,17 +109,17 @@ func toString(v reflect.Value) string {
 func isEncodableValue(v reflect.Value) bool {
 	switch v.Kind() {
 	case reflect.Array, reflect.Slice, reflect.String:
-		return v.Len() == 0
+		return v.Len() != 0
 	case reflect.Bool:
-		return !v.Bool()
+		return v.Bool()
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-		return v.Int() == 0
+		return v.Int() != 0
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Uintptr:
-		return v.Uint() == 0
+		return v.Uint() != 0
 	case reflect.Float32, reflect.Float64:
-		return v.Float() == 0
+		return v.Float() != 0
 	case reflect.Ptr:
 		return isEncodableValue(reflect.Indirect(v))
 	}
-	return true
+	return false
 }

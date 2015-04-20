@@ -74,7 +74,7 @@ func (bl *BreweryList) getPage(pageNum int) error {
 	}
 	v.Set("p", fmt.Sprintf("%d", pageNum))
 
-	u := bl.c.URL("/breweries", &v)
+	u := bl.c.url("/breweries", &v)
 
 	resp, err := bl.c.Get(u)
 	if err != nil {
@@ -136,7 +136,7 @@ func (bl *BreweryList) Next() (*Brewery, error) {
 
 // GET: /brewery/:breweryId
 func (c *Client) Brewery(id string) (brewery *Brewery, err error) {
-	u := c.URL("/brewery/"+id, nil)
+	u := c.url("/brewery/"+id, nil)
 	var resp *http.Response
 	resp, err = c.Get(u)
 	if err != nil {
