@@ -37,6 +37,8 @@ import (
 // POST: /beer/:beerId/yeasts
 // DELETE: /beer/:beerId/yeast/:yeastId
 
+// BeerList represents a lazy list of Beers. Create a new one with
+// NewBeerList. Iterate over a BeerList using First() and Next().
 type BeerList struct {
 	c       *Client
 	req     *BeerListRequest
@@ -44,7 +46,10 @@ type BeerList struct {
 	curBeer int
 }
 
+// ListOrder represents the ordering of a list of values.
 type ListOrder string
+
+// ListSort represents the sorting scheme for a list of values.
 type ListSort string
 
 const (
@@ -68,6 +73,8 @@ const (
 	DescendingSort          = "DESC"
 )
 
+// BeerListRequest contains all the required and optional fields
+// used for querying for a list of Beers.
 type BeerListRequest struct {
 	IDs                string `json:"ids"` // IDs of the beers to return, comma separated. Max 10.
 	Name               string `json:"name"`
@@ -98,6 +105,7 @@ type beerListResponse struct {
 	Beers         []Beer `json:"data"`
 }
 
+// Beer contains all relevant information for a single Beer.
 type Beer struct {
 	ID              string
 	Name            string
@@ -171,11 +179,14 @@ type Beer struct {
 	Year string
 }
 
-// GET: /beers
+// NewBeerList returns a new BeerList that will use the given BeerListRequest
+// to query for a list of Beers.
+// (GET: /beers)
 func (c *Client) NewBeerList(req *BeerListRequest) *BeerList {
 	return &BeerList{c: c, req: req}
 }
 
+// getPage obtains the "next" page from the BreweryDB API
 func (bl *BeerList) getPage(pageNum int) error {
 	var v url.Values
 	if bl.req != nil {
@@ -213,6 +224,7 @@ func (bl *BeerList) getPage(pageNum int) error {
 	return nil
 }
 
+// First returns the first Beer in the BeerList.
 func (bl *BeerList) First() (*Beer, error) {
 	// If we already have page 1 cached, just return the first Beer
 	if bl.resp != nil && bl.resp.CurrentPage == 1 {
@@ -227,6 +239,8 @@ func (bl *BeerList) First() (*Beer, error) {
 	return &bl.resp.Beers[0], nil
 }
 
+// Next returns the next Beer in the BeerList on each successive call, or nil
+// if there are no more Beers.
 func (bl *BeerList) Next() (*Beer, error) {
 	bl.curBeer++
 	// if we're still on the same page just return beer
@@ -248,6 +262,7 @@ func (bl *BeerList) Next() (*Beer, error) {
 	return &bl.resp.Beers[0], nil
 }
 
+// Beer queries for a single Beer with the given Beer ID.
 // GET: /beer/:beerId
 // TODO: add withBreweries, withSocialAccounts, withIngredients request parameters
 func (c *Client) Beer(id string) (beer *Beer, err error) {
@@ -275,6 +290,8 @@ func (c *Client) Beer(id string) (beer *Beer, err error) {
 	return
 }
 
+// BeerChangeRequest contains all the relevant options available to change
+// an existing beer record in the BreweryDB.
 type BeerChangeRequest struct {
 	Name               string `json:"name"`    // Required
 	StyleId            int    `json:"styleId"` // Required
@@ -294,6 +311,7 @@ type BeerChangeRequest struct {
 	Label              string `json:"label"`   // Base 64 encoded image
 }
 
+// AddBeer adds a new Beer to the BreweryDB and returns its new ID on success.
 // POST: /beers
 func (c *Client) AddBeer(req *BeerChangeRequest) (id string, err error) {
 	u := c.url("/beers", nil)
@@ -317,6 +335,7 @@ func (c *Client) AddBeer(req *BeerChangeRequest) (id string, err error) {
 	return
 }
 
+// UpdateBeer changes an existing Beer in the BreweryDB.
 // PUT: /beer/:beerId
 func (c *Client) UpdateBeer(id string, req *BeerChangeRequest) error {
 	u := c.url("/beer/"+id, nil)
@@ -334,6 +353,7 @@ func (c *Client) UpdateBeer(id string, req *BeerChangeRequest) error {
 	return nil
 }
 
+// Delete removes the Beer with the given ID from the BreweryDB.
 // DELETE: /beer/:beerId
 func (c *Client) DeleteBeer(id string) error {
 	u := c.url("/beer/"+id, nil)
@@ -351,14 +371,7 @@ func (c *Client) DeleteBeer(id string) error {
 
 	defer resp.Body.Close()
 
-	// TODO: Move to unit test and mock
-	// m := make(map[string]string)
-	// if err := json.NewDecoder(resp.Body).Decode(&m); err != nil {
-	// 	return err
-	// }
-	// if m["status"] != "success" {
-	// 	return fmt.Errorf("delete unsuccessful")
-	// }
+	// TODO: extract and return response message
 
 	return nil
 }

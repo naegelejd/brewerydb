@@ -1,5 +1,6 @@
 package brewerydb
 
+// RandomBeerRequest contains options for querying for a random beer.
 type RandomBeerRequest struct {
 	ABV                string `json:"abv"`
 	IBU                string `json:"ibu"`
@@ -21,6 +22,8 @@ type randomBeerResponse struct {
 	Beer    Beer `json:"data"`
 }
 
+// RandomBeer returns a random beer that meets the requirements specified
+// in the given RandomBeerRequest.
 // GET: /beer/random
 func (c *Client) RandomBeer(req *RandomBeerRequest) (b *Beer, err error) {
 	vals := encode(req)

@@ -13,6 +13,8 @@ type breweryListResponse struct {
 	Breweries     []Brewery `json:"data"`
 }
 
+// BreweryList represents a lazy list of breweries. Create a new one with
+// NewBreweryList. Iterate over a BreweryList using First() and Next().
 type BreweryList struct {
 	c          *Client
 	resp       *breweryListResponse
@@ -20,6 +22,7 @@ type BreweryList struct {
 	curBrewery int
 }
 
+// Brewery contains all relevant information for a single Brewery.
 type Brewery struct {
 	ID             string
 	Description    string
@@ -39,6 +42,8 @@ type Brewery struct {
 	StatusDisplay string
 }
 
+// BreweryListRequest contains all the required and optional fields
+// used for querying for a list of Breweries.
 type BreweryListRequest struct {
 	Name        string `json:"name"`
 	IDs         string `json:"ids"`
@@ -59,11 +64,14 @@ type breweryResponse struct {
 	Status  string
 }
 
+// NewBreweryList returns a new BreweryList that will use the given
+// BreweryListRequest to query for a list of Breweries.
 // GET: /breweries
 func (c *Client) NewBreweryList(req *BreweryListRequest) *BreweryList {
 	return &BreweryList{c: c, req: req}
 }
 
+// getPage obtains the "next" page from the BreweryDB API
 func (bl *BreweryList) getPage(pageNum int) error {
 	v := encode(bl.req)
 	v.Set("p", fmt.Sprintf("%d", pageNum))
@@ -93,6 +101,7 @@ func (bl *BreweryList) getPage(pageNum int) error {
 	return nil
 }
 
+// First returns the first Brewery in the BreweryList.
 func (bl *BreweryList) First() (*Brewery, error) {
 	// If we already have page 1 cached, just return the first Brewery
 	if bl.resp != nil && bl.resp.CurrentPage == 1 {
@@ -107,6 +116,8 @@ func (bl *BreweryList) First() (*Brewery, error) {
 	return &bl.resp.Breweries[0], nil
 }
 
+// Next returns the next Brewery in the BreweryList on each successive call,
+// or nil if there are no more Breweries.
 func (bl *BreweryList) Next() (*Brewery, error) {
 	bl.curBrewery++
 	// if we're still on the same page just return brewery
@@ -128,6 +139,7 @@ func (bl *BreweryList) Next() (*Brewery, error) {
 	return &bl.resp.Breweries[0], nil
 }
 
+// Brewery queries for a single Brewery with the given Brewery ID.
 // GET: /brewery/:breweryId
 func (c *Client) Brewery(id string) (brewery *Brewery, err error) {
 	u := c.url("/brewery/"+id, nil)
@@ -149,17 +161,37 @@ func (c *Client) Brewery(id string) (brewery *Brewery, err error) {
 	return
 }
 
+// AddBrewery adds a new Brewery to the BreweryDB and returns its new ID on success.
 // POST: /breweries
 func (c *Client) AddBrewery( /* params */ ) (id string, err error) {
 	return
 }
 
+// UpdateBrewery changes an existing Brewery in the BreweryDB.
 // PUT: /brewery/:breweryId
 func (c *Client) UpdateBrewery( /* params */ ) error {
 	return nil
 }
 
+// DeleteBrewery removes the Brewery with the given ID from the BreweryDB.
 // DELETE: /brewery/:breweryId
-func (c *Client) DeleteBrewery( /* params */ ) error {
+func (c *Client) DeleteBrewery(id string) error {
+	u := c.url("/brewery/"+id, nil)
+	req, err := http.NewRequest("DELETE", u, nil)
+	if err != nil {
+		return err
+	}
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return err
+	} else if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("brewery not found")
+	}
+
+	defer resp.Body.Close()
+
+	// TODO: extract and return response message
+
 	return nil
 }

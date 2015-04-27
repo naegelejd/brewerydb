@@ -15,12 +15,15 @@ type hopListResponse struct {
 	Hops          []Hop `json:"data"`
 }
 
+// HopList represents a lazy list of Hops. Create a new one with
+// NewHopList. Iterate over a HopList using First() and Next().
 type HopList struct {
 	c      *Client
 	resp   *hopListResponse
 	curHop int
 }
 
+// Hop contains all relevant information for a single variety of Hop.
 type Hop struct {
 	ID               int
 	Name             string
@@ -64,17 +67,21 @@ type hopResponse struct {
 	Status  string
 }
 
-// Hops returns a HopsList which can be consumed like so:
+// NewHopList returns a new HopList which can be consumed like so:
+//
+// TODO: THIS IS BROKEN: error in First() will be missed completely
 //
 // hs, _ := client.NewHopList()
 // for h, err := hs.First(); h != nil; h, err = hs.Next() {
 //	if err != nil { ...; break }
 //	...
 // }
+// GET: /hops
 func (c *Client) NewHopList() *HopList {
 	return &HopList{c: c}
 }
 
+// getPage obtains the "next" page from the BreweryDB API.
 func (hl *HopList) getPage(pageNum int) error {
 	v := url.Values{}
 	v.Set("p", fmt.Sprintf("%d", pageNum))
@@ -103,7 +110,7 @@ func (hl *HopList) getPage(pageNum int) error {
 	return nil
 }
 
-// GET: /hops
+// First returns the first Hop in the HopList.
 func (hl *HopList) First() (*Hop, error) {
 	// If we already have page 1 cached, just return the first Hop
 	if hl.resp != nil && hl.resp.CurrentPage == 1 {
@@ -118,6 +125,8 @@ func (hl *HopList) First() (*Hop, error) {
 	return &hl.resp.Hops[0], nil
 }
 
+// Next returns the next Hop in the HopList on each successive call, or nil
+// if there are no more Hops.
 func (hl *HopList) Next() (*Hop, error) {
 	hl.curHop++
 	// if we're still on the same page just return hop
@@ -139,6 +148,7 @@ func (hl *HopList) Next() (*Hop, error) {
 	return &hl.resp.Hops[0], nil
 }
 
+// Hop queries for a single Hop with the given Hop ID.
 // GET: /hop/:hopId
 func (c *Client) Hop(id int) (hop *Hop, err error) {
 	u := c.url(fmt.Sprintf("/hop/%d", id), nil)

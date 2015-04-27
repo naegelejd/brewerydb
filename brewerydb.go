@@ -1,3 +1,9 @@
+// Copyright 2015 Joseph Naegele. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// Package brewerydb provides bindings to the BreweryDB API
+// (http://www.brewerydb.com)
 package brewerydb
 
 import (
