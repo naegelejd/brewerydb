@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"net/url"
 )
 
 type breweryListResponse struct {
@@ -66,12 +65,7 @@ func (c *Client) NewBreweryList(req *BreweryListRequest) *BreweryList {
 }
 
 func (bl *BreweryList) getPage(pageNum int) error {
-	var v url.Values
-	if bl.req != nil {
-		v = encode(bl.req)
-	} else {
-		v = url.Values{}
-	}
+	v := encode(bl.req)
 	v.Set("p", fmt.Sprintf("%d", pageNum))
 
 	u := bl.c.url("/breweries", &v)

@@ -31,12 +31,44 @@ func (c *Client) BeerBreweries(id string) ([]*Brewery, error) {
 	return breweriesResp.Data, nil
 }
 
-// POST: /beer/:beerId/breweries
-func (c *Client) AddBeerBreweries(id string) {
+type BeerBreweryRequest struct {
+	LocationID string `json:"locationId"`
+}
 
+// WRONG in documentation: POST: /beer/:beerId/breweries
+// POST: /beer/:beerId/brewery/:breweryId
+// TODO: rename to AddBreweryToBeer?
+func (c *Client) AddBeerBrewery(beerID, breweryID string, req *BeerBreweryRequest) error {
+	u := c.url("/beer/"+beerID+"/brewery/"+breweryID, nil)
+
+	resp, err := c.PostForm(u, encode(req))
+	if err != nil {
+		return err
+	} else if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("unable to add brewery")
+	}
+	defer resp.Body.Close()
+
+	return nil
 }
 
 // DELETE: /beer/:beerId/brewery/:breweryId
-func (c *Client) DeleteBeerBreweries(id string) {
+// TODO: rename to DeleteBreweryFromBeer
+func (c *Client) DeleteBeerBreweries(beerID, breweryID string, req *BeerBreweryRequest) error {
+	v := encode(req)
+	u := c.url("/beer/"+beerID+"/brewery/"+breweryID, &v)
+	q, err := http.NewRequest("DELETE", u, nil)
+	if err != nil {
+		return err
+	}
 
+	resp, err := c.Do(q)
+	if resp != nil {
+		return err
+	} else if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("unable to delete brewery")
+	}
+	defer resp.Body.Close()
+
+	return nil
 }

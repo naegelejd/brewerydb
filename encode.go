@@ -34,19 +34,23 @@ import (
 // }
 
 func encode(data interface{}) url.Values {
+	query := url.Values{}
+
 	t := reflect.TypeOf(data)
 	v := reflect.ValueOf(data)
 
 	if t.Kind() == reflect.Ptr {
+		if v.IsNil() {
+			return query
+		}
 		v = reflect.Indirect(v)
 		t = v.Type()
 	}
 
 	if t.Kind() != reflect.Struct {
-		panic("expected struct")
+		return query
 	}
 
-	query := url.Values{}
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
 		var key string
