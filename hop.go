@@ -7,6 +7,11 @@ import (
 	"net/url"
 )
 
+// HopService provides access to the BreweryDB Hop API. Use Client.Hop.
+type HopService struct {
+	c *Client
+}
+
 type hopListResponse struct {
 	Status        string
 	CurrentPage   int
@@ -18,9 +23,9 @@ type hopListResponse struct {
 // HopList represents a lazy list of Hops. Create a new one with
 // NewHopList. Iterate over a HopList using First() and Next().
 type HopList struct {
-	c      *Client
-	resp   *hopListResponse
-	curHop int
+	service *HopService
+	resp    *hopListResponse
+	curHop  int
 }
 
 // Hop contains all relevant information for a single variety of Hop.
@@ -77,17 +82,17 @@ type hopResponse struct {
 //	...
 // }
 // GET: /hops
-func (c *Client) NewHopList() *HopList {
-	return &HopList{c: c}
+func (s *HopService) NewHopList() *HopList {
+	return &HopList{service: s}
 }
 
 // getPage obtains the "next" page from the BreweryDB API.
 func (hl *HopList) getPage(pageNum int) error {
 	v := url.Values{}
 	v.Set("p", fmt.Sprintf("%d", pageNum))
-	u := hl.c.url("/hops", &v)
+	u := hl.service.c.url("/hops", &v)
 
-	resp, err := hl.c.Get(u)
+	resp, err := hl.service.c.Get(u)
 	if err != nil {
 		return err
 	} else if resp.StatusCode == http.StatusNotFound {
@@ -150,10 +155,10 @@ func (hl *HopList) Next() (*Hop, error) {
 
 // Hop queries for a single Hop with the given Hop ID.
 // GET: /hop/:hopId
-func (c *Client) Hop(id int) (hop *Hop, err error) {
-	u := c.url(fmt.Sprintf("/hop/%d", id), nil)
+func (s *HopService) Hop(id int) (hop *Hop, err error) {
+	u := s.c.url(fmt.Sprintf("/hop/%d", id), nil)
 	var resp *http.Response
-	resp, err = c.Get(u)
+	resp, err = s.c.Get(u)
 	if err != nil {
 		return
 	} else if resp.StatusCode == http.StatusNotFound {

@@ -22,16 +22,16 @@ type randomBeerResponse struct {
 	Beer    Beer `json:"data"`
 }
 
-// RandomBeer returns a random beer that meets the requirements specified
+// Random returns a random beer that meets the requirements specified
 // in the given RandomBeerRequest.
 // GET: /beer/random
-func (c *Client) RandomBeer(req *RandomBeerRequest) (b *Beer, err error) {
+func (s *BeerService) Random(req *RandomBeerRequest) (b *Beer, err error) {
 	vals := encode(req)
 
-	u := c.url("/beer/random", &vals)
+	u := s.c.url("/beer/random", &vals)
 
 	r := &randomBeerResponse{}
-	if err = c.getJSON(u, r); err != nil {
+	if err = s.c.getJSON(u, r); err != nil {
 		return
 	}
 

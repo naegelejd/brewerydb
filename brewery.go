@@ -6,6 +6,11 @@ import (
 	"net/http"
 )
 
+// BreweryService provides access to the BreweryDB Brewery API. Use Client.Brewery.
+type BreweryService struct {
+	c *Client
+}
+
 type breweryListResponse struct {
 	Status        string
 	CurrentPage   int
@@ -16,7 +21,7 @@ type breweryListResponse struct {
 // BreweryList represents a lazy list of breweries. Create a new one with
 // NewBreweryList. Iterate over a BreweryList using First() and Next().
 type BreweryList struct {
-	c          *Client
+	service    *BreweryService
 	resp       *breweryListResponse
 	req        *BreweryListRequest
 	curBrewery int
@@ -67,8 +72,8 @@ type breweryResponse struct {
 // NewBreweryList returns a new BreweryList that will use the given
 // BreweryListRequest to query for a list of Breweries.
 // GET: /breweries
-func (c *Client) NewBreweryList(req *BreweryListRequest) *BreweryList {
-	return &BreweryList{c: c, req: req}
+func (s *BreweryService) NewBreweryList(req *BreweryListRequest) *BreweryList {
+	return &BreweryList{service: s, req: req}
 }
 
 // getPage obtains the "next" page from the BreweryDB API
@@ -76,9 +81,9 @@ func (bl *BreweryList) getPage(pageNum int) error {
 	v := encode(bl.req)
 	v.Set("p", fmt.Sprintf("%d", pageNum))
 
-	u := bl.c.url("/breweries", &v)
+	u := bl.service.c.url("/breweries", &v)
 
-	resp, err := bl.c.Get(u)
+	resp, err := bl.service.c.Get(u)
 	if err != nil {
 		return err
 	} else if resp.StatusCode == http.StatusNotFound {
@@ -141,10 +146,10 @@ func (bl *BreweryList) Next() (*Brewery, error) {
 
 // Brewery queries for a single Brewery with the given Brewery ID.
 // GET: /brewery/:breweryId
-func (c *Client) Brewery(id string) (brewery *Brewery, err error) {
-	u := c.url("/brewery/"+id, nil)
+func (s *BreweryService) Brewery(id string) (brewery *Brewery, err error) {
+	u := s.c.url("/brewery/"+id, nil)
 	var resp *http.Response
-	resp, err = c.Get(u)
+	resp, err = s.c.Get(u)
 	if err != nil {
 		return
 	} else if resp.StatusCode == http.StatusNotFound {
@@ -163,26 +168,26 @@ func (c *Client) Brewery(id string) (brewery *Brewery, err error) {
 
 // AddBrewery adds a new Brewery to the BreweryDB and returns its new ID on success.
 // POST: /breweries
-func (c *Client) AddBrewery( /* params */ ) (id string, err error) {
+func (s *BreweryService) AddBrewery( /* params */ ) (id string, err error) {
 	return
 }
 
 // UpdateBrewery changes an existing Brewery in the BreweryDB.
 // PUT: /brewery/:breweryId
-func (c *Client) UpdateBrewery( /* params */ ) error {
+func (s *BreweryService) UpdateBrewery( /* params */ ) error {
 	return nil
 }
 
 // DeleteBrewery removes the Brewery with the given ID from the BreweryDB.
 // DELETE: /brewery/:breweryId
-func (c *Client) DeleteBrewery(id string) error {
-	u := c.url("/brewery/"+id, nil)
+func (s *BreweryService) DeleteBrewery(id string) error {
+	u := s.c.url("/brewery/"+id, nil)
 	req, err := http.NewRequest("DELETE", u, nil)
 	if err != nil {
 		return err
 	}
 
-	resp, err := c.Do(req)
+	resp, err := s.c.Do(req)
 	if err != nil {
 		return err
 	} else if resp.StatusCode != http.StatusOK {

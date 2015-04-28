@@ -21,10 +21,18 @@ type Client struct {
 	http.Client
 	apiKey      string
 	numRequests int
+	Beer        *BeerService
+	Brewery     *BreweryService
+	Hop         *HopService
 }
 
 func NewClient(apiKey string) *Client {
-	return &Client{http.Client{}, apiKey, 0}
+	c := &Client{}
+	c.apiKey = apiKey
+	c.Beer = &BeerService{c}
+	c.Brewery = &BreweryService{c}
+	c.Hop = &HopService{c}
+	return c
 }
 
 func (c *Client) url(endpoint string, vals *url.Values) string {

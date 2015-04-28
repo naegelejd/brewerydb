@@ -6,11 +6,12 @@ import (
 	"net/http"
 )
 
+// Breweries queries for all Breweries associated with the Beer having the given ID.
 // GET: /beer/:beerId/breweries
-func (c *Client) BeerBreweries(id string) ([]*Brewery, error) {
-	u := c.url("/beer/"+id+"/breweries", nil)
+func (s *BeerService) Breweries(id string) ([]*Brewery, error) {
+	u := s.c.url("/beer/"+id+"/breweries", nil)
 
-	resp, err := c.Get(u)
+	resp, err := s.c.Get(u)
 	if err != nil {
 		return nil, err
 	} else if resp.StatusCode != http.StatusOK {
@@ -31,17 +32,20 @@ func (c *Client) BeerBreweries(id string) ([]*Brewery, error) {
 	return breweriesResp.Data, nil
 }
 
+// BeerBreweryRequest allows for specifying locations for a given Brewery, e.g.
+// if only adding/removing a specific Brewery location from a Beer.
 type BeerBreweryRequest struct {
 	LocationID string `json:"locationId"`
 }
 
+// AddBrewery adds the Brewery with the given Brewery ID to the Beer
+// with the given Beer ID.
 // WRONG in documentation: POST: /beer/:beerId/breweries
 // POST: /beer/:beerId/brewery/:breweryId
-// TODO: rename to AddBreweryToBeer?
-func (c *Client) AddBeerBrewery(beerID, breweryID string, req *BeerBreweryRequest) error {
-	u := c.url("/beer/"+beerID+"/brewery/"+breweryID, nil)
+func (s *BeerService) AddBrewery(beerID, breweryID string, req *BeerBreweryRequest) error {
+	u := s.c.url("/beer/"+beerID+"/brewery/"+breweryID, nil)
 
-	resp, err := c.PostForm(u, encode(req))
+	resp, err := s.c.PostForm(u, encode(req))
 	if err != nil {
 		return err
 	} else if resp.StatusCode != http.StatusOK {
@@ -52,17 +56,18 @@ func (c *Client) AddBeerBrewery(beerID, breweryID string, req *BeerBreweryReques
 	return nil
 }
 
+// DeleteBrewery removes the Brewery with the given Brewery ID from the Beer
+// with the given Beer ID.
 // DELETE: /beer/:beerId/brewery/:breweryId
-// TODO: rename to DeleteBreweryFromBeer
-func (c *Client) DeleteBeerBreweries(beerID, breweryID string, req *BeerBreweryRequest) error {
+func (s *BeerService) DeleteBrewery(beerID, breweryID string, req *BeerBreweryRequest) error {
 	v := encode(req)
-	u := c.url("/beer/"+beerID+"/brewery/"+breweryID, &v)
+	u := s.c.url("/beer/"+beerID+"/brewery/"+breweryID, &v)
 	q, err := http.NewRequest("DELETE", u, nil)
 	if err != nil {
 		return err
 	}
 
-	resp, err := c.Do(q)
+	resp, err := s.c.Do(q)
 	if resp != nil {
 		return err
 	} else if resp.StatusCode != http.StatusOK {

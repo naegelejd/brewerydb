@@ -37,10 +37,15 @@ import (
 // POST: /beer/:beerId/yeasts
 // DELETE: /beer/:beerId/yeast/:yeastId
 
+// BeerService provides access to the BreweryDB Beer API. Use Client.Beer.
+type BeerService struct {
+	c *Client
+}
+
 // BeerList represents a lazy list of Beers. Create a new one with
 // NewBeerList. Iterate over a BeerList using First() and Next().
 type BeerList struct {
-	c       *Client
+	service *BeerService
 	req     *BeerListRequest
 	resp    *beerListResponse
 	curBeer int
@@ -182,8 +187,8 @@ type Beer struct {
 // NewBeerList returns a new BeerList that will use the given BeerListRequest
 // to query for a list of Beers.
 // (GET: /beers)
-func (c *Client) NewBeerList(req *BeerListRequest) *BeerList {
-	return &BeerList{c: c, req: req}
+func (s *BeerService) NewBeerList(req *BeerListRequest) *BeerList {
+	return &BeerList{service: s, req: req}
 }
 
 // getPage obtains the "next" page from the BreweryDB API
@@ -196,9 +201,9 @@ func (bl *BeerList) getPage(pageNum int) error {
 	}
 	v.Set("p", fmt.Sprintf("%d", pageNum))
 
-	u := bl.c.url("/beers", &v)
+	u := bl.service.c.url("/beers", &v)
 
-	resp, err := bl.c.Get(u)
+	resp, err := bl.service.c.Get(u)
 	if err != nil {
 		return err
 	} else if resp.StatusCode == http.StatusNotFound {
@@ -265,10 +270,10 @@ func (bl *BeerList) Next() (*Beer, error) {
 // Beer queries for a single Beer with the given Beer ID.
 // GET: /beer/:beerId
 // TODO: add withBreweries, withSocialAccounts, withIngredients request parameters
-func (c *Client) Beer(id string) (beer *Beer, err error) {
-	u := c.url("/beer/"+id, nil)
+func (s *BeerService) Beer(id string) (beer *Beer, err error) {
+	u := s.c.url("/beer/"+id, nil)
 	var resp *http.Response
-	resp, err = c.Get(u)
+	resp, err = s.c.Get(u)
 	if err != nil {
 		return
 	} else if resp.StatusCode == http.StatusNotFound {
@@ -311,13 +316,13 @@ type BeerChangeRequest struct {
 	Label              string `json:"label"`   // Base 64 encoded image
 }
 
-// AddBeer adds a new Beer to the BreweryDB and returns its new ID on success.
+// Add adds a new Beer to the BreweryDB and returns its new ID on success.
 // POST: /beers
-func (c *Client) AddBeer(req *BeerChangeRequest) (id string, err error) {
-	u := c.url("/beers", nil)
+func (s *BeerService) Add(req *BeerChangeRequest) (id string, err error) {
+	u := s.c.url("/beers", nil)
 
 	var resp *http.Response
-	resp, err = c.PostForm(u, encode(req))
+	resp, err = s.c.PostForm(u, encode(req))
 	if err != nil {
 		return
 	} else if resp.StatusCode != http.StatusOK {
@@ -335,12 +340,12 @@ func (c *Client) AddBeer(req *BeerChangeRequest) (id string, err error) {
 	return
 }
 
-// UpdateBeer changes an existing Beer in the BreweryDB.
+// Update changes an existing Beer in the BreweryDB.
 // PUT: /beer/:beerId
-func (c *Client) UpdateBeer(id string, req *BeerChangeRequest) error {
-	u := c.url("/beer/"+id, nil)
+func (s *BeerService) Update(id string, req *BeerChangeRequest) error {
+	u := s.c.url("/beer/"+id, nil)
 
-	resp, err := c.PostForm(u, encode(req))
+	resp, err := s.c.PostForm(u, encode(req))
 	if err != nil {
 		return err
 	} else if resp.StatusCode != http.StatusOK {
@@ -355,14 +360,14 @@ func (c *Client) UpdateBeer(id string, req *BeerChangeRequest) error {
 
 // Delete removes the Beer with the given ID from the BreweryDB.
 // DELETE: /beer/:beerId
-func (c *Client) DeleteBeer(id string) error {
-	u := c.url("/beer/"+id, nil)
+func (s *BeerService) Delete(id string) error {
+	u := s.c.url("/beer/"+id, nil)
 	req, err := http.NewRequest("DELETE", u, nil)
 	if err != nil {
 		return err
 	}
 
-	resp, err := c.Do(req)
+	resp, err := s.c.Do(req)
 	if err != nil {
 		return err
 	} else if resp.StatusCode != http.StatusOK {
