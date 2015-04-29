@@ -7,8 +7,8 @@ import (
 )
 
 // Breweries queries for all Breweries associated with the Beer having the given ID.
-// GET: /beer/:beerId/breweries
 func (s *BeerService) Breweries(id string) ([]*Brewery, error) {
+	// GET: /beer/:beerId/breweries
 	u := s.c.url("/beer/"+id+"/breweries", nil)
 
 	resp, err := s.c.Get(u)
@@ -40,9 +40,10 @@ type BeerBreweryRequest struct {
 
 // AddBrewery adds the Brewery with the given Brewery ID to the Beer
 // with the given Beer ID.
+//
 // WRONG in documentation: POST: /beer/:beerId/breweries
-// POST: /beer/:beerId/brewery/:breweryId
 func (s *BeerService) AddBrewery(beerID, breweryID string, req *BeerBreweryRequest) error {
+	// POST: /beer/:beerId/brewery/:breweryId
 	u := s.c.url("/beer/"+beerID+"/brewery/"+breweryID, nil)
 
 	resp, err := s.c.PostForm(u, encode(req))
@@ -58,8 +59,8 @@ func (s *BeerService) AddBrewery(beerID, breweryID string, req *BeerBreweryReque
 
 // DeleteBrewery removes the Brewery with the given Brewery ID from the Beer
 // with the given Beer ID.
-// DELETE: /beer/:beerId/brewery/:breweryId
 func (s *BeerService) DeleteBrewery(beerID, breweryID string, req *BeerBreweryRequest) error {
+	// DELETE: /beer/:beerId/brewery/:breweryId
 	v := encode(req)
 	u := s.c.url("/beer/"+beerID+"/brewery/"+breweryID, &v)
 	q, err := http.NewRequest("DELETE", u, nil)

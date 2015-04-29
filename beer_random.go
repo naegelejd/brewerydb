@@ -24,8 +24,8 @@ type randomBeerResponse struct {
 
 // Random returns a random beer that meets the requirements specified
 // in the given RandomBeerRequest.
-// GET: /beer/random
 func (s *BeerService) Random(req *RandomBeerRequest) (b *Beer, err error) {
+	// GET: /beer/random
 	vals := encode(req)
 
 	u := s.c.url("/beer/random", &vals)

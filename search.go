@@ -1,17 +1,13 @@
 package brewerydb
 
+type SearchService struct {
+	c *Client
+}
+
 type SearchResults struct {
 	c *Client
 }
 
-func (c *Client) Search( /* params */ ) (*SearchResults, error) {
+func (ss *SearchService) Search( /* params */ ) (*SearchResults, error) {
 	return nil, nil
-}
-
-func (sr *SearchResults) First() error {
-	return nil
-}
-
-func (sr *SearchResults) Next() error {
-	return nil
 }

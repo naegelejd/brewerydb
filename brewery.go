@@ -71,8 +71,8 @@ type breweryResponse struct {
 
 // NewBreweryList returns a new BreweryList that will use the given
 // BreweryListRequest to query for a list of Breweries.
-// GET: /breweries
 func (s *BreweryService) NewBreweryList(req *BreweryListRequest) *BreweryList {
+	// GET: /breweries
 	return &BreweryList{service: s, req: req}
 }
 
@@ -145,8 +145,8 @@ func (bl *BreweryList) Next() (*Brewery, error) {
 }
 
 // Brewery queries for a single Brewery with the given Brewery ID.
-// GET: /brewery/:breweryId
 func (s *BreweryService) Brewery(id string) (brewery *Brewery, err error) {
+	// GET: /brewery/:breweryId
 	u := s.c.url("/brewery/"+id, nil)
 	var resp *http.Response
 	resp, err = s.c.Get(u)
@@ -167,20 +167,20 @@ func (s *BreweryService) Brewery(id string) (brewery *Brewery, err error) {
 }
 
 // AddBrewery adds a new Brewery to the BreweryDB and returns its new ID on success.
-// POST: /breweries
 func (s *BreweryService) AddBrewery( /* params */ ) (id string, err error) {
+	// POST: /breweries
 	return
 }
 
 // UpdateBrewery changes an existing Brewery in the BreweryDB.
-// PUT: /brewery/:breweryId
 func (s *BreweryService) UpdateBrewery( /* params */ ) error {
+	// PUT: /brewery/:breweryId
 	return nil
 }
 
 // DeleteBrewery removes the Brewery with the given ID from the BreweryDB.
-// DELETE: /brewery/:breweryId
 func (s *BreweryService) DeleteBrewery(id string) error {
+	// DELETE: /brewery/:breweryId
 	u := s.c.url("/brewery/"+id, nil)
 	req, err := http.NewRequest("DELETE", u, nil)
 	if err != nil {

@@ -18,7 +18,7 @@ func TestDeleteBeer(t *testing.T) {
 }
 
 // Get a random beer with an ABV between 8.0 and 9.0
-func ExampleRandomBeer() {
+func ExampleBeerService_Random() {
 	c := NewClient("<your API key>")
 
 	req := &RandomBeerRequest{
@@ -33,7 +33,7 @@ func ExampleRandomBeer() {
 	fmt.Println(b.Labels.Large)
 }
 
-func ExampleSpecificBeers() {
+func ExampleBeerList() {
 	c := NewClient("<your API key>")
 
 	// Get first 40 beers with an ABV between 8.0 and 9.0, descending, alphabetical
@@ -49,6 +49,10 @@ func ExampleSpecificBeers() {
 			break
 		}
 	}
+}
+
+func ExampleBeerService_Breweries() {
+	c := NewClient("<your API key>")
 
 	// Get breweries for a given beer
 	breweries, err := c.Beer.Breweries("jmGoBA")

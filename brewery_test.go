@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func ExampleBreweries1983() {
+func ExampleBreweryList() {
 	c := NewClient("<your API key>")
 
 	// Get all breweries established in 1983

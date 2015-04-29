@@ -120,42 +120,11 @@ type Beer struct {
 	ABV             string
 	IBU             string
 	GlasswareID     float64
-	Glass           struct {
-		ID          float64
-		Name        string
-		Description string
-		CreateDate  string
-		UpdateDate  string
-	}
-	StyleID float64
-	Style   struct {
-		ID         float64
-		CategoryID float64
-		Category   struct {
-			ID          float64
-			Name        string
-			Description string
-			CreateDate  string
-			UpdateDate  string
-		}
-		Name        string
-		ShortName   string
-		Description string
-		IbuMin      string
-		IbuMax      string
-		SrmMin      string
-		SrmMax      string
-		OgMin       string
-		OgMax       string
-		FgMin       string
-		FgMax       string
-		AbvMin      string
-		AbvMax      string
-		CreateDate  string
-		UpdateDate  string
-	}
-	IsOrganic string
-	Labels    struct {
+	Glass           Glass
+	StyleID         float64
+	Style           Style
+	IsOrganic       string
+	Labels          struct {
 		Medium string
 		Large  string
 		Icon   string
@@ -186,8 +155,8 @@ type Beer struct {
 
 // NewBeerList returns a new BeerList that will use the given BeerListRequest
 // to query for a list of Beers.
-// (GET: /beers)
 func (s *BeerService) NewBeerList(req *BeerListRequest) *BeerList {
+	// GET: /beers
 	return &BeerList{service: s, req: req}
 }
 
@@ -268,9 +237,10 @@ func (bl *BeerList) Next() (*Beer, error) {
 }
 
 // Beer queries for a single Beer with the given Beer ID.
-// GET: /beer/:beerId
+//
 // TODO: add withBreweries, withSocialAccounts, withIngredients request parameters
 func (s *BeerService) Beer(id string) (beer *Beer, err error) {
+	// GET: /beer/:beerId
 	u := s.c.url("/beer/"+id, nil)
 	var resp *http.Response
 	resp, err = s.c.Get(u)
@@ -317,8 +287,8 @@ type BeerChangeRequest struct {
 }
 
 // Add adds a new Beer to the BreweryDB and returns its new ID on success.
-// POST: /beers
 func (s *BeerService) Add(req *BeerChangeRequest) (id string, err error) {
+	// POST: /beers
 	u := s.c.url("/beers", nil)
 
 	var resp *http.Response
@@ -341,8 +311,8 @@ func (s *BeerService) Add(req *BeerChangeRequest) (id string, err error) {
 }
 
 // Update changes an existing Beer in the BreweryDB.
-// PUT: /beer/:beerId
 func (s *BeerService) Update(id string, req *BeerChangeRequest) error {
+	// PUT: /beer/:beerId
 	u := s.c.url("/beer/"+id, nil)
 
 	resp, err := s.c.PostForm(u, encode(req))
@@ -359,8 +329,8 @@ func (s *BeerService) Update(id string, req *BeerChangeRequest) error {
 }
 
 // Delete removes the Beer with the given ID from the BreweryDB.
-// DELETE: /beer/:beerId
 func (s *BeerService) Delete(id string) error {
+	// DELETE: /beer/:beerId
 	u := s.c.url("/beer/"+id, nil)
 	req, err := http.NewRequest("DELETE", u, nil)
 	if err != nil {

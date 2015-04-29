@@ -20,7 +20,7 @@ Then use the available services to access the API.
 For example:
 
 ```go
-# Get any random beer
+// Get any random beer
 beer, _ := client.Beer.Random(nil)
 fmt.Println(beer.Name, beer.Style.Name)
 ```
@@ -28,7 +28,7 @@ fmt.Println(beer.Name, beer.Style.Name)
 or
 
 ```go
-# Get all breweries established in 1983
+// Get all breweries established in 1983
 bs := c.Brewery.NewBreweryList(&brewerydb.BreweryListRequest{Established: "1983"})
 for b, err := bs.First(); b != nil; b, err = bs.Next() {
     if err != nil {
@@ -38,7 +38,7 @@ for b, err := bs.First(); b != nil; b, err = bs.Next() {
 }
 ```
 
-# status
+## status
 
 This library is still under heavy development. Please feel free to suggest design changes or submit bug fixes.
 

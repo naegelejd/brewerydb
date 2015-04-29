@@ -74,15 +74,16 @@ type hopResponse struct {
 
 // NewHopList returns a new HopList which can be consumed like so:
 //
-// TODO: THIS IS BROKEN: error in First() will be missed completely
+// TODO: THIS IS BROKEN: error in First() will be missed completely:
 //
-// hs, _ := client.NewHopList()
-// for h, err := hs.First(); h != nil; h, err = hs.Next() {
-//	if err != nil { ...; break }
-//	...
-// }
-// GET: /hops
+//	hs, _ := client.NewHopList()
+//	for h, err := hs.First(); h != nil; h, err = hs.Next() {
+//		if err != nil { ...; break }
+//		...
+//	}
+//
 func (s *HopService) NewHopList() *HopList {
+	// GET: /hops
 	return &HopList{service: s}
 }
 
@@ -154,8 +155,8 @@ func (hl *HopList) Next() (*Hop, error) {
 }
 
 // Hop queries for a single Hop with the given Hop ID.
-// GET: /hop/:hopId
 func (s *HopService) Hop(id int) (hop *Hop, err error) {
+	// GET: /hop/:hopId
 	u := s.c.url(fmt.Sprintf("/hop/%d", id), nil)
 	var resp *http.Response
 	resp, err = s.c.Get(u)

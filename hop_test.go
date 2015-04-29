@@ -10,7 +10,7 @@ func TestHop(t *testing.T) {
 
 }
 
-func ExampleAllHops() {
+func ExampleHopList() {
 	c := NewClient("<your API key>")
 
 	// Get a specific variety of hop with a given ID

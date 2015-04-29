@@ -21,17 +21,53 @@ type Client struct {
 	http.Client
 	apiKey      string
 	numRequests int
+	Adjunct     *AdjunctService
 	Beer        *BeerService
 	Brewery     *BreweryService
+	Category    *CategoryService
+	Change      *ChangeService
+	ConvertID   *ConvertIDService
+	Event       *EventService
+	Feature     *FeatureService
+	Fermentable *FermentableService
+	Fluidsize   *FluidsizeService
+	Glass       *GlassService
+	Guild       *GuildService
+	Heartbeat   *HeartbeatService
 	Hop         *HopService
+	Ingredient  *IngredientService
+	Location    *LocationService
+	Menu        *MenuService
+	Search      *SearchService
+	SocialSite  *SocialSiteService
+	Style       *StyleService
+	Yeast       *YeastService
 }
 
 func NewClient(apiKey string) *Client {
 	c := &Client{}
 	c.apiKey = apiKey
+	c.Adjunct = &AdjunctService{c}
 	c.Beer = &BeerService{c}
 	c.Brewery = &BreweryService{c}
+	c.Category = &CategoryService{c}
+	c.Change = &ChangeService{c}
+	c.ConvertID = &ConvertIDService{c}
+	c.Event = &EventService{c}
+	c.Feature = &FeatureService{c}
+	c.Fermentable = &FermentableService{c}
+	c.Fluidsize = &FluidsizeService{c}
+	c.Glass = &GlassService{c}
+	c.Guild = &GuildService{c}
+	c.Heartbeat = &HeartbeatService{c}
 	c.Hop = &HopService{c}
+	c.Ingredient = &IngredientService{c}
+	c.Location = &LocationService{c}
+	c.Menu = &MenuService{c}
+	c.Search = &SearchService{c}
+	c.SocialSite = &SocialSiteService{c}
+	c.Style = &StyleService{c}
+	c.Yeast = &YeastService{c}
 	return c
 }
 
