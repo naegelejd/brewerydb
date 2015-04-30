@@ -6,34 +6,6 @@ import (
 	"net/http"
 )
 
-// GeoPointResult represents a single brewery near a geographic coordinate.
-type GeoPointResult struct {
-	ID                  string
-	Name                string
-	BreweryID           string
-	LocationTypeDisplay string
-	YearOpened          string
-	YearClosed          string
-	Distance            float64
-	Latitude            float64
-	Longitude           float64
-	StreetAddress       string
-	PostalCode          string
-	Locality            string
-	Region              string
-	CountryISOCode      string
-	Phone               string
-	Status              string
-	StatusDisplay       string
-	CreateDate          string
-	UpdateDate          string
-	InPlanning          string // Y/N
-	OpenToPublic        string // Y/N
-	IsClosed            string // Y/N
-	IsPrimary           string // Y/N
-	Brewery             Brewery
-}
-
 // GeoPointUnit differentiates between miles and kilometers.
 type GeoPointUnit string
 
@@ -53,8 +25,9 @@ type GeoPointRequest struct {
 	WithAlternateNames string       `json:"withAlternateNames,omitempty"` // Y/N
 }
 
-// GeoPoint searches for Breweries near the geographic coordinate specified in the GeoPointRequest.
-func (ss *SearchService) GeoPoint(req *GeoPointRequest) ([]GeoPointResult, error) {
+// GeoPoint searches for Locations near the geographic coordinate specified in the GeoPointRequest.
+// TODO: pagination??
+func (ss *SearchService) GeoPoint(req *GeoPointRequest) ([]Location, error) {
 	v := encode(req)
 	u := ss.c.url("/search/geo/point", &v)
 	resp, err := ss.c.Get(u)
@@ -69,7 +42,7 @@ func (ss *SearchService) GeoPoint(req *GeoPointRequest) ([]GeoPointResult, error
 		NumberOfPages int
 		CurrentPage   int
 		TotalResults  int
-		Data          []GeoPointResult
+		Data          []Location
 	}{}
 
 	if err := json.NewDecoder(resp.Body).Decode(&geoPointResult); err != nil {

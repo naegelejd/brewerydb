@@ -71,6 +71,18 @@ const (
 	RandomBeerOrder                = "random"
 )
 
+// BeerTemperature represents the approximate temperature for a Beer.
+type BeerTemperature string
+
+const (
+	TemperatureCellar   BeerTemperature = "cellar"
+	TemperatureVeryCold                 = "very_cold"
+	TemperatureCool                     = "cool"
+	TemperatureCold                     = "cold"
+	TemperatureWarm                     = "warm"
+	TemperatureHot                      = "hot"
+)
+
 // BeerListRequest contains all the required and optional fields
 // used for querying for a list of Beers.
 type BeerListRequest struct {
@@ -103,6 +115,13 @@ type beerListResponse struct {
 	Beers         []Beer `json:"data"`
 }
 
+// Availability contains information on a Beer's availability.
+type Availability struct {
+	ID          string
+	Name        string
+	Description string
+}
+
 // Beer contains all relevant information for a single Beer.
 type Beer struct {
 	ID              string
@@ -127,13 +146,9 @@ type Beer struct {
 	Status                    string
 	StatusDisplay             string
 	AvailableID               float64
-	Available                 struct {
-		ID          float64
-		Name        string
-		Description string
-	}
-	BeerVariationID string
-	BeerVariation   struct {
+	Available                 Availability
+	BeerVariationID           string
+	BeerVariation             struct {
 		// TODO: instance of a Beer??
 	}
 	SrmID float64

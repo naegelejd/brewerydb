@@ -40,7 +40,7 @@ for b, err := bs.First(); b != nil; b, err = bs.Next() {
 
 ## status
 
-This library is still under heavy development. Please feel free to suggest design changes or submit bug fixes.
+This library is under heavy development. Please feel free to suggest design changes or report issues.
 
 ## license
 

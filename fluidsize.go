@@ -12,6 +12,16 @@ type FluidsizeService struct {
 	c *Client
 }
 
+// Volume represents a fluidsize volume.
+type Volume string
+
+const (
+	VolumeBarrel Volume = "barrel"
+	VolumePack          = "pack"
+	VolumeOunce         = "oz"
+	VolumeLiter         = "liter"
+)
+
 // Fluidsize represents a Fluidsize assigned to a UPC code.
 type Fluidsize struct {
 	ID            int
