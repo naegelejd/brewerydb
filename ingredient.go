@@ -32,8 +32,8 @@ type IngredientList struct {
 	Ingredients   []Ingredient `json:"data"`
 }
 
-// Ingredients returns all Ingredients on the given page.
-func (is *IngredientService) Ingredients(page int) (il IngredientList, err error) {
+// List returns all Ingredients on the given page.
+func (is *IngredientService) List(page int) (il IngredientList, err error) {
 	// GET: /ingredients
 	v := url.Values{}
 	v.Set("p", strconv.Itoa(page))
@@ -55,8 +55,8 @@ func (is *IngredientService) Ingredients(page int) (il IngredientList, err error
 	return
 }
 
-// Ingredient returns the Ingredient with the given Ingredient ID.
-func (is *IngredientService) Ingredient(id int) (ing Ingredient, err error) {
+// Get returns the Ingredient with the given Ingredient ID.
+func (is *IngredientService) Get(id int) (ing Ingredient, err error) {
 	// GET: /ingredient/:ingredientId
 	u := is.c.url(fmt.Sprintf("/ingredient/%d", id), nil)
 	var resp *http.Response

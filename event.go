@@ -17,14 +17,14 @@ type EventService struct {
 type EventType string
 
 const (
-	FestivalEvent            EventType = "festival"
-	CompetitionEvent                   = "competition"
-	FestivalCompetitionEvent           = "festival_competition"
-	TastingEvent                       = "tasting"
-	beerReleaseEvent                   = "beer_release"
-	SeminarEvent                       = "seminar"
-	MeetupEvent                        = "meetup"
-	OtherEvent                         = "other"
+	EventFestival            EventType = "festival"
+	EventCompetition                   = "competition"
+	EventFestivalCompetition           = "festival_competition"
+	EventTasting                       = "tasting"
+	EventBeerRelease                   = "beer_release"
+	EventSeminar                       = "seminar"
+	EventMeetup                        = "meetup"
+	EventOther                         = "other"
 )
 
 // Event represents a community event related to Beer/Breweries.
@@ -75,16 +75,16 @@ type Event struct {
 type EventOrder string
 
 const (
-	WebsiteEventOrder        = "website"
-	YearEventOrder           = "year"
-	StartDateEventOrder      = "startDate"
-	EndDateEventOrder        = "endDate"
-	LocalityEventOrder       = "locality"
-	RegionEventOrder         = "region"
-	CountryIsoCodeEventOrder = "countryIsoCode"
-	StatusEventOrder         = "status"
-	CreateDateEventOrder     = "createDate"
-	UpdateDateEventOrder     = "updateDate"
+	EventOrderWebsite        EventOrder = "website"
+	EventOrderYear                      = "year"
+	EventOrderStartDate                 = "startDate"
+	EventOrderEndDate                   = "endDate"
+	EventOrderLocality                  = "locality"
+	EventOrderRegion                    = "region"
+	EventOrderCountryIsoCode            = "countryIsoCode"
+	EventOrderStatus                    = "status"
+	EventOrderCreateDate                = "createDate"
+	EventOrderUpdateDate                = "updateDate"
 )
 
 // EventList represents a single "page" containing a slice of Events.
@@ -112,8 +112,8 @@ type EventRequest struct {
 	Sort           ListSort   `json:"sort"`
 }
 
-// Events returns an EventList containing a "page" of Events.
-func (es *EventService) Events(req *EventRequest) (el EventList, err error) {
+// List returns an EventList containing a "page" of Events.
+func (es *EventService) List(req *EventRequest) (el EventList, err error) {
 	// GET: /events
 	v := encode(req)
 	u := es.c.url("/events", &v)
@@ -135,8 +135,8 @@ func (es *EventService) Events(req *EventRequest) (el EventList, err error) {
 	return
 }
 
-// Event retrieves a single event with the given eventID.
-func (es *EventService) Event(eventID string) (e Event, err error) {
+// Get retrieves a single event with the given eventID.
+func (es *EventService) Get(eventID string) (e Event, err error) {
 	// GET: /event/:eventID
 	u := es.c.url("/event/"+eventID, nil)
 

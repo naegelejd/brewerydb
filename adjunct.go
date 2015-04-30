@@ -30,8 +30,8 @@ type AdjunctList struct {
 	Adjuncts      []Adjunct `json:"data"`
 }
 
-// Adjuncts returns all Adjuncts on the given page.
-func (as *AdjunctService) Adjuncts(page int) (al AdjunctList, err error) {
+// List returns all Adjuncts on the given page.
+func (as *AdjunctService) List(page int) (al AdjunctList, err error) {
 	// GET: /adjuncts
 	v := url.Values{}
 	v.Set("p", strconv.Itoa(page))
@@ -53,8 +53,8 @@ func (as *AdjunctService) Adjuncts(page int) (al AdjunctList, err error) {
 	return
 }
 
-// Adjunct obtains the Adjunct with the given Adjunct ID.
-func (as *AdjunctService) Adjunct(id int) (a Adjunct, err error) {
+// Get obtains the Adjunct with the given Adjunct ID.
+func (as *AdjunctService) Get(id int) (a Adjunct, err error) {
 	// GET: /adjunct/:adjunctID
 	u := as.c.url(fmt.Sprintf("/adjunct/%d", id), nil)
 	var resp *http.Response

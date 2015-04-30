@@ -21,8 +21,8 @@ type Category struct {
 	UpdateDate  string
 }
 
-// Categories returns all possible Beer Categories.
-func (c *CategoryService) Categories() ([]Category, error) {
+// List returns all possible Beer Categories.
+func (c *CategoryService) List() ([]Category, error) {
 	// GET: /categories
 	u := c.c.url("/categories", nil)
 
@@ -47,8 +47,8 @@ func (c *CategoryService) Categories() ([]Category, error) {
 	return categoriesResponse.Data, nil
 }
 
-// Category obtains the Category with the given Category ID.
-func (c *CategoryService) Category(id int) (cat Category, err error) {
+// Get obtains the Category with the given Category ID.
+func (c *CategoryService) Get(id int) (cat Category, err error) {
 	// GET: /category/:categoryId
 	u := c.c.url(fmt.Sprintf("/categories/%d", id), nil)
 

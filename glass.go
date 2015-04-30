@@ -21,8 +21,8 @@ type Glass struct {
 	UpdateDate  string
 }
 
-// Glassware returns a list of Glasses.
-func (gs *GlassService) Glassare() (gl []Glass, err error) {
+// List returns a list of Glasses.
+func (gs *GlassService) List() (gl []Glass, err error) {
 	// GET: /glassware
 	u := gs.c.url("/glassware", nil)
 
@@ -48,8 +48,8 @@ func (gs *GlassService) Glassare() (gl []Glass, err error) {
 	return
 }
 
-// Glass returns the Glass with the given Glass ID.
-func (gs *GlassService) Glass(id int) (g Glass, err error) {
+// Get returns the Glass with the given Glass ID.
+func (gs *GlassService) Get(id int) (g Glass, err error) {
 	// GET: /glass/:glassId
 	u := gs.c.url(fmt.Sprintf("/glass/%d", id), nil)
 

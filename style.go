@@ -43,8 +43,8 @@ type StyleList struct {
 	Styles        []Style `json:"data"`
 }
 
-// Styles returns all Styles on the given page.
-func (ss *StyleService) Styles(page int) (sl StyleList, err error) {
+// List returns all Styles on the given page.
+func (ss *StyleService) List(page int) (sl StyleList, err error) {
 	// GET: /styles
 	v := url.Values{}
 	v.Set("p", strconv.Itoa(page))
@@ -66,8 +66,8 @@ func (ss *StyleService) Styles(page int) (sl StyleList, err error) {
 	return
 }
 
-// Style obtains the Style with the given Style ID.
-func (ss *StyleService) Style(id int) (s Style, err error) {
+// Get obtains the Style with the given Style ID.
+func (ss *StyleService) Get(id int) (s Style, err error) {
 	// GET: /style/:styleID
 	u := ss.c.url(fmt.Sprintf("/style/%d", id), nil)
 	var resp *http.Response

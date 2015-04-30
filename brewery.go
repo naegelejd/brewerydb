@@ -144,8 +144,8 @@ func (bl *BreweryList) Next() (*Brewery, error) {
 	return &bl.resp.Breweries[0], nil
 }
 
-// Brewery queries for a single Brewery with the given Brewery ID.
-func (s *BreweryService) Brewery(id string) (brewery *Brewery, err error) {
+// Get queries for a single Brewery with the given Brewery ID.
+func (s *BreweryService) Get(id string) (brewery *Brewery, err error) {
 	// GET: /brewery/:breweryId
 	u := s.c.url("/brewery/"+id, nil)
 	var resp *http.Response

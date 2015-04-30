@@ -31,8 +31,8 @@ type Fluidsize struct {
 	CreateDate    string
 }
 
-// Fluidsizes returns a list of Fluidsizes.
-func (fs *FluidsizeService) Fluidsizes() (fl []Fluidsize, err error) {
+// List returns a list of Fluidsizes.
+func (fs *FluidsizeService) List() (fl []Fluidsize, err error) {
 	// GET: /fluidsizes
 	u := fs.c.url("/fluidsizes", nil)
 
@@ -58,8 +58,8 @@ func (fs *FluidsizeService) Fluidsizes() (fl []Fluidsize, err error) {
 	return
 }
 
-// Fluidsize returns the Fluidsize with the given Fluidsize ID.
-func (fs *FluidsizeService) Fluidsize(id int) (f Fluidsize, err error) {
+// Get returns the Fluidsize with the given Fluidsize ID.
+func (fs *FluidsizeService) Get(id int) (f Fluidsize, err error) {
 	// GET: /fluidsize/:fluidsizeId
 	u := fs.c.url(fmt.Sprintf("/fluidsize/%d", id), nil)
 

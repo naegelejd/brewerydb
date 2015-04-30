@@ -32,12 +32,12 @@ type Guild struct {
 type GuildOrder string
 
 const (
-	NameGuildOrder        GuildOrder = "name"
-	DescriptionGuildOrder            = "description"
-	EstablishedGuildOrder            = "established"
-	StatusGuildOrder                 = "status"
-	CreateDateGuildOrder             = "createDate"
-	UpdateDateGuildOrder             = "updateDate"
+	GuildOrderName        GuildOrder = "name"
+	GuildOrderDescription            = "description"
+	GuildOrderEstablished            = "established"
+	GuildOrderStatus                 = "status"
+	GuildOrderCreateDate             = "createDate"
+	GuildOrderUpdateDate             = "updateDate"
 )
 
 // GuildRequest contains options for specifying kinds of Guilds desired.
@@ -61,8 +61,8 @@ type GuildList struct {
 	Guilds        []Guild `json:"data"`
 }
 
-// Guilds returns an GuildList containing a "page" of Guilds.
-func (gs *GuildService) Guilds(req *GuildRequest) (gl GuildList, err error) {
+// List returns an GuildList containing a "page" of Guilds.
+func (gs *GuildService) List(req *GuildRequest) (gl GuildList, err error) {
 	// GET: /guilds
 	v := encode(req)
 	u := gs.c.url("/guilds", &v)
@@ -83,8 +83,8 @@ func (gs *GuildService) Guilds(req *GuildRequest) (gl GuildList, err error) {
 	return
 }
 
-// Guild retrieves a single Guild with the given guildID.
-func (gs *GuildService) Guild(guildID string) (g Guild, err error) {
+// Get retrieves a single Guild with the given guildID.
+func (gs *GuildService) Get(guildID string) (g Guild, err error) {
 	// GET: /guild/:guildID
 	u := gs.c.url("/guild/"+guildID, nil)
 

@@ -4,6 +4,6 @@ package brewerydb
 type ListSort string
 
 const (
-	AscendingSort  ListSort = "ASC"
-	DescendingSort          = "DESC"
+	SortAscending  ListSort = "ASC"
+	SortDescending          = "DESC"
 )

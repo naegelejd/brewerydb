@@ -30,8 +30,8 @@ type YeastList struct {
 	Yeasts        []Yeast `json:"data"`
 }
 
-// Yeasts returns all Yeasts on the given page.
-func (ys *YeastService) Yeasts(page int) (yl YeastList, err error) {
+// List returns all Yeasts on the given page.
+func (ys *YeastService) List(page int) (yl YeastList, err error) {
 	// GET: /yeasts
 	v := url.Values{}
 	v.Set("p", strconv.Itoa(page))
@@ -53,8 +53,8 @@ func (ys *YeastService) Yeasts(page int) (yl YeastList, err error) {
 	return
 }
 
-// Yeast obtains the Yeast with the given Yeast ID.
-func (ys *YeastService) Yeast(id int) (y Yeast, err error) {
+// Get obtains the Yeast with the given Yeast ID.
+func (ys *YeastService) Get(id int) (y Yeast, err error) {
 	// GET: /yeast/:yeastID
 	u := ys.c.url(fmt.Sprintf("/yeast/%d", id), nil)
 	var resp *http.Response

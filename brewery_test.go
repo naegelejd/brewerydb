@@ -18,7 +18,7 @@ func ExampleBreweryList() {
 	}
 
 	// Get all information about brewery with given ID (Flying Dog)
-	b, err := c.Brewery.Brewery("jmGoBA")
+	b, err := c.Brewery.Get("jmGoBA")
 	if err != nil {
 		log.Fatal(err)
 	}

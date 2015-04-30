@@ -65,8 +65,8 @@ type FeatureList struct {
 	Features      []Feature `json:"data"`
 }
 
-// Features returns all Featured Beers and Breweries.
-func (fs *FeatureService) Features(req *FeaturesRequest) (fl FeatureList, err error) {
+// List returns all Featured Beers and Breweries.
+func (fs *FeatureService) List(req *FeaturesRequest) (fl FeatureList, err error) {
 	// GET: /features
 	v := encode(req)
 	u := fs.c.url("/features", &v)

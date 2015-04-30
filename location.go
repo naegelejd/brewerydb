@@ -120,8 +120,8 @@ type LocationList struct {
 	Locations     []Location `json:"data"`
 }
 
-// Locations retrieves a list of Locations matching the given request.
-func (ls *LocationService) Locations(req *LocationRequest) (ll LocationList, err error) {
+// List retrieves a list of Locations matching the given request.
+func (ls *LocationService) List(req *LocationRequest) (ll LocationList, err error) {
 	// GET: /locations
 	v := encode(req)
 	u := ls.c.url("/locations", &v)
@@ -143,8 +143,8 @@ func (ls *LocationService) Locations(req *LocationRequest) (ll LocationList, err
 	return
 }
 
-// Location retrieves the Location with the given ID.
-func (ls *LocationService) Location(locID string) (l Location, err error) {
+// Get retrieves the Location with the given ID.
+func (ls *LocationService) Get(locID string) (l Location, err error) {
 	// GET: /location/:locationID
 	u := ls.c.url("/location/"+locID, nil)
 

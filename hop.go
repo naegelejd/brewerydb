@@ -154,8 +154,8 @@ func (hl *HopList) Next() (*Hop, error) {
 	return &hl.resp.Hops[0], nil
 }
 
-// Hop queries for a single Hop with the given Hop ID.
-func (s *HopService) Hop(id int) (hop *Hop, err error) {
+// Get queries for a single Hop with the given Hop ID.
+func (s *HopService) Get(id int) (hop *Hop, err error) {
 	// GET: /hop/:hopId
 	u := s.c.url(fmt.Sprintf("/hop/%d", id), nil)
 	var resp *http.Response

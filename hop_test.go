@@ -14,7 +14,7 @@ func ExampleHopList() {
 	c := NewClient("<your API key>")
 
 	// Get a specific variety of hop with a given ID
-	h, err := c.Hop.Hop(84)
+	h, err := c.Hop.Get(84)
 	if err != nil {
 		log.Fatal(err)
 	}

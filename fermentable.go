@@ -59,8 +59,8 @@ type FermentableList struct {
 	Fermentables  []Fermentable `json:"data"`
 }
 
-// Fermentables returns a list of Fermentable Beer ingredients.
-func (fs *FermentableService) Fermentables(page int) (fl FermentableList, err error) {
+// List returns a list of Fermentable Beer ingredients.
+func (fs *FermentableService) List(page int) (fl FermentableList, err error) {
 	// GET: /fermentables
 	v := url.Values{}
 	v.Set("p", strconv.Itoa(page))
@@ -82,8 +82,8 @@ func (fs *FermentableService) Fermentables(page int) (fl FermentableList, err er
 	return
 }
 
-// Fermentable returns the Fermentable with the given Fermentable ID.
-func (fs *FermentableService) Fermentable(id int) (f Fermentable, err error) {
+// Get returns the Fermentable with the given Fermentable ID.
+func (fs *FermentableService) Get(id int) (f Fermentable, err error) {
 	// GET: /fermentable/:fermentableID
 	u := fs.c.url(fmt.Sprintf("/fermentable/%d", id), nil)
 

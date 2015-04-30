@@ -76,8 +76,8 @@ func makeActualRequest(req *SearchRequest, query string, tp searchType) *actualS
 
 }
 
-// SearchBeer searches for Beers matching the given query.
-func (ss *SearchService) SearchBeer(query string, req *SearchRequest) (sr SearchBeerResults, err error) {
+// Beer searches for Beers matching the given query.
+func (ss *SearchService) Beer(query string, req *SearchRequest) (sr SearchBeerResults, err error) {
 	actualRequest := makeActualRequest(req, query, searchBeer)
 	v := encode(actualRequest)
 	u := ss.c.url("/search", &v)
@@ -95,8 +95,8 @@ func (ss *SearchService) SearchBeer(query string, req *SearchRequest) (sr Search
 	return
 }
 
-// SearchBrewery searches for Breweries matching the given query.
-func (ss *SearchService) SearchBrewery(query string, req *SearchRequest) (sr SearchBreweryResults, err error) {
+// Brewery searches for Breweries matching the given query.
+func (ss *SearchService) Brewery(query string, req *SearchRequest) (sr SearchBreweryResults, err error) {
 	actualRequest := makeActualRequest(req, query, searchBrewery)
 	v := encode(actualRequest)
 	u := ss.c.url("/search", &v)
@@ -114,8 +114,8 @@ func (ss *SearchService) SearchBrewery(query string, req *SearchRequest) (sr Sea
 	return
 }
 
-// SearchEvent searches for Events matching the given query.
-func (ss *SearchService) SearchEvent(query string, req *SearchRequest) (el EventList, err error) {
+// Event searches for Events matching the given query.
+func (ss *SearchService) Event(query string, req *SearchRequest) (el EventList, err error) {
 	actualRequest := makeActualRequest(req, query, searchEvent)
 	v := encode(actualRequest)
 	u := ss.c.url("/search", &v)
@@ -133,8 +133,8 @@ func (ss *SearchService) SearchEvent(query string, req *SearchRequest) (el Event
 	return
 }
 
-// SearchGuild searches for Guilds matching the given query.
-func (ss *SearchService) SearchGuild(query string, req *SearchRequest) (gl GuildList, err error) {
+// Guild searches for Guilds matching the given query.
+func (ss *SearchService) Guild(query string, req *SearchRequest) (gl GuildList, err error) {
 	actualRequest := makeActualRequest(req, query, searchGuild)
 	v := encode(actualRequest)
 	u := ss.c.url("/search", &v)

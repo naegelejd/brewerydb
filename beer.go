@@ -56,19 +56,19 @@ type BeerList struct {
 type BeerOrder string
 
 const (
-	NameBeerOrder        BeerOrder = "name"
-	DescriptionBeerOrder           = "description"
-	AbvBeerOrder                   = "abv"
-	IbuBeerOrder                   = "ibu"
-	GlasswareIDBeerOrder           = "glasswareId"
-	SrmIDBeerOrder                 = "smrID"
-	AvailableIDBeerOrder           = "availableId"
-	StyleIDBeerOrder               = "styleId"
-	IsOrganicBeerOrder             = "isOrganic"
-	StatusBeerOrder                = "status"
-	CreateDateBeerOrder            = "createDate"
-	UpdateDateBeerOrder            = "updateDate"
-	RandomBeerOrder                = "random"
+	BeerOrderName        BeerOrder = "name"
+	BeerOrderDescription           = "description"
+	BeerOrderAbv                   = "abv"
+	BeerOrderIbu                   = "ibu"
+	BeerOrderGlasswareID           = "glasswareId"
+	BeerOrderSrmID                 = "smrID"
+	BeerOrderAvailableID           = "availableId"
+	BeerOrderStyleID               = "styleId"
+	BeerOrderIsOrganic             = "isOrganic"
+	BeerOrderStatus                = "status"
+	BeerOrderCreateDate            = "createDate"
+	BeerOrderUpdateDate            = "updateDate"
+	BeerOrderRandom                = "random"
 )
 
 // BeerTemperature represents the approximate temperature for a Beer.
@@ -244,10 +244,10 @@ func (bl *BeerList) Next() (*Beer, error) {
 	return &bl.resp.Beers[0], nil
 }
 
-// Beer queries for a single Beer with the given Beer ID.
+// Get queries for a single Beer with the given Beer ID.
 //
 // TODO: add withBreweries, withSocialAccounts, withIngredients request parameters
-func (s *BeerService) Beer(id string) (beer *Beer, err error) {
+func (s *BeerService) Get(id string) (beer *Beer, err error) {
 	// GET: /beer/:beerId
 	u := s.c.url("/beer/"+id, nil)
 	var resp *http.Response
