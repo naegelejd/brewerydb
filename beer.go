@@ -1,6 +1,7 @@
 package brewerydb
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -51,55 +52,47 @@ type BeerList struct {
 	curBeer int
 }
 
-// ListOrder represents the ordering of a list of values.
-type ListOrder string
-
-// ListSort represents the sorting scheme for a list of values.
-type ListSort string
+// BeerOrder represents the ordering of a list of Beers.
+type BeerOrder string
 
 const (
-	NameOrder        ListOrder = "name"
-	DescriptionOrder           = "description"
-	AbvOrder                   = "abv"
-	IbuOrder                   = "ibu"
-	GlasswareIDOrder           = "glasswareId"
-	SrmIDOrder                 = "smrID"
-	AvailableIDOrder           = "availableId"
-	StyleIDOrder               = "styleId"
-	IsOrganicOrder             = "isOrganic"
-	StatusOrder                = "status"
-	CreateDateOrder            = "createDate"
-	UpdateDateOrder            = "updateDate"
-	RandomOrder                = "random"
-)
-
-const (
-	AscendingSort  ListSort = "ASC"
-	DescendingSort          = "DESC"
+	NameBeerOrder        BeerOrder = "name"
+	DescriptionBeerOrder           = "description"
+	AbvBeerOrder                   = "abv"
+	IbuBeerOrder                   = "ibu"
+	GlasswareIDBeerOrder           = "glasswareId"
+	SrmIDBeerOrder                 = "smrID"
+	AvailableIDBeerOrder           = "availableId"
+	StyleIDBeerOrder               = "styleId"
+	IsOrganicBeerOrder             = "isOrganic"
+	StatusBeerOrder                = "status"
+	CreateDateBeerOrder            = "createDate"
+	UpdateDateBeerOrder            = "updateDate"
+	RandomBeerOrder                = "random"
 )
 
 // BeerListRequest contains all the required and optional fields
 // used for querying for a list of Beers.
 type BeerListRequest struct {
-	IDs                string `json:"ids"` // IDs of the beers to return, comma separated. Max 10.
-	Name               string `json:"name"`
-	ABV                string `json:"abv"`
-	IBU                string `json:"ibu"`
-	GlasswareId        string `json:"glasswareId"`
-	SrmId              string `json:"srmId"`
-	AvailableId        string `json:"availableId"`
-	StyleId            string `json:"styleId"`
-	IsOrganic          string `json:"isOrganic"` // Y/N
-	HasLabels          string `json:"hasLabels"` // Y/N
-	Year               string `json:"year"`      // YYYY
-	Since              string `json:"since"`     // UNIX timestamp format. Max 30 days
-	Status             string `json:"status"`
-	Order              string `json:"order"`
-	Sort               string `json:"sort"`
-	RandomCount        string `json:"randomCount"`        // how many random beers to return. Max 10
-	WithBreweries      string `json:"withBreweries"`      // Y/N
-	WithSocialAccounts string `json:"withSocialAccounts"` // Premium. Y/N
-	WithIngredients    string `json:"withIngredients"`    // Premium. Y/N
+	IDs                string    `json:"ids"` // IDs of the beers to return, comma separated. Max 10.
+	Name               string    `json:"name"`
+	ABV                string    `json:"abv"`
+	IBU                string    `json:"ibu"`
+	GlasswareId        string    `json:"glasswareId"`
+	SrmId              string    `json:"srmId"`
+	AvailableId        string    `json:"availableId"`
+	StyleId            string    `json:"styleId"`
+	IsOrganic          string    `json:"isOrganic"` // Y/N
+	HasLabels          string    `json:"hasLabels"` // Y/N
+	Year               string    `json:"year"`      // YYYY
+	Since              string    `json:"since"`     // UNIX timestamp format. Max 30 days
+	Status             string    `json:"status"`
+	Order              BeerOrder `json:"order"`
+	Sort               ListSort  `json:"sort"`
+	RandomCount        string    `json:"randomCount"`        // how many random beers to return. Max 10
+	WithBreweries      string    `json:"withBreweries"`      // Y/N
+	WithSocialAccounts string    `json:"withSocialAccounts"` // Premium. Y/N
+	WithIngredients    string    `json:"withIngredients"`    // Premium. Y/N
 }
 
 type beerListResponse struct {
@@ -314,8 +307,13 @@ func (s *BeerService) Add(req *BeerChangeRequest) (id string, err error) {
 func (s *BeerService) Update(id string, req *BeerChangeRequest) error {
 	// PUT: /beer/:beerId
 	u := s.c.url("/beer/"+id, nil)
+	v := encode(req)
+	put, err := http.NewRequest("PUT", u, bytes.NewBufferString(v.Encode()))
+	if err != nil {
+		return err
+	}
 
-	resp, err := s.c.PostForm(u, encode(req))
+	resp, err := s.c.Do(put)
 	if err != nil {
 		return err
 	} else if resp.StatusCode != http.StatusOK {
