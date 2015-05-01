@@ -4,10 +4,10 @@ package brewerydb
 type RandomBeerRequest struct {
 	ABV                string `json:"abv"`
 	IBU                string `json:"ibu"`
-	GlasswareId        string `json:"glasswareId"`
-	SrmId              string `json:"srmID"`
-	AvailableId        string `json:"availableId"`
-	StyleId            string `json:"styleId"`
+	GlasswareID        string `json:"glasswareId"`
+	SrmID              string `json:"srmID"`
+	AvailableID        string `json:"availableId"`
+	StyleID            string `json:"styleId"`
 	IsOrganic          bool   `json:"isOrganic"`
 	Labels             bool   `json:"labels"`
 	Year               int    `json:"year"`

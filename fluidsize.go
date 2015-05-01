@@ -15,6 +15,7 @@ type FluidsizeService struct {
 // Volume represents a fluidsize volume.
 type Volume string
 
+// Pre-defined fluidsize Volumes.
 const (
 	VolumeBarrel Volume = "barrel"
 	VolumePack          = "pack"

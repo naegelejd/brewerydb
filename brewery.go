@@ -18,6 +18,23 @@ type breweryListResponse struct {
 	Breweries     []Brewery `json:"data"`
 }
 
+// BreweryOrder represents the ordering of a list of Breweries.
+type BreweryOrder string
+
+// BreweryList ordering options.
+const (
+	BreweryOrderName           BreweryOrder = "name"
+	BreweryOrderDescription                 = "description"
+	BreweryOrderWebsite                     = "website"
+	BreweryOrderEstablished                 = "established"
+	BreweryOrderMailingListURL              = "mailingListUrl"
+	BreweryOrderIsOrganic                   = "isOrganic"
+	BreweryOrderStatus                      = "status"
+	BreweryOrderCreateDate                  = "createDate"
+	BreweryOrderUpdateDate                  = "updateDate"
+	BreweryOrderRandom                      = "random"
+)
+
 // BreweryList represents a lazy list of breweries. Create a new one with
 // NewBreweryList. Iterate over a BreweryList using First() and Next().
 type BreweryList struct {
@@ -50,16 +67,16 @@ type Brewery struct {
 // BreweryListRequest contains all the required and optional fields
 // used for querying for a list of Breweries.
 type BreweryListRequest struct {
-	Name        string `json:"name"`
-	IDs         string `json:"ids"`
-	Established string `json:"established"`
-	IsOrganic   string `json:"isOrganic"`
-	HasImages   string `json:"hasImages"`
-	Since       string `json:"since"`
-	Status      string `json:"status"`
-	Order       string `json:"order"` // TODO: enumerate
-	Sort        string `json:"sort"`  // TODO: enumerate
-	RandomCount string `json:"randomCount"`
+	Name        string       `json:"name"`
+	IDs         string       `json:"ids"`
+	Established string       `json:"established"`
+	IsOrganic   string       `json:"isOrganic"`
+	HasImages   string       `json:"hasImages"`
+	Since       string       `json:"since"`
+	Status      string       `json:"status"`
+	Order       BreweryOrder `json:"order"` // TODO: enumerate
+	Sort        string       `json:"sort"`  // TODO: enumerate
+	RandomCount string       `json:"randomCount"`
 	// TODO: premium account parameters
 }
 

@@ -24,7 +24,7 @@ type HeartbeatResponse struct {
 	Message string
 }
 
-// HeartBeat checks whether the BreweryDB API is currently active. It
+// Heartbeat checks whether the BreweryDB API is currently active. It
 // returns nil if the API is available and an error otherwise.
 func (hs *HeartbeatService) Heartbeat() error {
 	u := hs.c.url("/heartbeat", nil)

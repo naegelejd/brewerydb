@@ -20,7 +20,7 @@ type Country struct {
 	DisplayName string
 	IsoThree    string
 	NumberCode  int
-	UrlTitle    string
+	URLTitle    string
 	CreateDate  string
 	// UpdateDate  string
 }
@@ -62,6 +62,7 @@ type Location struct {
 // LocationType represents the specific type of the Location.
 type LocationType string
 
+// Types of Locations.
 const (
 	LocationMicro      LocationType = "micro"
 	LocationMacro                   = "macro"
@@ -78,6 +79,7 @@ const (
 // LocationOrder specifies the ordering of a LocationList.
 type LocationOrder string
 
+// LocationList ordering options.
 const (
 	LocationOrderName           LocationOrder = "name"
 	LocationOrderBreweryname                  = "breweryName"

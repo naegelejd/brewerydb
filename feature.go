@@ -50,7 +50,7 @@ func (fs *FeatureService) Featured() (f Feature, err error) {
 }
 
 // FeatureRequest contains options for querying for a list of features.
-type FeaturesRequest struct {
+type FeatureRequest struct {
 	Page         int    `json:"p"`
 	Year         int    `json:"year"`
 	Week         int    `json:"week"`
@@ -66,7 +66,7 @@ type FeatureList struct {
 }
 
 // List returns all Featured Beers and Breweries.
-func (fs *FeatureService) List(req *FeaturesRequest) (fl FeatureList, err error) {
+func (fs *FeatureService) List(req *FeatureRequest) (fl FeatureList, err error) {
 	// GET: /features
 	v := encode(req)
 	u := fs.c.url("/features", &v)

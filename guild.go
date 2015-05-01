@@ -31,6 +31,7 @@ type Guild struct {
 // GuildOrder specifies ordering of a GuildList.
 type GuildOrder string
 
+// GuildList ordering options.
 const (
 	GuildOrderName        GuildOrder = "name"
 	GuildOrderDescription            = "description"

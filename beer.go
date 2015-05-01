@@ -55,6 +55,7 @@ type BeerList struct {
 // BeerOrder represents the ordering of a list of Beers.
 type BeerOrder string
 
+// BeerList ordering options.
 const (
 	BeerOrderName        BeerOrder = "name"
 	BeerOrderDescription           = "description"
@@ -74,6 +75,7 @@ const (
 // BeerTemperature represents the approximate temperature for a Beer.
 type BeerTemperature string
 
+// Beer temperatures.
 const (
 	TemperatureCellar   BeerTemperature = "cellar"
 	TemperatureVeryCold                 = "very_cold"
@@ -90,10 +92,10 @@ type BeerListRequest struct {
 	Name               string    `json:"name"`
 	ABV                string    `json:"abv"`
 	IBU                string    `json:"ibu"`
-	GlasswareId        string    `json:"glasswareId"`
-	SrmId              string    `json:"srmId"`
-	AvailableId        string    `json:"availableId"`
-	StyleId            string    `json:"styleId"`
+	GlasswareID        string    `json:"glasswareId"`
+	SrmID              string    `json:"srmId"`
+	AvailableID        string    `json:"availableId"`
+	StyleID            string    `json:"styleId"`
 	IsOrganic          string    `json:"isOrganic"` // Y/N
 	HasLabels          string    `json:"hasLabels"` // Y/N
 	Year               string    `json:"year"`      // YYYY
@@ -141,7 +143,7 @@ type Beer struct {
 		Large  string
 		Icon   string
 	}
-	ServingTemperature        string
+	ServingTemperature        BeerTemperature
 	ServingTemperatureDisplay string
 	Status                    string
 	StatusDisplay             string
@@ -276,22 +278,22 @@ func (s *BeerService) Get(id string) (beer *Beer, err error) {
 // BeerChangeRequest contains all the relevant options available to change
 // an existing beer record in the BreweryDB.
 type BeerChangeRequest struct {
-	Name               string `json:"name"`    // Required
-	StyleId            int    `json:"styleId"` // Required
-	Description        string `json:"description"`
-	ABV                string `json:"abv"`
-	IBU                string `json:"ibu"`
-	GlasswareId        int    `json:"glasswareId"`
-	SrmId              string `json:"srmID"`
-	AvailableId        string `json:"availableId"`
-	IsOrganic          string `json:"isOrganic"`
-	BeerVariationId    string `json:"beerVariationId"`
-	Year               string `json:"year"`
-	FoodPairings       string `json:"foodPairings"`
-	ServingTemperature string `json:"servingTemperature"`
-	OriginalGravity    string `json:"originalGravity"`
-	Brewery            string `json:"brewery"` // Comma separated list of existing brewery IDs
-	Label              string `json:"label"`   // Base 64 encoded image
+	Name               string          `json:"name"`    // Required
+	StyleID            int             `json:"styleId"` // Required
+	Description        string          `json:"description"`
+	ABV                string          `json:"abv"`
+	IBU                string          `json:"ibu"`
+	GlasswareID        int             `json:"glasswareId"`
+	SrmID              string          `json:"srmID"`
+	AvailableID        string          `json:"availableId"`
+	IsOrganic          string          `json:"isOrganic"`
+	BeerVariationID    string          `json:"beerVariationId"`
+	Year               string          `json:"year"`
+	FoodPairings       string          `json:"foodPairings"`
+	ServingTemperature BeerTemperature `json:"servingTemperature"`
+	OriginalGravity    string          `json:"originalGravity"`
+	Brewery            string          `json:"brewery"` // Comma separated list of existing brewery IDs
+	Label              string          `json:"label"`   // Base 64 encoded image
 }
 
 // Add adds a new Beer to the BreweryDB and returns its new ID on success.

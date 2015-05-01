@@ -18,6 +18,7 @@ type ConvertIDService struct {
 // ConvertType is the type of ID to convert.
 type ConvertType string
 
+// Types of things that have IDs that can be converted.
 const (
 	ConvertBrewery ConvertType = "brewery" // ConvertBrewery converts Brewery IDs.
 	ConvertBeer                = "beer"    // ConvertBeer converts Beer IDs.

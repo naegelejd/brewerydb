@@ -9,6 +9,7 @@ import (
 // GeoPointUnit differentiates between miles and kilometers.
 type GeoPointUnit string
 
+// Units of measurement.
 const (
 	Miles      GeoPointUnit = "mi"
 	Kilometers GeoPointUnit = "km"

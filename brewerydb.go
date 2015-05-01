@@ -17,6 +17,7 @@ import (
 
 var apiURL = "http://api.brewerydb.com/v2"
 
+// Client serves as the interface to the BreweryDB API.
 type Client struct {
 	http.Client
 	apiKey      string
@@ -44,6 +45,7 @@ type Client struct {
 	Yeast       *YeastService
 }
 
+// NewClient creates a new BreweryDB Client using the given API key.
 func NewClient(apiKey string) *Client {
 	c := &Client{}
 	c.apiKey = apiKey

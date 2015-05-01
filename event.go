@@ -16,6 +16,7 @@ type EventService struct {
 // EventType specifies the type of the Event.
 type EventType string
 
+// Types of Events.
 const (
 	EventFestival            EventType = "festival"
 	EventCompetition                   = "competition"
@@ -74,6 +75,7 @@ type Event struct {
 // EventOrder specifies the ordering of an EventList.
 type EventOrder string
 
+// EventList ordering options.
 const (
 	EventOrderWebsite        EventOrder = "website"
 	EventOrderYear                      = "year"
