@@ -1,11 +1,5 @@
 package brewerydb
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
-
 // GeoPointUnit differentiates between miles and kilometers.
 type GeoPointUnit string
 
@@ -28,16 +22,11 @@ type GeoPointRequest struct {
 
 // GeoPoint searches for Locations near the geographic coordinate specified in the GeoPointRequest.
 // TODO: pagination??
-func (ss *SearchService) GeoPoint(req *GeoPointRequest) ([]Location, error) {
-	v := encode(req)
-	u := ss.c.url("/search/geo/point", &v)
-	resp, err := ss.c.Get(u)
+func (ss *SearchService) GeoPoint(q *GeoPointRequest) ([]Location, error) {
+	req, err := ss.c.NewRequest("GET", "/search/geo/point", q)
 	if err != nil {
 		return nil, err
-	} else if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unable to search geo point")
 	}
-	defer resp.Body.Close()
 
 	geoPointResult := struct {
 		NumberOfPages int
@@ -46,9 +35,6 @@ func (ss *SearchService) GeoPoint(req *GeoPointRequest) ([]Location, error) {
 		Data          []Location
 	}{}
 
-	if err := json.NewDecoder(resp.Body).Decode(&geoPointResult); err != nil {
-		return nil, err
-	}
-
-	return geoPointResult.Data, nil
+	err = ss.c.Do(req, &geoPointResult)
+	return geoPointResult.Data, err
 }

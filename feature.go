@@ -1,7 +1,6 @@
 package brewerydb
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 )
@@ -23,18 +22,11 @@ type Feature struct {
 // Featured returns this week's Featured Beer and Brewery.
 func (fs *FeatureService) Featured() (f Feature, err error) {
 	// GET: /featured
-	u := fs.c.url("/featured", nil)
-
-	var resp *http.Response
-	resp, err = fs.c.Get(u)
+	var req *http.Request
+	req, err = fs.c.NewRequest("GET", "/featured", nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		fmt.Println(resp.StatusCode, resp.Body)
-		err = fmt.Errorf("unable to get featured")
-		return
 	}
-	defer resp.Body.Close()
 
 	featuredResponse := struct {
 		Status  string
@@ -42,11 +34,10 @@ func (fs *FeatureService) Featured() (f Feature, err error) {
 		Message string
 	}{}
 
-	if err = json.NewDecoder(resp.Body).Decode(&featuredResponse); err != nil {
+	if err = fs.c.Do(req, &featuredResponse); err != nil {
 		return
 	}
-	f = featuredResponse.Data
-	return
+	return featuredResponse.Data, nil
 }
 
 // FeatureRequest contains options for querying for a list of features.
@@ -66,24 +57,15 @@ type FeatureList struct {
 }
 
 // List returns all Featured Beers and Breweries.
-func (fs *FeatureService) List(req *FeatureRequest) (fl FeatureList, err error) {
+func (fs *FeatureService) List(q *FeatureRequest) (fl FeatureList, err error) {
 	// GET: /features
-	v := encode(req)
-	u := fs.c.url("/features", &v)
-
-	var resp *http.Response
-	resp, err = fs.c.Get(u)
+	var req *http.Request
+	req, err = fs.c.NewRequest("GET", "/features", q)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get features")
-		return
 	}
-	defer resp.Body.Close()
 
-	if err = json.NewDecoder(resp.Body).Decode(&fl); err != nil {
-		return
-	}
+	err = fs.c.Do(req, &fl)
 	return
 }
 
@@ -91,20 +73,12 @@ func (fs *FeatureService) List(req *FeatureRequest) (fl FeatureList, err error) 
 // year and week number.
 func (fs *FeatureService) FeatureByWeek(year, week int) (f Feature, err error) {
 	// GET: /feature/:year-week
-	u := fs.c.url(fmt.Sprintf("/feature/%4d-%d", year, week), nil)
-
-	var resp *http.Response
-	resp, err = fs.c.Get(u)
+	var req *http.Request
+	req, err = fs.c.NewRequest("GET", fmt.Sprintf("/feature/%4d-%d", year, week), nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get feature")
-		return
 	}
-	defer resp.Body.Close()
 
-	if err = json.NewDecoder(resp.Body).Decode(&f); err != nil {
-		return
-	}
+	err = fs.c.Do(req, &f)
 	return
 }

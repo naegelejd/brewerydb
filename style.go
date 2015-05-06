@@ -1,11 +1,8 @@
 package brewerydb
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
-	"net/url"
-	"strconv"
 )
 
 // StyleService provides access to the BreweryDB Style API. Use Client.Style.
@@ -46,49 +43,30 @@ type StyleList struct {
 // List returns all Styles on the given page.
 func (ss *StyleService) List(page int) (sl StyleList, err error) {
 	// GET: /styles
-	v := url.Values{}
-	v.Set("p", strconv.Itoa(page))
-	u := ss.c.url("/styles", &v)
-	var resp *http.Response
-	resp, err = ss.c.Get(u)
+	var req *http.Request
+	req, err = ss.c.NewRequest("GET", "/styles", &Page{page})
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get styles")
-		return
-	}
-	defer resp.Body.Close()
-
-	if err = json.NewDecoder(resp.Body).Decode(&sl); err != nil {
-		return
 	}
 
+	err = ss.c.Do(req, &sl)
 	return
 }
 
 // Get obtains the Style with the given Style ID.
 func (ss *StyleService) Get(id int) (s Style, err error) {
 	// GET: /style/:styleID
-	u := ss.c.url(fmt.Sprintf("/style/%d", id), nil)
-	var resp *http.Response
-	resp, err = ss.c.Get(u)
+	var req *http.Request
+	req, err = ss.c.NewRequest("GET", fmt.Sprintf("/style/%d", id), nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get style")
-		return
 	}
-	defer resp.Body.Close()
 
 	styleResponse := struct {
 		Status  string
 		Data    Style
 		Message string
 	}{}
-	if err = json.NewDecoder(resp.Body).Decode(&styleResponse); err != nil {
-		return
-	}
-	s = styleResponse.Data
-
-	return
+	err = ss.c.Do(req, &styleResponse)
+	return styleResponse.Data, err
 }

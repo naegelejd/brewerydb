@@ -1,11 +1,6 @@
 package brewerydb
 
-import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
+import "net/http"
 
 // GuildService provides access to the BreweryDB Guild API.
 // Use Client.Guild.
@@ -63,68 +58,44 @@ type GuildList struct {
 }
 
 // List returns an GuildList containing a "page" of Guilds.
-func (gs *GuildService) List(req *GuildRequest) (gl GuildList, err error) {
+func (gs *GuildService) List(q *GuildRequest) (gl GuildList, err error) {
 	// GET: /guilds
-	v := encode(req)
-	u := gs.c.url("/guilds", &v)
-
-	var resp *http.Response
-	resp, err = gs.c.Get(u)
+	var req *http.Request
+	req, err = gs.c.NewRequest("GET", "/guilds", q)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get guilds")
-		return
 	}
-	defer resp.Body.Close()
 
-	if err = json.NewDecoder(resp.Body).Decode(&gl); err != nil {
-		return
-	}
+	err = gs.c.Do(req, &gl)
 	return
 }
 
 // Get retrieves a single Guild with the given guildID.
 func (gs *GuildService) Get(guildID string) (g Guild, err error) {
 	// GET: /guild/:guildID
-	u := gs.c.url("/guild/"+guildID, nil)
-
-	var resp *http.Response
-	resp, err = gs.c.Get(u)
+	var req *http.Request
+	req, err = gs.c.NewRequest("GET", "/guild/"+guildID, nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get guild")
-		return
 	}
-	defer resp.Body.Close()
 
 	guildResponse := struct {
 		Status  string
 		Data    Guild
 		Message string
 	}{}
-	if err = json.NewDecoder(resp.Body).Decode(&guildResponse); err != nil {
-		return
-	}
-	g = guildResponse.Data
-	return
+	err = gs.c.Do(req, &guildResponse)
+	return guildResponse.Data, err
 }
 
 // AddGuild adds a Guild to the BreweryDB.
 // The Guild Name is required.
 func (gs *GuildService) AddGuild(g *Guild) (string, error) {
 	// POST: /guilds
-	v := encode(g)
-	u := gs.c.url("/guilds", nil)
-
-	resp, err := gs.c.PostForm(u, v)
+	req, err := gs.c.NewRequest("POST", "/guilds", g)
 	if err != nil {
 		return "", err
-	} else if resp.StatusCode != http.StatusOK {
-		return "", fmt.Errorf("unable to add guild")
 	}
-	defer resp.Body.Close()
 
 	addResponse := struct {
 		Status string
@@ -134,51 +105,28 @@ func (gs *GuildService) AddGuild(g *Guild) (string, error) {
 		Message string
 	}{}
 	// TODO: return any response?
-	if err := json.NewDecoder(resp.Body).Decode(&addResponse); err != nil {
-		return "", err
-	}
-
-	return addResponse.Data.ID, nil
+	err = gs.c.Do(req, &addResponse)
+	return addResponse.Data.ID, err
 }
 
 // UpdateGuild updates the Guild with the given guildID to match the given Guild.
 func (gs *GuildService) UpdateGuild(guildID string, g *Guild) error {
 	// PUT: /guild/:guildID
-	u := gs.c.url("/guild/"+guildID, nil)
-	v := encode(g)
-	put, err := http.NewRequest("PUT", u, bytes.NewBufferString(v.Encode()))
+	req, err := gs.c.NewRequest("PUT", "/guild/"+guildID, g)
 	if err != nil {
 		return err
 	}
 
-	resp, err := gs.c.Do(put)
-	if err != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("unable to update guild")
-	}
-	defer resp.Body.Close()
-
-	return nil
+	return gs.c.Do(req, nil)
 }
 
 // DeleteGuild removes the Guild with the given guildID.
 func (gs *GuildService) DeleteGuild(guildID string) error {
 	// DELETE: /guild/:guildID
-	u := gs.c.url("/guild/"+guildID, nil)
-
-	req, err := http.NewRequest("DELETE", u, nil)
+	req, err := gs.c.NewRequest("DELETE", "/guild/"+guildID, nil)
 	if err != nil {
 		return err
 	}
 
-	resp, err := gs.c.Do(req)
-	if err != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("unable to delete guild")
-	}
-	defer resp.Body.Close()
-
-	return nil
+	return gs.c.Do(req, nil)
 }

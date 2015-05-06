@@ -1,7 +1,6 @@
 package brewerydb
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 )
@@ -24,44 +23,32 @@ type Glass struct {
 // List returns a list of Glasses.
 func (gs *GlassService) List() (gl []Glass, err error) {
 	// GET: /glassware
-	u := gs.c.url("/glassware", nil)
-
-	var resp *http.Response
-	resp, err = gs.c.Get(u)
+	var req *http.Request
+	req, err = gs.c.NewRequest("GET", "/glassware", nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get glassware")
-		return
 	}
-	defer resp.Body.Close()
 
 	glasswareResponse := struct {
 		Status  string
 		Data    []Glass
 		Message string
 	}{}
-	if err = json.NewDecoder(resp.Body).Decode(&glasswareResponse); err != nil {
+	if err = gs.c.Do(req, &glasswareResponse); err != nil {
 		return
 	}
-	gl = glasswareResponse.Data
-	return
+
+	return glasswareResponse.Data, nil
 }
 
 // Get returns the Glass with the given Glass ID.
 func (gs *GlassService) Get(id int) (g Glass, err error) {
 	// GET: /glass/:glassId
-	u := gs.c.url(fmt.Sprintf("/glass/%d", id), nil)
-
-	var resp *http.Response
-	resp, err = gs.c.Get(u)
+	var req *http.Request
+	req, err = gs.c.NewRequest("GET", fmt.Sprintf("/glass/%d", id), nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get glass")
-		return
 	}
-	defer resp.Body.Close()
 
 	glassResponse := struct {
 		Status  string
@@ -69,9 +56,8 @@ func (gs *GlassService) Get(id int) (g Glass, err error) {
 		Message string
 	}{}
 
-	if err = json.NewDecoder(resp.Body).Decode(&glassResponse); err != nil {
+	if err = gs.c.Do(req, &glassResponse); err != nil {
 		return
 	}
-	g = glassResponse.Data
-	return
+	return glassResponse.Data, nil
 }

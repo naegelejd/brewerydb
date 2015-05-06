@@ -66,12 +66,6 @@ type Hop struct {
 	}
 }
 
-type hopResponse struct {
-	Message string
-	Hop     Hop `json:"data"`
-	Status  string
-}
-
 // NewHopList returns a new HopList which can be consumed like so:
 //
 // TODO: THIS IS BROKEN: error in First() will be missed completely:
@@ -82,9 +76,9 @@ type hopResponse struct {
 //		...
 //	}
 //
-func (s *HopService) NewHopList() *HopList {
+func (hs *HopService) NewHopList() *HopList {
 	// GET: /hops
-	return &HopList{service: s}
+	return &HopList{service: hs}
 }
 
 // getPage obtains the "next" page from the BreweryDB API.
@@ -155,23 +149,20 @@ func (hl *HopList) Next() (*Hop, error) {
 }
 
 // Get queries for a single Hop with the given Hop ID.
-func (s *HopService) Get(id int) (hop *Hop, err error) {
+func (hs *HopService) Get(id int) (hop Hop, err error) {
 	// GET: /hop/:hopId
-	u := s.c.url(fmt.Sprintf("/hop/%d", id), nil)
-	var resp *http.Response
-	resp, err = s.c.Get(u)
+	var req *http.Request
+	req, err = hs.c.NewRequest("GET", fmt.Sprintf("/hop/%d", id), nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode == http.StatusNotFound {
-		err = fmt.Errorf("hop not found")
-		return
 	}
-	defer resp.Body.Close()
 
-	hopResp := hopResponse{}
-	if err = json.NewDecoder(resp.Body).Decode(&hopResp); err != nil {
-		return
-	}
-	hop = &hopResp.Hop
-	return
+	hopResp := struct {
+		Message string
+		Data    Hop
+		Status  string
+	}{}
+
+	err = hs.c.Do(req, &hopResp)
+	return hopResp.Data, err
 }

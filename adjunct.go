@@ -1,11 +1,8 @@
 package brewerydb
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
-	"net/url"
-	"strconv"
 )
 
 // AdjunctService provides access to the BreweryDB Adjunct API. Use Client.Adjunct.
@@ -17,8 +14,8 @@ type AdjunctService struct {
 type Adjunct struct {
 	ID              int
 	Name            string
-	Category        string
-	CategoryDisplay string
+	Category        string // This will always be set to "misc"
+	CategoryDisplay string // This will always be set to "Miscellaneous"
 	CreateDate      string
 }
 
@@ -33,49 +30,34 @@ type AdjunctList struct {
 // List returns all Adjuncts on the given page.
 func (as *AdjunctService) List(page int) (al AdjunctList, err error) {
 	// GET: /adjuncts
-	v := url.Values{}
-	v.Set("p", strconv.Itoa(page))
-	u := as.c.url("/adjuncts", &v)
-	var resp *http.Response
-	resp, err = as.c.Get(u)
+
+	var req *http.Request
+	req, err = as.c.NewRequest("GET", "/adjuncts", Page{page})
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get adjuncts")
-		return
-	}
-	defer resp.Body.Close()
-
-	if err = json.NewDecoder(resp.Body).Decode(&al); err != nil {
-		return
 	}
 
+	err = as.c.Do(req, &al)
 	return
 }
 
 // Get obtains the Adjunct with the given Adjunct ID.
 func (as *AdjunctService) Get(id int) (a Adjunct, err error) {
 	// GET: /adjunct/:adjunctID
-	u := as.c.url(fmt.Sprintf("/adjunct/%d", id), nil)
-	var resp *http.Response
-	resp, err = as.c.Get(u)
+	var req *http.Request
+	req, err = as.c.NewRequest("GET", fmt.Sprintf("/adjunct/%d", id), nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get adjunct")
-		return
 	}
-	defer resp.Body.Close()
 
 	adjunctReponse := struct {
 		Status  string
 		Data    Adjunct
 		Message string
 	}{}
-	if err = json.NewDecoder(resp.Body).Decode(&adjunctReponse); err != nil {
+	if err = as.c.Do(req, &adjunctReponse); err != nil {
 		return
 	}
-	a = adjunctReponse.Data
 
-	return
+	return adjunctReponse.Data, nil
 }

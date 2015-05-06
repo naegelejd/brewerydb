@@ -1,11 +1,8 @@
 package brewerydb
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
-	"net/url"
-	"strconv"
 )
 
 // IngredientService provides access to the BreweryDB Ingredient API.
@@ -35,39 +32,28 @@ type IngredientList struct {
 // List returns all Ingredients on the given page.
 func (is *IngredientService) List(page int) (il IngredientList, err error) {
 	// GET: /ingredients
-	v := url.Values{}
-	v.Set("p", strconv.Itoa(page))
-	u := is.c.url("/ingredients", &v)
-	var resp *http.Response
-	resp, err = is.c.Get(u)
+	p := struct {
+		Page int `json:"p"`
+	}{page}
+
+	var req *http.Request
+	req, err = is.c.NewRequest("GET", "/ingredients", p)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get ingredients")
-		return
-	}
-	defer resp.Body.Close()
-
-	if err = json.NewDecoder(resp.Body).Decode(&il); err != nil {
-		return
 	}
 
+	err = is.c.Do(req, &il)
 	return
 }
 
 // Get returns the Ingredient with the given Ingredient ID.
 func (is *IngredientService) Get(id int) (ing Ingredient, err error) {
 	// GET: /ingredient/:ingredientId
-	u := is.c.url(fmt.Sprintf("/ingredient/%d", id), nil)
-	var resp *http.Response
-	resp, err = is.c.Get(u)
+	var req *http.Request
+	req, err = is.c.NewRequest("GET", fmt.Sprintf("/ingredient/%d", id), nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get ingredient")
-		return
 	}
-	defer resp.Body.Close()
 
 	ingredientResponse := struct {
 		Status  string
@@ -75,10 +61,6 @@ func (is *IngredientService) Get(id int) (ing Ingredient, err error) {
 		Message string
 	}{}
 
-	if err = json.NewDecoder(resp.Body).Decode(&ingredientResponse); err != nil {
-		return
-	}
-	ing = ingredientResponse.Data
-
-	return
+	err = is.c.Do(req, &ingredientResponse)
+	return ingredientResponse.Data, err
 }

@@ -1,7 +1,6 @@
 package brewerydb
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 )
@@ -22,55 +21,40 @@ type Category struct {
 }
 
 // List returns all possible Beer Categories.
-func (c *CategoryService) List() ([]Category, error) {
+func (cs *CategoryService) List() ([]Category, error) {
 	// GET: /categories
-	u := c.c.url("/categories", nil)
-
-	resp, err := c.c.Get(u)
+	req, err := cs.c.NewRequest("GET", "/categories", nil)
 	if err != nil {
 		return nil, err
-	} else if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unable to get categories")
 	}
-	defer resp.Body.Close()
 
 	categoriesResponse := struct {
 		Status  string
 		Data    []Category
 		Message string
 	}{}
-
-	if err := json.NewDecoder(resp.Body).Decode(&categoriesResponse); err != nil {
+	if err := cs.c.Do(req, &categoriesResponse); err != nil {
 		return nil, err
 	}
-
 	return categoriesResponse.Data, nil
 }
 
 // Get obtains the Category with the given Category ID.
-func (c *CategoryService) Get(id int) (cat Category, err error) {
+func (cs *CategoryService) Get(id int) (cat Category, err error) {
 	// GET: /category/:categoryId
-	u := c.c.url(fmt.Sprintf("/categories/%d", id), nil)
-
-	var resp *http.Response
-	resp, err = c.c.Get(u)
+	var req *http.Request
+	req, err = cs.c.NewRequest("GET", fmt.Sprintf("/categories/%d", id), nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get category")
-		return
 	}
-	defer resp.Body.Close()
 
 	categoryResponse := struct {
 		Status  string
 		Data    Category
 		Message string
 	}{}
-
-	if err = json.NewDecoder(resp.Body).Decode(&categoryResponse); err != nil {
+	if err = cs.c.Do(req, &categoryResponse); err != nil {
 		return
 	}
-
 	return categoryResponse.Data, nil
 }

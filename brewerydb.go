@@ -7,19 +7,27 @@
 package brewerydb
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
 )
 
-var apiURL = "http://api.brewerydb.com/v2"
+const apiURL = "http://api.brewerydb.com/v2"
+
+// Page is a convenience type for encoding only a page number
+// when paginating lists.
+type Page struct {
+	P int `json:"p"`
+}
 
 // Client serves as the interface to the BreweryDB API.
 type Client struct {
-	http.Client
+	client      http.Client
 	apiKey      string
 	numRequests int
 	Adjunct     *AdjunctService
@@ -73,6 +81,56 @@ func NewClient(apiKey string) *Client {
 	return c
 }
 
+// NewRequest creates a new http.Request with the given method,
+// BreweryDB endpoint, and optionally a struct to be URL-encoded
+// in the request.
+func (c *Client) NewRequest(method string, endpoint string, data interface{}) (*http.Request, error) {
+	url := apiURL + endpoint + "/?key=" + c.apiKey
+	var body io.Reader
+	if data != nil {
+		vals := encode(data)
+		payload := vals.Encode()
+		if method == "GET" {
+			url += "&" + payload
+		} else {
+			body = bytes.NewBufferString(payload)
+		}
+	}
+
+	// debugging:
+	log.Println(url)
+
+	return http.NewRequest(method, url, body)
+}
+
+// Do performs the given http.Request and optionally
+// decodes the JSON response into the given data struct.
+func (c *Client) Do(req *http.Request, data interface{}) error {
+	resp, err := c.client.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode < 200 || resp.StatusCode > 299 {
+		// TODO: return a more useful error message
+		return fmt.Errorf("HTTP Error %d", resp.StatusCode)
+	}
+
+	if data != nil {
+		// debugging:
+		body := io.TeeReader(resp.Body, os.Stdout)
+		// body := resp.Body
+		if w, ok := data.(io.Writer); ok {
+			_, err = io.Copy(w, body)
+		} else {
+			err = json.NewDecoder(body).Decode(data)
+		}
+	}
+
+	return err
+}
+
+// TODO: DELETE THIS
 func (c *Client) url(endpoint string, vals *url.Values) string {
 	if vals == nil {
 		vals = &url.Values{}
@@ -84,22 +142,7 @@ func (c *Client) url(endpoint string, vals *url.Values) string {
 	return u
 }
 
-func (c *Client) getJSON(url string, data interface{}) error {
-	resp, err := c.Get(url)
-	if err != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("bad status code: %d", resp.StatusCode)
-	}
-
-	defer resp.Body.Close()
-
-	// for debugging: dump json to stdout
-	reader := io.TeeReader(resp.Body, os.Stdout)
-
-	if err := json.NewDecoder(reader).Decode(data); err != nil {
-		return err
-	}
-
-	return nil
+// TODO: DELETE THIS
+func (c *Client) Get(url string) (*http.Response, error) {
+	return c.client.Get(url)
 }

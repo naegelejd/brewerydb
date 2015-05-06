@@ -1,11 +1,6 @@
 package brewerydb
 
-import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
+import "net/http"
 
 // LocationService provides access to the BreweryDB Location API.
 // Use Client.Location.
@@ -123,42 +118,26 @@ type LocationList struct {
 }
 
 // List retrieves a list of Locations matching the given request.
-func (ls *LocationService) List(req *LocationRequest) (ll LocationList, err error) {
+func (ls *LocationService) List(q *LocationRequest) (ll LocationList, err error) {
 	// GET: /locations
-	v := encode(req)
-	u := ls.c.url("/locations", &v)
-
-	var resp *http.Response
-	resp, err = ls.c.Get(u)
+	var req *http.Request
+	req, err = ls.c.NewRequest("GET", "/locations", q)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get locations")
-		return
-	}
-	defer resp.Body.Close()
-
-	if err = json.NewDecoder(resp.Body).Decode(&ll); err != nil {
-		return
 	}
 
+	err = ls.c.Do(req, &ll)
 	return
 }
 
 // Get retrieves the Location with the given ID.
 func (ls *LocationService) Get(locID string) (l Location, err error) {
 	// GET: /location/:locationID
-	u := ls.c.url("/location/"+locID, nil)
-
-	var resp *http.Response
-	resp, err = ls.c.Get(u)
+	var req *http.Request
+	req, err = ls.c.NewRequest("GET", "/location/"+locID, nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get location")
-		return
 	}
-	defer resp.Body.Close()
 
 	locationResponse := struct {
 		Status  string
@@ -166,53 +145,29 @@ func (ls *LocationService) Get(locID string) (l Location, err error) {
 		Message string
 	}{}
 
-	if err = json.NewDecoder(resp.Body).Decode(&locationResponse); err != nil {
-		return
-	}
-	l = locationResponse.Data
-
-	return
+	err = ls.c.Do(req, &locationResponse)
+	return locationResponse.Data, err
 }
 
 // UpdateLocation updates the Location having the given ID to match the given Location.
 func (ls *LocationService) UpdateLocation(locID string, l *Location) error {
 	// PUT: /location/:locationID
-	u := ls.c.url("/location/"+locID, nil)
-	v := encode(l)
-	put, err := http.NewRequest("PUT", u, bytes.NewBufferString(v.Encode()))
+	req, err := ls.c.NewRequest("PUT", "/location/"+locID, l)
 	if err != nil {
 		return err
 	}
-
-	resp, err := ls.c.Do(put)
-	if err != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("unable to update location")
-	}
-	defer resp.Body.Close()
 
 	// TODO: return any response?
-	return nil
+	return ls.c.Do(req, nil)
 }
 
 // DeleteLocation removes the Location with the given ID from the BreweryDB.
 func (ls *LocationService) DeleteLocation(locID string) error {
 	// DELETE: /location/:locationID
-	u := ls.c.url("/location/"+locID, nil)
-
-	req, err := http.NewRequest("DELETE", u, nil)
+	req, err := ls.c.NewRequest("DELETE", "/location/"+locID, nil)
 	if err != nil {
 		return err
 	}
 
-	resp, err := ls.c.Do(req)
-	if err != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("unable to delete location")
-	}
-	defer resp.Body.Close()
-
-	return nil
+	return ls.c.Do(req, nil)
 }

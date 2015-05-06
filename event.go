@@ -1,11 +1,6 @@
 package brewerydb
 
-import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
+import "net/http"
 
 // EventService provides access to the BreweryDB Event API.
 // Use Client.Event.
@@ -98,59 +93,44 @@ type EventList struct {
 }
 
 // EventRequest contains options for specifying the kinds of Events desired.
+// Non-Premium users must set one of the following: year, name, type, locality, region
 type EventRequest struct {
 	Page           int        `json:"p"`
-	IDs            string     `json:"ids"`
-	Year           string     `json:"year"`
-	Name           string     `json:"name"`
-	Type           string     `json:"type"`     // Key of the type of event, comma separated for multiple types
-	Locality       string     `json:"locality"` // e.g. US city
-	Region         string     `json:"region"`   // e.g. US state
-	CountryISOCode string     `json:"countryIsoCode"`
-	Since          int        `json:"since"` // Unix timestamp
-	Status         string     `json:"status"`
-	HasImages      string     `json:"hasImages"` // Y/N
-	Order          EventOrder `json:"order"`
-	Sort           ListSort   `json:"sort"`
+	IDs            string     `json:"ids,omitempty"`
+	Year           int        `json:"year,omitempty"`
+	Name           string     `json:"name,omitempty"`
+	Type           string     `json:"type,omitempty"`     // Key of the type of event, comma separated for multiple types
+	Locality       string     `json:"locality,omitempty"` // e.g. US city
+	Region         string     `json:"region,omitempty"`   // e.g. US state
+	CountryISOCode string     `json:"countryIsoCode,omitempty"`
+	Since          int        `json:"since,omitempty"` // Unix timestamp
+	Status         string     `json:"status,omitempty"`
+	HasImages      string     `json:"hasImages,omitempty"` // Y/N
+	Order          EventOrder `json:"order,omitempty"`
+	Sort           ListSort   `json:"sort,omitempty"`
 }
 
 // List returns an EventList containing a "page" of Events.
-func (es *EventService) List(req *EventRequest) (el EventList, err error) {
+func (es *EventService) List(q *EventRequest) (el EventList, err error) {
 	// GET: /events
-	v := encode(req)
-	u := es.c.url("/events", &v)
-
-	var resp *http.Response
-	resp, err = es.c.Get(u)
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", "/events", q)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get events")
-		return
-	}
-	defer resp.Body.Close()
-
-	if err = json.NewDecoder(resp.Body).Decode(&el); err != nil {
-		return
 	}
 
+	err = es.c.Do(req, &el)
 	return
 }
 
 // Get retrieves a single event with the given eventID.
 func (es *EventService) Get(eventID string) (e Event, err error) {
 	// GET: /event/:eventID
-	u := es.c.url("/event/"+eventID, nil)
-
-	var resp *http.Response
-	resp, err = es.c.Get(u)
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", "/event/"+eventID, nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to get event")
-		return
 	}
-	defer resp.Body.Close()
 
 	eventResponse := struct {
 		Status  string
@@ -158,12 +138,11 @@ func (es *EventService) Get(eventID string) (e Event, err error) {
 		Message string
 	}{}
 
-	if err = json.NewDecoder(resp.Body).Decode(&eventResponse); err != nil {
+	if err = es.c.Do(req, &eventResponse); err != nil {
 		return
 	}
-	e = eventResponse.Data
 
-	return
+	return eventResponse.Data, nil
 }
 
 // AddEvent adds an Event to the BreweryDB.
@@ -175,62 +154,34 @@ func (es *EventService) Get(eventID string) (e Event, err error) {
 // - EndDate (YYYY-MM-DD)
 func (es *EventService) AddEvent(e *Event) error {
 	// POST: /events
-	v := encode(e)
-	u := es.c.url("/events", nil)
-
-	resp, err := es.c.PostForm(u, v)
+	req, err := es.c.NewRequest("POST", "/events", e)
 	if err != nil {
 		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("unable to add event")
 	}
-	defer resp.Body.Close()
 
 	// TODO: return any response?
-
-	return nil
+	return es.c.Do(req, nil)
 }
 
 // UpdateEvent updates the Event with the given eventID to match the given Event.
 func (es *EventService) UpdateEvent(eventID string, e *Event) error {
 	// PUT: /event/:eventID
-	u := es.c.url("/event/"+eventID, nil)
-	v := encode(e)
-	put, err := http.NewRequest("PUT", u, bytes.NewBufferString(v.Encode()))
+	req, err := es.c.NewRequest("PUT", "/event/"+eventID, e)
 	if err != nil {
 		return err
 	}
-
-	resp, err := es.c.Do(put)
-	if err != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("unable to update event")
-	}
-	defer resp.Body.Close()
 
 	// TODO: return any response?
-
-	return nil
+	return es.c.Do(req, nil)
 }
 
 // DeleteEvent removes the Event with the given eventID.
 func (es *EventService) DeleteEvent(eventID string) error {
 	// DELETE: /event/:eventID
-	u := es.c.url("/event/"+eventID, nil)
-
-	req, err := http.NewRequest("DELETE", u, nil)
+	req, err := es.c.NewRequest("DELETE", "/event/"+eventID, nil)
 	if err != nil {
 		return err
 	}
 
-	resp, err := es.c.Do(req)
-	if err != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("unable to delete event")
-	}
-	defer resp.Body.Close()
-
-	return nil
+	return es.c.Do(req, nil)
 }

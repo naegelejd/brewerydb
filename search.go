@@ -1,10 +1,6 @@
 package brewerydb
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
+import "net/http"
 
 // SearchService provides access to the BreweryDB Search API.
 // Use Client.Search.
@@ -77,77 +73,62 @@ func makeActualRequest(req *SearchRequest, query string, tp searchType) *actualS
 }
 
 // Beer searches for Beers matching the given query.
-func (ss *SearchService) Beer(query string, req *SearchRequest) (sr SearchBeerResults, err error) {
-	actualRequest := makeActualRequest(req, query, searchBeer)
-	v := encode(actualRequest)
-	u := ss.c.url("/search", &v)
-	var resp *http.Response
-	resp, err = ss.c.Get(u)
+func (ss *SearchService) Beer(query string, q *SearchRequest) (sr SearchBeerResults, err error) {
+	actualRequest := makeActualRequest(q, query, searchBeer)
+	var req *http.Request
+	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to search beer")
-		return
 	}
-	defer resp.Body.Close()
 
-	err = json.NewDecoder(resp.Body).Decode(&sr)
+	err = ss.c.Do(req, &sr)
 	return
 }
 
 // Brewery searches for Breweries matching the given query.
-func (ss *SearchService) Brewery(query string, req *SearchRequest) (sr SearchBreweryResults, err error) {
-	actualRequest := makeActualRequest(req, query, searchBrewery)
-	v := encode(actualRequest)
-	u := ss.c.url("/search", &v)
-	var resp *http.Response
-	resp, err = ss.c.Get(u)
+func (ss *SearchService) Brewery(query string, q *SearchRequest) (sr SearchBreweryResults, err error) {
+	actualRequest := makeActualRequest(q, query, searchBrewery)
+	var req *http.Request
+	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to search brewery")
-		return
 	}
-	defer resp.Body.Close()
 
-	err = json.NewDecoder(resp.Body).Decode(&sr)
+	err = ss.c.Do(req, &sr)
 	return
 }
 
 // Event searches for Events matching the given query.
-func (ss *SearchService) Event(query string, req *SearchRequest) (el EventList, err error) {
-	actualRequest := makeActualRequest(req, query, searchEvent)
-	v := encode(actualRequest)
-	u := ss.c.url("/search", &v)
-	var resp *http.Response
-	resp, err = ss.c.Get(u)
+func (ss *SearchService) Event(query string, q *SearchRequest) (el EventList, err error) {
+	actualRequest := makeActualRequest(q, query, searchEvent)
+	var req *http.Request
+	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to search event")
-		return
 	}
-	defer resp.Body.Close()
 
-	err = json.NewDecoder(resp.Body).Decode(&el)
+	err = ss.c.Do(req, &el)
 	return
 }
 
 // Guild searches for Guilds matching the given query.
-func (ss *SearchService) Guild(query string, req *SearchRequest) (gl GuildList, err error) {
-	actualRequest := makeActualRequest(req, query, searchGuild)
-	v := encode(actualRequest)
-	u := ss.c.url("/search", &v)
-	var resp *http.Response
-	resp, err = ss.c.Get(u)
+func (ss *SearchService) Guild(query string, q *SearchRequest) (gl GuildList, err error) {
+	actualRequest := makeActualRequest(q, query, searchGuild)
+	var req *http.Request
+	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to search guild")
-		return
 	}
-	defer resp.Body.Close()
 
-	err = json.NewDecoder(resp.Body).Decode(&gl)
+	err = ss.c.Do(req, &gl)
 	return
+}
+
+// TODO: use this helper for all 4 search functions
+func (ss *SearchService) search(asr *actualSearchRequest, data interface{}) error {
+	req, err := ss.c.NewRequest("GET", "/search", asr)
+	if err != nil {
+		return err
+	}
+	return ss.c.Do(req, data)
 }

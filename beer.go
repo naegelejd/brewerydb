@@ -1,7 +1,6 @@
 package brewerydb
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -92,13 +91,13 @@ type BeerListRequest struct {
 	Name               string    `json:"name"`
 	ABV                string    `json:"abv"`
 	IBU                string    `json:"ibu"`
-	GlasswareID        string    `json:"glasswareId"`
-	SrmID              string    `json:"srmId"`
-	AvailableID        string    `json:"availableId"`
-	StyleID            string    `json:"styleId"`
+	GlasswareID        int       `json:"glasswareId"`
+	SrmID              int       `json:"srmId"`
+	AvailableID        int       `json:"availableId"`
+	StyleID            int       `json:"styleId"`
 	IsOrganic          string    `json:"isOrganic"` // Y/N
 	HasLabels          string    `json:"hasLabels"` // Y/N
-	Year               string    `json:"year"`      // YYYY
+	Year               int       `json:"year"`      // YYYY
 	Since              string    `json:"since"`     // UNIX timestamp format. Max 30 days
 	Status             string    `json:"status"`
 	Order              BeerOrder `json:"order"`
@@ -119,9 +118,16 @@ type beerListResponse struct {
 
 // Availability contains information on a Beer's availability.
 type Availability struct {
-	ID          string
+	ID          int
 	Name        string
 	Description string
+}
+
+// SRM represents a Standard Reference Method.
+type SRM struct {
+	ID   int
+	Hex  string
+	Name string
 }
 
 // Beer contains all relevant information for a single Beer.
@@ -133,9 +139,9 @@ type Beer struct {
 	OriginalGravity string
 	ABV             string
 	IBU             string
-	GlasswareID     float64
+	GlasswareID     int
 	Glass           Glass
-	StyleID         float64
+	StyleID         int
 	Style           Style
 	IsOrganic       string
 	Labels          struct {
@@ -147,27 +153,22 @@ type Beer struct {
 	ServingTemperatureDisplay string
 	Status                    string
 	StatusDisplay             string
-	AvailableID               float64
+	AvailableID               int
 	Available                 Availability
 	BeerVariationID           string
 	BeerVariation             struct {
 		// TODO: instance of a Beer??
 	}
-	SrmID float64
-	Srm   struct {
-		ID   float64
-		Name string
-		Hex  string
-		// TODO: anything else?
-	}
-	Year string
+	SrmID int
+	SRM   SRM
+	Year  int
 }
 
 // NewBeerList returns a new BeerList that will use the given BeerListRequest
 // to query for a list of Beers.
-func (s *BeerService) NewBeerList(req *BeerListRequest) *BeerList {
+func (bs *BeerService) NewBeerList(req *BeerListRequest) *BeerList {
 	// GET: /beers
-	return &BeerList{service: s, req: req}
+	return &BeerList{service: bs, req: req}
 }
 
 // getPage obtains the "next" page from the BreweryDB API
@@ -249,30 +250,23 @@ func (bl *BeerList) Next() (*Beer, error) {
 // Get queries for a single Beer with the given Beer ID.
 //
 // TODO: add withBreweries, withSocialAccounts, withIngredients request parameters
-func (s *BeerService) Get(id string) (beer *Beer, err error) {
+func (bs *BeerService) Get(id string) (beer Beer, err error) {
 	// GET: /beer/:beerId
-	u := s.c.url("/beer/"+id, nil)
-	var resp *http.Response
-	resp, err = s.c.Get(u)
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", "/beer/"+id, nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode == http.StatusNotFound {
-		err = fmt.Errorf("beer not found")
-		return
 	}
-	defer resp.Body.Close()
 
 	beerResp := struct {
 		Message string
-		Beer    Beer `json:"data"`
+		Data    Beer
 		Status  string
 	}{}
-
-	if err = json.NewDecoder(resp.Body).Decode(&beerResp); err != nil {
+	if err = bs.c.Do(req, &beerResp); err != nil {
 		return
 	}
-	beer = &beerResp.Beer
-	return
+	return beerResp.Data, nil
 }
 
 // BeerChangeRequest contains all the relevant options available to change
@@ -284,11 +278,11 @@ type BeerChangeRequest struct {
 	ABV                string          `json:"abv"`
 	IBU                string          `json:"ibu"`
 	GlasswareID        int             `json:"glasswareId"`
-	SrmID              string          `json:"srmID"`
-	AvailableID        string          `json:"availableId"`
+	SrmID              int             `json:"srmID"`
+	AvailableID        int             `json:"availableId"`
 	IsOrganic          string          `json:"isOrganic"`
 	BeerVariationID    string          `json:"beerVariationId"`
-	Year               string          `json:"year"`
+	Year               int             `json:"year"`
 	FoodPairings       string          `json:"foodPairings"`
 	ServingTemperature BeerTemperature `json:"servingTemperature"`
 	OriginalGravity    string          `json:"originalGravity"`
@@ -297,71 +291,46 @@ type BeerChangeRequest struct {
 }
 
 // Add adds a new Beer to the BreweryDB and returns its new ID on success.
-func (s *BeerService) Add(req *BeerChangeRequest) (id string, err error) {
+func (bs *BeerService) Add(q *BeerChangeRequest) (id string, err error) {
 	// POST: /beers
-	u := s.c.url("/beers", nil)
-
-	var resp *http.Response
-	resp, err = s.c.PostForm(u, encode(req))
+	var req *http.Request
+	req, err = bs.c.NewRequest("POST", "/beers", q)
 	if err != nil {
 		return
-	} else if resp.StatusCode != http.StatusOK {
-		err = fmt.Errorf("unable to create beer")
-		return
-	}
-	defer resp.Body.Close()
-
-	out := struct{ Data struct{ ID string } }{}
-	if err = json.NewDecoder(resp.Body).Decode(&out); err != nil {
-		return
 	}
 
-	id = out.Data.ID
-	return
+	addResponse := struct {
+		Data struct {
+			ID string
+		}
+	}{}
+	if err = bs.c.Do(req, &addResponse); err != nil {
+		return
+	}
+
+	return addResponse.Data.ID, nil
 }
 
 // Update changes an existing Beer in the BreweryDB.
-func (s *BeerService) Update(id string, req *BeerChangeRequest) error {
+func (bs *BeerService) Update(id string, q *BeerChangeRequest) error {
 	// PUT: /beer/:beerId
-	u := s.c.url("/beer/"+id, nil)
-	v := encode(req)
-	put, err := http.NewRequest("PUT", u, bytes.NewBufferString(v.Encode()))
+	req, err := bs.c.NewRequest("PUT", "/beer/"+id, q)
 	if err != nil {
 		return err
 	}
 
-	resp, err := s.c.Do(put)
-	if err != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("unable to update beer")
-	}
-	defer resp.Body.Close()
-
-	// TODO: check "status"=="success" in JSON response body?
-
-	return nil
+	// TODO: check status==success in JSON response body?
+	return bs.c.Do(req, nil)
 }
 
 // Delete removes the Beer with the given ID from the BreweryDB.
-func (s *BeerService) Delete(id string) error {
+func (bs *BeerService) Delete(id string) error {
 	// DELETE: /beer/:beerId
-	u := s.c.url("/beer/"+id, nil)
-	req, err := http.NewRequest("DELETE", u, nil)
+	req, err := bs.c.NewRequest("DELETE", "/beer/"+id, nil)
 	if err != nil {
 		return err
 	}
-
-	resp, err := s.c.Do(req)
-	if err != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("beer not found")
-	}
-
-	defer resp.Body.Close()
 
 	// TODO: extract and return response message
-
-	return nil
+	return bs.c.Do(req, nil)
 }

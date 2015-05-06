@@ -1,10 +1,6 @@
 package brewerydb
 
 import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-	"net/url"
 	"strconv"
 	"strings"
 )
@@ -26,25 +22,23 @@ const (
 
 // ConvertIDs converts a series of "old" Beer or Brewery IDs to the "new" format
 // (BreweryDB v1 to v2)
-func (c *ConvertIDService) ConvertIDs(t ConvertType, oldIDs ...int) (map[int]string, error) {
+func (cs *ConvertIDService) ConvertIDs(t ConvertType, oldIDs ...int) (map[int]string, error) {
 	// POST: /convertid
-	v := url.Values{}
-	v.Set("type", string(t))
 
 	var ids []string
 	for _, id := range oldIDs {
 		ids = append(ids, strconv.Itoa(id))
 	}
-	v.Set("ids", strings.Join(ids, ","))
 
-	u := c.c.url("/convertid", nil)
-	resp, err := c.c.PostForm(u, v)
+	q := struct {
+		Type string `json:"type"`
+		IDs  string `json:"ids"`
+	}{string(t), strings.Join(ids, ",")}
+
+	req, err := cs.c.NewRequest("POST", "/convertid", &q)
 	if err != nil {
 		return nil, err
-	} else if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("unable to convert ids")
 	}
-	defer resp.Body.Close()
 
 	convertidResponse := struct {
 		Status string
@@ -54,7 +48,7 @@ func (c *ConvertIDService) ConvertIDs(t ConvertType, oldIDs ...int) (map[int]str
 		}
 		Message string
 	}{}
-	if err := json.NewDecoder(resp.Body).Decode(&convertidResponse); err != nil {
+	if err := cs.c.Do(req, &convertidResponse); err != nil {
 		return nil, err
 	}
 

@@ -80,17 +80,11 @@ type BreweryListRequest struct {
 	// TODO: premium account parameters
 }
 
-type breweryResponse struct {
-	Message string
-	Brewery Brewery `json:"data"`
-	Status  string
-}
-
 // NewBreweryList returns a new BreweryList that will use the given
 // BreweryListRequest to query for a list of Breweries.
-func (s *BreweryService) NewBreweryList(req *BreweryListRequest) *BreweryList {
+func (bs *BreweryService) NewBreweryList(req *BreweryListRequest) *BreweryList {
 	// GET: /breweries
-	return &BreweryList{service: s, req: req}
+	return &BreweryList{service: bs, req: req}
 }
 
 // getPage obtains the "next" page from the BreweryDB API
@@ -162,58 +156,47 @@ func (bl *BreweryList) Next() (*Brewery, error) {
 }
 
 // Get queries for a single Brewery with the given Brewery ID.
-func (s *BreweryService) Get(id string) (brewery *Brewery, err error) {
+func (bs *BreweryService) Get(id string) (brewery Brewery, err error) {
 	// GET: /brewery/:breweryId
-	u := s.c.url("/brewery/"+id, nil)
-	var resp *http.Response
-	resp, err = s.c.Get(u)
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", "/brewery/"+id, nil)
 	if err != nil {
 		return
-	} else if resp.StatusCode == http.StatusNotFound {
-		err = fmt.Errorf("brewery not found")
-		return
 	}
-	defer resp.Body.Close()
 
-	breweryResp := breweryResponse{}
-	if err = json.NewDecoder(resp.Body).Decode(&breweryResp); err != nil {
+	breweryResp := struct {
+		Message string
+		Data    Brewery
+		Status  string
+	}{}
+	if err = bs.c.Do(req, &breweryResp); err != nil {
 		return
 	}
-	brewery = &breweryResp.Brewery
-	return
+	return breweryResp.Data, nil
 }
 
 // AddBrewery adds a new Brewery to the BreweryDB and returns its new ID on success.
-func (s *BreweryService) AddBrewery( /* params */ ) (id string, err error) {
+func (bs *BreweryService) AddBrewery( /* params */ ) (id string, err error) {
 	// POST: /breweries
+	// TODO: implement
 	return
 }
 
 // UpdateBrewery changes an existing Brewery in the BreweryDB.
-func (s *BreweryService) UpdateBrewery( /* params */ ) error {
+func (bs *BreweryService) UpdateBrewery( /* params */ ) error {
 	// PUT: /brewery/:breweryId
+	// TODO: implement
 	return nil
 }
 
 // DeleteBrewery removes the Brewery with the given ID from the BreweryDB.
-func (s *BreweryService) DeleteBrewery(id string) error {
+func (bs *BreweryService) DeleteBrewery(id string) error {
 	// DELETE: /brewery/:breweryId
-	u := s.c.url("/brewery/"+id, nil)
-	req, err := http.NewRequest("DELETE", u, nil)
+	req, err := bs.c.NewRequest("DELETE", "/brewery/"+id, nil)
 	if err != nil {
 		return err
 	}
 
-	resp, err := s.c.Do(req)
-	if err != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("brewery not found")
-	}
-
-	defer resp.Body.Close()
-
-	// TODO: extract and return response message
-
-	return nil
+	// TODO: extract and return response message?
+	return bs.c.Do(req, nil)
 }

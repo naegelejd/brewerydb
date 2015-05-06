@@ -1,31 +1,19 @@
 package brewerydb
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-)
-
 // Breweries queries for all Breweries associated with the Beer having the given ID.
-func (s *BeerService) Breweries(id string) ([]*Brewery, error) {
+func (bs *BeerService) Breweries(id string) ([]Brewery, error) {
 	// GET: /beer/:beerId/breweries
-	u := s.c.url("/beer/"+id+"/breweries", nil)
-
-	resp, err := s.c.Get(u)
+	req, err := bs.c.NewRequest("GET", "/beer/"+id+"/breweries", nil)
 	if err != nil {
 		return nil, err
-	} else if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("breweries not found")
 	}
-	defer resp.Body.Close()
 
 	breweriesResp := struct {
 		Status  string
-		Data    []*Brewery
+		Data    []Brewery
 		Message string
 	}{}
-
-	if err := json.NewDecoder(resp.Body).Decode(&breweriesResp); err != nil {
+	if err := bs.c.Do(req, &breweriesResp); err != nil {
 		return nil, err
 	}
 
@@ -42,39 +30,24 @@ type BeerBreweryRequest struct {
 // with the given Beer ID.
 //
 // WRONG in documentation: POST: /beer/:beerId/breweries
-func (s *BeerService) AddBrewery(beerID, breweryID string, req *BeerBreweryRequest) error {
+func (bs *BeerService) AddBrewery(beerID, breweryID string, q *BeerBreweryRequest) error {
 	// POST: /beer/:beerId/brewery/:breweryId
-	u := s.c.url("/beer/"+beerID+"/brewery/"+breweryID, nil)
-
-	resp, err := s.c.PostForm(u, encode(req))
+	req, err := bs.c.NewRequest("POST", "/beer/"+beerID+"/brewery/"+breweryID, nil)
 	if err != nil {
 		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("unable to add brewery")
 	}
-	defer resp.Body.Close()
 
-	return nil
+	return bs.c.Do(req, nil)
 }
 
 // DeleteBrewery removes the Brewery with the given Brewery ID from the Beer
 // with the given Beer ID.
-func (s *BeerService) DeleteBrewery(beerID, breweryID string, req *BeerBreweryRequest) error {
+func (bs *BeerService) DeleteBrewery(beerID, breweryID string, q *BeerBreweryRequest) error {
 	// DELETE: /beer/:beerId/brewery/:breweryId
-	v := encode(req)
-	u := s.c.url("/beer/"+beerID+"/brewery/"+breweryID, &v)
-	q, err := http.NewRequest("DELETE", u, nil)
+	req, err := bs.c.NewRequest("DELETE", "/beer/"+beerID+"/brewery/"+breweryID, q)
 	if err != nil {
 		return err
 	}
 
-	resp, err := s.c.Do(q)
-	if resp != nil {
-		return err
-	} else if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("unable to delete brewery")
-	}
-	defer resp.Body.Close()
-
-	return nil
+	return bs.c.Do(req, nil)
 }
