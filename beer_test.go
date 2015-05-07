@@ -37,17 +37,12 @@ func ExampleBeerList() {
 	c := NewClient("<your API key>")
 
 	// Get first 40 beers with an ABV between 8.0 and 9.0, descending, alphabetical
-	beers := c.Beer.NewBeerList(&BeerListRequest{ABV: "8", Sort: SortDescending})
-	count := 0
-	for b, err := beers.First(); b != nil; b, err = beers.Next() {
-		if err != nil {
-			log.Fatal(err)
-		}
+	bl, err := c.Beer.List(&BeerListRequest{ABV: "8", Sort: SortDescending})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, b := range bl.Beers {
 		fmt.Println(b.Name, b.ID)
-		count++
-		if count > 40 {
-			break
-		}
 	}
 }
 

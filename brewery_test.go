@@ -9,11 +9,11 @@ func ExampleBreweryList() {
 	c := NewClient("<your API key>")
 
 	// Get all breweries established in 1983
-	bs := c.Brewery.NewBreweryList(&BreweryListRequest{Established: "1983"})
-	for b, err := bs.First(); b != nil; b, err = bs.Next() {
-		if err != nil {
-			log.Fatal("error: ", err)
-		}
+	bl, err := c.Brewery.List(&BreweryListRequest{Established: "1983"})
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, b := range bl.Breweries {
 		fmt.Println(b.Name, b.ID)
 	}
 

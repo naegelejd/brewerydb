@@ -21,7 +21,7 @@ For example:
 
 ```go
 // Get any random beer
-beer, _ := client.Beer.Random(nil)
+beer, _ := client.Beer.Random(&brewerydb.RandomBeerRequest{ABV: "8"})
 fmt.Println(beer.Name, beer.Style.Name)
 ```
 
@@ -29,12 +29,12 @@ or
 
 ```go
 // Get all breweries established in 1983
-bs := c.Brewery.NewBreweryList(&brewerydb.BreweryListRequest{Established: "1983"})
-for b, err := bs.First(); b != nil; b, err = bs.Next() {
-    if err != nil {
-        panic(err)
-    }
-    fmt.Println(b.Name, b.ID)
+bs, err := client.Brewery.List(&brewerydb.BreweryListRequest{Established: "1983"})
+if err != nil {
+    panic(err)
+}
+for _, b := range bs {
+    fmt.Println(b.Name, b.Website)
 }
 ```
 

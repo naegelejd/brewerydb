@@ -32,7 +32,7 @@ type SearchBreweryResults struct {
 	CurrentPage   int
 	NumberOfPages int
 	TotalResults  int
-	Beers         []Beer `json:"data"`
+	Breweries     []Brewery `json:"data"`
 }
 
 // SearchRequest contains options for narrowing a Search.

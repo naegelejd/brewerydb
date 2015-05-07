@@ -21,11 +21,11 @@ func ExampleHopList() {
 	fmt.Printf("%+v\n", h)
 
 	// Get all types of hops
-	hs := c.Hop.NewHopList()
-	for h, err := hs.First(); h != nil; h, err = hs.Next() {
-		if err != nil {
-			log.Fatal("error: ", err)
-		}
+	hl, err := c.Hop.List(1)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, h := range hl.Hops {
 		fmt.Println(h.Name)
 	}
 }

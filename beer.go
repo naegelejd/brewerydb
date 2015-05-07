@@ -1,11 +1,6 @@
 package brewerydb
 
-import (
-	"encoding/json"
-	"fmt"
-	"net/http"
-	"net/url"
-)
+import "net/http"
 
 // GET: /beer/:beerId/adjuncts
 // POST: /beer/:beerId/adjuncts
@@ -42,13 +37,12 @@ type BeerService struct {
 	c *Client
 }
 
-// BeerList represents a lazy list of Beers. Create a new one with
-// NewBeerList. Iterate over a BeerList using First() and Next().
+// BeerList represents a "page" containing a slice of Beers.
 type BeerList struct {
-	service *BeerService
-	req     *BeerListRequest
-	resp    *beerListResponse
-	curBeer int
+	CurrentPage   int
+	NumberOfPages int
+	TotalResults  int
+	Beers         []Beer `json:"data"`
 }
 
 // BeerOrder represents the ordering of a list of Beers.
@@ -87,33 +81,26 @@ const (
 // BeerListRequest contains all the required and optional fields
 // used for querying for a list of Beers.
 type BeerListRequest struct {
-	IDs                string    `json:"ids"` // IDs of the beers to return, comma separated. Max 10.
-	Name               string    `json:"name"`
-	ABV                string    `json:"abv"`
-	IBU                string    `json:"ibu"`
-	GlasswareID        int       `json:"glasswareId"`
-	SrmID              int       `json:"srmId"`
-	AvailableID        int       `json:"availableId"`
-	StyleID            int       `json:"styleId"`
-	IsOrganic          string    `json:"isOrganic"` // Y/N
-	HasLabels          string    `json:"hasLabels"` // Y/N
-	Year               int       `json:"year"`      // YYYY
-	Since              string    `json:"since"`     // UNIX timestamp format. Max 30 days
-	Status             string    `json:"status"`
-	Order              BeerOrder `json:"order"`
-	Sort               ListSort  `json:"sort"`
-	RandomCount        string    `json:"randomCount"`        // how many random beers to return. Max 10
-	WithBreweries      string    `json:"withBreweries"`      // Y/N
-	WithSocialAccounts string    `json:"withSocialAccounts"` // Premium. Y/N
-	WithIngredients    string    `json:"withIngredients"`    // Premium. Y/N
-}
-
-type beerListResponse struct {
-	Status        string
-	CurrentPage   int
-	NumberOfPages int
-	TotalResults  int
-	Beers         []Beer `json:"data"`
+	Page               int       `json:"p"`
+	IDs                string    `json:"ids,omitempty"` // IDs of the beers to return, comma separated. Max 10.
+	Name               string    `json:"name,omitempty"`
+	ABV                string    `json:"abv,omitempty"`
+	IBU                string    `json:"ibu,omitempty"`
+	GlasswareID        int       `json:"glasswareId,omitempty"`
+	SrmID              int       `json:"srmId,omitempty"`
+	AvailableID        int       `json:"availableId,omitempty"`
+	StyleID            int       `json:"styleId,omitempty"`
+	IsOrganic          string    `json:"isOrganic,omitempty"` // Y/N
+	HasLabels          string    `json:"hasLabels,omitempty"` // Y/N
+	Year               int       `json:"year,omitempty"`      // YYYY
+	Since              string    `json:"since,omitempty"`     // UNIX timestamp format. Max 30 days
+	Status             string    `json:"status,omitempty"`
+	Order              BeerOrder `json:"order,omitempty"`
+	Sort               ListSort  `json:"sort,omitempty"`
+	RandomCount        string    `json:"randomCount,omitempty"`        // how many random beers to return. Max 10
+	WithBreweries      string    `json:"withBreweries,omitempty"`      // Y/N
+	WithSocialAccounts string    `json:"withSocialAccounts,omitempty"` // Premium. Y/N
+	WithIngredients    string    `json:"withIngredients,omitempty"`    // Premium. Y/N
 }
 
 // Availability contains information on a Beer's availability.
@@ -164,87 +151,18 @@ type Beer struct {
 	Year  int
 }
 
-// NewBeerList returns a new BeerList that will use the given BeerListRequest
-// to query for a list of Beers.
-func (bs *BeerService) NewBeerList(req *BeerListRequest) *BeerList {
+// List returns all Beers on the page specified in the given BeerListRequest.
+func (bs *BeerService) List(q *BeerListRequest) (bl BeerList, err error) {
 	// GET: /beers
-	return &BeerList{service: bs, req: req}
-}
 
-// getPage obtains the "next" page from the BreweryDB API
-func (bl *BeerList) getPage(pageNum int) error {
-	var v url.Values
-	if bl.req != nil {
-		v = encode(bl.req)
-	} else {
-		v = url.Values{}
-	}
-	v.Set("p", fmt.Sprintf("%d", pageNum))
-
-	u := bl.service.c.url("/beers", &v)
-
-	resp, err := bl.service.c.Get(u)
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", "/beers", q)
 	if err != nil {
-		return err
-	} else if resp.StatusCode == http.StatusNotFound {
-		return fmt.Errorf("beers not found")
-	}
-	defer resp.Body.Close()
-
-	beerListResp := &beerListResponse{}
-	if err := json.NewDecoder(resp.Body).Decode(beerListResp); err != nil {
-		// if e, ok := err.(*json.UnmarshalTypeError); ok == true {
-		// 	fmt.Printf("(JSON error) Value: %s, Type: %s", e.Value, e.Type.Kind())
-		// }
-		return err
+		return
 	}
 
-	if len(beerListResp.Beers) <= 0 {
-		return fmt.Errorf("no beers found on page %d", pageNum)
-	}
-
-	bl.resp = beerListResp
-	bl.curBeer = 0
-
-	return nil
-}
-
-// First returns the first Beer in the BeerList.
-func (bl *BeerList) First() (*Beer, error) {
-	// If we already have page 1 cached, just return the first Beer
-	if bl.resp != nil && bl.resp.CurrentPage == 1 {
-		bl.curBeer = 0
-		return &bl.resp.Beers[0], nil
-	}
-
-	if err := bl.getPage(1); err != nil {
-		return nil, err
-	}
-
-	return &bl.resp.Beers[0], nil
-}
-
-// Next returns the next Beer in the BeerList on each successive call, or nil
-// if there are no more Beers.
-func (bl *BeerList) Next() (*Beer, error) {
-	bl.curBeer++
-	// if we're still on the same page just return beer
-	if bl.curBeer < len(bl.resp.Beers) {
-		return &bl.resp.Beers[bl.curBeer], nil
-	}
-
-	// otherwise we have to make a new request
-	pageNum := bl.resp.CurrentPage + 1
-	if pageNum > bl.resp.NumberOfPages {
-		// no more pages
-		return nil, nil
-	}
-
-	if err := bl.getPage(pageNum); err != nil {
-		return nil, err
-	}
-
-	return &bl.resp.Beers[0], nil
+	err = bs.c.Do(req, &bl)
+	return
 }
 
 // Get queries for a single Beer with the given Beer ID.
@@ -271,6 +189,7 @@ func (bs *BeerService) Get(id string) (beer Beer, err error) {
 
 // BeerChangeRequest contains all the relevant options available to change
 // an existing beer record in the BreweryDB.
+// TODO: remove this and just use type Beer
 type BeerChangeRequest struct {
 	Name               string          `json:"name"`    // Required
 	StyleID            int             `json:"styleId"` // Required

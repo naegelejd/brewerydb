@@ -13,11 +13,10 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"net/url"
 	"os"
 )
 
-const apiURL = "http://api.brewerydb.com/v2"
+var apiURL = "http://api.brewerydb.com/v2"
 
 // Page is a convenience type for encoding only a page number
 // when paginating lists.
@@ -128,21 +127,4 @@ func (c *Client) Do(req *http.Request, data interface{}) error {
 	}
 
 	return err
-}
-
-// TODO: DELETE THIS
-func (c *Client) url(endpoint string, vals *url.Values) string {
-	if vals == nil {
-		vals = &url.Values{}
-	}
-	vals.Set("key", c.apiKey)
-	query := vals.Encode()
-	u := apiURL + endpoint + "/?" + query
-	fmt.Println(u)
-	return u
-}
-
-// TODO: DELETE THIS
-func (c *Client) Get(url string) (*http.Response, error) {
-	return c.client.Get(url)
 }

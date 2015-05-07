@@ -10,8 +10,10 @@ type YeastService struct {
 	c *Client
 }
 
+// YeastType represents a specific type/usage of yeast.
 type YeastType string
 
+// Specific Yeast types.
 const (
 	YeastTypeAle       YeastType = "ale"
 	YeastTypeWheat               = "wheat"
