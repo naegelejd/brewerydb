@@ -11,9 +11,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
-	"os"
 )
 
 var apiURL = "http://api.brewerydb.com/v2"
@@ -28,7 +26,7 @@ type Page struct {
 type Client struct {
 	client      http.Client
 	apiKey      string
-	numRequests int
+	JSONWriter  io.Writer
 	Adjunct     *AdjunctService
 	Beer        *BeerService
 	Brewery     *BreweryService
@@ -96,9 +94,6 @@ func (c *Client) NewRequest(method string, endpoint string, data interface{}) (*
 		}
 	}
 
-	// debugging:
-	log.Println(url)
-
 	return http.NewRequest(method, url, body)
 }
 
@@ -116,14 +111,15 @@ func (c *Client) Do(req *http.Request, data interface{}) error {
 	}
 
 	if data != nil {
-		// debugging:
-		body := io.TeeReader(resp.Body, os.Stdout)
-		// body := resp.Body
-		if w, ok := data.(io.Writer); ok {
-			_, err = io.Copy(w, body)
+		var body io.Reader
+		// if the client has a JSONWriter, also dump JSON responses
+		if c.JSONWriter != nil {
+			body = io.TeeReader(resp.Body, c.JSONWriter)
 		} else {
-			err = json.NewDecoder(body).Decode(data)
+			body = resp.Body
 		}
+
+		err = json.NewDecoder(body).Decode(data)
 	}
 
 	return err

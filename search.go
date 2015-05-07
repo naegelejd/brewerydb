@@ -17,24 +17,6 @@ const (
 	searchGuild              = "guild"
 )
 
-// SearchBeerResults is a list of Beers matching a Search.
-// TODO: nearly identical to "BeerList" in beer.go
-type SearchBeerResults struct {
-	CurrentPage   int
-	NumberOfPages int
-	TotalResults  int
-	Beers         []Beer `json:"data"`
-}
-
-// SearchBreweryResults is a list of Breweries matching a Search.
-// TODO: nearly identical to "BreweryList" in beer.go
-type SearchBreweryResults struct {
-	CurrentPage   int
-	NumberOfPages int
-	TotalResults  int
-	Breweries     []Brewery `json:"data"`
-}
-
 // SearchRequest contains options for narrowing a Search.
 type SearchRequest struct {
 	Page               int    `json:"p"`
@@ -73,7 +55,7 @@ func makeActualRequest(req *SearchRequest, query string, tp searchType) *actualS
 }
 
 // Beer searches for Beers matching the given query.
-func (ss *SearchService) Beer(query string, q *SearchRequest) (sr SearchBeerResults, err error) {
+func (ss *SearchService) Beer(query string, q *SearchRequest) (bl BeerList, err error) {
 	actualRequest := makeActualRequest(q, query, searchBeer)
 	var req *http.Request
 	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
@@ -81,12 +63,12 @@ func (ss *SearchService) Beer(query string, q *SearchRequest) (sr SearchBeerResu
 		return
 	}
 
-	err = ss.c.Do(req, &sr)
+	err = ss.c.Do(req, &bl)
 	return
 }
 
 // Brewery searches for Breweries matching the given query.
-func (ss *SearchService) Brewery(query string, q *SearchRequest) (sr SearchBreweryResults, err error) {
+func (ss *SearchService) Brewery(query string, q *SearchRequest) (bl BreweryList, err error) {
 	actualRequest := makeActualRequest(q, query, searchBrewery)
 	var req *http.Request
 	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
@@ -94,7 +76,7 @@ func (ss *SearchService) Brewery(query string, q *SearchRequest) (sr SearchBrewe
 		return
 	}
 
-	err = ss.c.Do(req, &sr)
+	err = ss.c.Do(req, &bl)
 	return
 }
 

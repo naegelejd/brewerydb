@@ -1,13 +1,25 @@
 package brewerydb
 
 import (
-	"os"
-	"testing"
+	"net/http"
+	"net/http/httptest"
 )
 
-var testAddress = "http://localhost:8080"
+var (
+	mux     *http.ServeMux
+	server  *httptest.Server
+	client  *Client
+	fakeKey = "abcdefghijklmnopqrstuvwxyz"
+)
 
-func TestMain(m *testing.M) {
-	apiURL = testAddress
-	os.Exit(m.Run())
+func setup() {
+	mux = http.NewServeMux()
+	server = httptest.NewServer(mux)
+
+	apiURL = server.URL
+	client = NewClient(fakeKey)
+}
+
+func teardown() {
+	server.Close()
 }
