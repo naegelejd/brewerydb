@@ -2,7 +2,7 @@
 
 brewerydb is a library for accessing the [BreweryDB API](http://www.brewerydb.com)
 
-Documentation: [![GoDoc](https://godoc.org/github.com/naegelejd/brewerydb?status.svg)](https://godoc.org/github.com/naegelejd/brewerydb)
+[![GoDoc](https://godoc.org/github.com/naegelejd/brewerydb?status.svg)](https://godoc.org/github.com/naegelejd/brewerydb) [![Build Status](https://travis-ci.org/naegelejd/brewerydb.svg)](https://travis-ci.org/naegelejd/brewerydb)
 
 ## usage
 
