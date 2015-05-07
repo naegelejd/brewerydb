@@ -1,0 +1,50 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"id": "5DhIPP",
+		"name": "Dubbel",
+		"nameDisplay": "Dubbel",
+		"abv": "8",
+		"availableId": 1,
+		"styleId": 58,
+		"isOrganic": "N",
+		"labels": {
+			"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/5DhIPP\/upload_BFKKt2-icon.png",
+			"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/5DhIPP\/upload_BFKKt2-medium.png",
+			"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/5DhIPP\/upload_BFKKt2-large.png"
+		},
+		"status": "verified",
+		"statusDisplay": "Verified",
+		"createDate": "2012-01-03 02:43:07",
+		"updateDate": "2012-09-08 17:31:41",
+		"available": {
+			"id": 1,
+			"name": "Year Round",
+			"description": "Available year round as a staple beer."
+		},
+		"style": {
+			"id": 58,
+			"categoryId": 5,
+			"category": {
+				"id": 5,
+				"name": "Belgian And French Origin Ales",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Belgian-Style Dubbel",
+			"shortName": "Belgian Dubbel",
+			"description": "This medium-bodied, red to dark brown colored ale has a malty sweetness and chocolate-like caramel aroma. A light hop flavor and\/or aroma is acceptable. Dubbels are also characterized by low-medium to medium bitterness. No diacetyl is acceptable. Yeastgenerated fruity esters (especially banana) are appropriate at low levels. Head retention is dense and mousse-like. Chill haze is acceptable at low serving temperatures. Often bottle conditioned a slight yeast haze and flavor may be evident.",
+			"ibuMin": "20",
+			"ibuMax": "30",
+			"abvMin": "6.25",
+			"abvMax": "7.5",
+			"srmMin": "16",
+			"srmMax": "36",
+			"ogMin": "1.06",
+			"fgMin": "1.012",
+			"fgMax": "1.016",
+			"createDate": "2012-03-21 20:06:46",
+			"updateDate": "2015-04-07 15:31:45"
+		}
+	},
+	"status": "success"
+}

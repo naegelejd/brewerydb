@@ -1,0 +1,424 @@
+{
+	"currentPage": 1,
+	"numberOfPages": 1,
+	"totalResults": 24,
+	"data": [
+		{
+			"id": "jmGoBA",
+			"name": "Flying Dog Brewery",
+			"description": "The Flying Dog Legend begins in 1983, and like every good legend there are several versions of this tale. The villains of the peace in this story are two non-conformist, 'not likely to take it lying down' ranchers named George Stranahan and Richard McIntyre.\r\n\r\nAs George tells it, he and 11 of his closest friends and family decided to embark on what they called an \u201camateur mountaineering expedition\u201d to climb K2 in the Himalayas. Under-qualified and unprepared, they started their journey with a Sherpa, a donkey, and a suitcase full of contraband. Naturally, half way through the trip the contraband was gone and the Sherpa and donkey had run off, leaving George and his group to fend for themselves. Luckily, everyone managed to make it off the mountain alive, and with a new outlook on life.\r\n\r\nHorn Dog Denver Colorado BeerLike any good beer drinker would at the end of an experience like that, George and his group found a local Pakistani hotel bar to have a drink in. Now, alcohol is banned in most Muslim nations, but if you sign an affidavit stating you are the son of a Christian, it\u2019s like a license to drink. George gladly signed away and got down to some serious drinking. That\u2019s about the time he noticed a painting in the Flashman Hotel of a Flying Dog hanging on the wall that had been drawn by a local artist. Now, we all know dogs don\u2019t fly, but nobody told this particular dog it couldn\u2019t fly, just like no one had told George and his friends they couldn\u2019t make this extraordinary journey. The Flying Dog became a symbol that George and his group used to describe what had happened to them with the mantra, \u201cit is amazing what you can achieve if nobody tells you that you can't.",
+			"website": "http:\/\/www.flyingdogales.com\/",
+			"established": "1983",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/jmGoBA\/upload_0z9L4W-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/jmGoBA\/upload_0z9L4W-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/jmGoBA\/upload_0z9L4W-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:55",
+			"updateDate": "2014-07-11 23:24:34",
+			"type": "brewery"
+		},
+		{
+			"id": "9EzLA2",
+			"name": "Moon Dog",
+			"description": "The Moon Dog brewery is as hand-crafted as the delicious beer it produces. A good chunk of the brewing gear was cobbled together from second-hand farming and dairy equipment.\r\n\r\nThe brewhouse is a four vessel 13hL electric system (hot liquor, mash\/lauter kettle and whirlpool). The beautiful and shiny fermentation system is comprised of an ever-growing farm of cylindro-conical tanks.\r\n\r\nThere is a wall of barrels, a painting of \"The Big Man\" - John Candy, many many chandeliers, a pink elephant (actually, maybe a few..), and most of all a whole lota love.\r\n\r\nIt has been described by one observer as the \u201coddest brewery\u201d he's ever seen. We like to call it home.",
+			"website": "http:\/\/moondogbrewing.com.au\/",
+			"established": "2010",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/9EzLA2\/upload_4Fbsbi-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/9EzLA2\/upload_4Fbsbi-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/9EzLA2\/upload_4Fbsbi-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2014-12-27 11:46:27",
+			"updateDate": "2014-12-27 12:45:49",
+			"type": "brewery"
+		},
+		{
+			"id": "CE6krO",
+			"name": "Sleepy Dog Brewery",
+			"description": "Established in 2009, Sleepy Dog Brewery has been brewing hand crafted beer for wholesale distribution throughout the state of Arizona. Our commitment to brewing consistent, quality beer with meticulous attention to detail has helped us consistently grow our distribution every year. Our products can be found throughout the state of Arizona and soon in Southern California. We supply beer to hundreds of bars and restaurants and most all major grocery and retail chains.",
+			"website": "http:\/\/www.sleepydogbrewing.com\/",
+			"established": "2009",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/CE6krO\/upload_ypnZke-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/CE6krO\/upload_ypnZke-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/CE6krO\/upload_ypnZke-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:08",
+			"updateDate": "2014-07-10 14:51:09",
+			"type": "brewery"
+		},
+		{
+			"id": "Mp4VNA",
+			"name": "Black Dog Brewery",
+			"description": "Black Dog Brewery was launched in late November 2011.  We are a craft brewery located at Taminick Cellars winery near Glenrowan in North East Victoria.  Our beers are hand crafted from premium malted barley, hops and yeast strains with pure Warby Range water.  Hand crafted, small batch brews made using traditional techniques and no preservatives, ensures each beer is of the highest quality, the way beers are meant to be.",
+			"website": "http:\/\/blackdogbrewery.com.au",
+			"established": "2011",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Mp4VNA\/upload_MExtyc-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Mp4VNA\/upload_MExtyc-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Mp4VNA\/upload_MExtyc-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2014-08-20 06:17:29",
+			"updateDate": "2014-08-23 14:55:44",
+			"type": "brewery"
+		},
+		{
+			"id": "HadszO",
+			"name": "Spotted Dog Brewery",
+			"description": "After fifteen years of brewing experiments and research - such as malting, milling, and roasting grain, recreating historical beer recipes, and brewing in his wife's kitchen - Jerry Grandle decided it was time to take things to a new level. In September 2014, the Spotted Dog Brewery opened, run by Jerry and his wife, Susan. The brewery is named after Ryleigh, the family's bluetick hound. Our beers have been enjoyed in many states by family and friends, from California to New York. Now that our doors are open to the public, we are proud to be Mesilla's only microbrewery and gladly share our beers with the Mesilla Valley and its visitors.",
+			"website": "http:\/\/www.spotteddogbrewery.com",
+			"established": "2014",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/HadszO\/upload_BW27BG-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/HadszO\/upload_BW27BG-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/HadszO\/upload_BW27BG-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2015-02-11 20:13:42",
+			"updateDate": "2015-02-11 20:33:36",
+			"type": "brewery"
+		},
+		{
+			"id": "yX6twV",
+			"name": "Laughing Dog Brewing",
+			"description": "At Laughing Dog Brewing, what began with a dream for brews with more hops has turned into an insatiable desire to craft beers of all flavors, with a focus on quality, purity, and fun. Today, Laughing Dog brews has brewed over 15 distinct beers, including seasonals like our Huckleberry Ale and Winter Ale, and our award-winning IPA's and Stouts. But despite our success and growth, our motto remains the same as the day we started, to create... \"Fetchingly Good Beer\"!",
+			"website": "http:\/\/www.laughingdogbrewing.com\/",
+			"established": "2005",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/yX6twV\/upload_V1NLx1-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/yX6twV\/upload_V1NLx1-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/yX6twV\/upload_V1NLx1-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:00",
+			"updateDate": "2014-09-10 17:57:21",
+			"type": "brewery"
+		},
+		{
+			"id": "dE1AzX",
+			"name": "Thirsty Dog Brewing Company",
+			"description": "Here at the Thirsty Dog Brewing Company, full flavor, delicate balance, texture & aroma combine to make beer an infinitely complex experience, and one that can be thoroughly enjoyable. Each of our beers are meticulously hand crafted in small batches using the finest ingredients. High quality malted barley is the source of the beer's sweetness & body. Select American & European hops are used to balance the malt sweetness, and , at times, add special flavors & aromas to the beer. Our careful selection of ingredients, along with specially designed recipes & brewing processes, give Thirsty Dog beers their unique flavor profiles that can be hard to find in today's mass market. one size fits all society.\r\n\r\nOur microbrewed beers are far more diverse in range and character then the small spectrum of mass-marketed beers offered to the American public by the large national breweries. Enjoy the diversity, Unleash the flavor today., Welcome to Thirsty Dog Brewing Company, and welcome to great beer!",
+			"website": "http:\/\/www.thirstydog.com\/",
+			"established": "1997",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/dE1AzX\/upload_FI98Q8-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/dE1AzX\/upload_FI98Q8-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/dE1AzX\/upload_FI98Q8-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:10",
+			"updateDate": "2013-08-12 13:08:44",
+			"type": "brewery"
+		},
+		{
+			"id": "wfAwfx",
+			"name": "BrewDog Ltd",
+			"description": "BrewDog is a Scottish craft brewery located in the town of Fraserburgh, Aberdeenshire.\r\n\r\nBrewDog was founded in 2006 by friends James Watt and Martin Dickie. The brewery at the Kessock Industrial Estate in Fraserburgh produced its first brew in April 2007. It is Scotland's largest independently owned brewery producing about 120,000 bottles per month for export all over the world.",
+			"website": "http:\/\/brewdog.com\/",
+			"established": "2006",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/wfAwfx\/upload_tn2qSA-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/wfAwfx\/upload_tn2qSA-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/wfAwfx\/upload_tn2qSA-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:48",
+			"updateDate": "2012-08-23 12:47:02",
+			"type": "brewery"
+		},
+		{
+			"id": "MjpQSa",
+			"name": "Brindle Dog Brewing Co LLC",
+			"website": "http:\/\/brindledogbrewing.com\/",
+			"isOrganic": "N",
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:48",
+			"updateDate": "2012-03-21 19:06:15",
+			"type": "brewery"
+		},
+		{
+			"id": "Um9ykB",
+			"name": "Dirty Dog Brewing",
+			"website": "http:\/\/www.dirtydogbrewing.com\/",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Um9ykB\/upload_ZGLdWg-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Um9ykB\/upload_ZGLdWg-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Um9ykB\/upload_ZGLdWg-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:52",
+			"updateDate": "2013-09-05 19:18:04",
+			"type": "brewery"
+		},
+		{
+			"id": "CRE5z9",
+			"name": "River Dog Brewing Company",
+			"description": "Founded in 2012 by the Gray Family, River Dog Brewing has managed to make a splash in the rising tide of the Southern craft beer scene. Under the direction of Brewmaster Dan Baker, we\u2019ve created an exceptional menu of beers, from Belgian ales to sours to one of the largest barrel aging programs in the South.\r\nWhen you visit the South Carolina Lowcountry, you know that it\u2019s more than just a place. It\u2019s a way of life. Incredible people. Amazing food. Exceptional beer \u2013 brewed in Bluffton.",
+			"website": "http:\/\/www.riverdogbrewing.com\/",
+			"established": "2012",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/CRE5z9\/upload_xWeexR-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/CRE5z9\/upload_xWeexR-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/CRE5z9\/upload_xWeexR-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2013-02-23 14:32:27",
+			"updateDate": "2014-09-16 13:24:26",
+			"type": "brewery"
+		},
+		{
+			"id": "raWRpa",
+			"name": "Alpine Dog Brewing Company",
+			"description": "Alpine Dog is a term coined for Coloradans. While we do love our dogs, this term goes deeper than that. It is a reflection of the people. In Colorado we love the mountains. It's where we go to play; it's where we go to exercise, relax, make friends and have fun getting away. Whether its crushing single track on a mountain bike, tearing up the slopes on skis or a snowboardi, hiking one of CO's 54 1...See More",
+			"website": "http:\/\/alpinedogbrewery.com\/",
+			"established": "2011",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/raWRpa\/upload_xVuIJ5-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/raWRpa\/upload_xVuIJ5-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/raWRpa\/upload_xVuIJ5-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-12-02 11:15:55",
+			"updateDate": "2014-12-15 11:52:04",
+			"type": "brewery"
+		},
+		{
+			"id": "B2s2YT",
+			"name": "HopDog BeerWorks",
+			"description": "HopDog BeerWorks is a beer tasting, cellar door sales attraction. HopDog brews hop-centric beers and artisanal ales, with a focus on quality ingredients and attention to detail. \r\n\r\nHopDog BeerWorks is a 200 litre nano-brewery. The beers are uncompromised, unfiltered, unadulterated and bottle conditioned, bringing you an unparalleled experience in a glass.",
+			"website": "http:\/\/www.hopdog.com.au\/",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/B2s2YT\/upload_OLmEow-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/B2s2YT\/upload_OLmEow-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/B2s2YT\/upload_OLmEow-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2013-07-30 20:33:55",
+			"updateDate": "2014-02-07 12:41:24",
+			"type": "brewery"
+		},
+		{
+			"id": "Ryy587",
+			"name": "Blue Dog Mead",
+			"description": "The oldest beverage on earth just got a facelift. No longer are viking wannabes and medieval enthusiasts the only people who get to knock back a glass of the original liquid sin. Now it\u2019s your turn.\r\n\r\nMead has been around longer than any other drink on the planet, so we\u2019ve had plenty of time to perfect the recipe. Blue Dog Mead is concocted with honey instead of grapes, making it a sweet, refreshing alternative to wine. Not to toot our own horn, but we think with one sip you\u2019ll be hooked.\r\n\r\nOur newly designed bottles are made to move, and we don\u2019t just mean off\r\nthe shelves. We mean to the beach,in a backpack or while watching a game. You\u2019re mobile and active, so why shouldn\u2019t your drink be? No gimmicks here. Blue Dog just wants to go with you as you grab the \r\nleash and take life for a good \u0003long walk.\r\n\r\nSo leave history to the vikings and the books, grab yourself some Blue Dog Mead and let\u2019s explore the future of this brand spankin\u2019 old drink together.",
+			"website": "http:\/\/www.bluedogmead.com",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Ryy587\/upload_WgNXu4-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Ryy587\/upload_WgNXu4-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Ryy587\/upload_WgNXu4-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2014-06-13 19:42:14",
+			"updateDate": "2014-06-14 17:06:01",
+			"type": "brewery"
+		},
+		{
+			"id": "iW1GUi",
+			"name": "Bike Dog Brewing Company",
+			"description": "Bike Dog Brewing Company is co-founded by four Sacramentans with a love for bikes, dogs and craft beer. The brewers fell in love with the endless flavor profiles available through brewing and the delicate hop profiles only available in incredibly fresh beer and want to share that love with beer drinkers from all over the Sacramento area.\r\n\r\nBike Dog is West Sacramento\u2019s first brewery and the only one in town with a tasting room. We operate a 3 barrel brewhouse (industry speak for really small) on site. Brewing small batches means the beer will always be amazingly fresh and allows for the flexibility to mix it up a little with new recipes getting brewed on a regular basis. Because it will be brewed in such small batches, much of the beer will be available only for purchase in the Bike Dog tasting room \u2014 allowing customers to see the beer go from grain to glass and hobnob with the brewers and allowing the brewers to personally nurture the local craft beer community.",
+			"website": "http:\/\/www.bikedogbrewing.com\/",
+			"established": "2013",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/iW1GUi\/upload_pqYKKU-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/iW1GUi\/upload_pqYKKU-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/iW1GUi\/upload_pqYKKU-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2013-12-31 20:04:43",
+			"updateDate": "2014-01-01 03:31:07",
+			"type": "brewery"
+		},
+		{
+			"id": "gtppeW",
+			"name": "Big Dog's Brewing Company",
+			"description": "Las Vegas' Original Brewpub... From our days at the Holy Cow in '92 to the present days at Big Dog's Brewing Co., we've been producing and enjoying award winning brews for over 19 years!",
+			"website": "http:\/\/www.bigdogsbrews.com\/",
+			"established": "1992",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/gtppeW\/upload_XEpFpv-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/gtppeW\/upload_XEpFpv-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/gtppeW\/upload_XEpFpv-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:46",
+			"updateDate": "2014-04-24 12:44:40",
+			"type": "brewery"
+		},
+		{
+			"id": "Oe91o4",
+			"name": "Dog Tag Brewing",
+			"description": "Our mission is to provide the highest quality crafted beers that deliver a message of gratitude for the selfless sacrifice of our nation\u2019s military. Our fallen warriors are not just nameless and faceless statistics, but great Americans with stories of courage and inspiration. \r\n\r\nDog Tag Brewing works with Gold Star families and details the stories of their fallen loved ones on each can. Better yet, a portion of our proceeds are donated to select organizations to individually honor each fallen warrior featured on our IPA and Lager brews. We invite you to learn more about each hero on our website, dogtagbrewing.com.\r\n\r\nDog Tag Brewing is combat-veteran owned. We are profoundly grateful to our nation's military families and will ensure that their loved ones are not forgotten through our unique can design, community outreach and charitable giving. Please remember these great Americans, salute their sacrifice and enjoy our beer.",
+			"website": "http:\/\/dogtagbrewing.com",
+			"established": "2014",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Oe91o4\/upload_V92yFm-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Oe91o4\/upload_V92yFm-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Oe91o4\/upload_V92yFm-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2014-07-31 11:25:49",
+			"updateDate": "2014-07-31 11:26:53",
+			"type": "brewery"
+		},
+		{
+			"id": "FxUsdm",
+			"name": "Little Dog Brewing",
+			"website": "http:\/\/www.littledogbrewing.com\/",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/FxUsdm\/upload_slOh43-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/FxUsdm\/upload_slOh43-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/FxUsdm\/upload_slOh43-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2015-01-22 14:03:01",
+			"updateDate": "2015-01-22 19:05:44",
+			"type": "brewery"
+		},
+		{
+			"id": "mBM8Oz",
+			"name": "Dingo Dog Brewing Company",
+			"description": "We are looking to open up a small, craft brewery in the Carrboro-Chapel Hill area. Our mission is simple - save the lives of companion animals, one beer at a time. We will be using our sales to fund grants to local animal rescue groups, and 'no-kill' shelters. Check back periodically for an update on our progress, and to see what we are brewing!",
+			"website": "http:\/\/www.dingodogbrewing.com\/",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/mBM8Oz\/upload_q8c2DM-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/mBM8Oz\/upload_q8c2DM-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/mBM8Oz\/upload_q8c2DM-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2015-02-03 12:40:26",
+			"updateDate": "2015-02-03 12:40:28",
+			"type": "brewery"
+		},
+		{
+			"id": "M3qDmi",
+			"name": "Malty Dog Brewery & Supplies",
+			"description": "Malty Dog Brewery & Supplies is a microbrewery, winery and homebrew store. Come have a pint or a glass of wine while enjoying the relaxed setting at our bar. If any of our beer or wine strikes your fancy, we'll give you the recipe and show you how to make it at home. So come shop, relax and enjoy. We also have free WiFi!",
+			"website": "http:\/\/www.maltydogbrewery.com\/",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/M3qDmi\/upload_FJP7vn-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/M3qDmi\/upload_FJP7vn-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/M3qDmi\/upload_FJP7vn-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-08-11 19:44:30",
+			"updateDate": "2012-08-11 19:46:36",
+			"type": "brewery"
+		},
+		{
+			"id": "Hs41Cv",
+			"name": "Sea Dog Brewing Company",
+			"description": "Today, Sea Dog Brewing Company operates brew pubs in two locations. The Sea Dog in Topsham occupies a scenic spot on the Androscoggin River. The Bangor location overlooks the historic Penobscot River. Both locations serve a full menu of handcrafted ales and creative pub fare with a flair. Being authentic is important to us. Our beers are brewed in a traditional style using only the highest quality ingredients like imported English two-row malted barley and British top-fermenting yeast. Our English brewing style results in brews with a distinctive, refreshing taste and crisp finish unique to top-fermented beers.",
+			"website": "http:\/\/www.seadogbrewing.com\/",
+			"established": "1993",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Hs41Cv\/upload_0K63l2-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Hs41Cv\/upload_0K63l2-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/Hs41Cv\/upload_0K63l2-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:08",
+			"updateDate": "2013-07-14 00:57:45",
+			"type": "brewery"
+		},
+		{
+			"id": "PrX8es",
+			"name": "Hair of the Dog Brewing",
+			"website": "http:\/\/hairofthedog.com\/",
+			"established": "1993",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/PrX8es\/upload_qRZX8L-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/PrX8es\/upload_qRZX8L-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/PrX8es\/upload_qRZX8L-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:56",
+			"updateDate": "2013-11-23 13:05:15",
+			"type": "brewery"
+		},
+		{
+			"id": "jPbb33",
+			"name": "Pub Dog Pizza & Drafthouse",
+			"description": "Pub Dog Pizza & Drafthouse opened in 2001 on Cross St. in the historic neighborhood of Federal Hill in Baltimore.  It immediately became a hit with neighborhood residents, suburbanites, and tourists alike.\r\n\r\nPub Dog quickly became famous for our gourmet personal-sized thin-crust pizzas, fresh salads, and \"Dog Deal\" beers - 2 mugs of our own house craft beer for one low price all the time.  \r\n\r\nWe developed a loyal late night following by serving food every night until 1:30 and staying open until 2:00AM every night.\r\n\r\nPub Dog expanded outside of the city in 2007, opening a location in Columbia.\r\n\r\nPub Dog began bottling some of our house beers for sale to go in 2007.  The bottles are now available at both pubs and in liquor stores around the state.",
+			"website": "http:\/\/www.pubdog.net\/",
+			"established": "2001",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/jPbb33\/upload_rtMZsX-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/jPbb33\/upload_rtMZsX-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/jPbb33\/upload_rtMZsX-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:52",
+			"updateDate": "2012-07-21 16:27:25",
+			"type": "brewery"
+		},
+		{
+			"id": "4q5nSU",
+			"name": "Wet Dog Cafe & Astoria Brewing Company",
+			"description": "The Wet Dog Caf\u00e9 was founded in 1995. The Brewery was added in 1997 under the name Pacific Rim Brewery. The name of the Brewery was changed to Astoria Brewing Co. in 2005 to commemorate Astoria\u2019s First Brewing Company which was established in 1872. The Wet Dog was named after\u2026.the original owners dog\u2026he loved the water and was always WET.\r\n\r\nOur Brew Master uses only the finest ingredients to create our exceptional beers. Each beer is handcrafted using a wide range of hops & grains, thus creating unique flavors. It takes approximately 2 weeks for grain, water & hops to become our tasty brews. Our brewery has a 4 barrel system & in 2008 we added two 8 barrel fermenting tanks allowing us to produce over 800 barrels annually.",
+			"website": "http:\/\/www.wetdogcafe.com\/",
+			"established": "1997",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/4q5nSU\/upload_FgQ6SC-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/4q5nSU\/upload_FgQ6SC-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/4q5nSU\/upload_FgQ6SC-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:12",
+			"updateDate": "2012-03-21 19:06:15",
+			"type": "brewery"
+		}
+	],
+	"status": "success"
+}
