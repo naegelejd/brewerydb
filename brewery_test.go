@@ -3,10 +3,11 @@ package brewerydb
 import (
 	"fmt"
 	"log"
+	"os"
 )
 
-func ExampleBreweryList() {
-	c := NewClient("<your API key>")
+func ExampleBreweryService_List() {
+	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
 	// Get all breweries established in 1983
 	bl, err := c.Brewery.List(&BreweryListRequest{Established: "1983"})

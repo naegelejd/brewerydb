@@ -3,6 +3,7 @@ package brewerydb
 import (
 	"fmt"
 	"log"
+	"os"
 	"testing"
 )
 
@@ -17,7 +18,7 @@ func TestDeleteBeer(t *testing.T) {
 
 // Get a random beer with an ABV between 8.0 and 9.0
 func ExampleBeerService_Random() {
-	c := NewClient("<your API key>")
+	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
 	req := &RandomBeerRequest{
 		ABV: "8",
@@ -31,8 +32,8 @@ func ExampleBeerService_Random() {
 	fmt.Println(b.Labels.Large)
 }
 
-func ExampleBeerList() {
-	c := NewClient("<your API key>")
+func ExampleBeerService_List() {
+	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
 	// Get first 40 beers with an ABV between 8.0 and 9.0, descending, alphabetical
 	bl, err := c.Beer.List(&BeerListRequest{ABV: "8", Sort: SortDescending})
@@ -45,7 +46,7 @@ func ExampleBeerList() {
 }
 
 func ExampleBeerService_Breweries() {
-	c := NewClient("<your API key>")
+	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
 	// Get breweries for a given beer
 	breweries, err := c.Beer.Breweries("jmGoBA")
