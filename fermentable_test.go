@@ -18,9 +18,7 @@ func TestFermentableList(t *testing.T) {
 	defer data.Close()
 
 	mux.HandleFunc("/fermentables/", func(w http.ResponseWriter, r *http.Request) {
-		if m := "GET"; m != r.Method {
-			t.Errorf("Request method = %v, want %v", r.Method, m)
-		}
+		checkMethod(t, r, "GET")
 		io.Copy(w, data)
 	})
 
@@ -30,5 +28,13 @@ func TestFermentableList(t *testing.T) {
 	}
 	if len(fl.Fermentables) <= 0 {
 		t.Error("Expected >0 fermentables")
+	}
+	for _, f := range fl.Fermentables {
+		if f.ID <= 0 {
+			t.Fatal("Expected non-zero fermentable ID")
+		}
+		if f.Name == "" {
+			t.Fatal("Expected non-empty fermentable name")
+		}
 	}
 }

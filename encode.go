@@ -110,6 +110,8 @@ func toString(v reflect.Value) string {
 // isEncodableValue determines if a value is:
 // 1. is of an encodable type, and
 // 2. not the zero value
+// TODO: stop caring about whether it's the zero-value and only
+// omit it if tagged with "omitempty"
 func isEncodableValue(v reflect.Value) bool {
 	switch v.Kind() {
 	case reflect.Array, reflect.Slice, reflect.String:

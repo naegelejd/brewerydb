@@ -65,6 +65,15 @@ func getTestData(c *brewerydb.Client, filename string, action func(c *brewerydb.
 	} else {
 		log.Printf("Creating %s\n", filename)
 	}
+
+	var in, out bytes.Buffer
+	c.JSONWriter = &in
+
+	log.Println("Executing API request")
+	if err := action(c); err != nil {
+		return err
+	}
+
 	f, err := os.Create(filename)
 	if err != nil {
 		return err
@@ -74,14 +83,6 @@ func getTestData(c *brewerydb.Client, filename string, action func(c *brewerydb.
 		f.Close()
 		c.JSONWriter = nil
 	}()
-
-	var in, out bytes.Buffer
-	c.JSONWriter = &in
-
-	log.Println("Executing API request")
-	if err := action(c); err != nil {
-		return err
-	}
 
 	if err := json.Indent(&out, in.Bytes(), "", "\t"); err != nil {
 		return err
@@ -98,7 +99,7 @@ func adjunctList(c *brewerydb.Client) error {
 }
 
 func beerList(c *brewerydb.Client) error {
-	_, err := c.Beer.List(&brewerydb.BeerListRequest{Page: 1})
+	_, err := c.Beer.List(&brewerydb.BeerListRequest{Page: 1, ABV: "8"})
 	return err
 }
 
@@ -108,7 +109,7 @@ func beerRandom(c *brewerydb.Client) error {
 }
 
 func breweryList(c *brewerydb.Client) error {
-	_, err := c.Brewery.List(&brewerydb.BreweryListRequest{Page: 1})
+	_, err := c.Brewery.List(&brewerydb.BreweryListRequest{Page: 1, Established: "1988"})
 	return err
 }
 
@@ -123,7 +124,7 @@ func eventList(c *brewerydb.Client) error {
 }
 
 func featureList(c *brewerydb.Client) error {
-	_, err := c.Feature.List(&brewerydb.FeatureRequest{Page: 1})
+	_, err := c.Feature.List(&brewerydb.FeatureRequest{Page: 1, Year: 2015})
 	return err
 }
 
@@ -143,7 +144,7 @@ func glassList(c *brewerydb.Client) error {
 }
 
 func guildList(c *brewerydb.Client) error {
-	_, err := c.Guild.List(&brewerydb.GuildRequest{Page: 1})
+	_, err := c.Guild.List(&brewerydb.GuildRequest{Page: 1, Name: "Brewers Association of Maryland"})
 	return err
 }
 
@@ -158,7 +159,7 @@ func ingredientList(c *brewerydb.Client) error {
 }
 
 func locationList(c *brewerydb.Client) error {
-	_, err := c.Location.List(&brewerydb.LocationRequest{Page: 1})
+	_, err := c.Location.List(&brewerydb.LocationRequest{Page: 1, Region: "Maryland"})
 	return err
 }
 

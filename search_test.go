@@ -18,9 +18,7 @@ func TestSearchBeer(t *testing.T) {
 	defer data.Close()
 
 	mux.HandleFunc("/search/", func(w http.ResponseWriter, r *http.Request) {
-		if m := "GET"; m != r.Method {
-			t.Errorf("Request method = %v, want %v", r.Method, m)
-		}
+		checkMethod(t, r, "GET")
 		io.Copy(w, data)
 	})
 
@@ -49,9 +47,7 @@ func TestSearchBrewery(t *testing.T) {
 	defer data.Close()
 
 	mux.HandleFunc("/search/", func(w http.ResponseWriter, r *http.Request) {
-		if m := "GET"; m != r.Method {
-			t.Errorf("Request method = %v, want %v", r.Method, m)
-		}
+		checkMethod(t, r, "GET")
 		io.Copy(w, data)
 	})
 

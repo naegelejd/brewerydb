@@ -1,0 +1,1055 @@
+{
+	"currentPage": 1,
+	"numberOfPages": 1,
+	"totalResults": 5,
+	"data": [
+		{
+			"id": 116,
+			"year": 2015,
+			"week": 5,
+			"breweryId": "LN8yp5",
+			"brewery": {
+				"id": "LN8yp5",
+				"name": "Lawson's Finest Liquids",
+				"description": "Lawson\u2019s Finest Liquids, LLC is based in Warren, Vermont and distributes small, custom batches of unique beer through their exclusive wholesale distributor, The Beer Guy, LLC. Sean Lawson, founder and brewer, has been an avid home brewer for nearly twenty years, with numerous award winning recipes. Lawson\u2019s Finest, with a small batch system, can custom craft specialty beers for establishments and events. Limited in availability by design, these rare beers can only be found near the Mad River Valley of Vermont.",
+				"website": "http:\/\/www.lawsonsfinest.com\/",
+				"established": "2008",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/LN8yp5\/upload_f9io6X-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/LN8yp5\/upload_f9io6X-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/LN8yp5\/upload_f9io6X-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:00",
+				"updateDate": "2015-03-18 19:14:45",
+				"locations": [
+					{
+						"id": "sbVFqO",
+						"name": "Main Brewery",
+						"locality": "Warren",
+						"region": "Vermont",
+						"postalCode": "05674",
+						"phone": "802-272-8436",
+						"website": "http:\/\/www.lawsonsfinest.com\/",
+						"latitude": 44.113535,
+						"longitude": -72.85575,
+						"isPrimary": "Y",
+						"inPlanning": "N",
+						"isClosed": "N",
+						"openToPublic": "Y",
+						"locationType": "micro",
+						"locationTypeDisplay": "Micro Brewery",
+						"countryIsoCode": "US",
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-01-03 02:42:00",
+						"updateDate": "2014-07-23 19:11:34",
+						"country": {
+							"isoCode": "US",
+							"name": "UNITED STATES",
+							"displayName": "United States",
+							"isoThree": "USA",
+							"numberCode": 840,
+							"createDate": "2012-01-03 02:41:33"
+						}
+					}
+				]
+			},
+			"beerId": "EUokQi",
+			"beer": {
+				"id": "EUokQi",
+				"name": "Sip of Sunshine",
+				"nameDisplay": "Sip of Sunshine",
+				"abv": "8",
+				"styleId": 30,
+				"isOrganic": "N",
+				"labels": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/EUokQi\/upload_KULfPF-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/EUokQi\/upload_KULfPF-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/EUokQi\/upload_KULfPF-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2014-07-10 12:59:02",
+				"updateDate": "2015-05-01 18:54:45",
+				"style": {
+					"id": 30,
+					"categoryId": 3,
+					"category": {
+						"id": 3,
+						"name": "North American Origin Ales",
+						"createDate": "2012-03-21 20:06:45"
+					},
+					"name": "American-Style India Pale Ale",
+					"shortName": "American IPA",
+					"description": "American-style India pale ales are perceived to have medium-high to intense hop bitterness, flavor and aroma with medium-high alcohol content. The style is further characterized by floral, fruity, citrus-like, piney, resinous, or sulfur-like American-variety hop character. Note that one or more of these American-variety hop characters is the perceived end, but the hop characters may be a result of the skillful use of hops of other national origins. The use of water with high mineral content results in a crisp, dry beer. This pale gold to deep copper-colored ale has a full, flowery hop aroma and may have a strong hop flavor (in addition to the perception of hop bitterness). India pale ales possess medium maltiness which contributes to a medium body. Fruity-ester flavors and aromas are moderate to very strong. Diacetyl can be absent or may be perceived at very low levels. Chill and\/or hop haze is allowable at cold temperatures. (English and citrus-like American hops are considered enough of a distinction justifying separate American-style IPA and English-style IPA categories or subcategories. Hops of other origins may be used for bitterness or approximating traditional American or English character. See English-style India Pale Ale",
+					"ibuMin": "50",
+					"ibuMax": "70",
+					"abvMin": "6.3",
+					"abvMax": "7.5",
+					"srmMin": "6",
+					"srmMax": "14",
+					"ogMin": "1.06",
+					"fgMin": "1.012",
+					"fgMax": "1.018",
+					"createDate": "2012-03-21 20:06:45",
+					"updateDate": "2015-04-07 15:26:37"
+				},
+				"breweries": [
+					{
+						"id": "LN8yp5",
+						"name": "Lawson's Finest Liquids",
+						"description": "Lawson\u2019s Finest Liquids, LLC is based in Warren, Vermont and distributes small, custom batches of unique beer through their exclusive wholesale distributor, The Beer Guy, LLC. Sean Lawson, founder and brewer, has been an avid home brewer for nearly twenty years, with numerous award winning recipes. Lawson\u2019s Finest, with a small batch system, can custom craft specialty beers for establishments and events. Limited in availability by design, these rare beers can only be found near the Mad River Valley of Vermont.",
+						"website": "http:\/\/www.lawsonsfinest.com\/",
+						"established": "2008",
+						"isOrganic": "N",
+						"images": {
+							"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/LN8yp5\/upload_f9io6X-icon.png",
+							"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/LN8yp5\/upload_f9io6X-medium.png",
+							"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/LN8yp5\/upload_f9io6X-large.png"
+						},
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-01-03 02:42:00",
+						"updateDate": "2015-03-18 19:14:45",
+						"locations": [
+							{
+								"id": "sbVFqO",
+								"name": "Main Brewery",
+								"locality": "Warren",
+								"region": "Vermont",
+								"postalCode": "05674",
+								"phone": "802-272-8436",
+								"website": "http:\/\/www.lawsonsfinest.com\/",
+								"latitude": 44.113535,
+								"longitude": -72.85575,
+								"isPrimary": "Y",
+								"inPlanning": "N",
+								"isClosed": "N",
+								"openToPublic": "Y",
+								"locationType": "micro",
+								"locationTypeDisplay": "Micro Brewery",
+								"countryIsoCode": "US",
+								"status": "verified",
+								"statusDisplay": "Verified",
+								"createDate": "2012-01-03 02:42:00",
+								"updateDate": "2014-07-23 19:11:34",
+								"country": {
+									"isoCode": "US",
+									"name": "UNITED STATES",
+									"displayName": "United States",
+									"isoThree": "USA",
+									"numberCode": 840,
+									"createDate": "2012-01-03 02:41:33"
+								}
+							}
+						]
+					}
+				]
+			},
+			"createDate": "2015-01-14 20:14:26"
+		},
+		{
+			"id": 117,
+			"year": 2015,
+			"week": 5,
+			"breweryId": "DXvlfF",
+			"brewery": {
+				"id": "DXvlfF",
+				"name": "Seven Barrel Brewery",
+				"description": "The 7Barrel was opened April 20, 1994 by renowned brewer Gregory J.  Noonan. While Greg is no longer with us, his tradition lives on through the dedicated patrons that enjoy the unique, friendly atmosphere of a neighborhood pub and brewery.  In continuing this tradition, the 7Barrel family welcomes you to visit us and celebrate our 20 years in the neighborhood.\r\n\r\nUnder the ownership of Upper Valley locals since 2010, we here at the 7Barrel are focused on continuing to provide our customers with high quality fare, great craft beer, and the enjoyable and unique atmosphere people have come to expect from our establishment. \r\n\r\nVisit our website and like us on Facebook to stay in the know with all of latest news and event dates.",
+				"website": "http:\/\/www.sevenbarrel.com\/",
+				"established": "1994",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/DXvlfF\/upload_i67o0S-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/DXvlfF\/upload_i67o0S-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/DXvlfF\/upload_i67o0S-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:08",
+				"updateDate": "2015-04-29 15:50:02",
+				"locations": [
+					{
+						"id": "8j1nFE",
+						"name": "Main Brewery",
+						"streetAddress": "5 Airport Road",
+						"locality": "West Lebanon",
+						"region": "New Hampshire",
+						"postalCode": "03784",
+						"phone": "603-298-5566",
+						"website": "http:\/\/www.7barrel.com\/",
+						"hoursOfOperation": "Mon - Sun: 11:00 am - 1:00 am",
+						"latitude": 43.6296341,
+						"longitude": -72.3200515,
+						"isPrimary": "Y",
+						"inPlanning": "N",
+						"isClosed": "N",
+						"openToPublic": "Y",
+						"locationType": "micro",
+						"locationTypeDisplay": "Micro Brewery",
+						"countryIsoCode": "US",
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-01-03 02:42:08",
+						"updateDate": "2014-07-23 19:11:34",
+						"country": {
+							"isoCode": "US",
+							"name": "UNITED STATES",
+							"displayName": "United States",
+							"isoThree": "USA",
+							"numberCode": 840,
+							"createDate": "2012-01-03 02:41:33"
+						}
+					}
+				]
+			},
+			"beerId": "79SG11",
+			"beer": {
+				"id": "79SG11",
+				"name": "FrostNipper",
+				"nameDisplay": "FrostNipper",
+				"description": "Our interpretation of a fall seasonal beer.  This beer will curl your toes and put goosebumps on your arms.  A fine collection of traditional fall spices make this a great addition to the holiday season...it will make all humbugs cheery.  The beer is dark in color...a bit darker than brown ale.  There is a combination of Perle and Willamette hops to provide a contrasting intensity with the fall spices.  The beer contains a generous amount of smoked malt.",
+				"abv": "7.2",
+				"ibu": "65",
+				"glasswareId": 5,
+				"srmId": 17,
+				"availableId": 8,
+				"styleId": 37,
+				"isOrganic": "N",
+				"labels": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/79SG11\/upload_E8myZm-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/79SG11\/upload_E8myZm-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/79SG11\/upload_E8myZm-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:43:14",
+				"updateDate": "2014-09-30 13:41:03",
+				"glass": {
+					"id": 5,
+					"name": "Pint",
+					"createDate": "2012-01-03 02:41:33"
+				},
+				"srm": {
+					"id": 17,
+					"name": "17",
+					"hex": "B04500"
+				},
+				"available": {
+					"id": 8,
+					"name": "Winter",
+					"description": "Available during the winter months."
+				},
+				"style": {
+					"id": 37,
+					"categoryId": 3,
+					"category": {
+						"id": 3,
+						"name": "North American Origin Ales",
+						"createDate": "2012-03-21 20:06:45"
+					},
+					"name": "American-Style Brown Ale",
+					"shortName": "American Brown",
+					"description": "American brown ales range from deep copper to brown in color. Roasted malt caramel-like and chocolate-like characters should be of medium intensity in both flavor and aroma. American brown ales have evident low to medium hop flavor and aroma, medium to high hop bitterness, and a medium body. Estery and fruity-ester characters should be subdued. Diacetyl should not be perceived. Chill haze is allowable at cold temperatures.",
+					"ibuMin": "25",
+					"ibuMax": "45",
+					"abvMin": "4",
+					"abvMax": "6.4",
+					"srmMin": "15",
+					"srmMax": "26",
+					"ogMin": "1.04",
+					"fgMin": "1.01",
+					"fgMax": "1.018",
+					"createDate": "2012-03-21 20:06:46",
+					"updateDate": "2015-04-07 15:27:35"
+				},
+				"breweries": [
+					{
+						"id": "XRTc94",
+						"name": "Aviator Brewing Company",
+						"description": "Aviator Brewing Company was started to provide fine ales and lagers in North Carolina.\r\n\r\nWe also got sick of driving to the store all the time to buy beer so we thought...what the heck....lets brew lots of beer and drink most of it ourselves.",
+						"website": "http:\/\/www.aviatorbrew.com\/",
+						"established": "2008",
+						"isOrganic": "N",
+						"images": {
+							"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/XRTc94\/upload_Kk99IO-icon.png",
+							"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/XRTc94\/upload_Kk99IO-medium.png",
+							"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/XRTc94\/upload_Kk99IO-large.png"
+						},
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-01-03 02:41:44",
+						"updateDate": "2013-09-16 12:26:19",
+						"locations": [
+							{
+								"id": "3GI0hE",
+								"name": "Main Brewery",
+								"streetAddress": "209 Technology Park Lane",
+								"locality": "Fuquay-Varina",
+								"region": "North Carolina",
+								"postalCode": "27526",
+								"phone": "919-567-2337",
+								"website": "http:\/\/www.aviatorbrew.com\/",
+								"hoursOfOperation": "Thursday & Friday \u2013 We open the doors at 5pm, single tour at 6pm and close at 8pm. Note there is only one tour at 6pm.\r\n\r\nSaturday \u2013 We open the doors at 3pm, and do tours from 4pm-6pm and close at 8pm.  No tours after 6pm.",
+								"latitude": 35.619701,
+								"longitude": -78.808539,
+								"isPrimary": "Y",
+								"inPlanning": "N",
+								"isClosed": "N",
+								"openToPublic": "Y",
+								"locationType": "micro",
+								"locationTypeDisplay": "Micro Brewery",
+								"countryIsoCode": "US",
+								"yearOpened": "2008",
+								"status": "verified",
+								"statusDisplay": "Verified",
+								"createDate": "2012-01-03 02:41:44",
+								"updateDate": "2014-09-29 20:33:37",
+								"country": {
+									"isoCode": "US",
+									"name": "UNITED STATES",
+									"displayName": "United States",
+									"isoThree": "USA",
+									"numberCode": 840,
+									"createDate": "2012-01-03 02:41:33"
+								}
+							},
+							{
+								"id": "FUOlYc",
+								"name": "Tap House",
+								"streetAddress": "600 E. Broad St.",
+								"locality": "Fuquay-Varina",
+								"region": "North Carolina",
+								"postalCode": "27526",
+								"phone": "919.552.8826",
+								"website": "http:\/\/www.aviatorbrew.com\/",
+								"hoursOfOperation": "Mon:  12:00pm - 12:00am\nTue:  12:00pm - 12:00am\nWed:  12:00pm - 12:00am\nThu:  12:00pm - 12:00am\nFri:  12:00pm - 1:00am\nSat:  12:00pm - 1:00am\nSun:  12:00pm - 12:00am\n\nMon-Thur Noon-12am; \r\nFri,Sat Noon-1am; \r\nSun Noon-12am",
+								"latitude": 35.5929549,
+								"longitude": -78.7940578,
+								"isPrimary": "N",
+								"inPlanning": "N",
+								"isClosed": "N",
+								"openToPublic": "Y",
+								"locationType": "tasting",
+								"locationTypeDisplay": "Tasting Room",
+								"countryIsoCode": "US",
+								"yearOpened": "2008",
+								"status": "verified",
+								"statusDisplay": "Verified",
+								"createDate": "2012-01-10 02:53:49",
+								"updateDate": "2014-09-29 20:33:38",
+								"country": {
+									"isoCode": "US",
+									"name": "UNITED STATES",
+									"displayName": "United States",
+									"isoThree": "USA",
+									"numberCode": 840,
+									"createDate": "2012-01-03 02:41:33"
+								}
+							},
+							{
+								"id": "ro7Zi3",
+								"name": "SmokeHouse Restaurant",
+								"streetAddress": "525 E. Broad St",
+								"locality": "Fuquay-Varina",
+								"region": "North Carolina",
+								"postalCode": "27526",
+								"phone": "(919) 557-7675",
+								"website": "http:\/\/www.aviatorbrew.com\/",
+								"hoursOfOperation": "Mon:  11:30am - 10:00pm\nTue:  11:30am - 10:00pm\nWed:  11:30am - 10:00pm\nThu:  11:30am - 10:00pm\nFri:  11:30am - 10:00pm\nSat:  11:30am - 11:00pm\nSun:  12:00pm - 9:00pm\n\nMon-Fri 11:30am-10pm\r\nSat 11:30am-11pm\r\nSun Noon-9pm",
+								"latitude": 35.5923185,
+								"longitude": -78.7843771,
+								"isPrimary": "N",
+								"inPlanning": "N",
+								"isClosed": "N",
+								"openToPublic": "Y",
+								"locationType": "restaurant",
+								"locationTypeDisplay": "Restaurant\/Ale House",
+								"countryIsoCode": "US",
+								"yearOpened": "2008",
+								"status": "verified",
+								"statusDisplay": "Verified",
+								"createDate": "2012-01-10 02:55:07",
+								"updateDate": "2014-09-29 20:33:39",
+								"country": {
+									"isoCode": "US",
+									"name": "UNITED STATES",
+									"displayName": "United States",
+									"isoThree": "USA",
+									"numberCode": 840,
+									"createDate": "2012-01-03 02:41:33"
+								}
+							}
+						]
+					}
+				]
+			},
+			"createDate": "2015-01-14 20:18:46"
+		},
+		{
+			"id": 115,
+			"year": 2015,
+			"week": 4,
+			"breweryId": "pj4HJk",
+			"brewery": {
+				"id": "pj4HJk",
+				"name": "The Alchemist",
+				"description": "The Alchemist is a 7 barrel brew pub specializing in hand-crafted  beer and casual pub fare.  All of our ales flow directly from our  basement brewery, which was designed and installed by our brewer and  co-proprietor John Kimmich.   We use only the finest imported malts and  domestic hops available to bring you the tastiest and finest selection  of beers in Vermont!",
+				"website": "http:\/\/www.alchemistbeer.com\/",
+				"established": "2003",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/pj4HJk\/upload_BvXmou-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/pj4HJk\/upload_BvXmou-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/pj4HJk\/upload_BvXmou-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:09",
+				"updateDate": "2014-11-13 18:10:56",
+				"locations": [
+					{
+						"id": "ER2JSs",
+						"name": "Main Brewery",
+						"streetAddress": "35 Crossroad",
+						"locality": "Waterbury",
+						"region": "Vermont",
+						"postalCode": "05676",
+						"phone": "802-244-7744",
+						"website": "http:\/\/www.alchemistbeer.com\/",
+						"latitude": 44.350471,
+						"longitude": -72.743821,
+						"isPrimary": "Y",
+						"inPlanning": "N",
+						"isClosed": "N",
+						"openToPublic": "N",
+						"locationType": "micro",
+						"locationTypeDisplay": "Micro Brewery",
+						"countryIsoCode": "US",
+						"yearOpened": "2003",
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-01-03 02:42:09",
+						"updateDate": "2015-02-04 02:56:18",
+						"country": {
+							"isoCode": "US",
+							"name": "UNITED STATES",
+							"displayName": "United States",
+							"isoThree": "USA",
+							"numberCode": 840,
+							"createDate": "2012-01-03 02:41:33"
+						}
+					},
+					{
+						"id": "8THGos",
+						"name": "Main Brewery",
+						"isPrimary": "N",
+						"inPlanning": "Y",
+						"isClosed": "N",
+						"openToPublic": "Y",
+						"locationType": "micro",
+						"locationTypeDisplay": "Micro Brewery",
+						"countryIsoCode": "US",
+						"status": "deleted",
+						"statusDisplay": "Deleted",
+						"createDate": "2015-03-28 14:47:28",
+						"updateDate": "2015-03-30 17:20:20",
+						"country": {
+							"isoCode": "US",
+							"name": "UNITED STATES",
+							"displayName": "United States",
+							"isoThree": "USA",
+							"numberCode": 840,
+							"createDate": "2012-01-03 02:41:33"
+						}
+					}
+				]
+			},
+			"beerId": "CFIZtr",
+			"beer": {
+				"id": "CFIZtr",
+				"name": "Heady Topper",
+				"nameDisplay": "Heady Topper",
+				"description": "We love hops \u2013 that\u2019s why our flagship Double IPA, Heady Topper, is packed full of them. Heady Topper was designed to showcase the complex flavors and aromas these flowers produce. The Alchemist has been brewing Heady Topper since 2003. This Double IPA is not intended to be the strongest or most bitter DIPA. It is brewed to give you wave after wave of hop flavor without any astringent bitterness. We brew Heady Topper with a proprietary blend of six hops \u2013 each imparting its own unique flavor and aroma. Take a big sip of Heady and see what hop flavors you can pick out. Orange? Tropical Fruit? Pink Grapefruit? Pine? Spice? There is just enough malt to give this beer some backbone, but not enough to take the hops away from the center stage.",
+				"abv": "8",
+				"ibu": "120",
+				"glasswareId": 6,
+				"styleId": 31,
+				"isOrganic": "N",
+				"labels": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/CFIZtr\/upload_Y3Prr0-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/CFIZtr\/upload_Y3Prr0-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/CFIZtr\/upload_Y3Prr0-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:43:21",
+				"updateDate": "2014-11-14 19:45:25",
+				"glass": {
+					"id": 6,
+					"name": "Snifter",
+					"createDate": "2012-01-03 02:41:33"
+				},
+				"style": {
+					"id": 31,
+					"categoryId": 3,
+					"category": {
+						"id": 3,
+						"name": "North American Origin Ales",
+						"createDate": "2012-03-21 20:06:45"
+					},
+					"name": "Imperial or Double India Pale Ale",
+					"shortName": "Imperial IPA",
+					"description": "Imperial or Double India Pale Ales have intense hop bitterness, flavor and aroma. Alcohol content is medium-high to high and notably evident. They range from deep golden to medium copper in color. The style may use any variety of hops. Though the hop character is intense it's balanced with complex alcohol flavors, moderate to high fruity esters and medium to high malt character. Hop character should be fresh and lively and should not be harsh in quality. The use of large amounts of hops may cause a degree of appropriate hop haze. Imperial or Double India Pale Ales have medium-high to full body. Diacetyl should not be perceived. The intention of this style of beer is to exhibit the fresh and bright character of hops. Oxidative character and aged character should not be present.",
+					"ibuMin": "65",
+					"ibuMax": "100",
+					"abvMin": "7.5",
+					"abvMax": "10.5",
+					"srmMin": "5",
+					"srmMax": "13",
+					"ogMin": "1.075",
+					"fgMin": "1.012",
+					"fgMax": "1.02",
+					"createDate": "2012-03-21 20:06:45",
+					"updateDate": "2015-04-07 15:26:46"
+				},
+				"breweries": [
+					{
+						"id": "pj4HJk",
+						"name": "The Alchemist",
+						"description": "The Alchemist is a 7 barrel brew pub specializing in hand-crafted  beer and casual pub fare.  All of our ales flow directly from our  basement brewery, which was designed and installed by our brewer and  co-proprietor John Kimmich.   We use only the finest imported malts and  domestic hops available to bring you the tastiest and finest selection  of beers in Vermont!",
+						"website": "http:\/\/www.alchemistbeer.com\/",
+						"established": "2003",
+						"isOrganic": "N",
+						"images": {
+							"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/pj4HJk\/upload_BvXmou-icon.png",
+							"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/pj4HJk\/upload_BvXmou-medium.png",
+							"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/pj4HJk\/upload_BvXmou-large.png"
+						},
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-01-03 02:42:09",
+						"updateDate": "2014-11-13 18:10:56",
+						"locations": [
+							{
+								"id": "ER2JSs",
+								"name": "Main Brewery",
+								"streetAddress": "35 Crossroad",
+								"locality": "Waterbury",
+								"region": "Vermont",
+								"postalCode": "05676",
+								"phone": "802-244-7744",
+								"website": "http:\/\/www.alchemistbeer.com\/",
+								"latitude": 44.350471,
+								"longitude": -72.743821,
+								"isPrimary": "Y",
+								"inPlanning": "N",
+								"isClosed": "N",
+								"openToPublic": "N",
+								"locationType": "micro",
+								"locationTypeDisplay": "Micro Brewery",
+								"countryIsoCode": "US",
+								"yearOpened": "2003",
+								"status": "verified",
+								"statusDisplay": "Verified",
+								"createDate": "2012-01-03 02:42:09",
+								"updateDate": "2015-02-04 02:56:18",
+								"country": {
+									"isoCode": "US",
+									"name": "UNITED STATES",
+									"displayName": "United States",
+									"isoThree": "USA",
+									"numberCode": 840,
+									"createDate": "2012-01-03 02:41:33"
+								}
+							},
+							{
+								"id": "8THGos",
+								"name": "Main Brewery",
+								"isPrimary": "N",
+								"inPlanning": "Y",
+								"isClosed": "N",
+								"openToPublic": "Y",
+								"locationType": "micro",
+								"locationTypeDisplay": "Micro Brewery",
+								"countryIsoCode": "US",
+								"status": "deleted",
+								"statusDisplay": "Deleted",
+								"createDate": "2015-03-28 14:47:28",
+								"updateDate": "2015-03-30 17:20:20",
+								"country": {
+									"isoCode": "US",
+									"name": "UNITED STATES",
+									"displayName": "United States",
+									"isoThree": "USA",
+									"numberCode": 840,
+									"createDate": "2012-01-03 02:41:33"
+								}
+							}
+						]
+					}
+				]
+			},
+			"createDate": "2015-01-14 20:13:38"
+		},
+		{
+			"id": 113,
+			"year": 2015,
+			"week": 3,
+			"breweryId": "ichhfQ",
+			"brewery": {
+				"id": "ichhfQ",
+				"name": "Olde Hickory Brewery",
+				"description": "Great beer is the result of meticulous attention to detail throughout the brewing process. Our beers begin their life as fresh water that flows from the granite slopes of the Blue Ridge and culminate in small batches less than 800 gallons each.\r\n\r\nOur beers are and have always been, brewed using select grains, robust hops and cultured yeast, with no additives or preservatives.  These basic ingredients are added with time, passion and the undying thirst for knowledge to produce our variety of quality brews that we're sure you'll enjoy!",
+				"website": "http:\/\/www.oldehickorybrewery.com\/",
+				"established": "1994",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/ichhfQ\/upload_QYoDzR-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/ichhfQ\/upload_QYoDzR-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/ichhfQ\/upload_QYoDzR-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:04",
+				"updateDate": "2013-08-12 22:05:24",
+				"locations": [
+					{
+						"id": "oZVAo0",
+						"name": "Olde Hickory Taproom",
+						"streetAddress": "222 Union Square",
+						"locality": "Hickory",
+						"region": "North Carolina",
+						"postalCode": "28601",
+						"phone": "828.322.1965",
+						"website": "http:\/\/www.oldehickorytaproom.com\/",
+						"hoursOfOperation": "7 Days a Week 11am - 2am",
+						"latitude": 35.732019,
+						"longitude": -81.340443,
+						"isPrimary": "Y",
+						"inPlanning": "N",
+						"isClosed": "N",
+						"openToPublic": "Y",
+						"locationType": "restaurant",
+						"locationTypeDisplay": "Restaurant\/Ale House",
+						"countryIsoCode": "US",
+						"yearOpened": "1994",
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-01-03 02:42:04",
+						"updateDate": "2014-07-23 19:11:34",
+						"country": {
+							"isoCode": "US",
+							"name": "UNITED STATES",
+							"displayName": "United States",
+							"isoThree": "USA",
+							"numberCode": 840,
+							"createDate": "2012-01-03 02:41:33"
+						}
+					},
+					{
+						"id": "U7qNrU",
+						"name": "Amos Howards Brew Pub",
+						"streetAddress": "2828 US Hwy 70 SW",
+						"locality": "Hickory",
+						"region": "North Carolina",
+						"postalCode": "28602",
+						"phone": "828.323.8753",
+						"hoursOfOperation": "Mon.-Thurs. 11am-11pm\r\nFri. & Sat. 11am-12midnight\r\nSun. 12pm-10pm",
+						"latitude": 35.72121,
+						"longitude": -81.387083,
+						"isPrimary": "N",
+						"inPlanning": "N",
+						"isClosed": "N",
+						"openToPublic": "Y",
+						"locationType": "restaurant",
+						"locationTypeDisplay": "Restaurant\/Ale House",
+						"countryIsoCode": "US",
+						"yearOpened": "1994",
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-01-10 04:20:02",
+						"updateDate": "2014-07-23 19:11:34",
+						"country": {
+							"isoCode": "US",
+							"name": "UNITED STATES",
+							"displayName": "United States",
+							"isoThree": "USA",
+							"numberCode": 840,
+							"createDate": "2012-01-03 02:41:33"
+						}
+					},
+					{
+						"id": "tYf3W8",
+						"name": "Production Facility",
+						"streetAddress": "2 3rd Street Southwest",
+						"locality": "Hickory",
+						"region": "North Carolina",
+						"postalCode": "28602",
+						"phone": "(828) 322-1422",
+						"latitude": 35.731722,
+						"longitude": -81.341977,
+						"isPrimary": "N",
+						"inPlanning": "N",
+						"isClosed": "N",
+						"openToPublic": "N",
+						"locationType": "production",
+						"locationTypeDisplay": "Production Facility",
+						"countryIsoCode": "US",
+						"yearOpened": "1994",
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-04-26 01:01:42",
+						"updateDate": "2014-07-23 19:11:34",
+						"country": {
+							"isoCode": "US",
+							"name": "UNITED STATES",
+							"displayName": "United States",
+							"isoThree": "USA",
+							"numberCode": 840,
+							"createDate": "2012-01-03 02:41:33"
+						}
+					}
+				]
+			},
+			"beerId": "U69UNh",
+			"beer": {
+				"id": "U69UNh",
+				"name": "The Event Horizon",
+				"nameDisplay": "The Event Horizon",
+				"description": "The Event Horizon- an annual release. We barrel age an imperial stout in oak bourbon barrels, from several bourbon varieties, and blend the results. Dark and rich with bourbon flavors- once this beer grabs you you'll never escape. Winner of a World Beer Cup (R) 2012 bronze award in the Wood- and Barrel-Aged Strong Stout category! \r\n\r\nReleased each year in the late fall-early winter.",
+				"abv": "8.5",
+				"glasswareId": 8,
+				"srmId": 41,
+				"availableId": 2,
+				"styleId": 43,
+				"isOrganic": "N",
+				"labels": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/U69UNh\/upload_4hSD2R-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/U69UNh\/upload_4hSD2R-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/U69UNh\/upload_4hSD2R-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-12-10 23:51:21",
+				"updateDate": "2015-01-14 01:39:52",
+				"glass": {
+					"id": 8,
+					"name": "Tulip",
+					"createDate": "2012-01-03 02:41:33"
+				},
+				"srm": {
+					"id": 41,
+					"name": "Over 40",
+					"hex": "000000"
+				},
+				"available": {
+					"id": 2,
+					"name": "Limited",
+					"description": "Limited availability."
+				},
+				"style": {
+					"id": 43,
+					"categoryId": 3,
+					"category": {
+						"id": 3,
+						"name": "North American Origin Ales",
+						"createDate": "2012-03-21 20:06:45"
+					},
+					"name": "American-Style Imperial Stout",
+					"shortName": "American Imperial Stout",
+					"description": "Black in color, American-style imperial stouts typically have a high alcohol content. Generally characterized as very robust. The extremely rich malty flavor and aroma are balanced with assertive hopping and fruity-ester characteristics. Bitterness should be moderately high to very high and balanced with full sweet malt character. Roasted malt astringency and bitterness can be moderately perceived but should not overwhelm the overall character. Hop aroma is usually moderately-high to overwhelmingly hop-floral, -citrus or -herbal. Diacetyl (butterscotch) levels should be absent.",
+					"ibuMin": "50",
+					"ibuMax": "80",
+					"abvMin": "7",
+					"abvMax": "12",
+					"srmMin": "40",
+					"srmMax": "40",
+					"ogMin": "1.08",
+					"fgMin": "1.02",
+					"fgMax": "1.03",
+					"createDate": "2012-03-21 20:06:46",
+					"updateDate": "2015-04-07 15:28:49"
+				},
+				"breweries": [
+					{
+						"id": "ichhfQ",
+						"name": "Olde Hickory Brewery",
+						"description": "Great beer is the result of meticulous attention to detail throughout the brewing process. Our beers begin their life as fresh water that flows from the granite slopes of the Blue Ridge and culminate in small batches less than 800 gallons each.\r\n\r\nOur beers are and have always been, brewed using select grains, robust hops and cultured yeast, with no additives or preservatives.  These basic ingredients are added with time, passion and the undying thirst for knowledge to produce our variety of quality brews that we're sure you'll enjoy!",
+						"website": "http:\/\/www.oldehickorybrewery.com\/",
+						"established": "1994",
+						"isOrganic": "N",
+						"images": {
+							"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/ichhfQ\/upload_QYoDzR-icon.png",
+							"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/ichhfQ\/upload_QYoDzR-medium.png",
+							"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/ichhfQ\/upload_QYoDzR-large.png"
+						},
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-01-03 02:42:04",
+						"updateDate": "2013-08-12 22:05:24",
+						"locations": [
+							{
+								"id": "oZVAo0",
+								"name": "Olde Hickory Taproom",
+								"streetAddress": "222 Union Square",
+								"locality": "Hickory",
+								"region": "North Carolina",
+								"postalCode": "28601",
+								"phone": "828.322.1965",
+								"website": "http:\/\/www.oldehickorytaproom.com\/",
+								"hoursOfOperation": "7 Days a Week 11am - 2am",
+								"latitude": 35.732019,
+								"longitude": -81.340443,
+								"isPrimary": "Y",
+								"inPlanning": "N",
+								"isClosed": "N",
+								"openToPublic": "Y",
+								"locationType": "restaurant",
+								"locationTypeDisplay": "Restaurant\/Ale House",
+								"countryIsoCode": "US",
+								"yearOpened": "1994",
+								"status": "verified",
+								"statusDisplay": "Verified",
+								"createDate": "2012-01-03 02:42:04",
+								"updateDate": "2014-07-23 19:11:34",
+								"country": {
+									"isoCode": "US",
+									"name": "UNITED STATES",
+									"displayName": "United States",
+									"isoThree": "USA",
+									"numberCode": 840,
+									"createDate": "2012-01-03 02:41:33"
+								}
+							},
+							{
+								"id": "U7qNrU",
+								"name": "Amos Howards Brew Pub",
+								"streetAddress": "2828 US Hwy 70 SW",
+								"locality": "Hickory",
+								"region": "North Carolina",
+								"postalCode": "28602",
+								"phone": "828.323.8753",
+								"hoursOfOperation": "Mon.-Thurs. 11am-11pm\r\nFri. & Sat. 11am-12midnight\r\nSun. 12pm-10pm",
+								"latitude": 35.72121,
+								"longitude": -81.387083,
+								"isPrimary": "N",
+								"inPlanning": "N",
+								"isClosed": "N",
+								"openToPublic": "Y",
+								"locationType": "restaurant",
+								"locationTypeDisplay": "Restaurant\/Ale House",
+								"countryIsoCode": "US",
+								"yearOpened": "1994",
+								"status": "verified",
+								"statusDisplay": "Verified",
+								"createDate": "2012-01-10 04:20:02",
+								"updateDate": "2014-07-23 19:11:34",
+								"country": {
+									"isoCode": "US",
+									"name": "UNITED STATES",
+									"displayName": "United States",
+									"isoThree": "USA",
+									"numberCode": 840,
+									"createDate": "2012-01-03 02:41:33"
+								}
+							},
+							{
+								"id": "tYf3W8",
+								"name": "Production Facility",
+								"streetAddress": "2 3rd Street Southwest",
+								"locality": "Hickory",
+								"region": "North Carolina",
+								"postalCode": "28602",
+								"phone": "(828) 322-1422",
+								"latitude": 35.731722,
+								"longitude": -81.341977,
+								"isPrimary": "N",
+								"inPlanning": "N",
+								"isClosed": "N",
+								"openToPublic": "N",
+								"locationType": "production",
+								"locationTypeDisplay": "Production Facility",
+								"countryIsoCode": "US",
+								"yearOpened": "1994",
+								"status": "verified",
+								"statusDisplay": "Verified",
+								"createDate": "2012-04-26 01:01:42",
+								"updateDate": "2014-07-23 19:11:34",
+								"country": {
+									"isoCode": "US",
+									"name": "UNITED STATES",
+									"displayName": "United States",
+									"isoThree": "USA",
+									"numberCode": 840,
+									"createDate": "2012-01-03 02:41:33"
+								}
+							}
+						]
+					}
+				]
+			},
+			"createDate": "2015-01-14 20:11:59"
+		},
+		{
+			"id": 114,
+			"year": 2015,
+			"week": 1,
+			"breweryId": "64Bwb3",
+			"brewery": {
+				"id": "64Bwb3",
+				"name": "Ohio Brewing Company",
+				"description": "Ohio Brewing Company is an award-winning microbrewery located in downtown Akron in the historic Selle building. Our brewery produces a wide array of styles, form German ales to Irish Red ales to Stouts and even Oktoberfest lagers.\r\n\r\nThe original Ohio Brewing Company was founded in 1997 in Niles, Ohio by current owner Chris Verich. Our current operation is a new venture by Chris in Akron, Ohio to produce these award-winning beers in a craft production brewery setting.",
+				"website": "http:\/\/ohiobrewing.com\/",
+				"established": "1997",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/64Bwb3\/upload_HPV4u3-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/64Bwb3\/upload_HPV4u3-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/64Bwb3\/upload_HPV4u3-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:04",
+				"updateDate": "2013-08-12 13:08:07",
+				"locations": [
+					{
+						"id": "kIi8qg",
+						"name": "Main Brewery",
+						"streetAddress": "451 South High Street",
+						"extendedAddress": "Suite B",
+						"locality": "Akron",
+						"region": "Ohio",
+						"postalCode": "44311",
+						"phone": "330-376-3008",
+						"website": "http:\/\/ohiobrewing.com\/",
+						"latitude": 41.073122,
+						"longitude": -81.52218,
+						"isPrimary": "Y",
+						"inPlanning": "N",
+						"isClosed": "N",
+						"openToPublic": "Y",
+						"locationType": "brewpub",
+						"locationTypeDisplay": "Brewpub",
+						"countryIsoCode": "US",
+						"yearOpened": "1997",
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2012-01-03 02:42:04",
+						"updateDate": "2014-07-23 19:11:34",
+						"country": {
+							"isoCode": "US",
+							"name": "UNITED STATES",
+							"displayName": "United States",
+							"isoThree": "USA",
+							"numberCode": 840,
+							"createDate": "2012-01-03 02:41:33"
+						}
+					}
+				]
+			},
+			"beerId": "fZUSij",
+			"beer": {
+				"id": "fZUSij",
+				"name": "Bacon Stout",
+				"nameDisplay": "Bacon Stout",
+				"description": "Our CBBC Stout is a true \u201cBreakfast Beer.\u201d Adding oatmeal in the grain bill and smoked bacon post-fermentation gives our stout a great smokey flavor and rich mouthfeel. This beer may sound like a meal, but at 5% ABV, our Stout is a session beer that will leave you asking for another pint of \u201cBacon.\u201d",
+				"abv": "5",
+				"ibu": "27",
+				"srmId": 38,
+				"styleId": 43,
+				"isOrganic": "N",
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2014-10-15 19:14:23",
+				"updateDate": "2014-10-15 19:30:13",
+				"srm": {
+					"id": 38,
+					"name": "38",
+					"hex": "3B0607"
+				},
+				"style": {
+					"id": 43,
+					"categoryId": 3,
+					"category": {
+						"id": 3,
+						"name": "North American Origin Ales",
+						"createDate": "2012-03-21 20:06:45"
+					},
+					"name": "American-Style Imperial Stout",
+					"shortName": "American Imperial Stout",
+					"description": "Black in color, American-style imperial stouts typically have a high alcohol content. Generally characterized as very robust. The extremely rich malty flavor and aroma are balanced with assertive hopping and fruity-ester characteristics. Bitterness should be moderately high to very high and balanced with full sweet malt character. Roasted malt astringency and bitterness can be moderately perceived but should not overwhelm the overall character. Hop aroma is usually moderately-high to overwhelmingly hop-floral, -citrus or -herbal. Diacetyl (butterscotch) levels should be absent.",
+					"ibuMin": "50",
+					"ibuMax": "80",
+					"abvMin": "7",
+					"abvMax": "12",
+					"srmMin": "40",
+					"srmMax": "40",
+					"ogMin": "1.08",
+					"fgMin": "1.02",
+					"fgMax": "1.03",
+					"createDate": "2012-03-21 20:06:46",
+					"updateDate": "2015-04-07 15:28:49"
+				},
+				"breweries": [
+					{
+						"id": "SUDalA",
+						"name": "Crystal Ball Brewing Company",
+						"description": "Crystal Ball Brewing Company is a microbrewery located at 1612 West King Street in West York, Pennsylvania. After years of planning and months of construction, this production facility is now open. \r\n\r\nUsing the finest and freshest ingredients possible, combined with traditional brewing techniques and the latest technology, our intent will be to produce world-class beer. Our brewers love good beer and know its social potential for creating and sustaining a tasteful social experience. Every batch will be carefully crafted with passion, vision, and fun. Our brews range from traditional offerings to the more experimental, for adventurous drinkers. With a great product, and community engagement, we see in our future the potential to become the largest production brewer of hand-crafted beer in the region. And while we cannot predict everything, we can make one guarantee. CBBC will make the best possible beer, with offerings that will appeal to all who Seek the Finest.",
+						"website": "http:\/\/crystalballbrewing.com\/",
+						"established": "2014",
+						"isOrganic": "N",
+						"images": {
+							"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/SUDalA\/upload_6RuBaa-icon.png",
+							"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/SUDalA\/upload_6RuBaa-medium.png",
+							"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/SUDalA\/upload_6RuBaa-large.png"
+						},
+						"status": "verified",
+						"statusDisplay": "Verified",
+						"createDate": "2014-05-19 13:46:36",
+						"updateDate": "2014-05-20 11:49:23",
+						"locations": [
+							{
+								"id": "Xsu7R3",
+								"name": "Main Brewery",
+								"streetAddress": "1612 West King Street",
+								"locality": "York",
+								"region": "Pennsylvania",
+								"postalCode": "17404",
+								"website": "http:\/\/www.crystalballbrewing.com",
+								"latitude": 39.9487765,
+								"longitude": -76.7630199,
+								"isPrimary": "Y",
+								"inPlanning": "N",
+								"isClosed": "N",
+								"openToPublic": "Y",
+								"locationType": "micro",
+								"locationTypeDisplay": "Micro Brewery",
+								"countryIsoCode": "US",
+								"yearOpened": "2014",
+								"status": "verified",
+								"statusDisplay": "Verified",
+								"createDate": "2014-05-20 11:50:10",
+								"updateDate": "2014-07-23 19:11:34",
+								"country": {
+									"isoCode": "US",
+									"name": "UNITED STATES",
+									"displayName": "United States",
+									"isoThree": "USA",
+									"numberCode": 840,
+									"createDate": "2012-01-03 02:41:33"
+								}
+							}
+						]
+					}
+				]
+			},
+			"createDate": "2015-01-14 20:13:15"
+		}
+	],
+	"status": "success"
+}

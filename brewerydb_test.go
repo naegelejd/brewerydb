@@ -3,6 +3,7 @@ package brewerydb
 import (
 	"net/http"
 	"net/http/httptest"
+	"testing"
 )
 
 var (
@@ -22,4 +23,10 @@ func setup() {
 
 func teardown() {
 	server.Close()
+}
+
+func checkMethod(t *testing.T, r *http.Request, method string) {
+	if method != r.Method {
+		t.Errorf("Request method = %v, want %v", r.Method, method)
+	}
 }

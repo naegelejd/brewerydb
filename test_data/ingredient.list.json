@@ -1,0 +1,367 @@
+{
+	"currentPage": 1,
+	"numberOfPages": 29,
+	"totalResults": 1427,
+	"data": [
+		{
+			"id": 1,
+			"name": "Admiral",
+			"description": "Bred at Wye as a replacement for Target and released in 1998, Admiral is a high-alpha variety considered to have a more pleasing, less harsh bitterness.",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33",
+			"updateDate": "2013-04-10 16:32:12"
+		},
+		{
+			"id": 2,
+			"name": "Aged \/ Debittered Hops (Lambic)",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 3,
+			"name": "Ahtanum",
+			"description": "An open-pollinated aroma variety developed in Washington, Ahtanum is used for its distinctive, somewhat Cascade-like aroma and for moderate bittering.",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33",
+			"updateDate": "2013-04-10 16:32:52"
+		},
+		{
+			"id": 4,
+			"name": "Amarillo",
+			"description": "Amarillo is a privately grown and registered hop variety; it was introduced recently but has been extremely popular with brewers seeking a Cascade-type hop with a distinctive American character. It is considered by many to be ideal for dry hopping, but also gives a clean bitterness due to low cohumulone content. The flavor has citrus and floral notes, and something like a Cascade character, but with more bitterness. Amarillo is a registered trademark of Virgil Gamache Farms, Inc., where the hop was originally developed.",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33",
+			"updateDate": "2013-04-10 16:33:13"
+		},
+		{
+			"id": 5,
+			"name": "Amarillo Gold",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 6,
+			"name": "Apollo",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 7,
+			"name": "Aquila",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 8,
+			"name": "Argentine Cascade",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 9,
+			"name": "Aurora",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 10,
+			"name": "Auscha (Saaz)",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 11,
+			"name": "Goldings",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33",
+			"updateDate": "2012-04-16 19:02:59"
+		},
+		{
+			"id": 12,
+			"name": "Banner",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 13,
+			"name": "Boadicea",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 14,
+			"name": "Bobek",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 15,
+			"name": "Bor",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 16,
+			"name": "Bramling Cross",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 17,
+			"name": "Bravo",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 18,
+			"name": "Brewer's Gold",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 19,
+			"name": "Bullion",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 20,
+			"name": "California Ivanhoe",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 21,
+			"name": "Calypso",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 22,
+			"name": "Cascade",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 23,
+			"name": "Celeia",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 24,
+			"name": "Centennial",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 25,
+			"name": "Challenger",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 26,
+			"name": "Chinook",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 27,
+			"name": "Citra",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 28,
+			"name": "Cluster",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 29,
+			"name": "Columbia",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 30,
+			"name": "Columbus",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 31,
+			"name": "Columbus (Tomahawk)",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 32,
+			"name": "Comet",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 33,
+			"name": "Crystal",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 34,
+			"name": "Czech Saaz",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 35,
+			"name": "Delta",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 36,
+			"name": "East Kent Goldings",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 37,
+			"name": "El Dorado",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 38,
+			"name": "Eroica",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 39,
+			"name": "Experimental 946",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 40,
+			"name": "Falconer's Flight",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 41,
+			"name": "First Gold",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 42,
+			"name": "French Strisserspalt",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 43,
+			"name": "Fuggles",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 44,
+			"name": "Galaxy",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 45,
+			"name": "Galena",
+			"description": "Galena is a high-alpha hop variety developed by the Iowa state breeding program in 1968 by open pollination from Brewer's Gold and released to the trade in 1978. Because of its strong, clean bitterness, it is said to be among the most common bittering hops used in America. It is sensitive to growing conditions and can be more difficult to grow outside of the Northwest. Galena has a strong fruity\/black currant aroma similar to Bullion.",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33",
+			"updateDate": "2013-04-10 16:39:12"
+		},
+		{
+			"id": 46,
+			"name": "German Magnum",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 47,
+			"name": "German Opal",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 48,
+			"name": "German Perle",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 49,
+			"name": "German Select",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 50,
+			"name": "German Tradition",
+			"category": "hop",
+			"categoryDisplay": "Hops",
+			"createDate": "2012-01-03 02:41:33"
+		}
+	],
+	"status": "success"
+}

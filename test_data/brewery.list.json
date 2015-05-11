@@ -1,0 +1,427 @@
+{
+	"currentPage": 1,
+	"numberOfPages": 1,
+	"totalResults": 28,
+	"data": [
+		{
+			"id": "17tUiZ",
+			"name": "Big Time Brewing Company",
+			"description": "Big Time's brewery is a 14 barrel JV Northwest system consisting of a gas fired brew kettle, an infusion mash tun with mixer, a hot liquor back, a wort cooler, (5) 14 barrel fermenters, (1) bright beer tank, and (20) 7 bbl serving tanks.  \r\n\r\nWe sell 85% of our beer at the pub but do wholesale a limited number of kegs to a dozen or so Seattle area taverns. We currently brew approximately 1,300 barrels of beer per year",
+			"website": "http:\/\/www.bigtimebrewery.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/17tUiZ\/upload_dKVoHL-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/17tUiZ\/upload_dKVoHL-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/17tUiZ\/upload_dKVoHL-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:46",
+			"updateDate": "2013-11-14 12:09:33"
+		},
+		{
+			"id": "f4lJDc",
+			"name": "Brasserie Fant\u00f4me",
+			"website": "http:\/\/www.fantome.be\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:47",
+			"updateDate": "2013-03-25 14:53:38"
+		},
+		{
+			"id": "7qP2CJ",
+			"name": "Brewpub-on-the-Green",
+			"established": "1988",
+			"isOrganic": "N",
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:48",
+			"updateDate": "2012-03-21 19:06:04"
+		},
+		{
+			"id": "4OBVPn",
+			"name": "Brooklyn Brewery",
+			"description": "Since its founding in 1988, The Brooklyn Brewery brews flavorful beers that enrich the life, tradition and culture of the communities it serves. Its award-winning roster of year round, season and specialty products have gained the Brewery notoriety as one of the top craft beer producers in the world. Brooklyn beers are currently distributed in 25 states and 17 countries, and throughout 2011 the brewery underwent an expansion that will double overall capacity by 2013. In addition to facilitating community meetings at its event space, brewery employees serve on not-for-profit boards, including the Prospect Park Alliance, the Open Space Alliance, Transportation Alternatives and the Brooklyn Historical Society. Each year the company supports many charitable and arts organizations including BAM, Brooklyn Museum and MoMA, and partners with food purveyors across the country to produce beer dinners and tasting events. The Brewery is open to the public Monday-Thursday from 5-7pm for reservation-only Small Batch tours, Friday evening for Happy Hour, and Saturdays and Sundays for Tours and Tastings. For more info, visit BrooklynBrewery.com and follow @BrooklynBrewery on Twitter.",
+			"website": "http:\/\/www.brooklynbrewery.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/4OBVPn\/upload_nQWKUG-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/4OBVPn\/upload_nQWKUG-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/4OBVPn\/upload_nQWKUG-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:48",
+			"updateDate": "2014-10-20 15:05:30"
+		},
+		{
+			"id": "9ynYAy",
+			"name": "Brouwerij Alken-Maes",
+			"description": "The company ' Alken- Maes Breweries SA \" was officially created in 1988 from the merger of breweries and Cristal Alken Maes . However, the roots of these two entities go back much further, to 1880. This year, Egied Maes bought the brewery Sint- Micha\u00ebl . Shortly after , Arthur Boes founded a brewery in Alken, about 100 km away.\r\n\r\nBoth breweries are growing consistently . In 1928, the first Belgian pils born: the Cristal. Maes Pils follows in 1946. Then Grimbergen , Ciney and others complement the portfolio until the merger in 1988. Having been acquired by Groupe Danone and Scottish & Newcastle, Alken- Maes joined 2008 HEINEKEN Company.\r\n\r\nHEINEKEN under the wing of Alken- Maes had a difficult period , and the new brewery can fully assume its position as an innovative challenger on the Belgian market . (Re ) launches beers Maes, Desperados and Grimbergen are successful and show the new momentum of the business.",
+			"website": "http:\/\/www.alkenmaes.be\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/9ynYAy\/upload_X0bog5-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/9ynYAy\/upload_X0bog5-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/9ynYAy\/upload_X0bog5-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:48",
+			"updateDate": "2014-05-05 12:03:59"
+		},
+		{
+			"id": "vefvPr",
+			"name": "Carver Brewing Company",
+			"description": "Operating as a brewery since 1988, we are Colorado's 2nd oldest brew pub. We maintain a tap list of 11 house made beers, produce over 20 different beer styles per year and specialize in recreating traditional lager beer styles and hop-centric American-Style ales. Our restaurant offers American fare with an International influence, focusing on healthy, made-from-scratch items that incorporate locally sourced ingredients. We serve breakfast, lunch and dinner seven days a week, 363 days a year.",
+			"website": "http:\/\/www.carverbrewing.com",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/vefvPr\/upload_pBOht6-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/vefvPr\/upload_pBOht6-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/vefvPr\/upload_pBOht6-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:50",
+			"updateDate": "2014-07-25 19:50:06"
+		},
+		{
+			"id": "01Bp2T",
+			"name": "Columbus Brewing Company",
+			"description": "The Columbus Brewing Company was originally founded in 1830. In 1988, the name was once again chosen to resurrect the proud brewing heritage of its namesake.\r\n\r\nOur Brewmaster brings years of experience to the brewery including an apprenticeship with a German-trained Brewmaster, completed the Master Brewers progam at U.C. Davis, and brewing at several breweries throughout North America.",
+			"website": "http:\/\/www.columbusbrewing.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/01Bp2T\/upload_kcE3Xu-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/01Bp2T\/upload_kcE3Xu-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/01Bp2T\/upload_kcE3Xu-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:51",
+			"updateDate": "2014-09-10 13:50:00"
+		},
+		{
+			"id": "YHij73",
+			"name": "Deschutes Brewery",
+			"description": "Founded in 1988, Deschutes Brewery began as a brew pub in downtown Bend, Oregon and is known for such brands as Black Butte Porter, its flagship brew and the nation\u2019s number one selling craft porter, and the popular Mirror Pond Pale Ale. In addition to its original Bend pub, this family and employee-owned brewery opened a second pub in Portland\u2019s Pearl District in 2008. The company\u2019s main brewing facility is located on the banks of the Deschutes River and is the nation's 6th largest independent craft brewery, distributing in 26 states and two provinces. Deschutes Brewery was named one of America\u2019s Best Places to Work in 2013 by Outside Magazine.",
+			"website": "http:\/\/www.deschutesbrewery.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/YHij73\/upload_mqvdmZ-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/YHij73\/upload_mqvdmZ-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/YHij73\/upload_mqvdmZ-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:52",
+			"updateDate": "2014-09-11 10:16:46"
+		},
+		{
+			"id": "EWlB8A",
+			"name": "Domhof Hausbrauerei",
+			"established": "1988",
+			"isOrganic": "N",
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-08-07 10:19:28",
+			"updateDate": "2012-08-13 13:16:07"
+		},
+		{
+			"id": "wjECY4",
+			"name": "Electric Brewing Co",
+			"description": "Arizona's first microbrewery.. 30 bbl home built gravity system, located on the edge of scenic Bisbee. We are generally closed to the public, however our beers are on tap and in bottles everywhere in Bisbee and some lesser locations in Phoenix and Tucson.\r\n\r\nBrewery was Purchased by Beast Brewing.",
+			"website": "http:\/\/electricbrewing.com",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/wjECY4\/upload_4hpnc7-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/wjECY4\/upload_4hpnc7-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/wjECY4\/upload_4hpnc7-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:53",
+			"updateDate": "2014-03-21 12:01:50"
+		},
+		{
+			"id": "oagzqT",
+			"name": "Frankfurter Brauhaus",
+			"website": "http:\/\/www.frankfurter-brauhaus.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-08-07 10:17:39",
+			"updateDate": "2012-08-13 02:10:37"
+		},
+		{
+			"id": "UdZgFF",
+			"name": "Grand Teton Brewing Company",
+			"description": "Grand Teton Brewing Company is the original brewery of Grand Teton and Yellowstone National Parks. We have been brewing our handcrafted beers at the base of the Tetons since 1988.",
+			"website": "http:\/\/www.grandtetonbrewing.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/UdZgFF\/upload_ZWO4tC-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/UdZgFF\/upload_ZWO4tC-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/UdZgFF\/upload_ZWO4tC-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:56",
+			"updateDate": "2012-11-15 14:16:13"
+		},
+		{
+			"id": "uSFO4T",
+			"name": "Great Lakes Brewing Company",
+			"description": "In the 1870s, Cleveland had 30 breweries. By the early 1980s, the last one had shuttered its doors. So when brothers Patrick and Daniel Conway opened Great Lakes Brewing Company on September 6, 1988, it not only signaled a new era in Cleveland brewing, it was also the first microbrewery in the state of Ohio. And the idea of a craft brewery in Cleveland caught on fast, as curious patrons hurried in for a pint crafted in the styles of old and drawn from the taps of the beautiful Victorian era bar. The company's commitment to sustainable business practices greatly contributed to its early popularity and success. Before long, Great Lakes Brewing Company had become one of Cleveland's most popular destinations for both dining and a fun night out.",
+			"website": "http:\/\/www.greatlakesbrewing.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/uSFO4T\/upload_O5TpB8-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/uSFO4T\/upload_O5TpB8-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/uSFO4T\/upload_O5TpB8-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:56",
+			"updateDate": "2014-09-10 20:44:32"
+		},
+		{
+			"id": "FmWw3u",
+			"name": "Gritty McDuff's Brewing Company",
+			"description": "Established in 1988 as Maine's Original Brewpub-the first to open it's doors in the state of Maine since prohibition-Gritty's has been at the forefront of Maine's leading craft beer industry introducing fresh English ales either on tap or on cask everyday for the last 20+ years! With the long wooden tables and cobblestone streets, the ambiance matches those of the hometown pubs in England and the people are just as merry! Come in for a pint, leave a fan for life. Gritty's...for what ales ya!",
+			"website": "http:\/\/www.grittys.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/FmWw3u\/upload_3XpjL0-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/FmWw3u\/upload_3XpjL0-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/FmWw3u\/upload_3XpjL0-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:41:56",
+			"updateDate": "2013-02-10 13:39:37"
+		},
+		{
+			"id": "COMf9V",
+			"name": "Hausbrauerei Boente",
+			"website": "http:\/\/www.bei-boente.de\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-08-07 10:19:22",
+			"updateDate": "2012-08-15 13:40:57"
+		},
+		{
+			"id": "11D3Xr",
+			"name": "Kieler Brauerei am Alten Markt",
+			"website": "http:\/\/www.kieler-brauerei.de\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-08-07 10:20:27",
+			"updateDate": "2012-08-12 23:41:06"
+		},
+		{
+			"id": "yLBNrD",
+			"name": "North Coast Brewing Company",
+			"description": "A pioneer in the craft beer movement, opened in 1988 as a local brewpub in the historic town of Fort Bragg, located on California\u2019s Mendocino Coast.\r\n\r\nUnder the leadership of brew master Mark Ruedrich, the brewery has developed a strong reputation for quality having won more than 70 awards in national and international competitions.\r\n\r\nIn addition to Red Seal Ale, Old Rasputin Russian Imperial Stout, Scrimshaw Pilsner, and other fine North Coast brands, the brewery has resurrected the old Acme label with a heritage dating back to the San Francisco of the 1860\u2019s.\r\n\r\nThese exceptional beers are available in 47 states now and also are exported to Europe and the Pacific Rim.",
+			"website": "http:\/\/www.northcoastbrewing.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/yLBNrD\/upload_9xEoIW-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/yLBNrD\/upload_9xEoIW-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/yLBNrD\/upload_9xEoIW-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:03",
+			"updateDate": "2014-12-10 02:54:41"
+		},
+		{
+			"id": "ODQYnq",
+			"name": "Nyn\u00e4shamns \u00c5ngbryggeri",
+			"website": "http:\/\/www.nyab.se\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/ODQYnq\/upload_3QI83A-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/ODQYnq\/upload_3QI83A-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/ODQYnq\/upload_3QI83A-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2014-04-28 17:10:00",
+			"updateDate": "2014-04-29 09:11:55"
+		},
+		{
+			"id": "mSmGcW",
+			"name": "Santa Fe Brewing Company",
+			"description": "The Santa Fe Brewing Company is a small operation with just a handful of friendly employees. Next time you are in the neighborhood, stop by, grab a cold one and say hello.\r\n\r\nWe are located in sunny Santa Fe, New Mexico right at the \"top of the Turquoise Trail.\"",
+			"website": "http:\/\/www.santafebrewing.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/mSmGcW\/upload_XRQSSh-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/mSmGcW\/upload_XRQSSh-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/mSmGcW\/upload_XRQSSh-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:07",
+			"updateDate": "2014-09-11 15:46:31"
+		},
+		{
+			"id": "uBmpMM",
+			"name": "Seabright Brewery",
+			"description": "All of our carefully hand-crafted, brewery fresh ales are made using only water, malt, yeast, and hops. Our brewmaster uses the finest two-row Harrington pale malted barley, specially roasted barley malts, hops from Oregon and Washington, and select brewers yeast to produce our beers right here on the premises.",
+			"website": "http:\/\/www.seabrightbrewery.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/uBmpMM\/upload_O7zVCk-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/uBmpMM\/upload_O7zVCk-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/uBmpMM\/upload_O7zVCk-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:08",
+			"updateDate": "2013-08-09 12:26:23"
+		},
+		{
+			"id": "LeJZox",
+			"name": "Southern Bay Brewing Co.",
+			"description": "Our Brewing Company was established in 1988, being re-named to Southern Bay Brewing Co. in 2005, so we have a long history in the beer business with traditional and innovative beers available.\r\n\r\nOur Beers and Ale's are subject to very strict quality control and laboratory microbiology testing throughout all stages of production. Samples of each package product batch are subject to stringent Quality Control procedures before dispatch. Our Beers and Ale's are naturally brewed.\r\n\r\nTo ensure we produce the best product available, we have implemented many filters, sterilization processes and optional pasteurization. We want to ensure our product is at it\u2019s best and remains that way for your peace of mind. We produce great crafted beer from a dedicated team of Brewers.",
+			"website": "http:\/\/www.southernbay.com.au",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/LeJZox\/upload_HWC3wr-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/LeJZox\/upload_HWC3wr-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/LeJZox\/upload_HWC3wr-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2014-01-15 11:10:32",
+			"updateDate": "2014-01-15 12:55:02"
+		},
+		{
+			"id": "NtOWyK",
+			"name": "Tied House Brewery & Cafe",
+			"description": "Tied House is the South Bay's original microbrewery. Family owned and in operation since 1988. We feature hand crafted brews and yummy pub grub.",
+			"website": "http:\/\/www.tiedhouse.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/NtOWyK\/upload_2YKg90-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/NtOWyK\/upload_2YKg90-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/NtOWyK\/upload_2YKg90-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:10",
+			"updateDate": "2012-03-21 19:06:11"
+		},
+		{
+			"id": "oPFGVt",
+			"name": "Tied House Cafe & Brewery",
+			"description": "Tied House is the South Bay's original microbrewery. Family owned and in operation since 1988. We feature hand crafted brews and yummy pub grub.",
+			"website": "http:\/\/tiedhouse.com",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/oPFGVt\/upload_4daoXi-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/oPFGVt\/upload_4daoXi-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/oPFGVt\/upload_4daoXi-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:16",
+			"updateDate": "2013-08-06 23:03:19"
+		},
+		{
+			"id": "HAszUa",
+			"name": "Vermont Pub & Brewery",
+			"description": "VPB is the third oldest brewpub on the East Coast.",
+			"website": "http:\/\/www.vermontbrewery.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:11",
+			"updateDate": "2012-04-24 03:40:05"
+		},
+		{
+			"id": "DCwAKJ",
+			"name": "Vulkan Brauhaus",
+			"established": "1988",
+			"isOrganic": "N",
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-08-07 10:19:44",
+			"updateDate": "2012-08-13 14:29:07"
+		},
+		{
+			"id": "HMKipA",
+			"name": "Willinger Brauhaus",
+			"website": "http:\/\/www.willinger-brauhaus.de\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-08-07 10:18:09",
+			"updateDate": "2012-08-13 01:37:19"
+		},
+		{
+			"id": "D7vKwm",
+			"name": "Wolffer",
+			"description": "W\u00f6lffer Estate Vineyard is unquestionably a beautiful place. But the creation of it spanned over three decades and required a creative vision, an ability to bring dreams to reality and a great deal of dedicated hard work by many people. Christian W\u00f6lffer possessed the vision and, with the meticulous care of his professional team, built this special place \u2013 W\u00f6lffer Estate Vineyard.\r\n\r\nThe original parcel of land was a potato farm with an old farmhouse in what is now the middle of the estate. Over the years, as more acres were acquired, paddocks and stables were added and, in 1988, the vineyard was founded. This 55-acre vineyard is part of a 175-acre estate with boarding stables, 30 paddocks, an indoor jumping ring, and a Grand Prix field. Both the stables and winery have a European character and, from these former potato fields, world-class wines have come forth. W\u00f6lffer Estate Vineyard is an American winery in the classic European tradition.",
+			"website": "http:\/\/www.wolffer.com\/",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/D7vKwm\/upload_jRsLsX-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/D7vKwm\/upload_jRsLsX-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/D7vKwm\/upload_jRsLsX-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2015-03-09 21:07:39",
+			"updateDate": "2015-03-10 18:11:15"
+		},
+		{
+			"id": "GfdTrX",
+			"name": "Wynkoop Brewing Company",
+			"description": "Colorado\u2019s first brewpub, Wynkoop Brewing Company was founded in 1988 by a group of young entrepreneurs and urban pioneers led by current Denver Governor John Hickenlooper.\r\n\r\nOur brewpub\u2019s hallmarks -- highly acclaimed small-batch beers, high quality food & service, the city\u2019s best pool hall and our glorious 1888 building -- helped make us a major catalyst for the revival of Lower Downtown Denver.\r\n\r\nToday Wynkoop Brewing Company is a beer-blessed Denver institution, a must-visit Colorado landmark and one of the nation\u2019s most revered craft breweries.\r\n\r\nWe\u2019re also one of the city\u2019s best places for private and corporate events. We\u2019ve hosted everything from Democratic National Convention parties to beer festivals, weddings and company conferences. (All with great beer and food.)\r\n\r\nToday we\u2019re expanding our downtown brewing efforts to deliver more of our ambitious, artisan-style craft beer to Denver\u2019s best beer outlets. Look for cans of our beer in local stores and kegs of all of our beers at the area\u2019s top bars and restaurants.",
+			"website": "http:\/\/www.wynkoop.com\/brewery",
+			"established": "1988",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/GfdTrX\/upload_oxC8S0-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/GfdTrX\/upload_oxC8S0-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/GfdTrX\/upload_oxC8S0-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:13",
+			"updateDate": "2014-10-02 15:38:10"
+		}
+	],
+	"status": "success"
+}

@@ -2,34 +2,40 @@ package brewerydb
 
 import (
 	"fmt"
+	"io"
 	"log"
+	"net/http"
 	"os"
 	"testing"
 )
 
-func TestDeleteBeer(t *testing.T) {
-	// Attempt to delete non-existent beer
-	// err := c.Beer.Delete("zzzzzzzzzzzzzzzzzz")
-	// if err == nil {
-	// 	t.Fatal("successfully delete a non-existent beer")
-	// }
-	// t.Fatal(err)
-}
+func TestBeerList(t *testing.T) {
+	setup()
+	defer teardown()
 
-// Get a random beer with an ABV between 8.0 and 9.0
-func ExampleBeerService_Random() {
-	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
-
-	req := &RandomBeerRequest{
-		ABV: "8",
-	}
-	b, err := c.Beer.Random(req)
+	data, err := os.Open("test_data/beer.list.json")
 	if err != nil {
-		log.Fatal(err)
+		t.Fatal("Failed to open test data file")
 	}
-	fmt.Println(b.Name)
-	fmt.Println(b.Style.Name)
-	fmt.Println(b.Labels.Large)
+	defer data.Close()
+
+	mux.HandleFunc("/beers/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		io.Copy(w, data)
+	})
+
+	bl, err := client.Beer.List(&BeerListRequest{ABV: "8"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(bl.Beers) <= 0 {
+		t.Fatal("Expected >0 beers")
+	}
+	for _, b := range bl.Beers {
+		if l := 6; l != len(b.ID) {
+			t.Fatal("Beer ID len = %d, wanted %d", len(b.ID), l)
+		}
+	}
 }
 
 func ExampleBeerService_List() {
