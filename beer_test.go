@@ -33,7 +33,7 @@ func TestBeerList(t *testing.T) {
 	}
 	for _, b := range bl.Beers {
 		if l := 6; l != len(b.ID) {
-			t.Fatal("Beer ID len = %d, wanted %d", len(b.ID), l)
+			t.Fatalf("Beer ID len = %d, wanted %d", len(b.ID), l)
 		}
 	}
 }

@@ -39,6 +39,7 @@ func encode(data interface{}) url.Values {
 	t := reflect.TypeOf(data)
 	v := reflect.ValueOf(data)
 
+	// "dereference" data if it is a pointer
 	if t.Kind() == reflect.Ptr {
 		if v.IsNil() {
 			return query
@@ -47,6 +48,7 @@ func encode(data interface{}) url.Values {
 		t = v.Type()
 	}
 
+	// only encode data if it is a struct
 	if t.Kind() != reflect.Struct {
 		return query
 	}

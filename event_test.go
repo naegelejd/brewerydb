@@ -31,7 +31,7 @@ func TestEventList(t *testing.T) {
 	}
 	for _, e := range el.Events {
 		if l := 6; l != len(e.ID) {
-			t.Fatal("Event ID len = %d, wanted %d", len(e.ID), l)
+			t.Fatalf("Event ID len = %d, wanted %d", len(e.ID), l)
 		}
 	}
 }
@@ -45,7 +45,7 @@ func TestEventGet(t *testing.T) {
 
 	data, err := os.Open("test_data/event.get.json")
 	if err != nil {
-		t.Errorf("Failed to open test data file")
+		t.Fatal("Failed to open test data file")
 	}
 	defer data.Close()
 
@@ -58,9 +58,9 @@ func TestEventGet(t *testing.T) {
 
 	e, err := client.Event.Get("mB7srw")
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Fatal(err)
 	}
 	if n := "Bare Beach Beer Bash"; n != e.Name {
-		t.Error("Event name = %v, wanted %v", e.Name, n)
+		t.Fatalf("Event name = %v, wanted %v", e.Name, n)
 	}
 }

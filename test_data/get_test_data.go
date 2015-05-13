@@ -41,6 +41,7 @@ func main() {
 		"location.list.json":    locationList,
 		"search.beer.json":      searchBeer,
 		"search.brewery.json":   searchBrewery,
+		"socialsite.list.json":  socialsiteList,
 		"style.list.json":       styleList,
 		"yeast.list.json":       yeastList,
 	}
@@ -170,6 +171,11 @@ func searchBeer(c *brewerydb.Client) error {
 
 func searchBrewery(c *brewerydb.Client) error {
 	_, err := c.Search.Brewery("dog", &brewerydb.SearchRequest{Page: 1})
+	return err
+}
+
+func socialsiteList(c *brewerydb.Client) error {
+	_, err := c.SocialSite.List()
 	return err
 }
 
