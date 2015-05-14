@@ -64,11 +64,8 @@ type FermentableList struct {
 // List returns a list of Fermentable Beer ingredients.
 func (fs *FermentableService) List(page int) (fl FermentableList, err error) {
 	// GET: /fermentables
-	p := struct {
-		Page int `json:"p"`
-	}{page}
 	var req *http.Request
-	req, err = fs.c.NewRequest("GET", "/fermentables", &p)
+	req, err = fs.c.NewRequest("GET", "/fermentables", &Page{page})
 	if err != nil {
 		return
 	}

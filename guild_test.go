@@ -17,12 +17,21 @@ func TestGuildList(t *testing.T) {
 	}
 	defer data.Close()
 
+	const (
+		page = 1
+		name = "Brewers Association of Maryland"
+	)
 	mux.HandleFunc("/guilds/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
+		checkPage(t, r, page)
+		if v := r.FormValue("name"); v != name {
+			t.Fatalf("Request.FormValue name = %v, wanted %v", v, name)
+			// TODO: check more request query values
+		}
 		io.Copy(w, data)
 	})
 
-	gl, err := client.Guild.List(&GuildRequest{Page: 1, Name: "Brewers Association of Maryland"})
+	gl, err := client.Guild.List(&GuildListRequest{Page: page, Name: name})
 	if err != nil {
 		t.Fatal(err)
 	}

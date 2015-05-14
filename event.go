@@ -25,46 +25,37 @@ const (
 
 // Event represents a community event related to Beer/Breweries.
 type Event struct {
-	ID              string    `json:"id"`
-	Name            string    `json:"name"`
-	Type            EventType `json:"type"`
-	StartDate       string    `json:"startDate"` // YYYY-MM-DD
-	EndDate         string    `json:"endDate"`   // YYYY-MM-DD
-	Description     string    `json:"description"`
-	Year            string    `json:"year"`
-	Time            string    `json:"time"`
-	Price           string    `json:"price"`
-	VenueName       string    `json:"venueName"`
-	StreetAddress   string    `json:"streetAddress"`
-	ExtendedAddress string    `json:"extendedAddress"`
-	Locality        string    `json:"locality"`
-	Region          string    `json:"region"`
-	PostalCode      string    `json:"postalCode"`
-	CountryIsoCode  string    `json:"countryIsoCode"` // Required
-	Phone           string    `json:"phone"`
-	Website         string    `json:"website"`
-	Longitude       float64   `json:"longitude"`
-	Latitude        float64   `json:"latitude"`
-	Image           string    `json:"image"` // base64-encoded
-
-	// TODO: The following should be empty when adding or updating an Event
-	Images struct {
-		Icon   string `json:",omitempty"`
-		Medium string `json:",omitempty"`
-		Large  string `json:",omitempty"`
-	} `json:",omitempty"`
-	CreateDate    string `json:",omitempty"`
-	UpdateDate    string `json:",omitempty"`
-	Status        string `json:",omitempty"`
-	StatusDisplay string `json:",omitempty"`
-	Country       struct {
-		Name        string `json:",omitempty"`
-		DisplayName string `json:",omitempty"`
-		ISOCode     string `json:",omitempty"`
-		ISOThree    string `json:",omitempty"`
-		NumberCode  int    `json:",omitempty"`
-		CreateDate  string `json:",omitempty"`
-	} `json:",omitempty"`
+	ID              string    `url:"-"`
+	Name            string    `url:"name"`
+	Type            EventType `url:"type"`
+	StartDate       string    `url:"startDate"` // YYYY-MM-DD
+	EndDate         string    `url:"endDate"`   // YYYY-MM-DD
+	Description     string    `url:"description,omitempty"`
+	Year            string    `url:"year,omitempty"`
+	Time            string    `url:"time,omitempty"`
+	Price           string    `url:"price,omitempty"`
+	VenueName       string    `url:"venueName,omitempty"`
+	StreetAddress   string    `url:"streetAddress,omitempty"`
+	ExtendedAddress string    `url:"extendedAddress,omitempty"`
+	Locality        string    `url:"locality,omitempty"`
+	Region          string    `url:"region,omitempty"`
+	PostalCode      string    `url:"postalCode,omitempty"`
+	CountryIsoCode  string    `url:"countryIsoCode"` // Required
+	Phone           string    `url:"phone,omitempty"`
+	Website         string    `url:"website,omitempty"`
+	Longitude       float64   `url:"longitude,omitempty"`
+	Latitude        float64   `url:"latitude,omitempty"`
+	Image           string    `url:"image"` // base64. Only used for adding/updating Events.
+	Images          struct {
+		Icon   string `url:"-"`
+		Medium string `url:"-"`
+		Large  string `url:"-"`
+	} `url:"-"`
+	Status        string  `url:"-"`
+	StatusDisplay string  `url:"-"`
+	Country       Country `url:"-"`
+	CreateDate    string  `url:"-"`
+	UpdateDate    string  `url:"-"`
 }
 
 // EventOrder specifies the ordering of an EventList.
@@ -92,26 +83,26 @@ type EventList struct {
 	Events        []Event `json:"data"`
 }
 
-// EventRequest contains options for specifying the kinds of Events desired.
+// EventListRequest contains options for specifying the kinds of Events desired.
 // Non-Premium users must set one of the following: year, name, type, locality, region
-type EventRequest struct {
-	Page           int        `json:"p"`
-	IDs            string     `json:"ids,omitempty"`
-	Year           int        `json:"year,omitempty"`
-	Name           string     `json:"name,omitempty"`
-	Type           string     `json:"type,omitempty"`     // Key of the type of event, comma separated for multiple types
-	Locality       string     `json:"locality,omitempty"` // e.g. US city
-	Region         string     `json:"region,omitempty"`   // e.g. US state
-	CountryISOCode string     `json:"countryIsoCode,omitempty"`
-	Since          int        `json:"since,omitempty"` // Unix timestamp
-	Status         string     `json:"status,omitempty"`
-	HasImages      string     `json:"hasImages,omitempty"` // Y/N
-	Order          EventOrder `json:"order,omitempty"`
-	Sort           ListSort   `json:"sort,omitempty"`
+type EventListRequest struct {
+	Page           int        `url:"p"`
+	IDs            string     `url:"ids,omitempty"`
+	Year           int        `url:"year,omitempty"`
+	Name           string     `url:"name,omitempty"`
+	Type           string     `url:"type,omitempty"`     // Key of the type of event, comma separated for multiple types
+	Locality       string     `url:"locality,omitempty"` // e.g. US city
+	Region         string     `url:"region,omitempty"`   // e.g. US state
+	CountryISOCode string     `url:"countryIsoCode,omitempty"`
+	Since          int        `url:"since,omitempty"` // Unix timestamp
+	Status         string     `url:"status,omitempty"`
+	HasImages      string     `url:"hasImages,omitempty"` // Y/N
+	Order          EventOrder `url:"order,omitempty"`
+	Sort           ListSort   `url:"sort,omitempty"`
 }
 
 // List returns an EventList containing a "page" of Events.
-func (es *EventService) List(q *EventRequest) (el EventList, err error) {
+func (es *EventService) List(q *EventListRequest) (el EventList, err error) {
 	// GET: /events
 	var req *http.Request
 	req, err = es.c.NewRequest("GET", "/events", q)

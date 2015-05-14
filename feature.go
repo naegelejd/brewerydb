@@ -40,12 +40,12 @@ func (fs *FeatureService) Featured() (f Feature, err error) {
 	return featuredResponse.Data, nil
 }
 
-// FeatureRequest contains options for querying for a list of features.
-type FeatureRequest struct {
-	Page         int    `json:"p"`
-	Year         int    `json:"year"`
-	Week         int    `json:"week"`
-	IgnoreFuture string `json:"ignoreFuture"` // Y or N
+// FeatureListRequest contains options for querying for a list of features.
+type FeatureListRequest struct {
+	Page         int    `url:"p"`
+	Year         int    `url:"year,omitempty"`
+	Week         int    `url:"week,omitempty"`
+	IgnoreFuture string `url:"ignoreFuture,omitempty"` // Y or N
 }
 
 // FeatureList represents a single "page" containing a slice of Features.
@@ -57,7 +57,7 @@ type FeatureList struct {
 }
 
 // List returns all Featured Beers and Breweries.
-func (fs *FeatureService) List(q *FeatureRequest) (fl FeatureList, err error) {
+func (fs *FeatureService) List(q *FeatureListRequest) (fl FeatureList, err error) {
 	// GET: /features
 	var req *http.Request
 	req, err = fs.c.NewRequest("GET", "/features", q)

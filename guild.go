@@ -10,17 +10,17 @@ type GuildService struct {
 
 // Guild represents a Beer or Brewing organization.
 type Guild struct {
-	ID          string `json:"id,omitempty"`
-	Name        string `json:"name,omitempty"` // Required
-	Description string `json:"description,omitempty"`
-	Website     string `json:"website,omitempty"`
-	Image       string `json:"image,omitempty"` // Base64
+	ID          string `url:"-"`
+	Name        string `url:"name"` // Required
+	Description string `url:"description,omitempty"`
+	Website     string `url:"website,omitempty"`
+	Image       string `url:"image,omitempty"` // Base64. Only used for adding/updating Guilds.
 	Images      struct {
-		Icon   string `json:"icon,omitempty"`
-		Medium string `json:"medium,omitempty"`
-		Large  string `json:"large,omitempty"`
-	} `json:"Images,omitempty"`
-	Established int `json:"established,omitempty"`
+		Icon   string `url:"-"`
+		Medium string `url:"-"`
+		Large  string `url:"-"`
+	} `url:"-"`
+	Established int `url:"established,omitempty"`
 }
 
 // GuildOrder specifies ordering of a GuildList.
@@ -36,17 +36,17 @@ const (
 	GuildOrderUpdateDate             = "updateDate"
 )
 
-// GuildRequest contains options for specifying kinds of Guilds desired.
-type GuildRequest struct {
-	Page        int        `json:"p"`
-	IDs         string     `json:"ids"`
-	Name        string     `json:"name"`
-	Established int        `json:"established"` // Year
-	Since       int        `json:"since"`
-	Status      string     `json:"status"`
-	HasImages   string     `json:"hasImages"` // Y/N
-	Order       GuildOrder `json:"order"`
-	Sort        ListSort   `json:"sort"`
+// GuildListRequest contains options for specifying kinds of Guilds desired.
+type GuildListRequest struct {
+	Page        int        `url:"p,omitempty"`
+	IDs         string     `url:"ids,omitempty"`
+	Name        string     `url:"name,omitempty"`        // Required for non-premium users.
+	Established int        `url:"established,omitempty"` // Year
+	Since       int        `url:"since,omitempty"`
+	Status      string     `url:"status,omitempty"`
+	HasImages   string     `url:"hasImages,omitempty"` // Y/N
+	Order       GuildOrder `url:"order,omitempty"`
+	Sort        ListSort   `url:"sort,omitempty"`
 }
 
 // GuildList represents a single "page" containing a slice of Guilds.
@@ -58,7 +58,7 @@ type GuildList struct {
 }
 
 // List returns an GuildList containing a "page" of Guilds.
-func (gs *GuildService) List(q *GuildRequest) (gl GuildList, err error) {
+func (gs *GuildService) List(q *GuildListRequest) (gl GuildList, err error) {
 	// GET: /guilds
 	var req *http.Request
 	req, err = gs.c.NewRequest("GET", "/guilds", q)

@@ -17,12 +17,14 @@ func TestIngredientList(t *testing.T) {
 	}
 	defer data.Close()
 
+	const page = 1
 	mux.HandleFunc("/ingredients/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
+		checkPage(t, r, page)
 		io.Copy(w, data)
 	})
 
-	il, err := client.Ingredient.List(1)
+	il, err := client.Ingredient.List(page)
 	if err != nil {
 		t.Fatal(err)
 	}

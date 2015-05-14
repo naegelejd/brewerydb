@@ -81,26 +81,26 @@ const (
 // BeerListRequest contains all the required and optional fields
 // used for querying for a list of Beers.
 type BeerListRequest struct {
-	Page               int       `json:"p"`
-	IDs                string    `json:"ids,omitempty"` // IDs of the beers to return, comma separated. Max 10.
-	Name               string    `json:"name,omitempty"`
-	ABV                string    `json:"abv,omitempty"`
-	IBU                string    `json:"ibu,omitempty"`
-	GlasswareID        int       `json:"glasswareId,omitempty"`
-	SrmID              int       `json:"srmId,omitempty"`
-	AvailableID        int       `json:"availableId,omitempty"`
-	StyleID            int       `json:"styleId,omitempty"`
-	IsOrganic          string    `json:"isOrganic,omitempty"` // Y/N
-	HasLabels          string    `json:"hasLabels,omitempty"` // Y/N
-	Year               int       `json:"year,omitempty"`      // YYYY
-	Since              string    `json:"since,omitempty"`     // UNIX timestamp format. Max 30 days
-	Status             string    `json:"status,omitempty"`
-	Order              BeerOrder `json:"order,omitempty"`
-	Sort               ListSort  `json:"sort,omitempty"`
-	RandomCount        string    `json:"randomCount,omitempty"`        // how many random beers to return. Max 10
-	WithBreweries      string    `json:"withBreweries,omitempty"`      // Y/N
-	WithSocialAccounts string    `json:"withSocialAccounts,omitempty"` // Premium. Y/N
-	WithIngredients    string    `json:"withIngredients,omitempty"`    // Premium. Y/N
+	Page               int       `url:"p"`
+	IDs                string    `url:"ids,omitempty"` // IDs of the beers to return, comma separated. Max 10.
+	Name               string    `url:"name,omitempty"`
+	ABV                string    `url:"abv,omitempty"`
+	IBU                string    `url:"ibu,omitempty"`
+	GlasswareID        int       `url:"glasswareId,omitempty"`
+	SrmID              int       `url:"srmId,omitempty"`
+	AvailableID        int       `url:"availableId,omitempty"`
+	StyleID            int       `url:"styleId,omitempty"`
+	IsOrganic          string    `url:"isOrganic,omitempty"` // Y/N
+	HasLabels          string    `url:"hasLabels,omitempty"` // Y/N
+	Year               int       `url:"year,omitempty"`      // YYYY
+	Since              string    `url:"since,omitempty"`     // UNIX timestamp format. Max 30 days
+	Status             string    `url:"status,omitempty"`
+	Order              BeerOrder `url:"order,omitempty"`
+	Sort               ListSort  `url:"sort,omitempty"`
+	RandomCount        string    `url:"randomCount,omitempty"`        // how many random beers to return. Max 10
+	WithBreweries      string    `url:"withBreweries,omitempty"`      // Y/N
+	WithSocialAccounts string    `url:"withSocialAccounts,omitempty"` // Premium. Y/N
+	WithIngredients    string    `url:"withIngredients,omitempty"`    // Premium. Y/N
 }
 
 // Availability contains information on a Beer's availability.
@@ -119,42 +119,45 @@ type SRM struct {
 
 // Beer contains all relevant information for a single Beer.
 type Beer struct {
-	ID              string
-	Name            string
-	Description     string
-	FoodPairings    string
-	OriginalGravity string
-	ABV             string
-	IBU             string
-	GlasswareID     int
-	Glass           Glass
-	StyleID         int
-	Style           Style
-	IsOrganic       string
+	ID              string `url:"-"`
+	Name            string `url:"name"` // Required
+	Description     string `url:"description,omitempty"`
+	FoodPairings    string `url:"foodPairings,omitempty"`
+	OriginalGravity string `url:"originalGravity,omitempty"`
+	ABV             string `url:"abv,omitempty"`
+	IBU             string `url:"ibu,omitempty"`
+	GlasswareID     int    `url:"glasswareId,omitempty"`
+	Glass           Glass  `url:"-"`
+	StyleID         int    `url:"styleId"` // Required
+	Style           Style  `url:"-"`
+	IsOrganic       string `url:"isOrganic,omitempty"`
 	Labels          struct {
-		Medium string
-		Large  string
-		Icon   string
-	}
-	ServingTemperature        BeerTemperature
-	ServingTemperatureDisplay string
-	Status                    string
-	StatusDisplay             string
-	AvailableID               int
-	Available                 Availability
-	BeerVariationID           string
+		Medium string `url:"-"`
+		Large  string `url:"-"`
+		Icon   string `url:"-"`
+	} `url:"-"`
+	Label                     string          `url:"label,omitempty"`   // base64. Only used for adding/updating Beers.
+	Brewery                   []string        `url:"brewery,omitempty"` // breweryID list. Only used for adding/updating Beers.
+	ServingTemperature        BeerTemperature `url:"servingTemperature,omitempty"`
+	ServingTemperatureDisplay string          `url:"-"`
+	Status                    string          `url:"-"`
+	StatusDisplay             string          `url:"-"`
+	AvailableID               int             `url:"availableId,omitempty"`
+	Available                 Availability    `url:"-"`
+	BeerVariationID           string          `url:"beerVariationId,omitempty"`
 	BeerVariation             struct {
 		// TODO: instance of a Beer??
-	}
-	SrmID int
-	SRM   SRM
-	Year  int
+	} `url:"-"`
+	SrmID      int    `url:"srmID,omitempty"`
+	SRM        SRM    `url:"-"`
+	Year       int    `url:"year,omitempty"`
+	CreateDate string `url:"-"`
+	UpdateDate string `url:"-"`
 }
 
 // List returns all Beers on the page specified in the given BeerListRequest.
 func (bs *BeerService) List(q *BeerListRequest) (bl BeerList, err error) {
 	// GET: /beers
-
 	var req *http.Request
 	req, err = bs.c.NewRequest("GET", "/beers", q)
 	if err != nil {
@@ -187,33 +190,11 @@ func (bs *BeerService) Get(id string) (beer Beer, err error) {
 	return beerResp.Data, nil
 }
 
-// BeerChangeRequest contains all the relevant options available to change
-// an existing beer record in the BreweryDB.
-// TODO: remove this and just use type Beer
-type BeerChangeRequest struct {
-	Name               string          `json:"name"`    // Required
-	StyleID            int             `json:"styleId"` // Required
-	Description        string          `json:"description"`
-	ABV                string          `json:"abv"`
-	IBU                string          `json:"ibu"`
-	GlasswareID        int             `json:"glasswareId"`
-	SrmID              int             `json:"srmID"`
-	AvailableID        int             `json:"availableId"`
-	IsOrganic          string          `json:"isOrganic"`
-	BeerVariationID    string          `json:"beerVariationId"`
-	Year               int             `json:"year"`
-	FoodPairings       string          `json:"foodPairings"`
-	ServingTemperature BeerTemperature `json:"servingTemperature"`
-	OriginalGravity    string          `json:"originalGravity"`
-	Brewery            string          `json:"brewery"` // Comma separated list of existing brewery IDs
-	Label              string          `json:"label"`   // Base 64 encoded image
-}
-
 // Add adds a new Beer to the BreweryDB and returns its new ID on success.
-func (bs *BeerService) Add(q *BeerChangeRequest) (id string, err error) {
+func (bs *BeerService) Add(b *Beer) (id string, err error) {
 	// POST: /beers
 	var req *http.Request
-	req, err = bs.c.NewRequest("POST", "/beers", q)
+	req, err = bs.c.NewRequest("POST", "/beers", b)
 	if err != nil {
 		return
 	}
@@ -231,9 +212,9 @@ func (bs *BeerService) Add(q *BeerChangeRequest) (id string, err error) {
 }
 
 // Update changes an existing Beer in the BreweryDB.
-func (bs *BeerService) Update(id string, q *BeerChangeRequest) error {
+func (bs *BeerService) Update(id string, b *Beer) error {
 	// PUT: /beer/:beerId
-	req, err := bs.c.NewRequest("PUT", "/beer/"+id, q)
+	req, err := bs.c.NewRequest("PUT", "/beer/"+id, b)
 	if err != nil {
 		return err
 	}
