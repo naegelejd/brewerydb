@@ -19,25 +19,25 @@ const (
 
 // SearchRequest contains options for narrowing a Search.
 type SearchRequest struct {
-	Page               int    `json:"p"`
-	WithBreweries      string `json:"withBreweries,omitempty"`      // Y/N
-	WithSocialAccounts string `json:"withSocialAccounts,omitempty"` // Y/N
-	WithGuilds         string `json:"withGuilds,omitempty"`         // Y/N
-	WithLocations      string `json:"withLocations,omitempty"`      // Y/N
-	WithAlternateNames string `json:"withAlternateNames,omitempty"` // Y/N
-	WithIngredients    string `json:"withIngredients,omitempty"`    // Y/N
+	Page               int
+	WithBreweries      string
+	WithSocialAccounts string
+	WithGuilds         string
+	WithLocations      string
+	WithAlternateNames string
+	WithIngredients    string
 }
 
 type actualSearchRequest struct {
-	Page               int        `json:"p"`
-	Query              string     `json:"q"`
-	Type               searchType `json:"type"`
-	WithBreweries      string     `json:"withBreweries,omitempty"`
-	WithSocialAccounts string     `json:"withSocialAccounts,omitempty"`
-	WithGuilds         string     `json:"withGuilds,omitempty"`
-	WithLocations      string     `json:"withLocations,omitempty"`
-	WithAlternateNames string     `json:"withAlternateNames,omitempty"`
-	WithIngredients    string     `json:"withIngredients,omitempty"`
+	Page               int        `url:"p,omitempty"`
+	Query              string     `url:"q"` // required
+	Type               searchType `url:"type"`
+	WithBreweries      string     `url:"withBreweries,omitempty"`
+	WithSocialAccounts string     `url:"withSocialAccounts,omitempty"`
+	WithGuilds         string     `url:"withGuilds,omitempty"`
+	WithLocations      string     `url:"withLocations,omitempty"`
+	WithAlternateNames string     `url:"withAlternateNames,omitempty"`
+	WithIngredients    string     `url:"withIngredients,omitempty"`
 }
 
 func makeActualRequest(req *SearchRequest, query string, tp searchType) *actualSearchRequest {

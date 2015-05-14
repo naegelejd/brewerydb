@@ -19,12 +19,14 @@ func TestHopList(t *testing.T) {
 	}
 	defer data.Close()
 
+	const page = 1
 	mux.HandleFunc("/hops/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
+		checkPage(t, r, page)
 		io.Copy(w, data)
 	})
 
-	hl, err := client.Hop.List(1)
+	hl, err := client.Hop.List(page)
 	if err != nil {
 		t.Fatal(err)
 	}

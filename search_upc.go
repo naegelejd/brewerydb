@@ -4,7 +4,7 @@ package brewerydb
 // TODO: pagination??
 func (ss *SearchService) UPC(code string) ([]Beer, error) {
 	q := struct {
-		Code string `json:"code"`
+		Code string `url:"code"`
 	}{code}
 
 	req, err := ss.c.NewRequest("GET", "/search/upc", &q)

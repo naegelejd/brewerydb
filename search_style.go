@@ -4,8 +4,8 @@ package brewerydb
 // TODO: pagination??
 func (ss *SearchService) Style(query string, withDescriptions bool) ([]Style, error) {
 	q := struct {
-		Query            string `json:"q"`
-		WithDescriptions string `json:"withDescriptions,omitempty"`
+		Query            string `url:"q"`
+		WithDescriptions string `url:"withDescriptions,omitempty"`
 	}{Query: query}
 	if withDescriptions {
 		q.WithDescriptions = "Y"

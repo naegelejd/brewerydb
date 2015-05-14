@@ -10,6 +10,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/google/go-querystring/query"
 	"io"
 	"net/http"
 )
@@ -19,7 +20,7 @@ var apiURL = "http://api.brewerydb.com/v2"
 // Page is a convenience type for encoding only a page number
 // when paginating lists.
 type Page struct {
-	P int `json:"p"`
+	P int `url:"p"`
 }
 
 // Client serves as the interface to the BreweryDB API.
@@ -85,7 +86,10 @@ func (c *Client) NewRequest(method string, endpoint string, data interface{}) (*
 	url := apiURL + endpoint + "/?key=" + c.apiKey
 	var body io.Reader
 	if data != nil {
-		vals := encode(data)
+		vals, err := query.Values(data)
+		if err != nil {
+			return nil, err
+		}
 		payload := vals.Encode()
 		if method == "GET" {
 			url += "&" + payload

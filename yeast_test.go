@@ -17,12 +17,14 @@ func TestYeastList(t *testing.T) {
 	}
 	defer data.Close()
 
+	const page = 1
 	mux.HandleFunc("/yeasts/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
+		checkPage(t, r, page)
 		io.Copy(w, data)
 	})
 
-	yl, err := client.Yeast.List(1)
+	yl, err := client.Yeast.List(page)
 	if err != nil {
 		t.Error(err)
 	}

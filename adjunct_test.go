@@ -17,8 +17,10 @@ func TestAdjunctList(t *testing.T) {
 	}
 	defer data.Close()
 
+	const page = 1
 	mux.HandleFunc("/adjuncts/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
+		checkPage(t, r, page)
 		io.Copy(w, data)
 	})
 

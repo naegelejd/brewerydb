@@ -59,7 +59,7 @@ type Hop struct {
 // List returns all Hops on the given page.
 func (hs *HopService) List(page int) (hl HopList, err error) {
 	var req *http.Request
-	req, err = hs.c.NewRequest("GET", "/hops", Page{page})
+	req, err = hs.c.NewRequest("GET", "/hops", &Page{page})
 	if err != nil {
 		return
 	}

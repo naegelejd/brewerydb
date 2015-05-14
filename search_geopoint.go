@@ -11,13 +11,13 @@ const (
 
 // GeoPointRequest contains options for specifying a geographic coordinate.
 type GeoPointRequest struct {
-	Latitude           float64      `json:"lat"` // Required
-	Longitude          float64      `json:"lng"` // Required
-	Radius             float64      `json:"radius,omitempty"`
-	Unit               GeoPointUnit `json:"unit,omitempty"`               // Default: mi
-	WithSocialAccounts string       `json:"withSocialAccounts,omitempty"` // Y/N
-	WithGuilds         string       `json:"withGuilds,omitempty"`         // Y/N
-	WithAlternateNames string       `json:"withAlternateNames,omitempty"` // Y/N
+	Latitude           float64      `url:"lat"` // Required
+	Longitude          float64      `url:"lng"` // Required
+	Radius             float64      `url:"radius,omitempty"`
+	Unit               GeoPointUnit `url:"unit,omitempty"`               // Default: mi
+	WithSocialAccounts string       `url:"withSocialAccounts,omitempty"` // Y/N
+	WithGuilds         string       `url:"withGuilds,omitempty"`         // Y/N
+	WithAlternateNames string       `url:"withAlternateNames,omitempty"` // Y/N
 }
 
 // GeoPoint searches for Locations near the geographic coordinate specified in the GeoPointRequest.

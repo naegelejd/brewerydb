@@ -19,12 +19,17 @@ func TestBreweryList(t *testing.T) {
 	}
 	defer data.Close()
 
+	const established = "1988"
 	mux.HandleFunc("/breweries/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
+		if v := r.FormValue("established"); v != established {
+			t.Fatalf("Request.FormValue established = %v, wanted %v", v, established)
+		}
+		// TODO: check more request query values
 		io.Copy(w, data)
 	})
 
-	bl, err := client.Brewery.List(&BreweryListRequest{Established: "1988"})
+	bl, err := client.Brewery.List(&BreweryListRequest{Established: established})
 	if err != nil {
 		t.Fatal(err)
 	}

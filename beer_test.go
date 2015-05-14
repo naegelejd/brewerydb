@@ -19,12 +19,18 @@ func TestBeerList(t *testing.T) {
 	}
 	defer data.Close()
 
+	const abv = "8"
 	mux.HandleFunc("/beers/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
+		abv := r.FormValue("abv")
+		if v := r.FormValue("abv"); v != abv {
+			t.Fatalf("Request.FormValue abv = %v, wanted %v", v, abv)
+		}
+		// TODO: check more request query values
 		io.Copy(w, data)
 	})
 
-	bl, err := client.Beer.List(&BeerListRequest{ABV: "8"})
+	bl, err := client.Beer.List(&BeerListRequest{ABV: abv})
 	if err != nil {
 		t.Fatal(err)
 	}

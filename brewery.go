@@ -34,38 +34,39 @@ type BreweryList struct {
 
 // Brewery contains all relevant information for a single Brewery.
 type Brewery struct {
-	ID             string
-	Description    string
-	Name           string
-	CreateDate     string
-	MailingListURL string
-	UpdateDate     string
+	ID             string `url:"-"`
+	Name           string `url:"name"`
+	Description    string `url:"description,omitempty"`
+	MailingListURL string `url:"mailingListUrl,omitempty"`
 	Images         struct {
-		Medium string
-		Small  string
-		Icon   string
-	}
-	Established   string
-	IsOrganic     string
-	Website       string
-	Status        string
-	StatusDisplay string
+		Medium string `url:"-"`
+		Small  string `url:"-"`
+		Icon   string `url:"-"`
+	} `url:"-"`
+	Image         string `url:"image,omitempty"` // only used for adding/update Breweries
+	Established   string `url:"established,omitempty"`
+	IsOrganic     string `url:"isOrganic,omitempty"`
+	Website       string `url:"website,omitempty"`
+	Status        string `url:"-"`
+	StatusDisplay string `url:"-"`
+	CreateDate    string `url:"-"`
+	UpdateDate    string `url:"-"`
 }
 
 // BreweryListRequest contains all the required and optional fields
 // used for querying for a list of Breweries.
 type BreweryListRequest struct {
-	Page        int          `json:"p"`
-	Name        string       `json:"name,omitempty"`
-	IDs         string       `json:"ids,omitempty"`
-	Established string       `json:"established,omitempty"`
-	IsOrganic   string       `json:"isOrganic,omitempty"`
-	HasImages   string       `json:"hasImages,omitempty"`
-	Since       string       `json:"since,omitempty"`
-	Status      string       `json:"status,omitempty"`
-	Order       BreweryOrder `json:"order,omitempty"` // TODO: enumerate
-	Sort        string       `json:"sort,omitempty"`  // TODO: enumerate
-	RandomCount string       `json:"randomCount,omitempty"`
+	Page        int          `url:"p"`
+	Name        string       `url:"name,omitempty"`
+	IDs         string       `url:"ids,omitempty"`
+	Established string       `url:"established,omitempty"`
+	IsOrganic   string       `url:"isOrganic,omitempty"`
+	HasImages   string       `url:"hasImages,omitempty"`
+	Since       string       `url:"since,omitempty"`
+	Status      string       `url:"status,omitempty"`
+	Order       BreweryOrder `url:"order,omitempty"` // TODO: enumerate
+	Sort        string       `url:"sort,omitempty"`  // TODO: enumerate
+	RandomCount string       `url:"randomCount,omitempty"`
 	// TODO: premium account parameters
 }
 

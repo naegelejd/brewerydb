@@ -17,12 +17,14 @@ func TestFermentableList(t *testing.T) {
 	}
 	defer data.Close()
 
+	const page = 1
 	mux.HandleFunc("/fermentables/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
+		checkPage(t, r, page)
 		io.Copy(w, data)
 	})
 
-	fl, err := client.Fermentable.List(1)
+	fl, err := client.Fermentable.List(page)
 	if err != nil {
 		t.Error(err)
 	}

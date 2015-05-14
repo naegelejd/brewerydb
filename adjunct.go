@@ -32,7 +32,7 @@ func (as *AdjunctService) List(page int) (al AdjunctList, err error) {
 	// GET: /adjuncts
 
 	var req *http.Request
-	req, err = as.c.NewRequest("GET", "/adjuncts", Page{page})
+	req, err = as.c.NewRequest("GET", "/adjuncts", &Page{page})
 	if err != nil {
 		return
 	}

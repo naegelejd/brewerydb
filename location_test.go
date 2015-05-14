@@ -17,12 +17,21 @@ func TestLocationList(t *testing.T) {
 	}
 	defer data.Close()
 
+	const (
+		page   = 1
+		region = "Maryland"
+	)
 	mux.HandleFunc("/locations/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
+		checkPage(t, r, page)
+		if v := r.FormValue("region"); v != region {
+			t.Fatalf("Request.FormValue region = %v, want %v", v, region)
+		}
+		// TODO: check more request query values
 		io.Copy(w, data)
 	})
 
-	ll, err := client.Location.List(&LocationRequest{Page: 1, Region: "Maryland"})
+	ll, err := client.Location.List(&LocationListRequest{Page: page, Region: region})
 	if err != nil {
 		t.Fatal(err)
 	}

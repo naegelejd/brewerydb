@@ -22,36 +22,36 @@ type Country struct {
 
 // Location represents a the location of a Brewery or similar institution.
 type Location struct {
-	ID                       string
-	Name                     string `json:"name,omitempty"`
-	StreetAddress            string `json:"streetAddress,omitempty"`
-	ExtendedAddress          string `json:"extendedAddress,omitempty"`
-	Locality                 string `json:"locality,omitempty"`
-	Region                   string `json:"region,omitempty"`
-	PostalCode               string `json:"postalCode,omitempty"`
-	Phone                    string `json:"phone,omitempty"`
-	Website                  string `json:"website,omitempty"`
-	HoursOfOperation         string
-	HoursOfOperationExplicit []string     `json:"hoursOfOperationExplicit,omitempty"`
-	HoursOfOperationNotes    string       `json:"hoursOfOperationNotes,omitempty"`
-	TourInfo                 string       `json:"tourInfo,omitempty"`
-	TimezoneID               string       `json:"timezoneId,omitempty"`
-	Latitude                 float64      `json:"latitude,omitempty"`
-	Longitude                float64      `json:"longitude,omitempty"`
-	IsPrimary                string       `json:"isPrimary,omitempty"`    // Y/N
-	InPlanning               string       `json:"inPlanning,omitempty"`   // Y/N
-	IsClosed                 string       `json:"isClosed,omitempty"`     // Y/N
-	OpenToPublic             string       `json:"openToPublic,omitempty"` // Y/N
-	LocationType             LocationType `json:"locationType,omitempty"`
-	LocationTypeDisplay      string
-	CountryISOCode           string `json:"countryIsoCode"` // Required for UpdateLocation
-	Country                  Country
-	CreateDate               string
-	UpdateDate               string
-	YearOpened               string
-	YearClosed               string
-	BreweryID                string
-	Brewery                  Brewery
+	ID                       string       `url:"-"`
+	Name                     string       `url:"name,omitempty"`
+	StreetAddress            string       `url:"streetAddress,omitempty"`
+	ExtendedAddress          string       `url:"extendedAddress,omitempty"`
+	Locality                 string       `url:"locality,omitempty"`
+	Region                   string       `url:"region,omitempty"`
+	PostalCode               string       `url:"postalCode,omitempty"`
+	Phone                    string       `url:"phone,omitempty"`
+	Website                  string       `url:"website,omitempty"`
+	HoursOfOperation         string       `url:"-"`
+	HoursOfOperationExplicit []string     `url:"hoursOfOperationExplicit,omitempty"`
+	HoursOfOperationNotes    string       `url:"hoursOfOperationNotes,omitempty"`
+	TourInfo                 string       `url:"tourInfo,omitempty"`
+	TimezoneID               string       `url:"timezoneId,omitempty"`
+	Latitude                 float64      `url:"latitude,omitempty"`
+	Longitude                float64      `url:"longitude,omitempty"`
+	IsPrimary                string       `url:"isPrimary,omitempty"`    // Y/N
+	InPlanning               string       `url:"inPlanning,omitempty"`   // Y/N
+	IsClosed                 string       `url:"isClosed,omitempty"`     // Y/N
+	OpenToPublic             string       `url:"openToPublic,omitempty"` // Y/N
+	LocationType             LocationType `url:"locationType,omitempty"`
+	LocationTypeDisplay      string       `url:"-"`
+	CountryISOCode           string       `url:"countryIsoCode"` // Required for UpdateLocation
+	Country                  Country      `url:"-"`
+	CreateDate               string       `url:"-"`
+	UpdateDate               string       `url:"-"`
+	YearOpened               string       `url:"-"`
+	YearClosed               string       `url:"-"`
+	BreweryID                string       `url:"-"`
+	Brewery                  Brewery      `url:"-"`
 }
 
 // LocationType represents the specific type of the Location.
@@ -91,22 +91,22 @@ const (
 	LocationOrderUpdateDate                   = "updateDate"
 )
 
-// LocationRequest contains options for specifying Locations.
-type LocationRequest struct {
-	Page           int           `json:"p,omitempty"`
-	IDs            string        `json:"ids,omitempty"`
-	Locality       string        `json:"locality,omitempty"`
-	Region         string        `json:"region,omitempty"`
-	PostalCode     string        `json:"postalCode,omitempty"`
-	IsPrimary      string        `json:"isPrimary,omitempty"`
-	InPlanning     string        `json:"inPlanning,omitempty"`
-	IsClosed       string        `json:"isClosed,omitempty"`
-	LocationType   LocationType  `json:"locationType,omitempty"`
-	CountryISOCode string        `json:"countryIsoCode,omitempty"`
-	Since          int           `json:"since,omitempty"`
-	Status         string        `json:"status,omitempty"`
-	Order          LocationOrder `json:"order,omitempty"`
-	Sort           ListSort      `json:"sort,omitempty"`
+// LocationListRequest contains options for specifying Locations.
+type LocationListRequest struct {
+	Page           int           `url:"p,omitempty"`
+	IDs            string        `url:"ids,omitempty"`
+	Locality       string        `url:"locality,omitempty"`
+	Region         string        `url:"region,omitempty"`
+	PostalCode     string        `url:"postalCode,omitempty"`
+	IsPrimary      string        `url:"isPrimary,omitempty"`
+	InPlanning     string        `url:"inPlanning,omitempty"`
+	IsClosed       string        `url:"isClosed,omitempty"`
+	LocationType   LocationType  `url:"locationType,omitempty"`
+	CountryISOCode string        `url:"countryIsoCode,omitempty"`
+	Since          int           `url:"since,omitempty"`
+	Status         string        `url:"status,omitempty"`
+	Order          LocationOrder `url:"order,omitempty"`
+	Sort           ListSort      `url:"sort,omitempty"`
 }
 
 // LocationList represents a "page" containing a slice of Locations.
@@ -118,7 +118,12 @@ type LocationList struct {
 }
 
 // List retrieves a list of Locations matching the given request.
-func (ls *LocationService) List(q *LocationRequest) (ll LocationList, err error) {
+// Non-premium users must set one of the following:
+//
+// - Locality
+// - PostalCode
+// - Region
+func (ls *LocationService) List(q *LocationListRequest) (ll LocationList, err error) {
 	// GET: /locations
 	var req *http.Request
 	req, err = ls.c.NewRequest("GET", "/locations", q)
@@ -150,6 +155,7 @@ func (ls *LocationService) Get(locID string) (l Location, err error) {
 }
 
 // UpdateLocation updates the Location having the given ID to match the given Location.
+// The CountryISOCode of the given Location *must* be set.
 func (ls *LocationService) UpdateLocation(locID string, l *Location) error {
 	// PUT: /location/:locationID
 	req, err := ls.c.NewRequest("PUT", "/location/"+locID, l)

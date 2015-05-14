@@ -4,6 +4,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strconv"
 	"testing"
 )
 
@@ -17,12 +18,17 @@ func TestEventList(t *testing.T) {
 	}
 	defer data.Close()
 
+	const year = 2015
 	mux.HandleFunc("/events/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
+		if v := r.FormValue("year"); v != strconv.Itoa(year) {
+			t.Fatalf("Request.FormValue year = %v, wanted %v", v, year)
+		}
+		// TODO: check more request query values
 		io.Copy(w, data)
 	})
 
-	el, err := client.Event.List(&EventRequest{Year: 2015})
+	el, err := client.Event.List(&EventListRequest{Year: year})
 	if err != nil {
 		t.Fatal(err)
 	}

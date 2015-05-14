@@ -32,12 +32,8 @@ type IngredientList struct {
 // List returns all Ingredients on the given page.
 func (is *IngredientService) List(page int) (il IngredientList, err error) {
 	// GET: /ingredients
-	p := struct {
-		Page int `json:"p"`
-	}{page}
-
 	var req *http.Request
-	req, err = is.c.NewRequest("GET", "/ingredients", p)
+	req, err = is.c.NewRequest("GET", "/ingredients", &Page{page})
 	if err != nil {
 		return
 	}
