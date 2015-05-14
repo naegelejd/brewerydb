@@ -23,16 +23,23 @@ func (bs *BeerService) Breweries(id string) ([]Brewery, error) {
 // BeerBreweryRequest allows for specifying locations for a given Brewery, e.g.
 // if only adding/removing a specific Brewery location from a Beer.
 type BeerBreweryRequest struct {
-	LocationID string `json:"locationId"`
+	LocationID string `url:"locationId,omitempty"`
 }
 
 // AddBrewery adds the Brewery with the given Brewery ID to the Beer
 // with the given Beer ID.
-//
-// WRONG in documentation: POST: /beer/:beerId/breweries
 func (bs *BeerService) AddBrewery(beerID, breweryID string, q *BeerBreweryRequest) error {
 	// POST: /beer/:beerId/brewery/:breweryId
-	req, err := bs.c.NewRequest("POST", "/beer/"+beerID+"/brewery/"+breweryID, nil)
+	params := struct {
+		ID         string `url:"breweryId"`
+		LocationID string `url:"locationId,omitempty"`
+	}{ID: breweryID}
+
+	if q != nil {
+		params.LocationID = q.LocationID
+	}
+
+	req, err := bs.c.NewRequest("POST", "/beer/"+beerID+"/brewery/"+breweryID, &params)
 	if err != nil {
 		return err
 	}

@@ -2,30 +2,23 @@ package brewerydb
 
 import "net/http"
 
-// RandomBeerRequest contains options for querying for a random beer.
+// RandomBeerRequest contains options for retrieving a random Beer.
 type RandomBeerRequest struct {
-	ABV                string `json:"abv,omitempty"`
-	IBU                string `json:"ibu,omitempty"`
-	GlasswareID        int    `json:"glasswareId,omitempty"`
-	SrmID              int    `json:"srmID,omitempty"`
-	AvailableID        int    `json:"availableId,omitempty"`
-	StyleID            int    `json:"styleId,omitempty"`
-	IsOrganic          bool   `json:"isOrganic,omitempty"`
-	Labels             bool   `json:"labels,omitempty"`
-	Year               int    `json:"year,omitempty"`
-	WithBreweries      bool   `json:"withBreweries,omitempty"`
-	WithSocialAccounts bool   `json:"withSocialAccounts,omitempty"`
-	WithIngredients    bool   `json:"withIngredients,omitempty"`
+	ABV                string `url:"abv,omitempty"`
+	IBU                string `url:"ibu,omitempty"`
+	GlasswareID        int    `url:"glasswareId,omitempty"`
+	SrmID              int    `url:"srmID,omitempty"`
+	AvailableID        int    `url:"availableId,omitempty"`
+	StyleID            int    `url:"styleId,omitempty"`
+	IsOrganic          bool   `url:"isOrganic,omitempty"` // Y/N
+	Labels             bool   `url:"labels,omitempty"`
+	Year               int    `url:"year,omitempty"`
+	WithBreweries      string `url:"withBreweries,omitempty"`      // Y/N
+	WithSocialAccounts string `url:"withSocialAccounts,omitempty"` // Y/N
+	WithIngredients    string `url:"withIngredients,omitempty"`    // Y/N
 }
 
-type randomBeerResponse struct {
-	Status  string
-	Message string
-	Beer    Beer `json:"data"`
-}
-
-// Random returns a random beer that meets the requirements specified
-// in the given RandomBeerRequest.
+// Random returns a random Beer.
 func (bs *BeerService) Random(q *RandomBeerRequest) (b Beer, err error) {
 	// GET: /beer/random
 
@@ -35,15 +28,11 @@ func (bs *BeerService) Random(q *RandomBeerRequest) (b Beer, err error) {
 		return
 	}
 
-	randomBeerResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Beer
 		Message string
 	}{}
-
-	if err = bs.c.Do(req, &randomBeerResponse); err != nil {
-		return
-	}
-
-	return randomBeerResponse.Data, nil
+	err = bs.c.Do(req, &resp)
+	return resp.Data, nil
 }
