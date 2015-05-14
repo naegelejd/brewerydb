@@ -5,10 +5,10 @@ import "net/http"
 // EventBreweriesRequest contains parameters for specifying desired
 // Breweries for a given Event.
 type EventBreweriesRequest struct {
-	Page            int    `json:"p"`
-	OnlyWinners     string `json:"onlyWinners,omitempty"` // Y/N
-	AwardCategoryID string `json:"awardCategoryId,omitempty"`
-	AwardPlaceID    string `json:"awardPlaceId,omitempty"`
+	Page            int    `url:"p,omitempty"`
+	OnlyWinners     string `url:"onlyWinners,omitempty"` // Y/N
+	AwardCategoryID string `url:"awardCategoryId,omitempty"`
+	AwardPlaceID    string `url:"awardPlaceId,omitempty"`
 }
 
 // ListBreweries returns a page of Breweries for the given Event.
@@ -45,19 +45,27 @@ func (es *EventService) GetBrewery(eventID, breweryID string) (b Brewery, err er
 // EventChangeBreweryRequest contains parameters for changing or adding
 // a new Brewery to an Event.
 type EventChangeBreweryRequest struct {
-	AwardCategoryID string `json:"awardCategoryId,omitempty"`
-	AwardPlaceID    string `json:"awardPlaceId,omitempty"`
+	AwardCategoryID string `url:"awardCategoryId,omitempty"`
+	AwardPlaceID    string `url:"awardPlaceId,omitempty"`
+}
+
+// TODO: test the encoding of embedded structs:
+type eventAddBreweryRequest struct {
+	BreweryID string `url:"breweryId"`
+	EventChangeBreweryRequest
 }
 
 // AddBrewery adds the Brewery with the given ID to the given Event.
 func (es *EventService) AddBrewery(eventID, breweryID string, q *EventChangeBreweryRequest) error {
 	// POST: /event/:eventID/brewery/:breweryID
-	// TODO: test the encoding of embedded structs:
-	params := struct {
-		BreweryID string `json:"breweryId"`
-		EventChangeBreweryRequest
-	}{breweryID, *q}
-	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/brewery/"+breweryID, &params)
+	var params *eventAddBreweryRequest
+	if q != nil {
+		params = &eventAddBreweryRequest{breweryID, *q}
+	} else {
+		params = &eventAddBreweryRequest{BreweryID: breweryID}
+	}
+
+	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/brewery/"+breweryID, params)
 	if err != nil {
 		return err
 	}

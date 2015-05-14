@@ -7,12 +7,12 @@ import (
 
 // AwardPlace represents an award location.
 type AwardPlace struct {
-	ID          int
-	Name        string
-	Description string
-	Image       string // base64
-	CreateDate  string
-	UpdateDate  string
+	ID          int    `url:"-"`
+	Name        string `url:"name"` // required for adding/updating AwardPlaces
+	Description string `url:"description"`
+	Image       string `url:"image"` // base64
+	CreateDate  string `url:"-"`
+	UpdateDate  string `url:"-"`
 }
 
 // ListAwardPlaces returns a slice of all AwardPlaces for the given Event.

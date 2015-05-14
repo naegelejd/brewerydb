@@ -2,11 +2,18 @@ package brewerydb
 
 import "net/http"
 
+type EventBeersRequest struct {
+	Page            int    `url:"p, omitempty"`
+	OnlyWinnders    string `url:"onlyWinners,omitempty"` // Y/N
+	AwardCategoryID string `url:"awardCategoryId,omitempty"`
+	AwardPlaceID    string `url:"awardPlaceId,omitempty"`
+}
+
 // ListBeers returns a page of Beers for the given Event.
-func (es *EventService) ListBeers(eventID string) (bl BeerList, err error) {
+func (es *EventService) ListBeers(eventID string, q *EventBeersRequest) (bl BeerList, err error) {
 	// GET: /event/:eventID/beers
 	var req *http.Request
-	req, err = es.c.NewRequest("GET", "/event/"+eventID+"/beers", nil)
+	req, err = es.c.NewRequest("GET", "/event/"+eventID+"/beers", q)
 	if err != nil {
 		return
 	}
@@ -36,19 +43,26 @@ func (es *EventService) GetBeer(eventID, beerID string) (b Beer, err error) {
 // EventChangeBeerRequest contains parameters for changing or adding
 // a new Beer to an Event.
 type EventChangeBeerRequest struct {
-	IsPouring       string `json:"isPouring"`
-	AwardCategoryID string `json:"awardCategoryId"`
-	AwardPlaceID    string `json:"awardPlaceId"`
+	IsPouring       string `url:"isPouring"`
+	AwardCategoryID string `url:"awardCategoryId"`
+	AwardPlaceID    string `url:"awardPlaceId"`
+}
+
+type eventAddBeerRequest struct {
+	BeerID string `url:"beerId"`
+	EventChangeBeerRequest
 }
 
 // AddBeer adds the Beer with the given ID to the given Event.
 func (es *EventService) AddBeer(eventID, beerID string, q *EventChangeBeerRequest) error {
 	// POST: /event/:eventId/beers
-	params := struct {
-		BeerID string `json:"beerId"`
-		EventChangeBeerRequest
-	}{beerID, *q}
-	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/beer/"+beerID, &params)
+	var params *eventAddBeerRequest
+	if q != nil {
+		params = &eventAddBeerRequest{beerID, *q}
+	} else {
+		params = &eventAddBeerRequest{BeerID: beerID}
+	}
+	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/beer/"+beerID, params)
 	if err != nil {
 		return err
 	}

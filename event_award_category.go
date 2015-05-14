@@ -7,12 +7,12 @@ import (
 
 // AwardCategory represents a category of award for an Event.
 type AwardCategory struct {
-	ID          int
-	Name        string
-	Description string
-	Image       string // base64
-	CreateDate  string
-	UpdateDate  string
+	ID          int    `url:"-"`
+	Name        string `url:"name"` // required for adding/updating AwardCategories
+	Description string `url:"description"`
+	Image       string `url:"image"` // base64
+	CreateDate  string `url:"-"`
+	UpdateDate  string `url:"-"`
 }
 
 // ListAwardCategories returns a slice of all AwardCategories for the given Event.

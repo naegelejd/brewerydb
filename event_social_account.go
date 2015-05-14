@@ -7,9 +7,9 @@ import (
 
 // SocialAccount represents a social media account/handle.
 type SocialAccount struct {
-	ID            int
-	SocialMediaID int    `json:"socialmediaId"`
-	Handle        string `json:"handle"`
+	ID            int    `url:"-"`
+	SocialMediaID int    `url:"socialmediaId"`
+	Handle        string `url:"handle"`
 }
 
 // ListSocialAccounts returns a slice of all social media accounts associated with the given Event.
@@ -49,8 +49,6 @@ func (es *EventService) GetSocialAccount(eventID string, socialAccountID int) (s
 }
 
 // AddSocialAccount adds a new SocialAccount to the given Event.
-// TODO: this encodes the entire SocialAccount, but its
-// ID should not be url-encoded
 func (es *EventService) AddSocialAccount(eventID string, s *SocialAccount) error {
 	// POST: /event/:eventId/socialaccounts
 	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/socialaccounts", s)
@@ -62,8 +60,6 @@ func (es *EventService) AddSocialAccount(eventID string, s *SocialAccount) error
 }
 
 // UpdateSocialAccount updates a SocialAccount for the given Event.
-// TODO: this encodes the entire SocialAccount, but its
-// ID should not be url-encoded
 func (es *EventService) UpdateSocialAccount(eventID string, s *SocialAccount) error {
 	// PUT: /event/:eventId/socialaccount/:socialaccountId
 	req, err := es.c.NewRequest("PUT", fmt.Sprintf("/event/%s/socialaccount/%d", eventID, s.ID), s)
