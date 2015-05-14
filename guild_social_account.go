@@ -3,10 +3,6 @@ package brewerydb
 import "fmt"
 import "net/http"
 
-// TODO: according to http://www.brewerydb.com/developers/docs-endpoint/guild_socialaccount,
-// the socialaccount requests return an object containing the SocialAccount fields, as well as
-// an entire Guild object an entire SocialSite ("socialMedia") object!!!
-
 // ListSocialAccounts returns a slice of all social media accounts associated with the given Guild.
 func (gs *GuildService) ListSocialAccounts(guildID string) (sl []SocialAccount, err error) {
 	// GET: /guild/:guildId/socialaccounts

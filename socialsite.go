@@ -22,6 +22,7 @@ type SocialSite struct {
 
 // SocialAccount represents a social media account/handle.
 // TODO: it appears some SocialAccount responses include the SocialSite ("socialMedia") object as well.
+// TODO: SocialAccount responses also return an object corresponding to the query (e.g. Beer, Event, Guild, etc.)
 type SocialAccount struct {
 	ID            int        `url:"-"`
 	SocialMediaID int        `url:"socialmediaId"`

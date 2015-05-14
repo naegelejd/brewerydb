@@ -26,9 +26,9 @@ const (
 type Yeast struct {
 	ID                  int
 	Name                string
+	Description         string
 	Category            string // This will always be set to "yeast"
 	CategoryDisplay     string // This will always be set to "Yeast"
-	Description         string
 	YeastType           YeastType
 	AttenuationMin      float64
 	AttenuationMax      float64

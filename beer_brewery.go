@@ -8,16 +8,16 @@ func (bs *BeerService) Breweries(id string) ([]Brewery, error) {
 		return nil, err
 	}
 
-	breweriesResp := struct {
+	resp := struct {
 		Status  string
 		Data    []Brewery
 		Message string
 	}{}
-	if err := bs.c.Do(req, &breweriesResp); err != nil {
+	if err := bs.c.Do(req, &resp); err != nil {
 		return nil, err
 	}
 
-	return breweriesResp.Data, nil
+	return resp.Data, nil
 }
 
 // BeerBreweryRequest allows for specifying locations for a given Brewery, e.g.

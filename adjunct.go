@@ -14,6 +14,7 @@ type AdjunctService struct {
 type Adjunct struct {
 	ID              int
 	Name            string
+	Description     string
 	Category        string // This will always be set to "misc"
 	CategoryDisplay string // This will always be set to "Miscellaneous"
 	CreateDate      string

@@ -2,9 +2,9 @@ package brewerydb
 
 // UPC retrieves one or more Beers matching the given Universal Product Code.
 // TODO: pagination??
-func (ss *SearchService) UPC(code string) ([]Beer, error) {
+func (ss *SearchService) UPC(code uint64) ([]Beer, error) {
 	q := struct {
-		Code string `url:"code"`
+		Code uint64 `url:"code"`
 	}{code}
 
 	req, err := ss.c.NewRequest("GET", "/search/upc", &q)
