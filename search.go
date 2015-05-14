@@ -1,7 +1,5 @@
 package brewerydb
 
-import "net/http"
-
 // SearchService provides access to the BreweryDB Search API.
 // Use Client.Search.
 type SearchService struct {
@@ -59,58 +57,30 @@ func makeActualSearchRequest(req *SearchRequest, query string, tp searchType) *a
 
 // Beer searches for Beers matching the given query.
 func (ss *SearchService) Beer(query string, q *SearchRequest) (bl BeerList, err error) {
-	actualRequest := makeActualSearchRequest(q, query, searchBeer)
-	var req *http.Request
-	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
-	if err != nil {
-		return
-	}
-
-	err = ss.c.Do(req, &bl)
+	err = ss.search(query, q, searchBeer, &bl)
 	return
 }
 
 // Brewery searches for Breweries matching the given query.
 func (ss *SearchService) Brewery(query string, q *SearchRequest) (bl BreweryList, err error) {
-	actualRequest := makeActualSearchRequest(q, query, searchBrewery)
-	var req *http.Request
-	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
-	if err != nil {
-		return
-	}
-
-	err = ss.c.Do(req, &bl)
+	err = ss.search(query, q, searchBrewery, &bl)
 	return
 }
 
 // Event searches for Events matching the given query.
 func (ss *SearchService) Event(query string, q *SearchRequest) (el EventList, err error) {
-	actualRequest := makeActualSearchRequest(q, query, searchEvent)
-	var req *http.Request
-	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
-	if err != nil {
-		return
-	}
-
-	err = ss.c.Do(req, &el)
+	err = ss.search(query, q, searchEvent, &el)
 	return
 }
 
 // Guild searches for Guilds matching the given query.
 func (ss *SearchService) Guild(query string, q *SearchRequest) (gl GuildList, err error) {
-	actualRequest := makeActualSearchRequest(q, query, searchGuild)
-	var req *http.Request
-	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
-	if err != nil {
-		return
-	}
-
-	err = ss.c.Do(req, &gl)
+	err = ss.search(query, q, searchGuild, &gl)
 	return
 }
 
-// TODO: use this helper for all 4 search functions
-func (ss *SearchService) search(asr *actualSearchRequest, data interface{}) error {
+func (ss *SearchService) search(query string, q *SearchRequest, t searchType, data interface{}) error {
+	asr := makeActualSearchRequest(q, query, t)
 	req, err := ss.c.NewRequest("GET", "/search", asr)
 	if err != nil {
 		return err
