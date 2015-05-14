@@ -20,6 +20,15 @@ type SocialSite struct {
 	UpdateDate string
 }
 
+// SocialAccount represents a social media account/handle.
+// TODO: it appears some SocialAccount responses include the SocialSite ("socialMedia") object as well.
+type SocialAccount struct {
+	ID            int        `url:"-"`
+	SocialMediaID int        `url:"socialmediaId"`
+	SocialSite    SocialSite `url:"-",json:"socialMedia"` // see TODO above
+	Handle        string     `url:"handle"`
+}
+
 // List returns a slice of all SocialSites in the BreweryDB.
 func (ss *SocialSiteService) List() (sl []SocialSite, err error) {
 	// GET: /socialsites

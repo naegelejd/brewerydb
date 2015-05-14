@@ -5,13 +5,6 @@ import (
 	"net/http"
 )
 
-// SocialAccount represents a social media account/handle.
-type SocialAccount struct {
-	ID            int    `url:"-"`
-	SocialMediaID int    `url:"socialmediaId"`
-	Handle        string `url:"handle"`
-}
-
 // ListSocialAccounts returns a slice of all social media accounts associated with the given Event.
 func (es *EventService) ListSocialAccounts(eventID string) (sl []SocialAccount, err error) {
 	// GET: /event/:eventId/socialaccounts

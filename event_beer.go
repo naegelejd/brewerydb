@@ -2,6 +2,8 @@ package brewerydb
 
 import "net/http"
 
+// EventBeersRequest contains parameters for specifying desired
+// Beers for a given Event.
 type EventBeersRequest struct {
 	Page            int    `url:"p, omitempty"`
 	OnlyWinnders    string `url:"onlyWinners,omitempty"` // Y/N

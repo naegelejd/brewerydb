@@ -40,7 +40,10 @@ type actualSearchRequest struct {
 	WithIngredients    string     `url:"withIngredients,omitempty"`
 }
 
-func makeActualRequest(req *SearchRequest, query string, tp searchType) *actualSearchRequest {
+func makeActualSearchRequest(req *SearchRequest, query string, tp searchType) *actualSearchRequest {
+	if req == nil {
+		return &actualSearchRequest{Query: query, Type: tp}
+	}
 	return &actualSearchRequest{
 		Page:               req.Page,
 		Query:              query,
@@ -56,7 +59,7 @@ func makeActualRequest(req *SearchRequest, query string, tp searchType) *actualS
 
 // Beer searches for Beers matching the given query.
 func (ss *SearchService) Beer(query string, q *SearchRequest) (bl BeerList, err error) {
-	actualRequest := makeActualRequest(q, query, searchBeer)
+	actualRequest := makeActualSearchRequest(q, query, searchBeer)
 	var req *http.Request
 	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
 	if err != nil {
@@ -69,7 +72,7 @@ func (ss *SearchService) Beer(query string, q *SearchRequest) (bl BeerList, err 
 
 // Brewery searches for Breweries matching the given query.
 func (ss *SearchService) Brewery(query string, q *SearchRequest) (bl BreweryList, err error) {
-	actualRequest := makeActualRequest(q, query, searchBrewery)
+	actualRequest := makeActualSearchRequest(q, query, searchBrewery)
 	var req *http.Request
 	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
 	if err != nil {
@@ -82,7 +85,7 @@ func (ss *SearchService) Brewery(query string, q *SearchRequest) (bl BreweryList
 
 // Event searches for Events matching the given query.
 func (ss *SearchService) Event(query string, q *SearchRequest) (el EventList, err error) {
-	actualRequest := makeActualRequest(q, query, searchEvent)
+	actualRequest := makeActualSearchRequest(q, query, searchEvent)
 	var req *http.Request
 	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
 	if err != nil {
@@ -95,7 +98,7 @@ func (ss *SearchService) Event(query string, q *SearchRequest) (el EventList, er
 
 // Guild searches for Guilds matching the given query.
 func (ss *SearchService) Guild(query string, q *SearchRequest) (gl GuildList, err error) {
-	actualRequest := makeActualRequest(q, query, searchGuild)
+	actualRequest := makeActualSearchRequest(q, query, searchGuild)
 	var req *http.Request
 	req, err = ss.c.NewRequest("GET", "/search", actualRequest)
 	if err != nil {
