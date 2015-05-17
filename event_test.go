@@ -3,19 +3,38 @@ package brewerydb
 import (
 	"io"
 	"net/http"
-	"os"
 	"strconv"
 	"testing"
 )
+
+func TestEventGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("event.get.json", t)
+	defer data.Close()
+
+	const id = "0oZVAo"
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, id)
+		io.Copy(w, data)
+	})
+
+	e, err := client.Event.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if e.ID != id {
+		t.Fatalf("Event ID = %v, want %v", e.ID, id)
+	}
+}
 
 func TestEventList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/event.list.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
+	data := loadTestData("event.list.json", t)
 	defer data.Close()
 
 	const year = 2015
@@ -39,34 +58,5 @@ func TestEventList(t *testing.T) {
 		if l := 6; l != len(e.ID) {
 			t.Fatalf("Event ID len = %d, wanted %d", len(e.ID), l)
 		}
-	}
-}
-
-func TestEventGet(t *testing.T) {
-	// TODO: don't skip
-	t.Skip()
-
-	setup()
-	defer teardown()
-
-	data, err := os.Open("test_data/event.get.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
-	defer data.Close()
-
-	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
-		if m := "GET"; m != r.Method {
-			t.Errorf("Request method = %v, want %v", r.Method, m)
-		}
-		io.Copy(w, data)
-	})
-
-	e, err := client.Event.Get("mB7srw")
-	if err != nil {
-		t.Fatal(err)
-	}
-	if n := "Bare Beach Beer Bash"; n != e.Name {
-		t.Fatalf("Event name = %v, wanted %v", e.Name, n)
 	}
 }

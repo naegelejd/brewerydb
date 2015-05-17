@@ -1,0 +1,27 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"id": 42,
+		"categoryId": 3,
+		"category": {
+			"id": 3,
+			"name": "North American Origin Ales",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		"name": "American-Style Stout",
+		"shortName": "American Stout",
+		"description": "Initial low to medium malt sweetness with a degree of caramel, chocolate and\/or roasted coffee flavor with a distinctive dryroasted bitterness in the finish. Coffee-like roasted barley and roasted malt aromas are prominent. Some slight roasted malt acidity is permissible and a medium- to full-bodied mouthfeel is appropriate. Hop bitterness may be moderate to high. Hop aroma and flavor is moderate to high, often with American citrus-type and\/or resiny hop character. The perception of fruity esters is low. Roasted malt\/barley astringency may be low but not excessive. Diacetyl (butterscotch) should be negligible or not perceived. Head retention is excellent.",
+		"ibuMin": "35",
+		"ibuMax": "60",
+		"abvMin": "5.7",
+		"abvMax": "8.8",
+		"srmMin": "40",
+		"srmMax": "40",
+		"ogMin": "1.05",
+		"fgMin": "1.01",
+		"fgMax": "1.022",
+		"createDate": "2012-03-21 20:06:46",
+		"updateDate": "2015-04-07 15:28:43"
+	},
+	"status": "success"
+}

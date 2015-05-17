@@ -3,18 +3,38 @@ package brewerydb
 import (
 	"io"
 	"net/http"
-	"os"
+	"strconv"
 	"testing"
 )
+
+func TestYeastGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("yeast.get.json", t)
+	defer data.Close()
+
+	const id = 1835
+	mux.HandleFunc("/yeast/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, strconv.Itoa(id))
+		io.Copy(w, data)
+	})
+
+	y, err := client.Yeast.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if y.ID != id {
+		t.Fatalf("Yeast ID = %v, want %v", y.ID, id)
+	}
+}
 
 func TestYeastList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/yeast.list.json")
-	if err != nil {
-		t.Errorf("Failed to open test data file")
-	}
+	data := loadTestData("yeast.list.json", t)
 	defer data.Close()
 
 	const page = 1

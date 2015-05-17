@@ -6,17 +6,38 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"testing"
 )
+
+func TestHopGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("hop.get.json", t)
+	defer data.Close()
+
+	const id = 42
+	mux.HandleFunc("/hop/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, strconv.Itoa(id))
+		io.Copy(w, data)
+	})
+
+	h, err := client.Hop.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if h.ID != id {
+		t.Fatalf("Hop ID = %v, want %v", h.ID, id)
+	}
+}
 
 func TestHopList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/hop.list.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
+	data := loadTestData("hop.list.json", t)
 	defer data.Close()
 
 	const page = 1

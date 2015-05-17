@@ -3,18 +3,38 @@ package brewerydb
 import (
 	"io"
 	"net/http"
-	"os"
+	"strconv"
 	"testing"
 )
+
+func TestFluidsizeGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("fluidsize.get.json", t)
+	defer data.Close()
+
+	const id = 5
+	mux.HandleFunc("/fluidsize/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, strconv.Itoa(id))
+		io.Copy(w, data)
+	})
+
+	f, err := client.Fluidsize.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if f.ID != id {
+		t.Fatalf("Fluidsize ID = %v, want %v", f.ID, id)
+	}
+}
 
 func TestFluidsizeList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/fluidsize.list.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
+	data := loadTestData("fluidsize.list.json", t)
 	defer data.Close()
 
 	mux.HandleFunc("/fluidsizes/", func(w http.ResponseWriter, r *http.Request) {

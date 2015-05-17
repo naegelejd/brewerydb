@@ -3,18 +3,38 @@ package brewerydb
 import (
 	"io"
 	"net/http"
-	"os"
+	"strconv"
 	"testing"
 )
+
+func TestGlassGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("glass.get.json", t)
+	defer data.Close()
+
+	const id = 7
+	mux.HandleFunc("/glass/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, strconv.Itoa(id))
+		io.Copy(w, data)
+	})
+
+	g, err := client.Glass.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if g.ID != id {
+		t.Fatalf("Glass ID = %v, want %v", g.ID, id)
+	}
+}
 
 func TestGlassList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/glass.list.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
+	data := loadTestData("glass.list.json", t)
 	defer data.Close()
 
 	mux.HandleFunc("/glassware/", func(w http.ResponseWriter, r *http.Request) {

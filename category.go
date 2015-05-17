@@ -43,7 +43,7 @@ func (cs *CategoryService) List() ([]Category, error) {
 func (cs *CategoryService) Get(id int) (cat Category, err error) {
 	// GET: /category/:categoryId
 	var req *http.Request
-	req, err = cs.c.NewRequest("GET", fmt.Sprintf("/categories/%d", id), nil)
+	req, err = cs.c.NewRequest("GET", fmt.Sprintf("/category/%d", id), nil)
 	if err != nil {
 		return
 	}

@@ -1,0 +1,68 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"id": 753,
+		"name": "Barley - Roasted",
+		"description": "Unmalted and roasted at high temperature to create a burnt, grainy, coffee-like flavor. Imparts a red to deep brown color to beer, and very strong roasted flavor. Use 2-4% in Brown ales to add a nutty flavor, or 3-10% in Porters and Stouts for coffee flavor.",
+		"countryOfOrigin": "US",
+		"srmId": 41,
+		"srmPrecise": 300,
+		"moistureContent": 5,
+		"coarseFineDifference": 1.5,
+		"dryYield": 55,
+		"potential": 1.025,
+		"protein": 13.2,
+		"maxInBatch": 10,
+		"requiresMashing": "N",
+		"characteristics": [
+			{
+				"id": 4,
+				"name": "Burnt",
+				"description": "Imparts a burnt tasting quality upon the beer.",
+				"createDate": "2013-06-24 16:07:26"
+			},
+			{
+				"id": 7,
+				"name": "Coffee",
+				"description": "Imparts a coffee flavor upon the beer.",
+				"createDate": "2013-06-24 16:07:26"
+			},
+			{
+				"id": 8,
+				"name": "Grainy",
+				"description": "Imparts a grainty taste upon the beer.",
+				"createDate": "2013-06-24 16:07:26"
+			},
+			{
+				"id": 11,
+				"name": "Nutty",
+				"description": "Imparts a nutty flavor upon the beer.",
+				"createDate": "2013-06-24 16:07:26"
+			},
+			{
+				"id": 12,
+				"name": "Roasted",
+				"description": "Imparts a roasted flavor upon the beer.",
+				"createDate": "2013-06-24 16:07:26"
+			}
+		],
+		"category": "malt",
+		"categoryDisplay": "Malts, Grains, & Fermentables",
+		"createDate": "2013-06-24 16:07:54",
+		"updateDate": "2013-06-24 16:10:14",
+		"srm": {
+			"id": 41,
+			"name": "Over 40",
+			"hex": "000000"
+		},
+		"country": {
+			"isoCode": "US",
+			"name": "UNITED STATES",
+			"displayName": "United States",
+			"isoThree": "USA",
+			"numberCode": 840,
+			"createDate": "2012-01-03 02:41:33"
+		}
+	},
+	"status": "success"
+}

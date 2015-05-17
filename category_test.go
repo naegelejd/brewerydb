@@ -3,18 +3,38 @@ package brewerydb
 import (
 	"io"
 	"net/http"
-	"os"
+	"strconv"
 	"testing"
 )
 
-func TestCategorclist(t *testing.T) {
+func TestCategoryGet(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/category.list.json")
+	data := loadTestData("category.get.json", t)
+	defer data.Close()
+
+	const id = 3
+	mux.HandleFunc("/category/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, strconv.Itoa(id))
+		io.Copy(w, data)
+	})
+
+	c, err := client.Category.Get(id)
 	if err != nil {
-		t.Errorf("Failed to open test data file")
+		t.Fatal(err)
 	}
+	if c.ID != id {
+		t.Fatalf("Category ID = %v, want %v", c.ID, id)
+	}
+}
+
+func TestCategorylist(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("category.list.json", t)
 	defer data.Close()
 
 	mux.HandleFunc("/categories/", func(w http.ResponseWriter, r *http.Request) {

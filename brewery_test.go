@@ -9,14 +9,34 @@ import (
 	"testing"
 )
 
+func TestBreweryGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("brewery.get.json", t)
+	defer data.Close()
+
+	const id = "jmGoBA"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, id)
+		io.Copy(w, data)
+	})
+
+	b, err := client.Brewery.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if b.ID != id {
+		t.Fatalf("Brewery ID = %v, want %v", b.ID, id)
+	}
+}
+
 func TestBreweryList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/brewery.list.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
+	data := loadTestData("brewery.list.json", t)
 	defer data.Close()
 
 	const established = "1988"

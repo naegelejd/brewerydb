@@ -1,0 +1,54 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"id": "z9H6HJ",
+		"name": "Bethesda",
+		"streetAddress": "7900 Norfolk Ave",
+		"locality": "Bethesda",
+		"region": "Maryland",
+		"postalCode": "20814",
+		"phone": "301-652-1311",
+		"website": "http:\/\/www.rockbottom.com\/bethesda",
+		"hoursOfOperation": "Sunday - Thursday: 11am - 1am\r\nFriday - Saturday: 11am - 2am",
+		"latitude": 38.988988,
+		"longitude": -77.097413,
+		"isPrimary": "N",
+		"inPlanning": "N",
+		"isClosed": "N",
+		"openToPublic": "Y",
+		"locationType": "brewpub",
+		"locationTypeDisplay": "Brewpub",
+		"countryIsoCode": "US",
+		"status": "verified",
+		"statusDisplay": "Verified",
+		"createDate": "2012-05-14 20:29:40",
+		"updateDate": "2014-07-23 19:11:34",
+		"breweryId": "D1UQzj",
+		"brewery": {
+			"id": "D1UQzj",
+			"name": "Rock Bottom Restaurant & Brewery",
+			"description": "Our brewers eat, drink and sleep beer. They\u2019re equal parts scientist, artist and beer geek. So, while every Rock Bottom brewer is passionate about their craft, they also put their own signature into every beer.\r\n\r\nIn other words, there is a unique beer menu at every Rock Bottom in addition to our core line up of consistent flavor profiles that you can expect at any Rock Bottom you visit nationwide.\r\n\r\nBut, you\u2019re thirsty and want to know what beers you can expect down here, right?",
+			"website": "http:\/\/www.rockbottom.com\/",
+			"established": "1998",
+			"isOrganic": "N",
+			"images": {
+				"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/D1UQzj\/upload_DpHpjM-icon.png",
+				"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/D1UQzj\/upload_DpHpjM-medium.png",
+				"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/D1UQzj\/upload_DpHpjM-large.png"
+			},
+			"status": "verified",
+			"statusDisplay": "Verified",
+			"createDate": "2012-01-03 02:42:15",
+			"updateDate": "2014-07-11 23:27:13"
+		},
+		"country": {
+			"isoCode": "US",
+			"name": "UNITED STATES",
+			"displayName": "United States",
+			"isoThree": "USA",
+			"numberCode": 840,
+			"createDate": "2012-01-03 02:41:33"
+		}
+	},
+	"status": "success"
+}

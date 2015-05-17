@@ -1,0 +1,10 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"id": 4,
+		"name": "Untappd",
+		"website": "http:\/\/www.untappd.com",
+		"createDate": "2012-01-03 02:41:41"
+	},
+	"status": "success"
+}

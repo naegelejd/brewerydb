@@ -3,18 +3,37 @@ package brewerydb
 import (
 	"io"
 	"net/http"
-	"os"
 	"testing"
 )
+
+func TestGuildGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("guild.get.json", t)
+	defer data.Close()
+
+	const id = "k2jMtH"
+	mux.HandleFunc("/guild/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, id)
+		io.Copy(w, data)
+	})
+
+	g, err := client.Guild.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if g.ID != id {
+		t.Fatalf("Guild ID = %v, want %v", g.ID, id)
+	}
+}
 
 func TestGuildList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/guild.list.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
+	data := loadTestData("guild.list.json", t)
 	defer data.Close()
 
 	const (

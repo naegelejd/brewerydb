@@ -1,0 +1,11 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"id": 42,
+		"name": "French Strisserspalt",
+		"category": "hop",
+		"categoryDisplay": "Hops",
+		"createDate": "2013-06-24 16:07:30"
+	},
+	"status": "success"
+}

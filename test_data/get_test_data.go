@@ -25,24 +25,43 @@ func main() {
 	c := brewerydb.NewClient(key)
 
 	var test_data = map[string]TestDataGetter{
+		"adjunct.get.json":      adjunctGet,
 		"adjunct.list.json":     adjunctList,
+		"beer.get.json":         beerGet,
 		"beer.list.json":        beerList,
 		"beer.random.json":      beerRandom,
+		"brewery.get.json":      breweryGet,
 		"brewery.list.json":     breweryList,
+		"category.get.json":     categoryGet,
 		"category.list.json":    categoryList,
+		"event.get.json":        eventGet,
 		"event.list.json":       eventList,
+		"feature.get.json":      featureGet,
 		"feature.list.json":     featureList,
+		"feature.byweek.json":   featureByWeek,
+		"fluidsize.get.json":    fluidsizeGet,
 		"fluidsize.list.json":   fluidsizeList,
+		"fermentable.get.json":  fermentableGet,
 		"fermentable.list.json": fermentableList,
+		"glass.get.json":        glassGet,
 		"glass.list.json":       glassList,
+		"guild.get.json":        guildGet,
 		"guild.list.json":       guildList,
+		"hop.get.json":          hopGet,
 		"hop.list.json":         hopList,
+		"ingredient.get.json":   ingredientGet,
 		"ingredient.list.json":  ingredientList,
+		"location.get.json":     locationGet,
 		"location.list.json":    locationList,
 		"search.beer.json":      searchBeer,
 		"search.brewery.json":   searchBrewery,
+		"search.event.json":     searchEvent,
+		"search.guild.json":     searchGuild,
+		"socialsite.get.json":   socialsiteGet,
 		"socialsite.list.json":  socialsiteList,
+		"style.get.json":        styleGet,
 		"style.list.json":       styleList,
+		"yeast.get.json":        yeastGet,
 		"yeast.list.json":       yeastList,
 	}
 
@@ -94,8 +113,18 @@ func getTestData(c *brewerydb.Client, filename string, action func(c *brewerydb.
 	return err
 }
 
+func adjunctGet(c *brewerydb.Client) error {
+	_, err := c.Adjunct.Get(923)
+	return err
+}
+
 func adjunctList(c *brewerydb.Client) error {
 	_, err := c.Adjunct.List(1)
+	return err
+}
+
+func beerGet(c *brewerydb.Client) error {
+	_, err := c.Beer.Get("o9TSOv")
 	return err
 }
 
@@ -109,8 +138,18 @@ func beerRandom(c *brewerydb.Client) error {
 	return err
 }
 
+func breweryGet(c *brewerydb.Client) error {
+	_, err := c.Brewery.Get("jmGoBA")
+	return err
+}
+
 func breweryList(c *brewerydb.Client) error {
 	_, err := c.Brewery.List(&brewerydb.BreweryListRequest{Page: 1, Established: "1988"})
+	return err
+}
+
+func categoryGet(c *brewerydb.Client) error {
+	_, err := c.Category.Get(3)
 	return err
 }
 
@@ -119,8 +158,18 @@ func categoryList(c *brewerydb.Client) error {
 	return err
 }
 
+func eventGet(c *brewerydb.Client) error {
+	_, err := c.Event.Get("0oZVAo")
+	return err
+}
+
 func eventList(c *brewerydb.Client) error {
 	_, err := c.Event.List(&brewerydb.EventListRequest{Page: 1, Year: 2015})
+	return err
+}
+
+func featureGet(c *brewerydb.Client) error {
+	_, err := c.Feature.Get()
 	return err
 }
 
@@ -129,8 +178,23 @@ func featureList(c *brewerydb.Client) error {
 	return err
 }
 
+func featureByWeek(c *brewerydb.Client) error {
+	_, err := c.Feature.ByWeek(2014, 7)
+	return err
+}
+
+func fermentableGet(c *brewerydb.Client) error {
+	_, err := c.Fermentable.Get(753)
+	return err
+}
+
 func fermentableList(c *brewerydb.Client) error {
 	_, err := c.Fermentable.List(1)
+	return err
+}
+
+func fluidsizeGet(c *brewerydb.Client) error {
+	_, err := c.Fluidsize.Get(5)
 	return err
 }
 
@@ -139,8 +203,18 @@ func fluidsizeList(c *brewerydb.Client) error {
 	return err
 }
 
+func glassGet(c *brewerydb.Client) error {
+	_, err := c.Glass.Get(7)
+	return err
+}
+
 func glassList(c *brewerydb.Client) error {
 	_, err := c.Glass.List()
+	return err
+}
+
+func guildGet(c *brewerydb.Client) error {
+	_, err := c.Guild.Get("k2jMtH")
 	return err
 }
 
@@ -149,13 +223,28 @@ func guildList(c *brewerydb.Client) error {
 	return err
 }
 
+func hopGet(c *brewerydb.Client) error {
+	_, err := c.Hop.Get(42)
+	return err
+}
+
 func hopList(c *brewerydb.Client) error {
 	_, err := c.Hop.List(1)
 	return err
 }
 
+func ingredientGet(c *brewerydb.Client) error {
+	_, err := c.Ingredient.Get(42)
+	return err
+}
+
 func ingredientList(c *brewerydb.Client) error {
 	_, err := c.Ingredient.List(1)
+	return err
+}
+
+func locationGet(c *brewerydb.Client) error {
+	_, err := c.Location.Get("z9H6HJ")
 	return err
 }
 
@@ -174,13 +263,38 @@ func searchBrewery(c *brewerydb.Client) error {
 	return err
 }
 
+func searchEvent(c *brewerydb.Client) error {
+	_, err := c.Search.Event("festival", &brewerydb.SearchRequest{Page: 1})
+	return err
+}
+
+func searchGuild(c *brewerydb.Client) error {
+	_, err := c.Search.Guild("maryland", &brewerydb.SearchRequest{Page: 1})
+	return err
+}
+
+func socialsiteGet(c *brewerydb.Client) error {
+	_, err := c.SocialSite.Get(4)
+	return err
+}
+
 func socialsiteList(c *brewerydb.Client) error {
 	_, err := c.SocialSite.List()
 	return err
 }
 
+func styleGet(c *brewerydb.Client) error {
+	_, err := c.Style.Get(42)
+	return err
+}
+
 func styleList(c *brewerydb.Client) error {
 	_, err := c.Style.List(1)
+	return err
+}
+
+func yeastGet(c *brewerydb.Client) error {
+	_, err := c.Yeast.Get(1835)
 	return err
 }
 

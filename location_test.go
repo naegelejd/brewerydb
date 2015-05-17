@@ -3,18 +3,37 @@ package brewerydb
 import (
 	"io"
 	"net/http"
-	"os"
 	"testing"
 )
+
+func TestLocationGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("location.get.json", t)
+	defer data.Close()
+
+	const id = "z9H6HJ"
+	mux.HandleFunc("/location/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, id)
+		io.Copy(w, data)
+	})
+
+	l, err := client.Location.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if l.ID != id {
+		t.Fatalf("Location ID = %v, want %v", l.ID, id)
+	}
+}
 
 func TestLocationList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/location.list.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
+	data := loadTestData("location.list.json", t)
 	defer data.Close()
 
 	const (

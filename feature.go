@@ -14,13 +14,17 @@ type FeatureService struct {
 // TODO: the Brewery in a Feature should ALSO contain its locations:
 // see: http://www.brewerydb.com/developers/docs-endpoint/feature_index#1
 type Feature struct {
-	BeerID  string
-	Beer    Beer
-	Brewery Brewery
+	ID        int
+	Year      int
+	Week      int
+	BeerID    string
+	Beer      Beer
+	BreweryID string
+	Brewery   Brewery
 }
 
-// Featured returns this week's Featured Beer and Brewery.
-func (fs *FeatureService) Featured() (f Feature, err error) {
+// Get returns this week's Featured Beer and Brewery.
+func (fs *FeatureService) Get() (f Feature, err error) {
 	// GET: /featured
 	var req *http.Request
 	req, err = fs.c.NewRequest("GET", "/featured", nil)
@@ -28,16 +32,13 @@ func (fs *FeatureService) Featured() (f Feature, err error) {
 		return
 	}
 
-	featuredResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Feature
 		Message string
 	}{}
-
-	if err = fs.c.Do(req, &featuredResponse); err != nil {
-		return
-	}
-	return featuredResponse.Data, nil
+	err = fs.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // FeatureListRequest contains options for querying for a list of features.
@@ -69,16 +70,21 @@ func (fs *FeatureService) List(q *FeatureListRequest) (fl FeatureList, err error
 	return
 }
 
-// FeatureByWeek returns the Featured Beer and Brewery for the given
+// ByWeek returns the Featured Beer and Brewery for the given
 // year and week number.
-func (fs *FeatureService) FeatureByWeek(year, week int) (f Feature, err error) {
+func (fs *FeatureService) ByWeek(year, week int) (f Feature, err error) {
 	// GET: /feature/:year-week
 	var req *http.Request
-	req, err = fs.c.NewRequest("GET", fmt.Sprintf("/feature/%4d-%d", year, week), nil)
+	req, err = fs.c.NewRequest("GET", fmt.Sprintf("/feature/%4d-%02d", year, week), nil)
 	if err != nil {
 		return
 	}
 
-	err = fs.c.Do(req, &f)
-	return
+	resp := struct {
+		Status  string
+		Data    Feature
+		Message string
+	}{}
+	err = fs.c.Do(req, &resp)
+	return resp.Data, err
 }

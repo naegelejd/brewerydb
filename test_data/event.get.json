@@ -1,0 +1,42 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"id": "0oZVAo",
+		"year": "2015",
+		"name": "Yellowstone Beer Fest",
+		"description": "The Yellowstone Beer Fest is a regional beer fest held in Cody, Wyoming with five hours of fun, unlimited sampling, food vendors, and live music. Offering local and regional award winning craft beers from Cody, Wyoming, Colorado, Montana, Oregon, Washington, California, Alaska, Utah, Illinois, and Hawaii. There will be some limited release and unique beer available. Featuring around 80+ different beers in all!\r\nYellowstone Beer Fest is a recently established Non-Profit Organization with proceeds donated to local charities. Must be 21 years old.",
+		"type": "festival",
+		"typeDisplay": "Beer Festival",
+		"startDate": "2015-07-18",
+		"endDate": "2015-07-18",
+		"time": "from 3:00 P.M \u2013 8:00 P.M",
+		"price": "$30 to $35",
+		"venueName": "Park County Complex",
+		"streetAddress": "1501 Stampede Ave.",
+		"locality": "Cody",
+		"region": "Wyoming",
+		"postalCode": "82414",
+		"countryIsoCode": "US",
+		"latitude": 44.520076,
+		"longitude": -109.05873,
+		"website": "http:\/\/www.yellowstonebeerfest.com\/",
+		"images": {
+			"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/event\/0oZVAo\/upload_KjVkrq-icon.png",
+			"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/event\/0oZVAo\/upload_KjVkrq-medium.png",
+			"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/event\/0oZVAo\/upload_KjVkrq-large.png"
+		},
+		"status": "verified",
+		"statusDisplay": "Verified",
+		"createDate": "2015-04-30 13:52:38",
+		"updateDate": "2015-05-06 15:24:00",
+		"country": {
+			"isoCode": "US",
+			"name": "UNITED STATES",
+			"displayName": "United States",
+			"isoThree": "USA",
+			"numberCode": 840,
+			"createDate": "2012-01-03 02:41:33"
+		}
+	},
+	"status": "success"
+}

@@ -9,14 +9,34 @@ import (
 	"testing"
 )
 
+func TestBeerGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("beer.get.json", t)
+	defer data.Close()
+
+	const id = "o9TSOv"
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, id)
+		io.Copy(w, data)
+	})
+
+	b, err := client.Beer.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if b.ID != id {
+		t.Fatalf("Beer ID = %v, want %v", b.ID, id)
+	}
+}
+
 func TestBeerList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/beer.list.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
+	data := loadTestData("beer.list.json", t)
 	defer data.Close()
 
 	const abv = "8"

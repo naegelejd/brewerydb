@@ -1,0 +1,19 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"id": "k2jMtH",
+		"name": "Brewers Association of Maryland",
+		"description": "The Brewers Association of Maryland (BAM) is a non-profit trade association founded in 1996, comprised of active Maryland breweries and brewpubs.  The mission of BAM is to foster and promote the Maryland world-renowned brewing industry.\r\n\r\n BAM currently sponsors two annual Beer Festivals; Springfest at Harry Grove Stadium in Frederick, and Maryland Oktoberfest at Timonium Fairgrounds in Timonium.  BAM encourages responsible enjoyment of Maryland beer and all alcoholic beverages by legal age adults.\r\n\r\n The brewing industry in Maryland got its start in 1703 in Annapolis, MD by Benjamin Fordham.  Since then, over 50 breweries have opened in Maryland and BAM is committed to continuing the proud tradition of craftbrewing world class beers.  Maryland craft breweries have received numerous awards and medals at beer festivals and Competitions throughout the US and worldwide.",
+		"website": "http:\/\/www.MarylandBeer.org\/",
+		"images": {
+			"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/guild\/k2jMtH\/upload_TjDXP0-icon.png",
+			"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/guild\/k2jMtH\/upload_TjDXP0-medium.png",
+			"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/guild\/k2jMtH\/upload_TjDXP0-large.png"
+		},
+		"status": "verified",
+		"statusDisplay": "Verified",
+		"createDate": "2012-01-03 02:41:33",
+		"updateDate": "2012-03-21 19:08:23"
+	},
+	"status": "success"
+}

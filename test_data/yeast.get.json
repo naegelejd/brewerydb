@@ -1,0 +1,23 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"id": 1835,
+		"name": "American Ale",
+		"description": "Very clean, crisp flavor characteristics with low fruitiness and mild ester production. A very versatile yeast for styles that desire dominant malt and hop character. This strain makes a wonderful ?House? strain. Mild citrus notes develop with cooler 60-66?F (15-19?C) fermentations. Normally requires filtration for bright beers.",
+		"yeastType": "ale",
+		"attenuationMin": 73,
+		"attenuationMax": 77,
+		"fermentTempMin": 60,
+		"fermentTempMax": 72,
+		"alcoholToleranceMin": 11,
+		"alcoholToleranceMax": 11,
+		"productId": "1056",
+		"supplier": "Wyeast",
+		"yeastFormat": "liquid",
+		"category": "yeast",
+		"categoryDisplay": "Yeast",
+		"createDate": "2013-06-24 16:09:23",
+		"updateDate": "2013-06-24 16:10:52"
+	},
+	"status": "success"
+}

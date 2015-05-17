@@ -3,18 +3,38 @@ package brewerydb
 import (
 	"io"
 	"net/http"
-	"os"
+	"strconv"
 	"testing"
 )
+
+func TestAdjunctGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("adjunct.get.json", t)
+	defer data.Close()
+
+	const id = 923
+	mux.HandleFunc("/adjunct/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, strconv.Itoa(id))
+		io.Copy(w, data)
+	})
+
+	a, err := client.Adjunct.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if a.ID != id {
+		t.Fatalf("Adjunct ID = %v, want %v", a.ID, id)
+	}
+}
 
 func TestAdjunctList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/adjunct.list.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
+	data := loadTestData("adjunct.list.json", t)
 	defer data.Close()
 
 	const page = 1

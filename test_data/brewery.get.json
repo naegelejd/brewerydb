@@ -1,0 +1,21 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"id": "jmGoBA",
+		"name": "Flying Dog Brewery",
+		"description": "The Flying Dog Legend begins in 1983, and like every good legend there are several versions of this tale. The villains of the peace in this story are two non-conformist, 'not likely to take it lying down' ranchers named George Stranahan and Richard McIntyre.\r\n\r\nAs George tells it, he and 11 of his closest friends and family decided to embark on what they called an \u201camateur mountaineering expedition\u201d to climb K2 in the Himalayas. Under-qualified and unprepared, they started their journey with a Sherpa, a donkey, and a suitcase full of contraband. Naturally, half way through the trip the contraband was gone and the Sherpa and donkey had run off, leaving George and his group to fend for themselves. Luckily, everyone managed to make it off the mountain alive, and with a new outlook on life.\r\n\r\nHorn Dog Denver Colorado BeerLike any good beer drinker would at the end of an experience like that, George and his group found a local Pakistani hotel bar to have a drink in. Now, alcohol is banned in most Muslim nations, but if you sign an affidavit stating you are the son of a Christian, it\u2019s like a license to drink. George gladly signed away and got down to some serious drinking. That\u2019s about the time he noticed a painting in the Flashman Hotel of a Flying Dog hanging on the wall that had been drawn by a local artist. Now, we all know dogs don\u2019t fly, but nobody told this particular dog it couldn\u2019t fly, just like no one had told George and his friends they couldn\u2019t make this extraordinary journey. The Flying Dog became a symbol that George and his group used to describe what had happened to them with the mantra, \u201cit is amazing what you can achieve if nobody tells you that you can't.",
+		"website": "http:\/\/www.flyingdogales.com\/",
+		"established": "1983",
+		"isOrganic": "N",
+		"images": {
+			"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/jmGoBA\/upload_0z9L4W-icon.png",
+			"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/jmGoBA\/upload_0z9L4W-medium.png",
+			"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/jmGoBA\/upload_0z9L4W-large.png"
+		},
+		"status": "verified",
+		"statusDisplay": "Verified",
+		"createDate": "2012-01-03 02:41:55",
+		"updateDate": "2014-07-11 23:24:34"
+	},
+	"status": "success"
+}

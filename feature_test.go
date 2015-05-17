@@ -1,21 +1,45 @@
 package brewerydb
 
 import (
+	"fmt"
 	"io"
 	"net/http"
-	"os"
 	"strconv"
 	"testing"
 )
+
+func TestFeatureGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("feature.get.json", t)
+	defer data.Close()
+
+	mux.HandleFunc("/featured/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		io.Copy(w, data)
+	})
+
+	f, err := client.Feature.Get()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if id := 117; f.ID != id {
+		t.Fatalf("Feature ID = %v, want %v", f.ID, id)
+	}
+	if breweryID := "DXvlfF"; f.BreweryID != breweryID {
+		t.Fatalf("Feature BreweryID = %v, want %v", f.BreweryID, breweryID)
+	}
+	if beerID := "79SG11"; f.BeerID != beerID {
+		t.Fatalf("Feature BeerID = %v, want %v", f.BeerID, beerID)
+	}
+}
 
 func TestFeatureList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/feature.list.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
+	data := loadTestData("feature.list.json", t)
 	defer data.Close()
 
 	const (
@@ -47,5 +71,37 @@ func TestFeatureList(t *testing.T) {
 		if l := 6; l != len(f.Brewery.ID) {
 			t.Fatalf("Features Brewery.ID len = %d, wanted %d", len(f.Brewery.ID), l)
 		}
+	}
+}
+
+func TestFeatureByWeek(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("feature.byweek.json", t)
+	defer data.Close()
+
+	const (
+		year = 2015
+		week = 7
+	)
+	mux.HandleFunc("/feature/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, fmt.Sprintf("%4d-%02d", year, week))
+		io.Copy(w, data)
+	})
+
+	f, err := client.Feature.ByWeek(year, week)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if id := 101; f.ID != id {
+		t.Fatalf("Feature ID = %v, want %v", f.ID, id)
+	}
+	if breweryID := "ouUm8w"; f.BreweryID != breweryID {
+		t.Fatalf("Feature BreweryID = %v, want %v", f.BreweryID, breweryID)
+	}
+	if beerID := "fA0O8C"; f.BeerID != beerID {
+		t.Fatalf("Feature BeerID = %v, want %v", f.BeerID, beerID)
 	}
 }

@@ -3,18 +3,38 @@ package brewerydb
 import (
 	"io"
 	"net/http"
-	"os"
+	"strconv"
 	"testing"
 )
+
+func TestSocialSiteGet(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("socialsite.get.json", t)
+	defer data.Close()
+
+	const id = 4
+	mux.HandleFunc("/socialsite/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, strconv.Itoa(id))
+		io.Copy(w, data)
+	})
+
+	s, err := client.SocialSite.Get(id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if s.ID != id {
+		t.Fatalf("Socialsite ID = %v, want %v", s.ID, id)
+	}
+}
 
 func TestSocialSiteList(t *testing.T) {
 	setup()
 	defer teardown()
 
-	data, err := os.Open("test_data/socialsite.list.json")
-	if err != nil {
-		t.Errorf("Failed to open test data file")
-	}
+	data := loadTestData("socialsite.list.json", t)
 	defer data.Close()
 
 	mux.HandleFunc("/socialsites/", func(w http.ResponseWriter, r *http.Request) {
