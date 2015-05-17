@@ -139,14 +139,14 @@ func (es *EventService) Get(eventID string) (e Event, err error) {
 	return eventResponse.Data, nil
 }
 
-// AddEvent adds an Event to the BreweryDB.
+// Add adds an Event to the BreweryDB.
 // The following **must** be set in the Event:
 //
 // - Name
 // - Type
 // - StartDate (YYYY-MM-DD)
 // - EndDate (YYYY-MM-DD)
-func (es *EventService) AddEvent(e *Event) error {
+func (es *EventService) Add(e *Event) error {
 	// POST: /events
 	req, err := es.c.NewRequest("POST", "/events", e)
 	if err != nil {
@@ -157,8 +157,8 @@ func (es *EventService) AddEvent(e *Event) error {
 	return es.c.Do(req, nil)
 }
 
-// UpdateEvent updates the Event with the given eventID to match the given Event.
-func (es *EventService) UpdateEvent(eventID string, e *Event) error {
+// Update updates the Event with the given eventID to match the given Event.
+func (es *EventService) Update(eventID string, e *Event) error {
 	// PUT: /event/:eventID
 	req, err := es.c.NewRequest("PUT", "/event/"+eventID, e)
 	if err != nil {
@@ -169,8 +169,8 @@ func (es *EventService) UpdateEvent(eventID string, e *Event) error {
 	return es.c.Do(req, nil)
 }
 
-// DeleteEvent removes the Event with the given eventID.
-func (es *EventService) DeleteEvent(eventID string) error {
+// Delete removes the Event with the given eventID.
+func (es *EventService) Delete(eventID string) error {
 	// DELETE: /event/:eventID
 	req, err := es.c.NewRequest("DELETE", "/event/"+eventID, nil)
 	if err != nil {

@@ -280,8 +280,8 @@ func (bs *BeerService) DeleteAdjunct(beerID string, adjunctID int) error {
 	return bs.c.Do(req, nil)
 }
 
-// Breweries queries for all Breweries associated with the Beer having the given ID.
-func (bs *BeerService) Breweries(id string) ([]Brewery, error) {
+// ListBreweries queries for all Breweries associated with the Beer having the given ID.
+func (bs *BeerService) ListBreweries(id string) ([]Brewery, error) {
 	// GET: /beer/:beerId/breweries
 	req, err := bs.c.NewRequest("GET", "/beer/"+id+"/breweries", nil)
 	if err != nil {
@@ -482,8 +482,8 @@ type RandomBeerRequest struct {
 	WithIngredients    string `url:"withIngredients,omitempty"`    // Y/N
 }
 
-// Random returns a random Beer.
-func (bs *BeerService) Random(q *RandomBeerRequest) (b Beer, err error) {
+// GetRandom returns a random Beer.
+func (bs *BeerService) GetRandom(q *RandomBeerRequest) (b Beer, err error) {
 	// GET: /beer/random
 
 	var req *http.Request

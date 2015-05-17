@@ -64,6 +64,18 @@ func TestBeerList(t *testing.T) {
 	}
 }
 
+func TestBeerAdd(t *testing.T) {
+
+}
+
+func TestBeerUpdate(t *testing.T) {
+
+}
+
+func TestBeerDelete(t *testing.T) {
+
+}
+
 func ExampleBeerService_List() {
 	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
@@ -81,7 +93,7 @@ func ExampleBeerService_Breweries() {
 	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
 	// Get breweries for a given beer
-	breweries, err := c.Beer.Breweries("jmGoBA")
+	breweries, err := c.Beer.ListBreweries("jmGoBA")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -105,7 +117,7 @@ func TestBeerRandom(t *testing.T) {
 		io.Copy(w, data)
 	})
 
-	b, err := client.Beer.Random(&RandomBeerRequest{ABV: "8"})
+	b, err := client.Beer.GetRandom(&RandomBeerRequest{ABV: "8"})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -126,7 +138,7 @@ func ExampleBeerService_Random() {
 	req := &RandomBeerRequest{
 		ABV: "8",
 	}
-	b, err := c.Beer.Random(req)
+	b, err := c.Beer.GetRandom(req)
 	if err != nil {
 		log.Fatal(err)
 	}

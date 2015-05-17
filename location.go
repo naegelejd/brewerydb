@@ -154,9 +154,9 @@ func (ls *LocationService) Get(locID string) (l Location, err error) {
 	return locationResponse.Data, err
 }
 
-// UpdateLocation updates the Location having the given ID to match the given Location.
+// Update updates the Location having the given ID to match the given Location.
 // The CountryISOCode of the given Location *must* be set.
-func (ls *LocationService) UpdateLocation(locID string, l *Location) error {
+func (ls *LocationService) Update(locID string, l *Location) error {
 	// PUT: /location/:locationID
 	req, err := ls.c.NewRequest("PUT", "/location/"+locID, l)
 	if err != nil {
@@ -167,8 +167,8 @@ func (ls *LocationService) UpdateLocation(locID string, l *Location) error {
 	return ls.c.Do(req, nil)
 }
 
-// DeleteLocation removes the Location with the given ID from the BreweryDB.
-func (ls *LocationService) DeleteLocation(locID string) error {
+// Delete removes the Location with the given ID from the BreweryDB.
+func (ls *LocationService) Delete(locID string) error {
 	// DELETE: /location/:locationID
 	req, err := ls.c.NewRequest("DELETE", "/location/"+locID, nil)
 	if err != nil {

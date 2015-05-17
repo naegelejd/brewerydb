@@ -91,9 +91,9 @@ func (gs *GuildService) Get(guildID string) (g Guild, err error) {
 	return guildResponse.Data, err
 }
 
-// AddGuild adds a Guild to the BreweryDB.
+// Add adds a Guild to the BreweryDB.
 // The Guild Name is required.
-func (gs *GuildService) AddGuild(g *Guild) (string, error) {
+func (gs *GuildService) Add(g *Guild) (string, error) {
 	// POST: /guilds
 	req, err := gs.c.NewRequest("POST", "/guilds", g)
 	if err != nil {
@@ -112,8 +112,8 @@ func (gs *GuildService) AddGuild(g *Guild) (string, error) {
 	return addResponse.Data.ID, err
 }
 
-// UpdateGuild updates the Guild with the given guildID to match the given Guild.
-func (gs *GuildService) UpdateGuild(guildID string, g *Guild) error {
+// Update updates the Guild with the given guildID to match the given Guild.
+func (gs *GuildService) Update(guildID string, g *Guild) error {
 	// PUT: /guild/:guildID
 	req, err := gs.c.NewRequest("PUT", "/guild/"+guildID, g)
 	if err != nil {
@@ -123,8 +123,8 @@ func (gs *GuildService) UpdateGuild(guildID string, g *Guild) error {
 	return gs.c.Do(req, nil)
 }
 
-// DeleteGuild removes the Guild with the given guildID.
-func (gs *GuildService) DeleteGuild(guildID string) error {
+// Delete removes the Guild with the given guildID.
+func (gs *GuildService) Delete(guildID string) error {
 	// DELETE: /guild/:guildID
 	req, err := gs.c.NewRequest("DELETE", "/guild/"+guildID, nil)
 	if err != nil {

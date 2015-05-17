@@ -106,9 +106,8 @@ func (bs *BreweryService) Get(id string) (brewery Brewery, err error) {
 	return breweryResp.Data, nil
 }
 
-// AddBrewery adds a new Brewery to the BreweryDB and returns its new ID on success.
-// TODO: ensure a *Brewery can be used to add new brewery
-func (bs *BreweryService) AddBrewery(b *Brewery) (id string, err error) {
+// Add adds a new Brewery to the BreweryDB and returns its new ID on success.
+func (bs *BreweryService) Add(b *Brewery) (id string, err error) {
 	// POST: /breweries
 	var req *http.Request
 	req, err = bs.c.NewRequest("POST", "/breweries", b)
@@ -125,9 +124,8 @@ func (bs *BreweryService) AddBrewery(b *Brewery) (id string, err error) {
 	return addResp.ID, err
 }
 
-// UpdateBrewery changes an existing Brewery in the BreweryDB.
-// TODO: ensure a *Brewery can be used to add new brewery
-func (bs *BreweryService) UpdateBrewery(breweryID string, b *Brewery) error {
+// Update changes an existing Brewery in the BreweryDB.
+func (bs *BreweryService) Update(breweryID string, b *Brewery) error {
 	// PUT: /brewery/:breweryId
 	req, err := bs.c.NewRequest("PUT", "/brewery/"+breweryID, b)
 	if err != nil {
@@ -138,8 +136,8 @@ func (bs *BreweryService) UpdateBrewery(breweryID string, b *Brewery) error {
 	return bs.c.Do(req, nil)
 }
 
-// DeleteBrewery removes the Brewery with the given ID from the BreweryDB.
-func (bs *BreweryService) DeleteBrewery(id string) error {
+// Delete removes the Brewery with the given ID from the BreweryDB.
+func (bs *BreweryService) Delete(id string) error {
 	// DELETE: /brewery/:breweryId
 	req, err := bs.c.NewRequest("DELETE", "/brewery/"+id, nil)
 	if err != nil {
@@ -340,8 +338,8 @@ type RandomBreweryRequest struct {
 	WithAlternateNames string `url:"withAlternateNames"` // Y/N
 }
 
-// Random returns a random active Brewery.
-func (bs *BreweryService) Random(q *RandomBreweryRequest) (b Brewery, err error) {
+// GetRandom returns a random active Brewery.
+func (bs *BreweryService) GetRandom(q *RandomBreweryRequest) (b Brewery, err error) {
 	// GET: /brewery/random
 	var req *http.Request
 	req, err = bs.c.NewRequest("GET", "/brewery/random", q)
