@@ -120,12 +120,12 @@ func categoryList(c *brewerydb.Client) error {
 }
 
 func eventList(c *brewerydb.Client) error {
-	_, err := c.Event.List(&brewerydb.EventRequest{Page: 1, Year: 2015})
+	_, err := c.Event.List(&brewerydb.EventListRequest{Page: 1, Year: 2015})
 	return err
 }
 
 func featureList(c *brewerydb.Client) error {
-	_, err := c.Feature.List(&brewerydb.FeatureRequest{Page: 1, Year: 2015})
+	_, err := c.Feature.List(&brewerydb.FeatureListRequest{Page: 1, Year: 2015})
 	return err
 }
 
@@ -145,7 +145,7 @@ func glassList(c *brewerydb.Client) error {
 }
 
 func guildList(c *brewerydb.Client) error {
-	_, err := c.Guild.List(&brewerydb.GuildRequest{Page: 1, Name: "Brewers Association of Maryland"})
+	_, err := c.Guild.List(&brewerydb.GuildListRequest{Page: 1, Name: "Brewers Association of Maryland"})
 	return err
 }
 
@@ -160,7 +160,7 @@ func ingredientList(c *brewerydb.Client) error {
 }
 
 func locationList(c *brewerydb.Client) error {
-	_, err := c.Location.List(&brewerydb.LocationRequest{Page: 1, Region: "Maryland"})
+	_, err := c.Location.List(&brewerydb.LocationListRequest{Page: 1, Region: "Maryland"})
 	return err
 }
 

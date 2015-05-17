@@ -15,6 +15,7 @@ import (
 	"net/http"
 )
 
+// apiURL is not const so it can be stubbed in unit tests.
 var apiURL = "http://api.brewerydb.com/v2"
 
 // Page is a convenience type for encoding only a page number
