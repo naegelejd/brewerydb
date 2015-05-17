@@ -1,6 +1,9 @@
 package brewerydb
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 // BreweryService provides access to the BreweryDB Brewery API. Use Client.Brewery.
 type BreweryService struct {
@@ -144,5 +147,281 @@ func (bs *BreweryService) DeleteBrewery(id string) error {
 	}
 
 	// TODO: extract and return response message?
+	return bs.c.Do(req, nil)
+}
+
+// AlternateName represents an alternate name for a Brewery.
+// TODO: the actual response object contains the entire Brewery object as well.
+//	see: http://www.brewerydb.com/developers/docs-endpoint/brewery_alternatename
+type AlternateName struct {
+	ID         int
+	Name       string
+	BreweryID  string
+	CreateDate string
+	UpdateDate string
+}
+
+// ListAlternateNames returns a slice of all the AlternateNames for the Brewery with the given ID.
+func (bs *BreweryService) ListAlternateNames(breweryID string) (al []AlternateName, err error) {
+	// GET: /brewery/:breweryId/alternatenames
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", "/brewery/"+breweryID+"/alternatenames", nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    []AlternateName
+		Message string
+	}{}
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// AddAlternateName adds an alternate name to the Brewery with the given ID.
+func (bs *BreweryService) AddAlternateName(breweryID, name string) error {
+	// POST: /brewery/:breweryId/alternatenames
+	q := struct {
+		Name string `url:"name"`
+	}{name}
+	req, err := bs.c.NewRequest("POST", "/brewery/"+breweryID+"/alternatenames", &q)
+	if err != nil {
+		return err
+	}
+	return bs.c.Do(req, nil)
+}
+
+// DeleteAlternateName removes the AlternateName with the given ID from the Brewery with the given ID.
+func (bs *BreweryService) DeleteAlternateName(breweryID string, alternateNameID int) error {
+	// DELETE: /brewery/:breweryId/alternatename/:alternatenameId
+	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/brewery/%s/alternatenames/%d", breweryID, alternateNameID), nil)
+	if err != nil {
+		return err
+	}
+	return bs.c.Do(req, nil)
+}
+
+// BreweryBeersRequest contains options for querying for all Beers from a Brewery.
+type BreweryBeersRequest struct {
+	WithBreweries      string `url:"withBreweries"`      // Y/N
+	WithSocialAccounts string `url:"withSocialAccounts"` // Y/N
+	WithIngredients    string `url:"withIngredients"`    // Y/N
+}
+
+// ListBeers returns a slice of all Beers offered by the Brewery with the given ID.
+func (bs *BreweryService) ListBeers(breweryID string, q *BreweryBeersRequest) (bl []Beer, err error) {
+	// GET: /brewery/:breweryId/beers
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", "/brewery/"+breweryID+"/beers", q)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    []Beer
+		Message string
+	}{}
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// ListEvents returns a slice of Events where the given Brewery is/was present
+// or has won awards.
+func (bs *BreweryService) ListEvents(breweryID string, onlyWinners bool) (el []Event, err error) {
+	// GET: /brewery/:breweryId/events
+	var q struct {
+		OnlyWinners string `url:"onlyWinners,omitempty"`
+	}
+	if onlyWinners {
+		q.OnlyWinners = "Y"
+	}
+
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", "/brewery/"+breweryID+"/events", &q)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    []Event
+		Message string
+	}{}
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// ListGuilds returns a slice of all Guilds the Brewery with the given ID belongs to.
+func (bs *BreweryService) ListGuilds(breweryID string) (al []Guild, err error) {
+	// GET: /brewery/:breweryId/guilds
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", "/brewery/"+breweryID+"/guilds", nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    []Guild
+		Message string
+	}{}
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// AddGuild adds the Guild with the given ID to the Brewery with the given ID.
+// discount is optional (value of discount offered to guild members).
+func (bs *BreweryService) AddGuild(breweryID string, guildID int, discount *string) error {
+	// POST: /brewery/:breweryId/guilds
+	q := struct {
+		ID       int    `url:"guildId"`
+		Discount string `url:"discount"`
+	}{ID: guildID}
+	if discount != nil {
+		q.Discount = *discount
+	}
+
+	req, err := bs.c.NewRequest("POST", "/brewery/"+breweryID+"/guilds", &q)
+	if err != nil {
+		return err
+	}
+
+	return bs.c.Do(req, nil)
+}
+
+// DeleteGuild removes the Guild with the given ID from the Brewery with the given ID.
+func (bs *BreweryService) DeleteGuild(breweryID string, guildID int) error {
+	// DELETE: /brewery/:breweryId/guild/:guildId
+	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/brewery/%s/guild/%d", breweryID, guildID), nil)
+	if err != nil {
+		return err
+	}
+	return bs.c.Do(req, nil)
+}
+
+// ListLocations returns a slice of all locations for the Brewery with the given ID.
+func (bs *BreweryService) ListLocations(breweryID string) (ll []Location, err error) {
+	// GET: /brewery/:breweryId/locations
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", "/brewery/"+breweryID+"/locations", nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    []Location
+		Message string
+	}{}
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// AddLocation adds a new location for the Brewery with the given ID.
+func (bs *BreweryService) AddLocation(breweryID string, loc *Location) error {
+	// POST: /brewery/:breweryId/locations
+	req, err := bs.c.NewRequest("POST", "/brewery/"+breweryID+"/locations", loc)
+	if err != nil {
+		return err
+	}
+
+	return bs.c.Do(req, nil)
+}
+
+// RandomBreweryRequest contains options for retrieving a random Brewery.
+type RandomBreweryRequest struct {
+	Established        string `url:"established"`        // YYYY
+	IsOrganic          string `url:"isOrganic"`          // Y/N
+	WithSocialAccounts string `url:"withSocialAccounts"` // Y/N
+	WithGuilds         string `url:"withGuilds"`         // Y/N
+	WithLocations      string `url:"withLocations"`      // Y/N
+	WithAlternateNames string `url:"withAlternateNames"` // Y/N
+}
+
+// Random returns a random active Brewery.
+func (bs *BreweryService) Random(q *RandomBreweryRequest) (b Brewery, err error) {
+	// GET: /brewery/random
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", "/brewery/random", q)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    Brewery
+		Message string
+	}{}
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// ListSocialAccounts returns a slice of all social media accounts associated with the given Brewery.
+func (bs *BreweryService) ListSocialAccounts(breweryID string) (sl []SocialAccount, err error) {
+	// GET: /brewery/:breweryId/socialaccounts
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", "/brewery/"+breweryID+"/socialaccounts", nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    []SocialAccount
+		Message string
+	}{}
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// GetSocialAccount retrieves the SocialAccount with the given ID for the given Brewery.
+func (bs *BreweryService) GetSocialAccount(breweryID string, socialAccountID int) (s SocialAccount, err error) {
+	// GET: /brewery/:breweryId/socialaccount/:socialaccountId
+	var req *http.Request
+	req, err = bs.c.NewRequest("GET", fmt.Sprintf("/brewery/%s/socialaccount/%d", breweryID, socialAccountID), nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    SocialAccount
+		Message string
+	}{}
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// AddSocialAccount adds a new SocialAccount to the given Brewery.
+func (bs *BreweryService) AddSocialAccount(breweryID string, s *SocialAccount) error {
+	// POST: /brewery/:breweryId/socialaccounts
+	req, err := bs.c.NewRequest("POST", "/brewery/"+breweryID+"/socialaccounts", s)
+	if err != nil {
+		return err
+	}
+
+	return bs.c.Do(req, nil)
+}
+
+// UpdateSocialAccount updates a SocialAccount for the given Brewery.
+func (bs *BreweryService) UpdateSocialAccount(breweryID string, s *SocialAccount) error {
+	// PUT: /brewery/:breweryId/socialaccount/:socialaccountId
+	req, err := bs.c.NewRequest("PUT", fmt.Sprintf("/brewery/%s/socialaccount/%d", breweryID, s.ID), s)
+	if err != nil {
+		return err
+	}
+
+	return bs.c.Do(req, nil)
+}
+
+// DeleteSocialAccount removes a SocialAccount from the given Brewery.
+func (bs *BreweryService) DeleteSocialAccount(breweryID string, socialAccountID int) error {
+	// DELETE: /brewery/:breweryId/socialaccount/:socialaccountId
+	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/brewery/%s/socialaccount/%d", breweryID, socialAccountID), nil)
+	if err != nil {
+		return err
+	}
 	return bs.c.Do(req, nil)
 }

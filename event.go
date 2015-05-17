@@ -1,6 +1,9 @@
 package brewerydb
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 // EventService provides access to the BreweryDB Event API.
 // Use Client.Event.
@@ -174,5 +177,410 @@ func (es *EventService) DeleteEvent(eventID string) error {
 		return err
 	}
 
+	return es.c.Do(req, nil)
+}
+
+// AwardCategory represents a category of award for an Event.
+type AwardCategory struct {
+	ID          int    `url:"-"`
+	Name        string `url:"name"` // required for adding/updating AwardCategories
+	Description string `url:"description"`
+	Image       string `url:"image"` // base64
+	CreateDate  string `url:"-"`
+	UpdateDate  string `url:"-"`
+}
+
+// ListAwardCategories returns a slice of all AwardCategories for the given Event.
+func (es *EventService) ListAwardCategories(eventID string) (al []AwardCategory, err error) {
+	// GET: /event/:eventId/awardcategories
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", "/event/"+eventID+"/awardcategories", nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    []AwardCategory
+		Message string
+	}{}
+	err = es.c.Do(req, &resp)
+	return resp.Data, nil
+}
+
+// GetAwardCategory retrieves the specified AwardCategory for the given Event.
+func (es *EventService) GetAwardCategory(eventID string, awardCategoryID int) (a AwardCategory, err error) {
+	// GET: /event/:eventId/awardcategory/:awardcategoryId
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", fmt.Sprintf("/event/%s/awardcategory/%d", eventID, awardCategoryID), nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    AwardCategory
+		Message string
+	}{}
+	err = es.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// AddAwardCategory adds a new AwardCategory to the given Event.
+func (es *EventService) AddAwardCategory(eventID string, a *AwardCategory) error {
+	// POST: /event/:eventId/awardcategories
+	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/awardcategories", a)
+	if err != nil {
+		return err
+	}
+
+	return es.c.Do(req, nil)
+}
+
+// UpdateAwardCategory updates an AwardCategory	for the given Event.
+func (es *EventService) UpdateAwardCategory(eventID string, a *AwardCategory) error {
+	// PUT: /event/:eventId/awardcategory/:awardcategoryId
+	req, err := es.c.NewRequest("PUT", fmt.Sprintf("/event/%s/awardcategory/%d", eventID, a.ID), a)
+	if err != nil {
+		return err
+	}
+
+	return es.c.Do(req, nil)
+}
+
+// DeleteAwardCategory removes an AwardCategory from the given Event.
+func (es *EventService) DeleteAwardCategory(eventID string, awardCategoryID int) error {
+	// DELETE: /event/:eventId/awardcategory/:awardcategoryId
+	req, err := es.c.NewRequest("DELETE", fmt.Sprintf("/event/%s/awardcategory/%d", eventID, awardCategoryID), nil)
+	if err != nil {
+		return err
+	}
+
+	return es.c.Do(req, nil)
+}
+
+// AwardPlace represents an award location.
+type AwardPlace struct {
+	ID          int    `url:"-"`
+	Name        string `url:"name"` // required for adding/updating AwardPlaces
+	Description string `url:"description"`
+	Image       string `url:"image"` // base64
+	CreateDate  string `url:"-"`
+	UpdateDate  string `url:"-"`
+}
+
+// ListAwardPlaces returns a slice of all AwardPlaces for the given Event.
+func (es *EventService) ListAwardPlaces(eventID string) (al []AwardPlace, err error) {
+	// GET: /event/:eventId/awardplaces
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", "/event/"+eventID+"/awardplaces", nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    []AwardPlace
+		Message string
+	}{}
+	err = es.c.Do(req, &resp)
+	return resp.Data, nil
+}
+
+// GetAwardPlace retrieves the specified AwardPlace for the given Event.
+func (es *EventService) GetAwardPlace(eventID string, awardPlaceID int) (a AwardPlace, err error) {
+	// GET: /event/:eventId/awardplace/:awardplaceId
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", fmt.Sprintf("/event/%s/awardplace/%d", eventID, awardPlaceID), nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    AwardPlace
+		Message string
+	}{}
+	err = es.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// AddAwardPlace adds a new AwardPlace to the given Event.
+func (es *EventService) AddAwardPlace(eventID string, a *AwardPlace) error {
+	// POST: /event/:eventId/awardplaces
+	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/awardplaces", a)
+	if err != nil {
+		return err
+	}
+
+	return es.c.Do(req, nil)
+}
+
+// UpdateAwardPlace updates an AwardPlace for the given Event.
+func (es *EventService) UpdateAwardPlace(eventID string, a *AwardPlace) error {
+	// PUT: /event/:eventId/awardplace/:awardplaceId
+	req, err := es.c.NewRequest("PUT", fmt.Sprintf("/event/%s/awardplace/%d", eventID, a.ID), a)
+	if err != nil {
+		return err
+	}
+
+	return es.c.Do(req, nil)
+}
+
+// DeleteAwardPlace removes an AwardPlace from the given Event.
+func (es *EventService) DeleteAwardPlace(eventID string, awardPlaceID int) error {
+	// DELETE: /event/:eventId/awardplace/:awardplaceId
+	req, err := es.c.NewRequest("DELETE", fmt.Sprintf("/event/%s/awardplace/%d", eventID, awardPlaceID), nil)
+	if err != nil {
+		return err
+	}
+
+	return es.c.Do(req, nil)
+}
+
+// EventBeersRequest contains parameters for specifying desired
+// Beers for a given Event.
+type EventBeersRequest struct {
+	Page            int    `url:"p, omitempty"`
+	OnlyWinnders    string `url:"onlyWinners,omitempty"` // Y/N
+	AwardCategoryID string `url:"awardCategoryId,omitempty"`
+	AwardPlaceID    string `url:"awardPlaceId,omitempty"`
+}
+
+// ListBeers returns a page of Beers for the given Event.
+func (es *EventService) ListBeers(eventID string, q *EventBeersRequest) (bl BeerList, err error) {
+	// GET: /event/:eventID/beers
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", "/event/"+eventID+"/beers", q)
+	if err != nil {
+		return
+	}
+
+	err = es.c.Do(req, &bl)
+	return
+}
+
+// GetBeer retrieves the Beer with the given ID for the given Event.
+func (es *EventService) GetBeer(eventID, beerID string) (b Beer, err error) {
+	// GET: /event/:eventId/beer/:beerId
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", "/event/"+eventID+"/beer/"+beerID, nil)
+	if err != nil {
+		return
+	}
+
+	eventBeerResp := struct {
+		Status  string
+		Data    Beer
+		Message string
+	}{}
+	err = es.c.Do(req, &eventBeerResp)
+	return eventBeerResp.Data, err
+}
+
+// EventChangeBeerRequest contains parameters for changing or adding
+// a new Beer to an Event.
+type EventChangeBeerRequest struct {
+	IsPouring       string `url:"isPouring"`
+	AwardCategoryID string `url:"awardCategoryId"`
+	AwardPlaceID    string `url:"awardPlaceId"`
+}
+
+type eventAddBeerRequest struct {
+	BeerID string `url:"beerId"`
+	EventChangeBeerRequest
+}
+
+// AddBeer adds the Beer with the given ID to the given Event.
+func (es *EventService) AddBeer(eventID, beerID string, q *EventChangeBeerRequest) error {
+	// POST: /event/:eventId/beers
+	var params *eventAddBeerRequest
+	if q != nil {
+		params = &eventAddBeerRequest{beerID, *q}
+	} else {
+		params = &eventAddBeerRequest{BeerID: beerID}
+	}
+	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/beer/"+beerID, params)
+	if err != nil {
+		return err
+	}
+	return es.c.Do(req, nil)
+}
+
+// UpdateBeer updates the Beer with the given ID for the given Event.
+func (es *EventService) UpdateBeer(eventID, beerID string, q *EventChangeBeerRequest) error {
+	// PUT: /event/:eventId/beer/:beerId
+	req, err := es.c.NewRequest("PUT", "/event/"+eventID+"/beer/"+beerID, q)
+	if err != nil {
+		return err
+	}
+	return es.c.Do(req, nil)
+}
+
+// DeleteBeer removes the Beer with the given ID from the given Event.
+func (es *EventService) DeleteBeer(eventID, beerID string) error {
+	// DELETE: /event/:eventId/beer/:beerId
+	req, err := es.c.NewRequest("DELETE", "/event/"+eventID+"/beer/"+beerID, nil)
+	if err != nil {
+		return err
+	}
+	return es.c.Do(req, nil)
+}
+
+// EventBreweriesRequest contains parameters for specifying desired
+// Breweries for a given Event.
+type EventBreweriesRequest struct {
+	Page            int    `url:"p,omitempty"`
+	OnlyWinners     string `url:"onlyWinners,omitempty"` // Y/N
+	AwardCategoryID string `url:"awardCategoryId,omitempty"`
+	AwardPlaceID    string `url:"awardPlaceId,omitempty"`
+}
+
+// ListBreweries returns a page of Breweries for the given Event.
+func (es *EventService) ListBreweries(eventID string, q *EventBreweriesRequest) (bl BreweryList, err error) {
+	// GET: /event/:eventID/breweries
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", "/event/"+eventID+"/breweries", q)
+	if err != nil {
+		return
+	}
+
+	err = es.c.Do(req, &bl)
+	return
+}
+
+// GetBrewery retrieves the Brewery with the given ID for the given Event.
+func (es *EventService) GetBrewery(eventID, breweryID string) (b Brewery, err error) {
+	// GET: /event/:eventID/brewery/:breweryID
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", "/event/"+eventID+"/brewery/"+breweryID, nil)
+	if err != nil {
+		return
+	}
+
+	eventBreweryResp := struct {
+		Status  string
+		Data    Brewery
+		Message string
+	}{}
+	err = es.c.Do(req, &eventBreweryResp)
+	return eventBreweryResp.Data, err
+}
+
+// EventChangeBreweryRequest contains parameters for changing or adding
+// a new Brewery to an Event.
+type EventChangeBreweryRequest struct {
+	AwardCategoryID string `url:"awardCategoryId,omitempty"`
+	AwardPlaceID    string `url:"awardPlaceId,omitempty"`
+}
+
+// TODO: test the encoding of embedded structs:
+type eventAddBreweryRequest struct {
+	BreweryID string `url:"breweryId"`
+	EventChangeBreweryRequest
+}
+
+// AddBrewery adds the Brewery with the given ID to the given Event.
+func (es *EventService) AddBrewery(eventID, breweryID string, q *EventChangeBreweryRequest) error {
+	// POST: /event/:eventID/brewery/:breweryID
+	var params *eventAddBreweryRequest
+	if q != nil {
+		params = &eventAddBreweryRequest{breweryID, *q}
+	} else {
+		params = &eventAddBreweryRequest{BreweryID: breweryID}
+	}
+
+	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/brewery/"+breweryID, params)
+	if err != nil {
+		return err
+	}
+	return es.c.Do(req, nil)
+}
+
+// UpdateBrewery updates the Brewery with the given ID for the given Event.
+func (es *EventService) UpdateBrewery(eventID, breweryID string, q *EventChangeBreweryRequest) error {
+	// PUT: /event/:eventID/brewery/:breweryID
+	req, err := es.c.NewRequest("PUT", "/event/"+eventID+"/brewery/"+breweryID, q)
+	if err != nil {
+		return err
+	}
+	return es.c.Do(req, nil)
+}
+
+// DeleteBrewery removes the Brewery with the given ID from the given Event.
+func (es *EventService) DeleteBrewery(eventID, breweryID string) error {
+	// DELETE: /event/:eventID/brewery/:breweryID
+	req, err := es.c.NewRequest("DELETE", "/event/"+eventID+"/brewery/"+breweryID, nil)
+	if err != nil {
+		return err
+	}
+	return es.c.Do(req, nil)
+}
+
+// ListSocialAccounts returns a slice of all social media accounts associated with the given Event.
+func (es *EventService) ListSocialAccounts(eventID string) (sl []SocialAccount, err error) {
+	// GET: /event/:eventId/socialaccounts
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", "/event/"+eventID+"/socialaccounts", nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    []SocialAccount
+		Message string
+	}{}
+	err = es.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// GetSocialAccount retrieves the SocialAccount with the given ID for the given Event.
+func (es *EventService) GetSocialAccount(eventID string, socialAccountID int) (s SocialAccount, err error) {
+	// GET: /event/:eventId/socialaccount/:socialaccountId
+	var req *http.Request
+	req, err = es.c.NewRequest("GET", fmt.Sprintf("/event/%s/socialaccount/%d", eventID, socialAccountID), nil)
+	if err != nil {
+		return
+	}
+
+	resp := struct {
+		Status  string
+		Data    SocialAccount
+		Message string
+	}{}
+	err = es.c.Do(req, &resp)
+	return resp.Data, err
+}
+
+// AddSocialAccount adds a new SocialAccount to the given Event.
+func (es *EventService) AddSocialAccount(eventID string, s *SocialAccount) error {
+	// POST: /event/:eventId/socialaccounts
+	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/socialaccounts", s)
+	if err != nil {
+		return err
+	}
+
+	return es.c.Do(req, nil)
+}
+
+// UpdateSocialAccount updates a SocialAccount for the given Event.
+func (es *EventService) UpdateSocialAccount(eventID string, s *SocialAccount) error {
+	// PUT: /event/:eventId/socialaccount/:socialaccountId
+	req, err := es.c.NewRequest("PUT", fmt.Sprintf("/event/%s/socialaccount/%d", eventID, s.ID), s)
+	if err != nil {
+		return err
+	}
+
+	return es.c.Do(req, nil)
+}
+
+// DeleteSocialAccount removes a SocialAccount from the given Event.
+func (es *EventService) DeleteSocialAccount(eventID string, socialAccountID int) error {
+	// DELETE: /event/:eventId/socialaccount/:socialaccountId
+	req, err := es.c.NewRequest("DELETE", fmt.Sprintf("/event/%s/socialaccount/%d", eventID, socialAccountID), nil)
+	if err != nil {
+		return err
+	}
 	return es.c.Do(req, nil)
 }
