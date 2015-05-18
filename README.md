@@ -2,7 +2,7 @@
 
 brewerydb is a library for accessing the [BreweryDB API](http://www.brewerydb.com)
 
-[![GoDoc](https://godoc.org/github.com/naegelejd/brewerydb?status.svg)](https://godoc.org/github.com/naegelejd/brewerydb) [![Build Status](https://travis-ci.org/naegelejd/brewerydb.svg)](https://travis-ci.org/naegelejd/brewerydb)[![Coverage Status](https://coveralls.io/repos/naegelejd/brewerydb/badge.svg?branch=master)](https://coveralls.io/r/naegelejd/brewerydb?branch=master)
+[![GoDoc](https://godoc.org/github.com/naegelejd/brewerydb?status.svg)](https://godoc.org/github.com/naegelejd/brewerydb) [![Build Status](https://travis-ci.org/naegelejd/brewerydb.svg)](https://travis-ci.org/naegelejd/brewerydb)[![Coverage Status](https://coveralls.io/repos/naegelejd/brewerydb/badge.svg?branch=master)](https://coveralls.io/r/naegelejd/brewerydb?branch=master)<img src="https://sourcegraph.com/api/repos/github.com/naegelejd/brewerydb/.counters/views.svg?no-count=1" alt="views" style="display:none;"><img src="https://sourcegraph.com/api/repos/github.com/naegelejd/brewerydb/.counters/views-24h.svg" alt="views-24h" style="display:none;">
 
 ## usage
 
