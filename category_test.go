@@ -37,7 +37,7 @@ func TestCategorylist(t *testing.T) {
 	data := loadTestData("category.list.json", t)
 	defer data.Close()
 
-	mux.HandleFunc("/categories/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/categories", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		io.Copy(w, data)
 	})

@@ -42,7 +42,7 @@ func TestBeerList(t *testing.T) {
 	defer data.Close()
 
 	const abv = "8"
-	mux.HandleFunc("/beers/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/beers", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		if v := r.FormValue("abv"); v != abv {
 			t.Fatalf("Request.FormValue abv = %v, wanted %v", v, abv)
@@ -70,7 +70,125 @@ func TestBeerAdd(t *testing.T) {
 }
 
 func TestBeerUpdate(t *testing.T) {
+	setup()
+	defer teardown()
 
+	beer := &Beer{
+		ID:              "o9TSOv",
+		Name:            "The Truth",
+		Description:     "Hop bomb",
+		FoodPairings:    "Barbecue",
+		OriginalGravity: "1.0",
+		ABV:             "8.7",
+		IBU:             "80",
+		GlasswareID:     5,
+		Glass:           Glass{ID: 5, Name: "Pint"},
+		StyleID:         31,
+		IsOrganic:       "N",
+		Labels: Labels{
+			"https://s3.amazonaws.com/brewerydbapi/beer/o9TSOv/upload_nIhalb-icon.png",
+			"https://s3.amazonaws.com/brewerydbapi/beer/o9TSOv/upload_nIhalb-medium.png",
+			"https://s3.amazonaws.com/brewerydbapi/beer/o9TSOv/upload_nIhalb-large.png",
+		},
+		Label:              "https://s3.amazonaws.com/brewerydbapi/beer/o9TSOv/upload_nIhalb-large.png",
+		Brewery:            []string{"jmGoBA"},
+		ServingTemperature: TemperatureCool,
+		Status:             "verified",
+		AvailableID:        1,
+		Available:          Availability{ID: 1, Name: "Year Round"},
+		SrmID:              6,
+		SRM:                SRM{ID: 6, Name: "6", Hex: "F8A600"},
+		Year:               2013,
+	}
+
+	const id = "o9TSOv"
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		checkURLSuffix(t, r, id)
+
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "failed to parse form", http.StatusBadRequest)
+		}
+
+		checkPostFormValue(t, r, "name", beer.Name)
+		checkPostFormValue(t, r, "description", beer.Description)
+		checkPostFormValue(t, r, "foodPairings", beer.FoodPairings)
+		checkPostFormValue(t, r, "originalGravity", beer.OriginalGravity)
+		checkPostFormValue(t, r, "abv", beer.ABV)
+		checkPostFormValue(t, r, "ibu", beer.IBU)
+		checkPostFormValue(t, r, "glasswareId", strconv.Itoa(beer.GlasswareID))
+		checkPostFormValue(t, r, "styleId", strconv.Itoa(beer.StyleID))
+		checkPostFormValue(t, r, "isOrganic", beer.IsOrganic)
+		checkPostFormValue(t, r, "label", beer.Label)
+		checkPostFormValue(t, r, "brewery", beer.Brewery[0])
+		checkPostFormValue(t, r, "servingTemperature", string(beer.ServingTemperature))
+		checkPostFormValue(t, r, "availableId", strconv.Itoa(beer.AvailableID))
+		checkPostFormValue(t, r, "srmId", strconv.Itoa(beer.SrmID))
+		checkPostFormValue(t, r, "year", strconv.Itoa(beer.Year))
+
+		// Check that fiels tagged with "-" or "omitempty" are NOT encoded
+		checkPostFormDNE(t, r, "id", "status", "beerVariationId")
+	})
+
+	if err := client.Beer.Update(id, beer); err != nil {
+		t.Fatal(err)
+	}
+
+	// TODO: enable this test
+	t.Skip()
+	if client.Beer.Update(id, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestBeerUpdateSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	account := &SocialAccount{
+		ID:            2,
+		SocialMediaID: 8,
+		SocialSite: SocialSite{
+			ID:      8,
+			Name:    "Google Plus",
+			Website: "https://plus.google.com/u/0/",
+		},
+		Handle: "flying_dog",
+	}
+
+	const id = "o9TSOv"
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccount" {
+			t.Fatal("bad URL, expected \"/beer/:beerId/socialaccount/:socialaccountId")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(account.ID) {
+			http.Error(w, "invalid SocialAccount ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "socialmediaId", strconv.Itoa(account.SocialMediaID))
+		checkPostFormValue(t, r, "handle", account.Handle)
+
+		checkPostFormDNE(t, r, "id", "socialMedia")
+	})
+
+	if err := client.Beer.UpdateSocialAccount(id, account); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Beer.UpdateSocialAccount("******", account) == nil {
+		t.Fatal("expected HTTP error")
+	}
+
+	// TODO: enable this test:
+	t.Skip()
+	if client.Beer.UpdateSocialAccount(id, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
 }
 
 func TestBeerDelete(t *testing.T) {

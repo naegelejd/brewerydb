@@ -17,7 +17,7 @@ func TestSearchBeer(t *testing.T) {
 		query = "flying"
 		page  = 1
 	)
-	mux.HandleFunc("/search/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
 		if q := r.FormValue("q"); q != query {
@@ -52,7 +52,7 @@ func TestSearchBrewery(t *testing.T) {
 		query = "dog"
 		page  = 1
 	)
-	mux.HandleFunc("/search/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
 		if q := r.FormValue("q"); q != query {
@@ -87,7 +87,7 @@ func TestSearchEvent(t *testing.T) {
 		query = "festival"
 		page  = 1
 	)
-	mux.HandleFunc("/search/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
 		if q := r.FormValue("q"); q != query {
@@ -122,7 +122,7 @@ func TestSearchGuild(t *testing.T) {
 		query = "maryland"
 		page  = 1
 	)
-	mux.HandleFunc("/search/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
 		if q := r.FormValue("q"); q != query {

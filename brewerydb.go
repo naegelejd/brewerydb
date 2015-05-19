@@ -13,6 +13,8 @@ import (
 	"github.com/google/go-querystring/query"
 	"io"
 	"net/http"
+	"net/url"
+	"strconv"
 )
 
 // apiURL is not const so it can be stubbed in unit tests.
@@ -83,23 +85,51 @@ func NewClient(apiKey string) *Client {
 // NewRequest creates a new http.Request with the given method,
 // BreweryDB endpoint, and optionally a struct to be URL-encoded
 // in the request.
-func (c *Client) NewRequest(method string, endpoint string, data interface{}) (*http.Request, error) {
-	url := apiURL + endpoint + "/?key=" + c.apiKey
-	var body io.Reader
+func (c *Client) NewRequest(method string, endpoint string, data interface{}) (req *http.Request, err error) {
+	var u *url.URL
+	u, err = url.Parse(apiURL)
+	if err != nil {
+		return
+	}
+	u.Path += endpoint
+
+	var dataVals url.Values
 	if data != nil {
-		vals, err := query.Values(data)
+		dataVals, err = query.Values(data)
 		if err != nil {
-			return nil, err
+			return
 		}
-		payload := vals.Encode()
-		if method == "GET" {
-			url += "&" + payload
-		} else {
-			body = bytes.NewBufferString(payload)
-		}
+	} else {
+		dataVals = url.Values{}
 	}
 
-	return http.NewRequest(method, url, body)
+	switch method {
+	case "GET":
+		fallthrough
+	case "DELETE":
+		dataVals.Set("key", c.apiKey)
+		u.RawQuery = dataVals.Encode()
+		req, err = http.NewRequest(method, u.String(), nil)
+	case "POST":
+		fallthrough
+	case "PUT":
+		q := url.Values{}
+		q.Set("key", c.apiKey)
+		u.RawQuery = q.Encode()
+
+		payload := dataVals.Encode()
+		body := bytes.NewBufferString(payload)
+		req, err = http.NewRequest(method, u.String(), body)
+		if err != nil {
+			return
+		}
+		req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+		req.Header.Add("Content-Length", strconv.Itoa(len(payload)))
+	default:
+		err = fmt.Errorf("Unknown HTTP method: %s", method)
+	}
+
+	return
 }
 
 // Do performs the given http.Request and optionally

@@ -120,25 +120,28 @@ type SRM struct {
 	Name string
 }
 
+// Labels is a collection of up to three differently-sized image URLs.
+type Labels struct {
+	Icon   string `url:"-"`
+	Medium string `url:"-"`
+	Large  string `url:"-"`
+}
+
 // Beer contains all relevant information for a single Beer.
 type Beer struct {
-	ID              string `url:"-"`
-	Name            string `url:"name"` // Required
-	Description     string `url:"description,omitempty"`
-	FoodPairings    string `url:"foodPairings,omitempty"`
-	OriginalGravity string `url:"originalGravity,omitempty"`
-	ABV             string `url:"abv,omitempty"`
-	IBU             string `url:"ibu,omitempty"`
-	GlasswareID     int    `url:"glasswareId,omitempty"`
-	Glass           Glass  `url:"-"`
-	StyleID         int    `url:"styleId"` // Required
-	Style           Style  `url:"-"`
-	IsOrganic       string `url:"isOrganic,omitempty"`
-	Labels          struct {
-		Medium string `url:"-"`
-		Large  string `url:"-"`
-		Icon   string `url:"-"`
-	} `url:"-"`
+	ID                        string          `url:"-"`
+	Name                      string          `url:"name"` // Required
+	Description               string          `url:"description,omitempty"`
+	FoodPairings              string          `url:"foodPairings,omitempty"`
+	OriginalGravity           string          `url:"originalGravity,omitempty"`
+	ABV                       string          `url:"abv,omitempty"`
+	IBU                       string          `url:"ibu,omitempty"`
+	GlasswareID               int             `url:"glasswareId,omitempty"`
+	Glass                     Glass           `url:"-"`
+	StyleID                   int             `url:"styleId"` // Required
+	Style                     Style           `url:"-"`
+	IsOrganic                 string          `url:"isOrganic,omitempty"`
+	Labels                    Labels          `url:"-"`
 	Label                     string          `url:"label,omitempty"`   // base64. Only used for adding/updating Beers.
 	Brewery                   []string        `url:"brewery,omitempty"` // breweryID list. Only used for adding/updating Beers.
 	ServingTemperature        BeerTemperature `url:"servingTemperature,omitempty"`
@@ -151,7 +154,7 @@ type Beer struct {
 	BeerVariation             struct {
 		// TODO: instance of a Beer??
 	} `url:"-"`
-	SrmID      int    `url:"srmID,omitempty"`
+	SrmID      int    `url:"srmId,omitempty"`
 	SRM        SRM    `url:"-"`
 	Year       int    `url:"year,omitempty"`
 	CreateDate string `url:"-"`

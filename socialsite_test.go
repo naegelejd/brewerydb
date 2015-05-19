@@ -37,7 +37,7 @@ func TestSocialSiteList(t *testing.T) {
 	data := loadTestData("socialsite.list.json", t)
 	defer data.Close()
 
-	mux.HandleFunc("/socialsites/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/socialsites", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		io.Copy(w, data)
 	})

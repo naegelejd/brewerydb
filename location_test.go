@@ -41,7 +41,7 @@ func TestLocationList(t *testing.T) {
 		page   = 1
 		region = "Maryland"
 	)
-	mux.HandleFunc("/locations/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/locations", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
 		if v := r.FormValue("region"); v != region {

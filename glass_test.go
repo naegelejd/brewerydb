@@ -37,7 +37,7 @@ func TestGlassList(t *testing.T) {
 	data := loadTestData("glass.list.json", t)
 	defer data.Close()
 
-	mux.HandleFunc("/glassware/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/glassware", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		io.Copy(w, data)
 	})

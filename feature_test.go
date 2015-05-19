@@ -46,7 +46,7 @@ func TestFeatureList(t *testing.T) {
 		page = 1
 		year = 2015
 	)
-	mux.HandleFunc("/features/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/features", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
 		if v := r.FormValue("year"); v != strconv.Itoa(year) {

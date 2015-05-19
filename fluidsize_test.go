@@ -37,7 +37,7 @@ func TestFluidsizeList(t *testing.T) {
 	data := loadTestData("fluidsize.list.json", t)
 	defer data.Close()
 
-	mux.HandleFunc("/fluidsizes/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/fluidsizes", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		io.Copy(w, data)
 	})

@@ -57,3 +57,20 @@ func checkURLSuffix(t *testing.T, r *http.Request, suffix string) {
 		t.Fatalf("URL path = %s, expected suffix = %s", r.URL.Path, suffix)
 	}
 }
+
+// Checks that the Request's body contains name url-encoded with value=value
+func checkPostFormValue(t *testing.T, r *http.Request, name, value string) {
+	if v := r.PostFormValue(name); v != value {
+		t.Fatalf("%s = %v, want %v", name, v, value)
+	}
+}
+
+// Checks that each key is NOT url-encoded in the Request's Body
+func checkPostFormDNE(t *testing.T, r *http.Request, keys ...string) {
+	formMap := map[string][]string(r.PostForm)
+	for _, key := range keys {
+		if _, ok := formMap[key]; ok {
+			t.Fatalf("form value '%s' should not be encoded", key)
+		}
+	}
+}

@@ -39,7 +39,7 @@ func TestEventList(t *testing.T) {
 	defer data.Close()
 
 	const year = 2015
-	mux.HandleFunc("/events/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/events", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		if v := r.FormValue("year"); v != strconv.Itoa(year) {
 			t.Fatalf("Request.FormValue year = %v, wanted %v", v, year)

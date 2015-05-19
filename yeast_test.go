@@ -38,7 +38,7 @@ func TestYeastList(t *testing.T) {
 	defer data.Close()
 
 	const page = 1
-	mux.HandleFunc("/yeasts/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/yeasts", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
 		io.Copy(w, data)

@@ -42,7 +42,7 @@ func TestBreweryList(t *testing.T) {
 	defer data.Close()
 
 	const established = "1988"
-	mux.HandleFunc("/breweries/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/breweries", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		if v := r.FormValue("established"); v != established {
 			t.Fatalf("Request.FormValue established = %v, wanted %v", v, established)

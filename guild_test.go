@@ -42,7 +42,7 @@ func TestGuildList(t *testing.T) {
 		page = 1
 		name = "Brewers Association of Maryland"
 	)
-	mux.HandleFunc("/guilds/", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/guilds", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
 		if v := r.FormValue("name"); v != name {
