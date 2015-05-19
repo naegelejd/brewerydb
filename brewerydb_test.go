@@ -67,6 +67,9 @@ func checkPostFormValue(t *testing.T, r *http.Request, name, value string) {
 
 // Checks that each key is NOT url-encoded in the Request's Body
 func checkPostFormDNE(t *testing.T, r *http.Request, keys ...string) {
+	if err := r.ParseForm(); err != nil {
+		t.Fatal(err)
+	}
 	formMap := map[string][]string(r.PostForm)
 	for _, key := range keys {
 		if _, ok := formMap[key]; ok {

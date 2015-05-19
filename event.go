@@ -43,22 +43,18 @@ type Event struct {
 	Locality        string    `url:"locality,omitempty"`
 	Region          string    `url:"region,omitempty"`
 	PostalCode      string    `url:"postalCode,omitempty"`
-	CountryIsoCode  string    `url:"countryIsoCode"` // Required
+	CountryISOCode  string    `url:"countryIsoCode"` // Required
 	Phone           string    `url:"phone,omitempty"`
 	Website         string    `url:"website,omitempty"`
 	Longitude       float64   `url:"longitude,omitempty"`
 	Latitude        float64   `url:"latitude,omitempty"`
 	Image           string    `url:"image"` // base64. Only used for adding/updating Events.
-	Images          struct {
-		Icon   string `url:"-"`
-		Medium string `url:"-"`
-		Large  string `url:"-"`
-	} `url:"-"`
-	Status        string  `url:"-"`
-	StatusDisplay string  `url:"-"`
-	Country       Country `url:"-"`
-	CreateDate    string  `url:"-"`
-	UpdateDate    string  `url:"-"`
+	Images          Images    `url:"-"`
+	Status          string    `url:"-"`
+	StatusDisplay   string    `url:"-"`
+	Country         Country   `url:"-"`
+	CreateDate      string    `url:"-"`
+	UpdateDate      string    `url:"-"`
 }
 
 // EventOrder specifies the ordering of an EventList.
@@ -361,8 +357,8 @@ func (es *EventService) DeleteAwardPlace(eventID string, awardPlaceID int) error
 type EventBeersRequest struct {
 	Page            int    `url:"p, omitempty"`
 	OnlyWinnders    string `url:"onlyWinners,omitempty"` // Y/N
-	AwardCategoryID string `url:"awardCategoryId,omitempty"`
-	AwardPlaceID    string `url:"awardPlaceId,omitempty"`
+	AwardCategoryID int    `url:"awardcategoryId,omitempty"`
+	AwardPlaceID    int    `url:"awardplaceId,omitempty"`
 }
 
 // ListBeers returns a page of Beers for the given Event.
@@ -399,9 +395,9 @@ func (es *EventService) GetBeer(eventID, beerID string) (b Beer, err error) {
 // EventChangeBeerRequest contains parameters for changing or adding
 // a new Beer to an Event.
 type EventChangeBeerRequest struct {
-	IsPouring       string `url:"isPouring"`
-	AwardCategoryID string `url:"awardCategoryId"`
-	AwardPlaceID    string `url:"awardPlaceId"`
+	IsPouring       string `url:"isPouring,omitempty"`
+	AwardCategoryID int    `url:"awardcategoryId,omitempty"`
+	AwardPlaceID    int    `url:"awardplaceId,omitempty"`
 }
 
 type eventAddBeerRequest struct {
@@ -428,6 +424,9 @@ func (es *EventService) AddBeer(eventID, beerID string, q *EventChangeBeerReques
 // UpdateBeer updates the Beer with the given ID for the given Event.
 func (es *EventService) UpdateBeer(eventID, beerID string, q *EventChangeBeerRequest) error {
 	// PUT: /event/:eventId/beer/:beerId
+	if q == nil {
+		q = &EventChangeBeerRequest{}
+	}
 	req, err := es.c.NewRequest("PUT", "/event/"+eventID+"/beer/"+beerID, q)
 	if err != nil {
 		return err
@@ -450,8 +449,8 @@ func (es *EventService) DeleteBeer(eventID, beerID string) error {
 type EventBreweriesRequest struct {
 	Page            int    `url:"p,omitempty"`
 	OnlyWinners     string `url:"onlyWinners,omitempty"` // Y/N
-	AwardCategoryID string `url:"awardCategoryId,omitempty"`
-	AwardPlaceID    string `url:"awardPlaceId,omitempty"`
+	AwardCategoryID int    `url:"awardcategoryId,omitempty"`
+	AwardPlaceID    int    `url:"awardplaceId,omitempty"`
 }
 
 // ListBreweries returns a page of Breweries for the given Event.
@@ -488,8 +487,8 @@ func (es *EventService) GetBrewery(eventID, breweryID string) (b Brewery, err er
 // EventChangeBreweryRequest contains parameters for changing or adding
 // a new Brewery to an Event.
 type EventChangeBreweryRequest struct {
-	AwardCategoryID string `url:"awardCategoryId,omitempty"`
-	AwardPlaceID    string `url:"awardPlaceId,omitempty"`
+	AwardCategoryID int `url:"awardcategoryId,omitempty"`
+	AwardPlaceID    int `url:"awardplaceId,omitempty"`
 }
 
 // TODO: test the encoding of embedded structs:
@@ -518,6 +517,9 @@ func (es *EventService) AddBrewery(eventID, breweryID string, q *EventChangeBrew
 // UpdateBrewery updates the Brewery with the given ID for the given Event.
 func (es *EventService) UpdateBrewery(eventID, breweryID string, q *EventChangeBreweryRequest) error {
 	// PUT: /event/:eventID/brewery/:breweryID
+	if q == nil {
+		q = &EventChangeBreweryRequest{}
+	}
 	req, err := es.c.NewRequest("PUT", "/event/"+eventID+"/brewery/"+breweryID, q)
 	if err != nil {
 		return err

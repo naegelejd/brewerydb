@@ -11,10 +11,10 @@ type LocationService struct {
 
 // Country represents a country found on Earth.
 type Country struct {
-	IsoCode     string
+	ISOCode     string
 	Name        string
 	DisplayName string
-	IsoThree    string
+	ISOThree    string
 	NumberCode  int
 	URLTitle    string
 	CreateDate  string

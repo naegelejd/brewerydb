@@ -41,19 +41,15 @@ type Brewery struct {
 	Name           string `url:"name"`
 	Description    string `url:"description,omitempty"`
 	MailingListURL string `url:"mailingListUrl,omitempty"`
-	Images         struct {
-		Medium string `url:"-"`
-		Small  string `url:"-"`
-		Icon   string `url:"-"`
-	} `url:"-"`
-	Image         string `url:"image,omitempty"` // only used for adding/update Breweries
-	Established   string `url:"established,omitempty"`
-	IsOrganic     string `url:"isOrganic,omitempty"`
-	Website       string `url:"website,omitempty"`
-	Status        string `url:"-"`
-	StatusDisplay string `url:"-"`
-	CreateDate    string `url:"-"`
-	UpdateDate    string `url:"-"`
+	Images         Images `url:"-"`
+	Image          string `url:"image,omitempty"` // only used for adding/update Breweries
+	Established    string `url:"established,omitempty"`
+	IsOrganic      string `url:"isOrganic,omitempty"`
+	Website        string `url:"website,omitempty"`
+	Status         string `url:"-"`
+	StatusDisplay  string `url:"-"`
+	CreateDate     string `url:"-"`
+	UpdateDate     string `url:"-"`
 }
 
 // BreweryListRequest contains all the required and optional fields

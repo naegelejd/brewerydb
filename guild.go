@@ -18,12 +18,10 @@ type Guild struct {
 	Description string `url:"description,omitempty"`
 	Website     string `url:"website,omitempty"`
 	Image       string `url:"image,omitempty"` // Base64. Only used for adding/updating Guilds.
-	Images      struct {
-		Icon   string `url:"-"`
-		Medium string `url:"-"`
-		Large  string `url:"-"`
-	} `url:"-"`
-	Established int `url:"established,omitempty"`
+	Images      Images `url:"-"`
+	Established int    `url:"established,omitempty"`
+	CreateDate  string `url:"-"`
+	UpdateDate  string `url:"-"`
 }
 
 // GuildOrder specifies ordering of a GuildList.

@@ -1,6 +1,7 @@
 package brewerydb
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"strconv"
@@ -59,6 +60,303 @@ func TestEventList(t *testing.T) {
 		if l := 6; l != len(e.ID) {
 			t.Fatalf("Event ID len = %d, wanted %d", len(e.ID), l)
 		}
+	}
+}
+
+func TestEventAdd(t *testing.T) {
+
+}
+
+func TestEventUpdate(t *testing.T) {
+	setup()
+	defer teardown()
+
+	event := &Event{
+		ID:             "k2jMtH",
+		Name:           "Yellowstone Beer Fest",
+		Type:           EventFestival,
+		StartDate:      "2015-07-18",
+		EndDate:        "2015-07-18",
+		Description:    "Regional beer fest in Cody, Wyoming",
+		Year:           "2015",
+		Time:           "from 3:00 PM - 8:00 PM",
+		Price:          "$30 - $35",
+		VenueName:      "Park County Complex",
+		StreetAddress:  "1501 Stampede Ave.",
+		Locality:       "Cody",
+		Region:         "Wyoming",
+		PostalCode:     "82414",
+		CountryISOCode: "US",
+		Website:        "http://www.yellowstonebeerfest.com/",
+		Longitude:      -109.05873,
+		Latitude:       44.520076,
+		Image:          "https://s3.amazonaws.com/brewerydbapi/event/0oZVAo/upload_KjVkrq-large.png",
+		Images: Images{
+			"https://s3.amazonaws.com/brewerydbapi/event/0oZVAo/upload_KjVkrq-icon.png",
+			"https://s3.amazonaws.com/brewerydbapi/event/0oZVAo/upload_KjVkrq-medium.png",
+			"https://s3.amazonaws.com/brewerydbapi/event/0oZVAo/upload_KjVkrq-large.png",
+		},
+	}
+
+	const id = "k2jMtH"
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		checkURLSuffix(t, r, id)
+
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "failed to parse form", http.StatusBadRequest)
+		}
+
+		checkPostFormValue(t, r, "name", event.Name)
+		checkPostFormValue(t, r, "type", string(EventFestival))
+		checkPostFormValue(t, r, "startDate", event.StartDate)
+		checkPostFormValue(t, r, "endDate", event.EndDate)
+		checkPostFormValue(t, r, "description", event.Description)
+		checkPostFormValue(t, r, "time", event.Time)
+		checkPostFormValue(t, r, "time", event.Time)
+		checkPostFormValue(t, r, "price", event.Price)
+		checkPostFormValue(t, r, "venueName", event.VenueName)
+		checkPostFormValue(t, r, "streetAddress", event.StreetAddress)
+		checkPostFormValue(t, r, "locality", event.Locality)
+		checkPostFormValue(t, r, "region", event.Region)
+		checkPostFormValue(t, r, "postalCode", event.PostalCode)
+		checkPostFormValue(t, r, "countryIsoCode", event.CountryISOCode)
+		checkPostFormValue(t, r, "website", event.Website)
+		checkPostFormValue(t, r, "longitude", fmt.Sprintf("%.5f", event.Longitude))
+		checkPostFormValue(t, r, "latitude", fmt.Sprintf("%f", event.Latitude))
+		checkPostFormValue(t, r, "image", event.Image)
+
+		// Check that fields tagged with "-" or "omitempty" are NOT encoded
+		checkPostFormDNE(t, r, "id", "ID", "images", "Images", "status",
+			"Status", "extendedAddress", "ExtendedAddress", "phone", "Phone")
+	})
+
+	if err := client.Event.Update(id, event); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Event.Update(id, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestEventUpdateAwardCategory(t *testing.T) {
+	setup()
+	defer teardown()
+
+	category := &AwardCategory{
+		ID:          1,
+		Name:        "Best in Show",
+		Description: "Best Brew",
+		Image:       "http://www.fakeimage.com/1.jpg",
+	}
+
+	const id = "k2jMtH"
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "awardcategory" {
+			t.Fatal("bad URL, expected \"/event/:eventId/awardcategory/:awardcategoryId\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(category.ID) {
+			http.Error(w, "invalid AwardCategory ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "name", category.Name)
+		checkPostFormValue(t, r, "description", category.Description)
+		checkPostFormValue(t, r, "image", category.Image)
+
+		checkPostFormDNE(t, r, "id", "ID", "CreateDate", "UpdateDate")
+	})
+
+	if err := client.Event.UpdateAwardCategory(id, category); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Event.UpdateAwardCategory(id, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestEventUpdateAwardPlace(t *testing.T) {
+	setup()
+	defer teardown()
+
+	place := &AwardPlace{
+		ID:          1,
+		Name:        "First",
+		Description: "First Place",
+		Image:       "http://www.fakeimage.com/2.jpg",
+	}
+
+	const id = "k2jMtH"
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "awardplace" {
+			t.Fatal("bad URL, expected \"/event/:eventId/awardplace/:awardplaceId\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(place.ID) {
+			http.Error(w, "invalid AwardPlace ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "name", place.Name)
+		checkPostFormValue(t, r, "description", place.Description)
+		checkPostFormValue(t, r, "image", place.Image)
+
+		checkPostFormDNE(t, r, "id", "ID", "CreateDate", "UpdateDate")
+	})
+
+	if err := client.Event.UpdateAwardPlace(id, place); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Event.UpdateAwardPlace(id, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestEventUpdateBeer(t *testing.T) {
+	setup()
+	defer teardown()
+
+	change := &EventChangeBeerRequest{
+		IsPouring:       "Y",
+		AwardCategoryID: 2,
+		AwardPlaceID:    3,
+	}
+
+	const (
+		eventID = "k2jMtH"
+		beerID  = "o9TSOv"
+	)
+	firstTest := true
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "beer" {
+			t.Fatal("bad URL, expected \"/event/:eventId/beer/:beerId\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+		if split[4] != beerID {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+
+		if firstTest {
+			checkPostFormValue(t, r, "isPouring", change.IsPouring)
+			checkPostFormValue(t, r, "awardcategoryId", strconv.Itoa(change.AwardCategoryID))
+			checkPostFormValue(t, r, "awardplaceId", strconv.Itoa(change.AwardPlaceID))
+		}
+	})
+
+	if err := client.Event.UpdateBeer(eventID, beerID, change); err != nil {
+		t.Fatal(err)
+	}
+
+	// Allowed to pass nil *EventChangeBeerRequest
+	firstTest = false
+	if err := client.Event.UpdateBeer(eventID, beerID, nil); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestEventUpdateBrewery(t *testing.T) {
+	setup()
+	defer teardown()
+
+	change := &EventChangeBreweryRequest{
+		AwardCategoryID: 2,
+		AwardPlaceID:    3,
+	}
+
+	const (
+		eventID   = "k2jMtH"
+		breweryID = "jmGoBA"
+	)
+	firstTest := true
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "brewery" {
+			t.Fatal("bad URL, expected \"/event/:eventId/brewery/:breweryId\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+		if split[4] != breweryID {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+
+		if firstTest {
+			checkPostFormValue(t, r, "awardcategoryId", strconv.Itoa(change.AwardCategoryID))
+			checkPostFormValue(t, r, "awardplaceId", strconv.Itoa(change.AwardPlaceID))
+		}
+	})
+
+	if err := client.Event.UpdateBrewery(eventID, breweryID, change); err != nil {
+		t.Fatal(err)
+	}
+
+	// Allowed to pass nil *EventChangeBreweryRequest
+	firstTest = false
+	if err := client.Event.UpdateBrewery(eventID, breweryID, nil); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestEventUpdateSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	account := &SocialAccount{
+		ID:            2,
+		SocialMediaID: 4,
+		SocialSite: SocialSite{
+			ID:      4,
+			Name:    "Untappd",
+			Website: "https://www.untappd.com",
+		},
+		Handle: "yellowstone_beer_fest",
+	}
+
+	const id = "k2jMtH"
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccount" {
+			t.Fatal("bad URL, expected \"/event/:eventId/socialaccount/:socialaccountId\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(account.ID) {
+			http.Error(w, "invalid SocialAccount ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "socialmediaId", strconv.Itoa(account.SocialMediaID))
+		checkPostFormValue(t, r, "handle", account.Handle)
+
+		checkPostFormDNE(t, r, "id", "ID", "socialMedia", "SocialSite")
+	})
+
+	if err := client.Event.UpdateSocialAccount(id, account); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Event.UpdateSocialAccount("******", account) == nil {
+		t.Fatal("expected HTTP error")
+	}
+
+	if client.Event.UpdateSocialAccount(id, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
 	}
 }
 

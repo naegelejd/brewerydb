@@ -26,6 +26,13 @@ type Page struct {
 	P int `url:"p"`
 }
 
+// Images is a collection of up to three differently-sized image URLs.
+type Images struct {
+	Icon   string `url:"-"`
+	Medium string `url:"-"`
+	Large  string `url:"-"`
+}
+
 // Client serves as the interface to the BreweryDB API.
 type Client struct {
 	client      http.Client

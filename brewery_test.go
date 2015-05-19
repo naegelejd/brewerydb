@@ -66,6 +66,103 @@ func TestBreweryList(t *testing.T) {
 	}
 }
 
+func TestBreweryAdd(t *testing.T) {
+
+}
+
+func TestBreweryUpdate(t *testing.T) {
+	setup()
+	defer teardown()
+
+	brewery := &Brewery{
+		ID:             "jmGoBA",
+		Name:           "Flying Dog Brewery",
+		Description:    "Good people drink good beer.",
+		MailingListURL: "boss@flyingdogales.com",
+		Image:          "https://s3.amazonaws.com/brewerydbapi/brewery/jmGoBA/upload_0z9L4W-large.png",
+		Established:    "1983",
+		IsOrganic:      "N",
+		Website:        "http://www.flyingdogales.com",
+		Status:         "verified",
+	}
+	const id = "jmGoBA"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		checkURLSuffix(t, r, id)
+
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "failed to parse form", http.StatusBadRequest)
+		}
+
+		checkPostFormValue(t, r, "name", brewery.Name)
+		checkPostFormValue(t, r, "description", brewery.Description)
+		checkPostFormValue(t, r, "mailingListUrl", brewery.MailingListURL)
+		checkPostFormValue(t, r, "image", brewery.Image)
+		checkPostFormValue(t, r, "established", brewery.Established)
+		checkPostFormValue(t, r, "isOrganic", brewery.IsOrganic)
+		checkPostFormValue(t, r, "website", brewery.Website)
+
+		// Check that fields tagged with "-" or "omitempty" are NOT encoded
+		checkPostFormDNE(t, r, "id", "ID", "status", "Status")
+	})
+
+	if err := client.Brewery.Update(id, brewery); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Brewery.Update(id, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestBreweryUpdateSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	account := &SocialAccount{
+		ID:            3,
+		SocialMediaID: 1,
+		SocialSite: SocialSite{
+			ID:      1,
+			Name:    "Facebook Fan Page",
+			Website: "http://www.facebook.com",
+		},
+		Handle: "flying_dog",
+	}
+
+	const id = "jmGoBA"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccount" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/socialaccount/:socialaccountId\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(account.ID) {
+			http.Error(w, "invalid SocialAccount ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "socialmediaId", strconv.Itoa(account.SocialMediaID))
+		checkPostFormValue(t, r, "handle", account.Handle)
+
+		checkPostFormDNE(t, r, "id", "socialMedia", "SocialSite")
+	})
+
+	if err := client.Brewery.UpdateSocialAccount(id, account); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Brewery.UpdateSocialAccount("******", account) == nil {
+		t.Fatal("expected HTTP error")
+	}
+
+	if client.Brewery.UpdateSocialAccount(id, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
 func TestBreweryDelete(t *testing.T) {
 	setup()
 	defer teardown()

@@ -90,13 +90,6 @@ type SRM struct {
 	Name string
 }
 
-// Labels is a collection of up to three differently-sized image URLs.
-type Labels struct {
-	Icon   string `url:"-"`
-	Medium string `url:"-"`
-	Large  string `url:"-"`
-}
-
 // Beer contains all relevant information for a single Beer.
 type Beer struct {
 	ID                        string          `url:"-"`
@@ -111,7 +104,7 @@ type Beer struct {
 	StyleID                   int             `url:"styleId"` // Required
 	Style                     Style           `url:"-"`
 	IsOrganic                 string          `url:"isOrganic,omitempty"`
-	Labels                    Labels          `url:"-"`
+	Labels                    Images          `url:"-"`
 	Label                     string          `url:"label,omitempty"`   // base64. Only used for adding/updating Beers.
 	Brewery                   []string        `url:"brewery,omitempty"` // breweryID list. Only used for adding/updating Beers.
 	ServingTemperature        BeerTemperature `url:"servingTemperature,omitempty"`

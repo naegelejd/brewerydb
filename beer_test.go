@@ -85,7 +85,7 @@ func TestBeerUpdate(t *testing.T) {
 		Glass:           Glass{ID: 5, Name: "Pint"},
 		StyleID:         31,
 		IsOrganic:       "N",
-		Labels: Labels{
+		Labels: Images{
 			"https://s3.amazonaws.com/brewerydbapi/beer/o9TSOv/upload_nIhalb-icon.png",
 			"https://s3.amazonaws.com/brewerydbapi/beer/o9TSOv/upload_nIhalb-medium.png",
 			"https://s3.amazonaws.com/brewerydbapi/beer/o9TSOv/upload_nIhalb-large.png",
@@ -126,16 +126,14 @@ func TestBeerUpdate(t *testing.T) {
 		checkPostFormValue(t, r, "srmId", strconv.Itoa(beer.SrmID))
 		checkPostFormValue(t, r, "year", strconv.Itoa(beer.Year))
 
-		// Check that fiels tagged with "-" or "omitempty" are NOT encoded
-		checkPostFormDNE(t, r, "id", "status", "beerVariationId")
+		// Check that fields tagged with "-" or "omitempty" are NOT encoded
+		checkPostFormDNE(t, r, "id", "ID", "status", "Status", "beerVariationId", "BeerVariationID")
 	})
 
 	if err := client.Beer.Update(id, beer); err != nil {
 		t.Fatal(err)
 	}
 
-	// TODO: enable this test
-	t.Skip()
 	if client.Beer.Update(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
@@ -161,7 +159,7 @@ func TestBeerUpdateSocialAccount(t *testing.T) {
 		checkMethod(t, r, "PUT")
 		split := strings.Split(r.URL.Path, "/")
 		if split[3] != "socialaccount" {
-			t.Fatal("bad URL, expected \"/beer/:beerId/socialaccount/:socialaccountId")
+			t.Fatal("bad URL, expected \"/beer/:beerId/socialaccount/:socialaccountId\"")
 		}
 		if split[2] != id {
 			http.Error(w, "invalid Beer ID", http.StatusNotFound)
@@ -173,7 +171,7 @@ func TestBeerUpdateSocialAccount(t *testing.T) {
 		checkPostFormValue(t, r, "socialmediaId", strconv.Itoa(account.SocialMediaID))
 		checkPostFormValue(t, r, "handle", account.Handle)
 
-		checkPostFormDNE(t, r, "id", "socialMedia")
+		checkPostFormDNE(t, r, "id", "socialMedia", "SocialSite")
 	})
 
 	if err := client.Beer.UpdateSocialAccount(id, account); err != nil {
@@ -184,8 +182,6 @@ func TestBeerUpdateSocialAccount(t *testing.T) {
 		t.Fatal("expected HTTP error")
 	}
 
-	// TODO: enable this test:
-	t.Skip()
 	if client.Beer.UpdateSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
