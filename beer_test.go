@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
+	"strings"
 	"testing"
 )
 
@@ -42,7 +44,6 @@ func TestBeerList(t *testing.T) {
 	const abv = "8"
 	mux.HandleFunc("/beers/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
-		abv := r.FormValue("abv")
 		if v := r.FormValue("abv"); v != abv {
 			t.Fatalf("Request.FormValue abv = %v, wanted %v", v, abv)
 		}
@@ -73,7 +74,194 @@ func TestBeerUpdate(t *testing.T) {
 }
 
 func TestBeerDelete(t *testing.T) {
+	setup()
+	defer teardown()
 
+	const (
+		id0 = "o9TSOv"
+		id1 = "******"
+	)
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "DELETE")
+		split := strings.Split(r.URL.Path, "/")
+		if split[1] != "beer" {
+			t.Fatal("bad URL, expected \"/beer/:beerId\"")
+		}
+		if split[2] != id0 {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+		// TODO: should Delete tests care about JSON response?
+		// io.Copy(w, bytes.NewBufferString(`{
+		// "status": "success",
+		// "data": 1,
+		// "message": "..."
+		// }`))
+
+	})
+
+	if err := client.Beer.Delete(id0); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := client.Beer.Delete(id1); err == nil {
+		t.Fatal("expected HTTP 404")
+	}
+}
+
+func TestBeerDeleteBrewery(t *testing.T) {
+	setup()
+	defer teardown()
+
+	const (
+		beerID0    = "o9TSOv"
+		beerID1    = "******"
+		breweryID0 = "jmGoBA"
+		breweryID1 = "~~~~~~"
+		locationID = "z9H6HJ"
+	)
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "DELETE")
+		split := strings.Split(r.URL.Path, "/")
+		if split[1] != "beer" || split[3] != "brewery" {
+			t.Fatal("bad URL, expected \"/beer/:beerId/brewery/:breweryId\"")
+		}
+		if split[2] != beerID0 {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+		if split[4] != breweryID0 {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+
+		if v := r.FormValue("locationid"); v != "" && v != locationID {
+			t.Fatalf("Request.FormValue locationId = %v, wanted %v", v, locationID)
+		}
+	})
+
+	delReq := &BeerBreweryRequest{LocationID: locationID}
+
+	// check valid DeleteBrewery with locationID
+	if err := client.Beer.DeleteBrewery(beerID0, breweryID0, delReq); err != nil {
+		t.Fatal(err)
+	}
+	// check valid DeleteBrewery with nil locationID
+	if err := client.Beer.DeleteBrewery(beerID0, breweryID0, nil); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Beer.DeleteBrewery(beerID0, breweryID1, nil) == nil {
+		t.Fatal("expected HTTP 404 error")
+	}
+
+	if client.Beer.DeleteBrewery(beerID1, breweryID0, nil) == nil {
+		t.Fatal("expected HTTP 404 error")
+	}
+}
+
+type beerDeleter func(string, int) error
+
+func testBeerDeleteHelper(t *testing.T, name, beerID string, otherID int, del beerDeleter) {
+	setup()
+	defer teardown()
+
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "DELETE")
+		split := strings.Split(r.URL.Path, "/")
+		if split[1] != "beer" || split[3] != name {
+			t.Fatalf("bad URL, expected \"/beer/:beerId/%s/:%sId\"", name, name)
+		}
+		if split[2] != beerID {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(otherID) {
+			http.Error(w, "invalid "+name+" ID", http.StatusNotFound)
+		}
+	})
+
+	if err := del(beerID, otherID); err != nil {
+		log.Fatal(err)
+	}
+
+	if del(beerID, -1) == nil {
+		t.Fatal("expected HTTP 404 error")
+	}
+
+	if del("*~*~*~", otherID) == nil {
+		t.Fatal("expected HTTP 404 error")
+	}
+}
+
+func TestBeerDeleteAdjunct(t *testing.T) {
+	setup()
+	defer teardown()
+
+	beerID := "o9TSOv"
+	adjunctID := 923
+	testBeerDeleteHelper(t, "adjunct", beerID, adjunctID, client.Beer.DeleteAdjunct)
+}
+
+func TestBeerDeleteFermentable(t *testing.T) {
+	setup()
+	defer teardown()
+
+	beerID := "o9TSOv"
+	fermentableID := 753
+	testBeerDeleteHelper(t, "fermentable", beerID, fermentableID, client.Beer.DeleteFermentable)
+}
+
+func TestBeerDeleteHop(t *testing.T) {
+	setup()
+	defer teardown()
+
+	beerID := "o9TSOv"
+	hopID := 42
+	testBeerDeleteHelper(t, "hop", beerID, hopID, client.Beer.DeleteHop)
+}
+
+func TestBeerDeleteSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	beerID := "o9TSOv"
+	socialID := 3
+	testBeerDeleteHelper(t, "socialaccount", beerID, socialID, client.Beer.DeleteSocialAccount)
+}
+
+func TestBeerDeleteYeast(t *testing.T) {
+	setup()
+	defer teardown()
+
+	beerID := "o9TSOv"
+	yeastID := 1835
+	testBeerDeleteHelper(t, "yeast", beerID, yeastID, client.Beer.DeleteYeast)
+}
+
+func TestBeerRandom(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data, err := os.Open("test_data/beer.getrandom.json")
+	if err != nil {
+		t.Fatal("Failed to open test data file")
+	}
+	defer data.Close()
+
+	mux.HandleFunc("/beer/random/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		io.Copy(w, data)
+	})
+
+	b, err := client.Beer.GetRandom(&RandomBeerRequest{ABV: "8"})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Can't really verify specific information since it's a random beer
+	if len(b.Name) <= 0 {
+		t.Fatal("Expected non-empty beer name")
+	}
+	if len(b.ID) <= 0 {
+		t.Fatal("Expected non-empty beer ID")
+	}
 }
 
 func ExampleBeerService_List() {
@@ -99,35 +287,6 @@ func ExampleBeerService_Breweries() {
 	}
 	for _, b := range breweries {
 		fmt.Println(b.Name)
-	}
-}
-
-func TestBeerRandom(t *testing.T) {
-	setup()
-	defer teardown()
-
-	data, err := os.Open("test_data/beer.random.json")
-	if err != nil {
-		t.Fatal("Failed to open test data file")
-	}
-	defer data.Close()
-
-	mux.HandleFunc("/beer/random/", func(w http.ResponseWriter, r *http.Request) {
-		checkMethod(t, r, "GET")
-		io.Copy(w, data)
-	})
-
-	b, err := client.Beer.GetRandom(&RandomBeerRequest{ABV: "8"})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// Can't really verify specific information since it's a random beer
-	if len(b.Name) <= 0 {
-		t.Fatal("Expected non-empty beer name")
-	}
-	if len(b.ID) <= 0 {
-		t.Fatal("Expected non-empty beer ID")
 	}
 }
 

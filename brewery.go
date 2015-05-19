@@ -193,7 +193,7 @@ func (bs *BreweryService) AddAlternateName(breweryID, name string) error {
 // DeleteAlternateName removes the AlternateName with the given ID from the Brewery with the given ID.
 func (bs *BreweryService) DeleteAlternateName(breweryID string, alternateNameID int) error {
 	// DELETE: /brewery/:breweryId/alternatename/:alternatenameId
-	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/brewery/%s/alternatenames/%d", breweryID, alternateNameID), nil)
+	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/brewery/%s/alternatename/%d", breweryID, alternateNameID), nil)
 	if err != nil {
 		return err
 	}
@@ -271,10 +271,10 @@ func (bs *BreweryService) ListGuilds(breweryID string) (al []Guild, err error) {
 
 // AddGuild adds the Guild with the given ID to the Brewery with the given ID.
 // discount is optional (value of discount offered to guild members).
-func (bs *BreweryService) AddGuild(breweryID string, guildID int, discount *string) error {
+func (bs *BreweryService) AddGuild(breweryID string, guildID string, discount *string) error {
 	// POST: /brewery/:breweryId/guilds
 	q := struct {
-		ID       int    `url:"guildId"`
+		ID       string `url:"guildId"`
 		Discount string `url:"discount"`
 	}{ID: guildID}
 	if discount != nil {
@@ -290,9 +290,9 @@ func (bs *BreweryService) AddGuild(breweryID string, guildID int, discount *stri
 }
 
 // DeleteGuild removes the Guild with the given ID from the Brewery with the given ID.
-func (bs *BreweryService) DeleteGuild(breweryID string, guildID int) error {
+func (bs *BreweryService) DeleteGuild(breweryID string, guildID string) error {
 	// DELETE: /brewery/:breweryId/guild/:guildId
-	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/brewery/%s/guild/%d", breweryID, guildID), nil)
+	req, err := bs.c.NewRequest("DELETE", "/brewery/"+breweryID+"/guild/"+guildID, nil)
 	if err != nil {
 		return err
 	}

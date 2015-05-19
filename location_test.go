@@ -3,6 +3,7 @@ package brewerydb
 import (
 	"io"
 	"net/http"
+	"strings"
 	"testing"
 )
 
@@ -68,5 +69,31 @@ func TestLocationList(t *testing.T) {
 		if l.Longitude == 0.0 {
 			t.Fatal("Expected non-zero longitude")
 		}
+	}
+}
+
+func TestLocationDelete(t *testing.T) {
+	setup()
+	defer teardown()
+
+	const id = "z9H6HJ"
+	mux.HandleFunc("/location/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "DELETE")
+		split := strings.Split(r.URL.Path, "/")
+		if split[1] != "location" {
+			t.Fatal("bad URL, expected \"/location/:locationId\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Location ID", http.StatusNotFound)
+		}
+
+	})
+
+	if err := client.Location.Delete(id); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := client.Location.Delete("******"); err == nil {
+		t.Fatal("expected HTTP 404")
 	}
 }

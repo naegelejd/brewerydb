@@ -29,7 +29,7 @@ func main() {
 		"adjunct.list.json":     adjunctList,
 		"beer.get.json":         beerGet,
 		"beer.list.json":        beerList,
-		"beer.random.json":      beerRandom,
+		"beer.getrandom.json":   beerGetRandom,
 		"brewery.get.json":      breweryGet,
 		"brewery.list.json":     breweryList,
 		"category.get.json":     categoryGet,
@@ -133,8 +133,8 @@ func beerList(c *brewerydb.Client) error {
 	return err
 }
 
-func beerRandom(c *brewerydb.Client) error {
-	_, err := c.Beer.Random(&brewerydb.RandomBeerRequest{ABV: "8"})
+func beerGetRandom(c *brewerydb.Client) error {
+	_, err := c.Beer.GetRandom(&brewerydb.RandomBeerRequest{ABV: "8"})
 	return err
 }
 
