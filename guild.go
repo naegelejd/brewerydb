@@ -95,6 +95,9 @@ func (gs *GuildService) Get(guildID string) (g Guild, err error) {
 // The Guild Name is required.
 func (gs *GuildService) Add(g *Guild) (string, error) {
 	// POST: /guilds
+	if g == nil {
+		return "", fmt.Errorf("nil Guild")
+	}
 	req, err := gs.c.NewRequest("POST", "/guilds", g)
 	if err != nil {
 		return "", err
@@ -115,6 +118,9 @@ func (gs *GuildService) Add(g *Guild) (string, error) {
 // Update updates the Guild with the given guildID to match the given Guild.
 func (gs *GuildService) Update(guildID string, g *Guild) error {
 	// PUT: /guild/:guildID
+	if g == nil {
+		return fmt.Errorf("nil Guild")
+	}
 	req, err := gs.c.NewRequest("PUT", "/guild/"+guildID, g)
 	if err != nil {
 		return err
@@ -191,6 +197,9 @@ func (gs *GuildService) GetSocialAccount(guildID string, socialAccountID int) (s
 // AddSocialAccount adds a new SocialAccount to the given Guild.
 func (gs *GuildService) AddSocialAccount(guildID string, s *SocialAccount) error {
 	// POST: /guild/:guildId/socialaccounts
+	if s == nil {
+		return fmt.Errorf("nil SocialAccount")
+	}
 	req, err := gs.c.NewRequest("POST", "/guild/"+guildID+"/socialaccounts", s)
 	if err != nil {
 		return err
@@ -202,6 +211,9 @@ func (gs *GuildService) AddSocialAccount(guildID string, s *SocialAccount) error
 // UpdateSocialAccount updates a SocialAccount for the given Guild.
 func (gs *GuildService) UpdateSocialAccount(guildID string, s *SocialAccount) error {
 	// PUT: /guild/:guildId/socialaccount/:socialAccountId
+	if s == nil {
+		return fmt.Errorf("nil SocialAccount")
+	}
 	req, err := gs.c.NewRequest("PUT", fmt.Sprintf("/guild/%s/socialaccount/%d", guildID, s.ID), s)
 	if err != nil {
 		return err

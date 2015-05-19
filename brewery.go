@@ -109,6 +109,10 @@ func (bs *BreweryService) Get(id string) (brewery Brewery, err error) {
 // Add adds a new Brewery to the BreweryDB and returns its new ID on success.
 func (bs *BreweryService) Add(b *Brewery) (id string, err error) {
 	// POST: /breweries
+	if b == nil {
+		err = fmt.Errorf("nil Brewery")
+		return
+	}
 	var req *http.Request
 	req, err = bs.c.NewRequest("POST", "/breweries", b)
 	if err != nil {
@@ -127,6 +131,9 @@ func (bs *BreweryService) Add(b *Brewery) (id string, err error) {
 // Update changes an existing Brewery in the BreweryDB.
 func (bs *BreweryService) Update(breweryID string, b *Brewery) error {
 	// PUT: /brewery/:breweryId
+	if b == nil {
+		return fmt.Errorf("nil Brewery")
+	}
 	req, err := bs.c.NewRequest("PUT", "/brewery/"+breweryID, b)
 	if err != nil {
 		return err
@@ -320,6 +327,9 @@ func (bs *BreweryService) ListLocations(breweryID string) (ll []Location, err er
 // AddLocation adds a new location for the Brewery with the given ID.
 func (bs *BreweryService) AddLocation(breweryID string, loc *Location) error {
 	// POST: /brewery/:breweryId/locations
+	if loc == nil {
+		return fmt.Errorf("nil Location")
+	}
 	req, err := bs.c.NewRequest("POST", "/brewery/"+breweryID+"/locations", loc)
 	if err != nil {
 		return err
@@ -395,6 +405,9 @@ func (bs *BreweryService) GetSocialAccount(breweryID string, socialAccountID int
 // AddSocialAccount adds a new SocialAccount to the given Brewery.
 func (bs *BreweryService) AddSocialAccount(breweryID string, s *SocialAccount) error {
 	// POST: /brewery/:breweryId/socialaccounts
+	if s == nil {
+		return fmt.Errorf("nil SocialAccount")
+	}
 	req, err := bs.c.NewRequest("POST", "/brewery/"+breweryID+"/socialaccounts", s)
 	if err != nil {
 		return err
@@ -406,6 +419,9 @@ func (bs *BreweryService) AddSocialAccount(breweryID string, s *SocialAccount) e
 // UpdateSocialAccount updates a SocialAccount for the given Brewery.
 func (bs *BreweryService) UpdateSocialAccount(breweryID string, s *SocialAccount) error {
 	// PUT: /brewery/:breweryId/socialaccount/:socialaccountId
+	if s == nil {
+		return fmt.Errorf("nil SocialAccount")
+	}
 	req, err := bs.c.NewRequest("PUT", fmt.Sprintf("/brewery/%s/socialaccount/%d", breweryID, s.ID), s)
 	if err != nil {
 		return err

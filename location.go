@@ -1,5 +1,6 @@
 package brewerydb
 
+import "fmt"
 import "net/http"
 
 // LocationService provides access to the BreweryDB Location API.
@@ -158,6 +159,9 @@ func (ls *LocationService) Get(locID string) (l Location, err error) {
 // The CountryISOCode of the given Location *must* be set.
 func (ls *LocationService) Update(locID string, l *Location) error {
 	// PUT: /location/:locationID
+	if l == nil {
+		return fmt.Errorf("nil Location")
+	}
 	req, err := ls.c.NewRequest("PUT", "/location/"+locID, l)
 	if err != nil {
 		return err

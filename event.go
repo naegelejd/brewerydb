@@ -148,6 +148,9 @@ func (es *EventService) Get(eventID string) (e Event, err error) {
 // - EndDate (YYYY-MM-DD)
 func (es *EventService) Add(e *Event) error {
 	// POST: /events
+	if e == nil {
+		return fmt.Errorf("nil Event")
+	}
 	req, err := es.c.NewRequest("POST", "/events", e)
 	if err != nil {
 		return err
@@ -160,6 +163,9 @@ func (es *EventService) Add(e *Event) error {
 // Update updates the Event with the given eventID to match the given Event.
 func (es *EventService) Update(eventID string, e *Event) error {
 	// PUT: /event/:eventID
+	if e == nil {
+		return fmt.Errorf("nil Event")
+	}
 	req, err := es.c.NewRequest("PUT", "/event/"+eventID, e)
 	if err != nil {
 		return err
@@ -229,6 +235,9 @@ func (es *EventService) GetAwardCategory(eventID string, awardCategoryID int) (a
 // AddAwardCategory adds a new AwardCategory to the given Event.
 func (es *EventService) AddAwardCategory(eventID string, a *AwardCategory) error {
 	// POST: /event/:eventId/awardcategories
+	if a == nil {
+		return fmt.Errorf("nil AwardCategory")
+	}
 	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/awardcategories", a)
 	if err != nil {
 		return err
@@ -240,6 +249,9 @@ func (es *EventService) AddAwardCategory(eventID string, a *AwardCategory) error
 // UpdateAwardCategory updates an AwardCategory	for the given Event.
 func (es *EventService) UpdateAwardCategory(eventID string, a *AwardCategory) error {
 	// PUT: /event/:eventId/awardcategory/:awardcategoryId
+	if a == nil {
+		return fmt.Errorf("nil AwardCategory")
+	}
 	req, err := es.c.NewRequest("PUT", fmt.Sprintf("/event/%s/awardcategory/%d", eventID, a.ID), a)
 	if err != nil {
 		return err
@@ -308,6 +320,9 @@ func (es *EventService) GetAwardPlace(eventID string, awardPlaceID int) (a Award
 // AddAwardPlace adds a new AwardPlace to the given Event.
 func (es *EventService) AddAwardPlace(eventID string, a *AwardPlace) error {
 	// POST: /event/:eventId/awardplaces
+	if a == nil {
+		return fmt.Errorf("nil AwardPlace")
+	}
 	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/awardplaces", a)
 	if err != nil {
 		return err
@@ -319,6 +334,9 @@ func (es *EventService) AddAwardPlace(eventID string, a *AwardPlace) error {
 // UpdateAwardPlace updates an AwardPlace for the given Event.
 func (es *EventService) UpdateAwardPlace(eventID string, a *AwardPlace) error {
 	// PUT: /event/:eventId/awardplace/:awardplaceId
+	if a == nil {
+		return fmt.Errorf("nil AwardPlace")
+	}
 	req, err := es.c.NewRequest("PUT", fmt.Sprintf("/event/%s/awardplace/%d", eventID, a.ID), a)
 	if err != nil {
 		return err
@@ -556,6 +574,9 @@ func (es *EventService) GetSocialAccount(eventID string, socialAccountID int) (s
 // AddSocialAccount adds a new SocialAccount to the given Event.
 func (es *EventService) AddSocialAccount(eventID string, s *SocialAccount) error {
 	// POST: /event/:eventId/socialaccounts
+	if s == nil {
+		return fmt.Errorf("nil SocialAccount")
+	}
 	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/socialaccounts", s)
 	if err != nil {
 		return err
@@ -567,6 +588,9 @@ func (es *EventService) AddSocialAccount(eventID string, s *SocialAccount) error
 // UpdateSocialAccount updates a SocialAccount for the given Event.
 func (es *EventService) UpdateSocialAccount(eventID string, s *SocialAccount) error {
 	// PUT: /event/:eventId/socialaccount/:socialaccountId
+	if s == nil {
+		return fmt.Errorf("nil SocialAccount")
+	}
 	req, err := es.c.NewRequest("PUT", fmt.Sprintf("/event/%s/socialaccount/%d", eventID, s.ID), s)
 	if err != nil {
 		return err

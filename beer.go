@@ -5,36 +5,6 @@ import (
 	"net/http"
 )
 
-// GET: /beer/:beerId/adjuncts
-// POST: /beer/:beerId/adjuncts
-// DELETE: /beer/:beerId/adjunct/:adjunctId
-
-// GET: /beer/:beerId/events
-
-// GET: /beer/:beerId/fermentables
-// POST: /beer/:beerId/fermentables
-// DELETE: /beer/:beerId/fermentable/:fermentableId
-
-// GET: /beer/:beerId/hops
-// POST: /beer/:beerId/hops
-// DELETE: /beer/:beerId/hop/:hopId
-
-// GET: /beer/:beerId/ingredients
-
-// GET: /beer/:beerId/socialaccounts
-// GET: /beer/:beerId/socialaccount/:socialaccountId
-// POST: /beer/:beerId/socialaccounts
-// DELETE: /beer/:beerId/socialaccount/:socialaccountId
-// DELETE: /beer/:beerId/socialaccount/:socialaccountId
-
-// POST: /beer/:beerId/upcs
-
-// GET: /beer/:beerId/variations
-
-// GET: /beer/:beerId/yeasts
-// POST: /beer/:beerId/yeasts
-// DELETE: /beer/:beerId/yeast/:yeastId
-
 // BeerService provides access to the BreweryDB Beer API. Use Client.Beer.
 type BeerService struct {
 	c *Client
@@ -199,6 +169,10 @@ func (bs *BeerService) Get(id string) (beer Beer, err error) {
 // Add adds a new Beer to the BreweryDB and returns its new ID on success.
 func (bs *BeerService) Add(b *Beer) (id string, err error) {
 	// POST: /beers
+	if b == nil {
+		err = fmt.Errorf("nil Beer")
+		return
+	}
 	var req *http.Request
 	req, err = bs.c.NewRequest("POST", "/beers", b)
 	if err != nil {
@@ -220,6 +194,9 @@ func (bs *BeerService) Add(b *Beer) (id string, err error) {
 // Update changes an existing Beer in the BreweryDB.
 func (bs *BeerService) Update(id string, b *Beer) error {
 	// PUT: /beer/:beerId
+	if b == nil {
+		return fmt.Errorf("nil Beer")
+	}
 	req, err := bs.c.NewRequest("PUT", "/beer/"+id, b)
 	if err != nil {
 		return err
@@ -543,6 +520,9 @@ func (bs *BeerService) GetSocialAccount(beerID string, socialAccountID int) (s S
 // AddSocialAccount adds a new SocialAccount to the given Beer.
 func (bs *BeerService) AddSocialAccount(beerID string, s *SocialAccount) error {
 	// POST: /beer/:beerId/socialaccounts
+	if s == nil {
+		return fmt.Errorf("nil SocialAccount")
+	}
 	req, err := bs.c.NewRequest("POST", "/beer/"+beerID+"/socialaccounts", s)
 	if err != nil {
 		return err
@@ -554,6 +534,9 @@ func (bs *BeerService) AddSocialAccount(beerID string, s *SocialAccount) error {
 // UpdateSocialAccount updates a SocialAccount for the given Beer.
 func (bs *BeerService) UpdateSocialAccount(beerID string, s *SocialAccount) error {
 	// PUT: /beer/:beerId/socialaccount/:socialaccountId
+	if s == nil {
+		return fmt.Errorf("nil SocialAccount")
+	}
 	req, err := bs.c.NewRequest("PUT", fmt.Sprintf("/beer/%s/socialaccount/%d", beerID, s.ID), s)
 	if err != nil {
 		return err
