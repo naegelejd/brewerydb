@@ -66,15 +66,8 @@ func TestBreweryList(t *testing.T) {
 	}
 }
 
-func TestBreweryAdd(t *testing.T) {
-
-}
-
-func TestBreweryUpdate(t *testing.T) {
-	setup()
-	defer teardown()
-
-	brewery := &Brewery{
+func makeTestBrewery() *Brewery {
+	return &Brewery{
 		ID:             "jmGoBA",
 		Name:           "Flying Dog Brewery",
 		Description:    "Good people drink good beer.",
@@ -85,10 +78,59 @@ func TestBreweryUpdate(t *testing.T) {
 		Website:        "http://www.flyingdogales.com",
 		Status:         "verified",
 	}
-	const id = "jmGoBA"
+}
+
+func TestBreweryAdd(t *testing.T) {
+	setup()
+	defer teardown()
+
+	brewery := makeTestBrewery()
+
+	const newID = "abcdef"
+	mux.HandleFunc("/breweries", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "failed to parse form", http.StatusBadRequest)
+		}
+
+		checkPostFormValue(t, r, "name", brewery.Name)
+		checkPostFormValue(t, r, "description", brewery.Description)
+		checkPostFormValue(t, r, "mailingListUrl", brewery.MailingListURL)
+		checkPostFormValue(t, r, "image", brewery.Image)
+		checkPostFormValue(t, r, "established", brewery.Established)
+		checkPostFormValue(t, r, "isOrganic", brewery.IsOrganic)
+		checkPostFormValue(t, r, "website", brewery.Website)
+
+		// Check that fields tagged with "-" or "omitempty" are NOT encoded
+		checkPostFormDNE(t, r, "id", "ID", "status", "Status")
+
+		fmt.Fprintf(w, `{"status":"...", "data":{"id":"%s"}, "message":"..."}`, newID)
+	})
+
+	id, err := client.Brewery.Add(brewery)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if id != newID {
+		t.Fatalf("new Brewery ID = %v, want %v", id, newID)
+	}
+
+	_, err = client.Brewery.Add(nil)
+	if err == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestBreweryUpdate(t *testing.T) {
+	setup()
+	defer teardown()
+
+	brewery := makeTestBrewery()
+
 	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "PUT")
-		checkURLSuffix(t, r, id)
+		checkURLSuffix(t, r, brewery.ID)
 
 		if err := r.ParseForm(); err != nil {
 			http.Error(w, "failed to parse form", http.StatusBadRequest)
@@ -106,11 +148,56 @@ func TestBreweryUpdate(t *testing.T) {
 		checkPostFormDNE(t, r, "id", "ID", "status", "Status")
 	})
 
-	if err := client.Brewery.Update(id, brewery); err != nil {
+	if err := client.Brewery.Update(brewery.ID, brewery); err != nil {
 		t.Fatal(err)
 	}
 
-	if client.Brewery.Update(id, nil) == nil {
+	if client.Brewery.Update(brewery.ID, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestBreweryAddSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	account := &SocialAccount{
+		ID:            3,
+		SocialMediaID: 1,
+		SocialSite: SocialSite{
+			ID:      1,
+			Name:    "Facebook Fan Page",
+			Website: "http://www.facebook.com",
+		},
+		Handle: "flying_dog",
+	}
+
+	const id = "jmGoBA"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccounts" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/socialaccounts\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "socialmediaId", strconv.Itoa(account.SocialMediaID))
+		checkPostFormValue(t, r, "handle", account.Handle)
+
+		checkPostFormDNE(t, r, "id", "ID", "socialMedia", "SocialSite")
+	})
+
+	if err := client.Brewery.AddSocialAccount(id, account); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Brewery.AddSocialAccount("******", account) == nil {
+		t.Fatal("expected HTTP error")
+	}
+
+	if client.Brewery.AddSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
 }
@@ -133,6 +220,9 @@ func TestBreweryUpdateSocialAccount(t *testing.T) {
 	const id = "jmGoBA"
 	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "PUT")
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "failed to parse form", http.StatusBadRequest)
+		}
 		split := strings.Split(r.URL.Path, "/")
 		if split[3] != "socialaccount" {
 			t.Fatal("bad URL, expected \"/brewery/:breweryId/socialaccount/:socialaccountId\"")
@@ -188,6 +278,44 @@ func TestBreweryDelete(t *testing.T) {
 	}
 }
 
+func TestAddAlternateName(t *testing.T) {
+	setup()
+	defer teardown()
+
+	const (
+		breweryID = "jmGoBA"
+		altName   = "Flying Dog"
+		newID     = 3
+	)
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+		split := strings.Split(r.URL.Path, "/")
+		if split[1] != "brewery" || split[3] != "alternatenames" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/alternatenames\"")
+		}
+		if split[2] != breweryID {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "name", altName)
+
+		fmt.Fprintf(w, `{"status":"...", "data":{"id":%d}, "message":"..."}`, newID)
+	})
+
+	id, err := client.Brewery.AddAlternateName(breweryID, altName)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if id != newID {
+		t.Fatalf("alternate name ID = %v, want %v", id, newID)
+	}
+
+	_, err = client.Brewery.AddAlternateName("******", altName)
+	if err == nil {
+		t.Fatal("expected HTTP 404")
+	}
+}
+
 func TestBreweryDeleteAlternatName(t *testing.T) {
 	setup()
 	defer teardown()
@@ -223,6 +351,46 @@ func TestBreweryDeleteAlternatName(t *testing.T) {
 	}
 }
 
+func TestBreweryAddGuild(t *testing.T) {
+	setup()
+	defer teardown()
+
+	const (
+		breweryID = "jmGoBA"
+		guildID   = "k2jMtH"
+	)
+	discount := "10%"
+	firstTest := true
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+		split := strings.Split(r.URL.Path, "/")
+		if split[1] != "brewery" || split[3] != "guilds" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/guilds\"")
+		}
+		if split[2] != breweryID {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "guildId", guildID)
+		if firstTest {
+			checkPostFormValue(t, r, "discount", discount)
+		}
+	})
+
+	if err := client.Brewery.AddGuild(breweryID, guildID, &discount); err != nil {
+		t.Fatal(err)
+	}
+
+	firstTest = false
+	if err := client.Brewery.AddGuild("******", guildID, nil); err == nil {
+		t.Fatal("expected HTTP 404")
+	}
+
+	if err := client.Brewery.AddGuild(breweryID, guildID, nil); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestBreweryDeleteGuild(t *testing.T) {
 	setup()
 	defer teardown()
@@ -255,6 +423,77 @@ func TestBreweryDeleteGuild(t *testing.T) {
 
 	if err := client.Brewery.DeleteGuild(breweryID, "~~~~~~"); err == nil {
 		t.Fatal("expected HTTP 404")
+	}
+}
+
+func TestBreweryAddLocation(t *testing.T) {
+	setup()
+	defer teardown()
+
+	location := makeTestLocation()
+
+	const (
+		breweryID = "jmGoBA"
+		newID     = "abcdef"
+	)
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+
+		split := strings.Split(r.URL.Path, "/")
+		if split[1] != "brewery" || split[3] != "locations" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/locations\"")
+		}
+		if split[2] != breweryID {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "failed to parse form", http.StatusBadRequest)
+		}
+
+		checkPostFormValue(t, r, "name", location.Name)
+		checkPostFormValue(t, r, "streetAddress", location.StreetAddress)
+		checkPostFormValue(t, r, "locality", location.Locality)
+		checkPostFormValue(t, r, "region", location.Region)
+		checkPostFormValue(t, r, "postalCode", location.PostalCode)
+		checkPostFormValue(t, r, "phone", location.Phone)
+		checkPostFormValue(t, r, "website", location.Website)
+		checkPostFormValue(t, r, "hoursOfOperationExplicit", location.HoursOfOperationExplicit[0])
+		checkPostFormValue(t, r, "latitude", fmt.Sprintf("%f", location.Latitude))
+		checkPostFormValue(t, r, "longitude", fmt.Sprintf("%f", location.Longitude))
+		checkPostFormValue(t, r, "isPrimary", location.IsPrimary)
+		checkPostFormValue(t, r, "inPlanning", location.InPlanning)
+		checkPostFormValue(t, r, "isClosed", location.IsClosed)
+		checkPostFormValue(t, r, "openToPublic", location.OpenToPublic)
+		checkPostFormValue(t, r, "locationType", string(location.LocationType))
+		checkPostFormValue(t, r, "countryIsoCode", location.CountryISOCode)
+
+		// Check that fields tagged with "-" or "omitempty" are NOT encoded
+		checkPostFormDNE(t, r, "id", "ID", "extendedAddress",
+			"ExtendedAddress", "hoursOfOperation", "hoursOfOperationNotes", "tourInfo",
+			"LocationTypeDisplay", "country", "Country", "yearClosed",
+			"breweryID", "BreweryID", "brewery", "Brewery",
+			"status", "Status")
+
+		fmt.Fprintf(w, `{"status":"...", "data":{"guid":"%s"}, "message":"..."}`, newID)
+	})
+
+	id, err := client.Brewery.AddLocation(breweryID, location)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if id != newID {
+		t.Fatalf("Location ID = %v, want %v", id, newID)
+	}
+
+	_, err = client.Brewery.AddLocation("******", location)
+	if err == nil {
+		t.Fatal("expected HTTP 404 error")
+	}
+
+	_, err = client.Brewery.AddLocation(breweryID, nil)
+	if err == nil {
+		t.Fatal("expected error regarding nil parameter")
 	}
 }
 

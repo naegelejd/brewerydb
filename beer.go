@@ -159,7 +159,7 @@ func (bs *BeerService) Get(id string) (beer Beer, err error) {
 	return beerResp.Data, nil
 }
 
-// Add adds a new Beer to the BreweryDB and returns its new ID on success.
+// Add adds a new Beer to the BreweryDB and returns its new ID.
 func (bs *BeerService) Add(b *Beer) (id string, err error) {
 	// POST: /beers
 	if b == nil {
@@ -172,16 +172,15 @@ func (bs *BeerService) Add(b *Beer) (id string, err error) {
 		return
 	}
 
-	addResponse := struct {
-		Data struct {
+	resp := struct {
+		Status string
+		Data   struct {
 			ID string
 		}
+		Message string
 	}{}
-	if err = bs.c.Do(req, &addResponse); err != nil {
-		return
-	}
-
-	return addResponse.Data.ID, nil
+	err = bs.c.Do(req, &resp)
+	return resp.Data.ID, err
 }
 
 // Update changes an existing Beer in the BreweryDB.
@@ -292,7 +291,7 @@ func (bs *BeerService) AddBrewery(beerID, breweryID string, q *BeerBreweryReques
 		params.LocationID = q.LocationID
 	}
 
-	req, err := bs.c.NewRequest("POST", "/beer/"+beerID+"/brewery/"+breweryID, &params)
+	req, err := bs.c.NewRequest("POST", "/beer/"+beerID+"/breweries", &params)
 	if err != nil {
 		return err
 	}
@@ -550,6 +549,8 @@ func (bs *BeerService) DeleteSocialAccount(beerID string, socialAccountID int) e
 
 // AddUPC assigns a Universal Product Code to the Beer with the given ID.
 // fluidsizeID is optional.
+// NOTE: fluidsizeID is encoded as "fluidSizeId" with a capital S.
+// see: http://www.brewerydb.com/developers/docs-endpoint/beer_upc
 func (bs *BeerService) AddUPC(beerID string, code uint64, fluidsizeID *int) error {
 	// POST: /beer/:beerId/upcs
 	q := struct {

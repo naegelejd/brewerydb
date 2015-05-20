@@ -1,6 +1,7 @@
 package brewerydb
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"strconv"
@@ -67,15 +68,8 @@ func TestGuildList(t *testing.T) {
 	}
 }
 
-func TestGuildAdd(t *testing.T) {
-
-}
-
-func TestGuildUpdate(t *testing.T) {
-	setup()
-	defer teardown()
-
-	guild := &Guild{
+func makeTestGuild() *Guild {
+	return &Guild{
 		ID:          "k2jMtH",
 		Name:        "Brewers Association of Maryland",
 		Description: "Non-profit trade association",
@@ -88,11 +82,56 @@ func TestGuildUpdate(t *testing.T) {
 		},
 		Established: 1996,
 	}
+}
 
-	const id = "k2jMtH"
+func TestGuildAdd(t *testing.T) {
+	setup()
+	defer teardown()
+
+	guild := makeTestGuild()
+
+	const newID = "abcdef"
+	mux.HandleFunc("/guilds", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "failed to parse form", http.StatusBadRequest)
+		}
+
+		checkPostFormValue(t, r, "name", guild.Name)
+		checkPostFormValue(t, r, "description", guild.Description)
+		checkPostFormValue(t, r, "website", guild.Website)
+		checkPostFormValue(t, r, "image", guild.Image)
+		checkPostFormValue(t, r, "established", strconv.Itoa(guild.Established))
+
+		checkPostFormDNE(t, r, "id", "ID", "images", "Images")
+
+		fmt.Fprintf(w, `{"status":"...", "data":{"id":"%s"}, "message":"..."}`, newID)
+	})
+
+	id, err := client.Guild.Add(guild)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if id != newID {
+		t.Fatalf("new Guild ID = %v, want %v", id, newID)
+	}
+
+	_, err = client.Guild.Add(nil)
+	if err == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestGuildUpdate(t *testing.T) {
+	setup()
+	defer teardown()
+
+	guild := makeTestGuild()
+
 	mux.HandleFunc("/guild/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "PUT")
-		checkURLSuffix(t, r, id)
+		checkURLSuffix(t, r, guild.ID)
 
 		if err := r.ParseForm(); err != nil {
 			http.Error(w, "failed to parse form", http.StatusBadRequest)
@@ -108,11 +147,82 @@ func TestGuildUpdate(t *testing.T) {
 		checkPostFormDNE(t, r, "id", "ID", "images", "Images", "status")
 	})
 
-	if err := client.Guild.Update(id, guild); err != nil {
+	if err := client.Guild.Update(guild.ID, guild); err != nil {
 		t.Fatal(err)
 	}
 
-	if client.Guild.Update(id, nil) == nil {
+	if client.Guild.Update(guild.ID, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestGuildDelete(t *testing.T) {
+	setup()
+	defer teardown()
+
+	const id = "k2jMtH"
+	mux.HandleFunc("/guild/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "DELETE")
+		split := strings.Split(r.URL.Path, "/")
+		if split[1] != "guild" {
+			t.Fatal("bad URL, expected \"/guild/:guildId\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Guild ID", http.StatusNotFound)
+		}
+
+	})
+
+	if err := client.Guild.Delete(id); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := client.Guild.Delete("******"); err == nil {
+		t.Fatal("expected HTTP 404")
+	}
+}
+
+func TestGuildAddSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	account := &SocialAccount{
+		ID:            1,
+		SocialMediaID: 2,
+		SocialSite: SocialSite{
+			ID:      2,
+			Name:    "Twitter",
+			Website: "https://www.twitter.com",
+		},
+		Handle: "marylandbeer",
+	}
+
+	const id = "k2jMtH"
+	mux.HandleFunc("/guild/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccounts" {
+			t.Fatal("bad URL, expected \"/guild/:guildId/socialaccounts\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Guild ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "socialmediaId", strconv.Itoa(account.SocialMediaID))
+		checkPostFormValue(t, r, "handle", account.Handle)
+
+		checkPostFormDNE(t, r, "id", "ID", "socialMedia", "SocialSite")
+	})
+
+	if err := client.Guild.AddSocialAccount(id, account); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Guild.AddSocialAccount("******", account) == nil {
+		t.Fatal("expected HTTP error")
+	}
+
+	if client.Guild.AddSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
 }
@@ -162,32 +272,6 @@ func TestGuildUpdateSocialAccount(t *testing.T) {
 
 	if client.Guild.UpdateSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
-	}
-}
-
-func TestGuildDelete(t *testing.T) {
-	setup()
-	defer teardown()
-
-	const id = "k2jMtH"
-	mux.HandleFunc("/guild/", func(w http.ResponseWriter, r *http.Request) {
-		checkMethod(t, r, "DELETE")
-		split := strings.Split(r.URL.Path, "/")
-		if split[1] != "guild" {
-			t.Fatal("bad URL, expected \"/guild/:guildId\"")
-		}
-		if split[2] != id {
-			http.Error(w, "invalid Guild ID", http.StatusNotFound)
-		}
-
-	})
-
-	if err := client.Guild.Delete(id); err != nil {
-		t.Fatal(err)
-	}
-
-	if err := client.Guild.Delete("******"); err == nil {
-		t.Fatal("expected HTTP 404")
 	}
 }
 

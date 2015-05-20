@@ -73,11 +73,8 @@ func TestLocationList(t *testing.T) {
 	}
 }
 
-func TestLocationUpdate(t *testing.T) {
-	setup()
-	defer teardown()
-
-	location := &Location{
+func makeTestLocation() *Location {
+	return &Location{
 		ID:                       "z9H6Hj",
 		Name:                     "Bethesda",
 		StreetAddress:            "7900 Norfolk Ave",
@@ -108,10 +105,17 @@ func TestLocationUpdate(t *testing.T) {
 		Brewery:    Brewery{},
 	}
 
-	const id = "o9TSOv"
+}
+
+func TestLocationUpdate(t *testing.T) {
+	setup()
+	defer teardown()
+
+	location := makeTestLocation()
+
 	mux.HandleFunc("/location/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "PUT")
-		checkURLSuffix(t, r, id)
+		checkURLSuffix(t, r, location.ID)
 
 		if err := r.ParseForm(); err != nil {
 			http.Error(w, "failed to parse form", http.StatusBadRequest)
@@ -142,11 +146,11 @@ func TestLocationUpdate(t *testing.T) {
 			"status", "Status")
 	})
 
-	if err := client.Location.Update(id, location); err != nil {
+	if err := client.Location.Update(location.ID, location); err != nil {
 		t.Fatal(err)
 	}
 
-	if client.Location.Update(id, nil) == nil {
+	if client.Location.Update(location.ID, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
 }

@@ -135,25 +135,33 @@ func (es *EventService) Get(eventID string) (e Event, err error) {
 	return eventResponse.Data, nil
 }
 
-// Add adds an Event to the BreweryDB.
+// Add adds an Event to the BreweryDB and returns its new ID.
 // The following **must** be set in the Event:
 //
 // - Name
 // - Type
 // - StartDate (YYYY-MM-DD)
 // - EndDate (YYYY-MM-DD)
-func (es *EventService) Add(e *Event) error {
+func (es *EventService) Add(e *Event) (string, error) {
 	// POST: /events
 	if e == nil {
-		return fmt.Errorf("nil Event")
+		return "", fmt.Errorf("nil Event")
 	}
 	req, err := es.c.NewRequest("POST", "/events", e)
 	if err != nil {
-		return err
+		return "", err
 	}
 
-	// TODO: return any response?
-	return es.c.Do(req, nil)
+	resp := struct {
+		Status string
+		Data   struct {
+			ID string
+		}
+		Message string
+	}{}
+
+	err = es.c.Do(req, &resp)
+	return resp.Data.ID, err
 }
 
 // Update updates the Event with the given eventID to match the given Event.
@@ -414,7 +422,7 @@ func (es *EventService) AddBeer(eventID, beerID string, q *EventChangeBeerReques
 	} else {
 		params = &eventAddBeerRequest{BeerID: beerID}
 	}
-	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/beer/"+beerID, params)
+	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/beers", params)
 	if err != nil {
 		return err
 	}
@@ -507,7 +515,7 @@ func (es *EventService) AddBrewery(eventID, breweryID string, q *EventChangeBrew
 		params = &eventAddBreweryRequest{BreweryID: breweryID}
 	}
 
-	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/brewery/"+breweryID, params)
+	req, err := es.c.NewRequest("POST", "/event/"+eventID+"/breweries", params)
 	if err != nil {
 		return err
 	}

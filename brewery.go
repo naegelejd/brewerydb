@@ -91,18 +91,16 @@ func (bs *BreweryService) Get(id string) (brewery Brewery, err error) {
 		return
 	}
 
-	breweryResp := struct {
+	resp := struct {
 		Message string
 		Data    Brewery
 		Status  string
 	}{}
-	if err = bs.c.Do(req, &breweryResp); err != nil {
-		return
-	}
-	return breweryResp.Data, nil
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
 }
 
-// Add adds a new Brewery to the BreweryDB and returns its new ID on success.
+// Add adds a new Brewery to the BreweryDB and returns its new ID.
 func (bs *BreweryService) Add(b *Brewery) (id string, err error) {
 	// POST: /breweries
 	if b == nil {
@@ -115,13 +113,15 @@ func (bs *BreweryService) Add(b *Brewery) (id string, err error) {
 		return
 	}
 
-	addResp := struct {
-		Status  string
-		ID      string
+	resp := struct {
+		Status string
+		Data   struct {
+			ID string
+		}
 		Message string
 	}{}
-	err = bs.c.Do(req, &addResp)
-	return addResp.ID, err
+	err = bs.c.Do(req, &resp)
+	return resp.Data.ID, err
 }
 
 // Update changes an existing Brewery in the BreweryDB.
@@ -180,17 +180,28 @@ func (bs *BreweryService) ListAlternateNames(breweryID string) (al []AlternateNa
 	return resp.Data, err
 }
 
-// AddAlternateName adds an alternate name to the Brewery with the given ID.
-func (bs *BreweryService) AddAlternateName(breweryID, name string) error {
+// AddAlternateName adds an alternate name to the Brewery with the given ID
+// and returns the alternate name's new ID.
+func (bs *BreweryService) AddAlternateName(breweryID, name string) (id int, err error) {
 	// POST: /brewery/:breweryId/alternatenames
 	q := struct {
 		Name string `url:"name"`
 	}{name}
-	req, err := bs.c.NewRequest("POST", "/brewery/"+breweryID+"/alternatenames", &q)
+	var req *http.Request
+	req, err = bs.c.NewRequest("POST", "/brewery/"+breweryID+"/alternatenames", &q)
 	if err != nil {
-		return err
+		return
 	}
-	return bs.c.Do(req, nil)
+
+	resp := struct {
+		Status string
+		Data   struct {
+			ID int
+		}
+		Message string
+	}{}
+	err = bs.c.Do(req, &resp)
+	return resp.Data.ID, err
 }
 
 // DeleteAlternateName removes the AlternateName with the given ID from the Brewery with the given ID.
@@ -320,18 +331,30 @@ func (bs *BreweryService) ListLocations(breweryID string) (ll []Location, err er
 	return resp.Data, err
 }
 
-// AddLocation adds a new location for the Brewery with the given ID.
-func (bs *BreweryService) AddLocation(breweryID string, loc *Location) error {
+// AddLocation adds a new location for the Brewery with the given ID
+// and returns the new location's ID.
+// TODO: verify that the location ID in the response is, in fact, called "guid".
+// see: http://www.brewerydb.com/developers/docs-endpoint/brewery_location#2
+func (bs *BreweryService) AddLocation(breweryID string, loc *Location) (id string, err error) {
 	// POST: /brewery/:breweryId/locations
 	if loc == nil {
-		return fmt.Errorf("nil Location")
+		return "", fmt.Errorf("nil Location")
 	}
-	req, err := bs.c.NewRequest("POST", "/brewery/"+breweryID+"/locations", loc)
+	var req *http.Request
+	req, err = bs.c.NewRequest("POST", "/brewery/"+breweryID+"/locations", loc)
 	if err != nil {
-		return err
+		return
 	}
 
-	return bs.c.Do(req, nil)
+	resp := struct {
+		Status string
+		Data   struct {
+			ID string `json:"guid"`
+		}
+		Message string
+	}{}
+	err = bs.c.Do(req, &resp)
+	return resp.Data.ID, err
 }
 
 // RandomBreweryRequest contains options for retrieving a random Brewery.

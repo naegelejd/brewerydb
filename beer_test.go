@@ -65,15 +65,8 @@ func TestBeerList(t *testing.T) {
 	}
 }
 
-func TestBeerAdd(t *testing.T) {
-
-}
-
-func TestBeerUpdate(t *testing.T) {
-	setup()
-	defer teardown()
-
-	beer := &Beer{
+func makeTestBeer() *Beer {
+	return &Beer{
 		ID:              "o9TSOv",
 		Name:            "The Truth",
 		Description:     "Hop bomb",
@@ -101,10 +94,66 @@ func TestBeerUpdate(t *testing.T) {
 		Year:               2013,
 	}
 
-	const id = "o9TSOv"
+}
+
+func TestBeerAdd(t *testing.T) {
+	setup()
+	defer teardown()
+
+	beer := makeTestBeer()
+
+	const newID = "abcdef"
+	mux.HandleFunc("/beers", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "failed to parse form", http.StatusBadRequest)
+		}
+
+		checkPostFormValue(t, r, "name", beer.Name)
+		checkPostFormValue(t, r, "description", beer.Description)
+		checkPostFormValue(t, r, "foodPairings", beer.FoodPairings)
+		checkPostFormValue(t, r, "originalGravity", beer.OriginalGravity)
+		checkPostFormValue(t, r, "abv", beer.ABV)
+		checkPostFormValue(t, r, "ibu", beer.IBU)
+		checkPostFormValue(t, r, "glasswareId", strconv.Itoa(beer.GlasswareID))
+		checkPostFormValue(t, r, "styleId", strconv.Itoa(beer.StyleID))
+		checkPostFormValue(t, r, "isOrganic", beer.IsOrganic)
+		checkPostFormValue(t, r, "label", beer.Label)
+		checkPostFormValue(t, r, "brewery", beer.Brewery[0])
+		checkPostFormValue(t, r, "servingTemperature", string(beer.ServingTemperature))
+		checkPostFormValue(t, r, "availableId", strconv.Itoa(beer.AvailableID))
+		checkPostFormValue(t, r, "srmId", strconv.Itoa(beer.SrmID))
+		checkPostFormValue(t, r, "year", strconv.Itoa(beer.Year))
+
+		// Check that fields tagged with "-" or "omitempty" are NOT encoded
+		checkPostFormDNE(t, r, "id", "ID", "status", "Status", "beerVariationId", "BeerVariationID")
+
+		fmt.Fprintf(w, `{"status":"...", "data":{"id":"%s"}, "message":"..."}`, newID)
+	})
+
+	id, err := client.Beer.Add(beer)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if id != newID {
+		t.Fatalf("new Beer ID = %v, want %v", id, newID)
+	}
+
+	_, err = client.Beer.Add(nil)
+	if err == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestBeerUpdate(t *testing.T) {
+	setup()
+	defer teardown()
+
+	beer := makeTestBeer()
 	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "PUT")
-		checkURLSuffix(t, r, id)
+		checkURLSuffix(t, r, beer.ID)
 
 		if err := r.ParseForm(); err != nil {
 			http.Error(w, "failed to parse form", http.StatusBadRequest)
@@ -130,59 +179,11 @@ func TestBeerUpdate(t *testing.T) {
 		checkPostFormDNE(t, r, "id", "ID", "status", "Status", "beerVariationId", "BeerVariationID")
 	})
 
-	if err := client.Beer.Update(id, beer); err != nil {
+	if err := client.Beer.Update(beer.ID, beer); err != nil {
 		t.Fatal(err)
 	}
 
-	if client.Beer.Update(id, nil) == nil {
-		t.Fatal("expected error regarding nil parameter")
-	}
-}
-
-func TestBeerUpdateSocialAccount(t *testing.T) {
-	setup()
-	defer teardown()
-
-	account := &SocialAccount{
-		ID:            2,
-		SocialMediaID: 8,
-		SocialSite: SocialSite{
-			ID:      8,
-			Name:    "Google Plus",
-			Website: "https://plus.google.com/u/0/",
-		},
-		Handle: "flying_dog",
-	}
-
-	const id = "o9TSOv"
-	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
-		checkMethod(t, r, "PUT")
-		split := strings.Split(r.URL.Path, "/")
-		if split[3] != "socialaccount" {
-			t.Fatal("bad URL, expected \"/beer/:beerId/socialaccount/:socialaccountId\"")
-		}
-		if split[2] != id {
-			http.Error(w, "invalid Beer ID", http.StatusNotFound)
-		}
-		if split[4] != strconv.Itoa(account.ID) {
-			http.Error(w, "invalid SocialAccount ID", http.StatusNotFound)
-		}
-
-		checkPostFormValue(t, r, "socialmediaId", strconv.Itoa(account.SocialMediaID))
-		checkPostFormValue(t, r, "handle", account.Handle)
-
-		checkPostFormDNE(t, r, "id", "socialMedia", "SocialSite")
-	})
-
-	if err := client.Beer.UpdateSocialAccount(id, account); err != nil {
-		t.Fatal(err)
-	}
-
-	if client.Beer.UpdateSocialAccount("******", account) == nil {
-		t.Fatal("expected HTTP error")
-	}
-
-	if client.Beer.UpdateSocialAccount(id, nil) == nil {
+	if client.Beer.Update(beer.ID, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
 }
@@ -273,10 +274,11 @@ func TestBeerDeleteBrewery(t *testing.T) {
 
 type beerDeleter func(string, int) error
 
-func testBeerDeleteHelper(t *testing.T, name, beerID string, otherID int, del beerDeleter) {
+func testBeerDeleteHelper(t *testing.T, name string, otherID int, del beerDeleter) {
 	setup()
 	defer teardown()
 
+	const beerID = "o9TSOv"
 	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "DELETE")
 		split := strings.Split(r.URL.Path, "/")
@@ -305,48 +307,264 @@ func testBeerDeleteHelper(t *testing.T, name, beerID string, otherID int, del be
 }
 
 func TestBeerDeleteAdjunct(t *testing.T) {
-	setup()
-	defer teardown()
-
-	beerID := "o9TSOv"
 	adjunctID := 923
-	testBeerDeleteHelper(t, "adjunct", beerID, adjunctID, client.Beer.DeleteAdjunct)
+	testBeerDeleteHelper(t, "adjunct", adjunctID, client.Beer.DeleteAdjunct)
 }
 
 func TestBeerDeleteFermentable(t *testing.T) {
-	setup()
-	defer teardown()
-
-	beerID := "o9TSOv"
 	fermentableID := 753
-	testBeerDeleteHelper(t, "fermentable", beerID, fermentableID, client.Beer.DeleteFermentable)
+	testBeerDeleteHelper(t, "fermentable", fermentableID, client.Beer.DeleteFermentable)
 }
 
 func TestBeerDeleteHop(t *testing.T) {
-	setup()
-	defer teardown()
-
-	beerID := "o9TSOv"
 	hopID := 42
-	testBeerDeleteHelper(t, "hop", beerID, hopID, client.Beer.DeleteHop)
+	testBeerDeleteHelper(t, "hop", hopID, client.Beer.DeleteHop)
 }
 
 func TestBeerDeleteSocialAccount(t *testing.T) {
-	setup()
-	defer teardown()
-
-	beerID := "o9TSOv"
 	socialID := 3
-	testBeerDeleteHelper(t, "socialaccount", beerID, socialID, client.Beer.DeleteSocialAccount)
+	testBeerDeleteHelper(t, "socialaccount", socialID, client.Beer.DeleteSocialAccount)
 }
 
 func TestBeerDeleteYeast(t *testing.T) {
+	yeastID := 1835
+	testBeerDeleteHelper(t, "yeast", yeastID, client.Beer.DeleteYeast)
+}
+
+type beerAdder func(string, int) error
+
+func testBeerAddHelper(t *testing.T, name string, otherID int, add beerAdder) {
 	setup()
 	defer teardown()
 
-	beerID := "o9TSOv"
-	yeastID := 1835
-	testBeerDeleteHelper(t, "yeast", beerID, yeastID, client.Beer.DeleteYeast)
+	const beerID = "o9TSOv"
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != name+"s" {
+			t.Fatalf("bad URL, expected \"/beer/:beerId/%ss\"", name)
+		}
+		if split[2] != beerID {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, name+"Id", strconv.Itoa(otherID))
+	})
+
+	if err := add(beerID, otherID); err != nil {
+		t.Fatal(err)
+	}
+
+	if add("******", otherID) == nil {
+		t.Fatal("expected HTTP error")
+	}
+}
+
+func TestBeerAddAdjunct(t *testing.T) {
+	const adjunctID = 923
+	testBeerAddHelper(t, "adjunct", adjunctID, client.Beer.AddAdjunct)
+}
+
+func TestBeerAddBrewery(t *testing.T) {
+	setup()
+	defer teardown()
+
+	const (
+		beerID     = "o9TSOv"
+		breweryID  = "jmGoBA"
+		locationID = "z9H6HJ"
+	)
+	firstTest := true
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "breweries" {
+			t.Fatal("bad URL, expected \"/beer/:beerId/breweries\"")
+		}
+		if split[2] != beerID {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "breweryId", breweryID)
+		if firstTest {
+			checkPostFormValue(t, r, "locationId", locationID)
+		} else {
+			checkPostFormDNE(t, r, "locationId")
+		}
+	})
+
+	if err := client.Beer.AddBrewery(beerID, breweryID, &BeerBreweryRequest{locationID}); err != nil {
+		t.Fatal(err)
+	}
+
+	firstTest = false
+	if err := client.Beer.AddBrewery(beerID, breweryID, &BeerBreweryRequest{}); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := client.Beer.AddBrewery(beerID, breweryID, nil); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Beer.AddBrewery("******", breweryID, nil) == nil {
+		t.Fatal("expected HTTP 404 error")
+	}
+}
+
+func TestBeerAddFermentable(t *testing.T) {
+	const fermentableID = 753
+	testBeerAddHelper(t, "fermentable", fermentableID, client.Beer.AddFermentable)
+}
+
+func TestBeerAddHop(t *testing.T) {
+	const hopID = 42
+	testBeerAddHelper(t, "hop", hopID, client.Beer.AddHop)
+}
+
+func TestBeerAddSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	account := &SocialAccount{
+		ID:            2,
+		SocialMediaID: 8,
+		SocialSite: SocialSite{
+			ID:      8,
+			Name:    "Google Plus",
+			Website: "https://plus.google.com/u/0/",
+		},
+		Handle: "flying_dog",
+	}
+
+	const id = "o9TSOv"
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccounts" {
+			t.Fatal("bad URL, expected \"/beer/:beerId/socialaccounts\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "socialmediaId", strconv.Itoa(account.SocialMediaID))
+		checkPostFormValue(t, r, "handle", account.Handle)
+
+		checkPostFormDNE(t, r, "id", "ID", "socialMedia", "SocialSite")
+	})
+
+	if err := client.Beer.AddSocialAccount(id, account); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Beer.AddSocialAccount("******", account) == nil {
+		t.Fatal("expected HTTP error")
+	}
+
+	if client.Beer.AddSocialAccount(id, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestBeerUpdateSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	account := &SocialAccount{
+		ID:            2,
+		SocialMediaID: 8,
+		SocialSite: SocialSite{
+			ID:      8,
+			Name:    "Google Plus",
+			Website: "https://plus.google.com/u/0/",
+		},
+		Handle: "flying_dog",
+	}
+
+	const id = "o9TSOv"
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "PUT")
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "failed to parse form", http.StatusBadRequest)
+		}
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccount" {
+			t.Fatal("bad URL, expected \"/beer/:beerId/socialaccount/:socialaccountId\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(account.ID) {
+			http.Error(w, "invalid SocialAccount ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "socialmediaId", strconv.Itoa(account.SocialMediaID))
+		checkPostFormValue(t, r, "handle", account.Handle)
+
+		checkPostFormDNE(t, r, "id", "socialMedia", "SocialSite")
+	})
+
+	if err := client.Beer.UpdateSocialAccount(id, account); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Beer.UpdateSocialAccount("******", account) == nil {
+		t.Fatal("expected HTTP error")
+	}
+
+	if client.Beer.UpdateSocialAccount(id, nil) == nil {
+		t.Fatal("expected error regarding nil parameter")
+	}
+}
+
+func TestBeerAddUPC(t *testing.T) {
+	setup()
+	defer teardown()
+
+	const (
+		beerID = "o9TSOv"
+		upc    = 98765432100
+	)
+	fluidsizeID := 5
+	firstTest := true
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "POST")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "upcs" {
+			t.Fatal("bad URL, expected \"/beer/:beerId/upcs\"")
+		}
+		if split[2] != beerID {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+
+		checkPostFormValue(t, r, "upcCode", fmt.Sprintf("%d", upc))
+		if firstTest {
+			checkPostFormValue(t, r, "fluidSizeId", strconv.Itoa(fluidsizeID))
+		} else {
+			checkPostFormDNE(t, r, "fluidSizeId")
+		}
+
+		// fluidsizeID is encoded as fluidSizeId... ensure other variants are nowhere to be found
+		checkPostFormDNE(t, r, "upc", "Upc", "UPC", "fluidsizeId", "fluidsizeID")
+	})
+
+	if err := client.Beer.AddUPC(beerID, upc, &fluidsizeID); err != nil {
+		t.Fatal(err)
+	}
+
+	firstTest = false
+	if err := client.Beer.AddUPC(beerID, upc, nil); err != nil {
+		t.Fatal(err)
+	}
+
+	if client.Beer.AddUPC("******", upc, nil) == nil {
+		t.Fatal("expected HTTP 404 error")
+	}
+}
+
+func TestBeerAddYeast(t *testing.T) {
+	const yeastID = 1835
+	testBeerAddHelper(t, "yeast", yeastID, client.Beer.AddYeast)
 }
 
 func TestBeerRandom(t *testing.T) {

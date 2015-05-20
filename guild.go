@@ -89,7 +89,7 @@ func (gs *GuildService) Get(guildID string) (g Guild, err error) {
 	return guildResponse.Data, err
 }
 
-// Add adds a Guild to the BreweryDB.
+// Add adds a Guild to the BreweryDB and returns its new ID.
 // The Guild Name is required.
 func (gs *GuildService) Add(g *Guild) (string, error) {
 	// POST: /guilds
@@ -101,16 +101,16 @@ func (gs *GuildService) Add(g *Guild) (string, error) {
 		return "", err
 	}
 
-	addResponse := struct {
+	resp := struct {
 		Status string
 		Data   struct {
 			ID string
 		}
 		Message string
 	}{}
-	// TODO: return any response?
-	err = gs.c.Do(req, &addResponse)
-	return addResponse.Data.ID, err
+
+	err = gs.c.Do(req, &resp)
+	return resp.Data.ID, err
 }
 
 // Update updates the Guild with the given guildID to match the given Guild.
