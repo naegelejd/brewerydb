@@ -29,16 +29,13 @@ func (gs *GlassService) List() (gl []Glass, err error) {
 		return
 	}
 
-	glasswareResponse := struct {
+	resp := struct {
 		Status  string
 		Data    []Glass
 		Message string
 	}{}
-	if err = gs.c.Do(req, &glasswareResponse); err != nil {
-		return
-	}
-
-	return glasswareResponse.Data, nil
+	err = gs.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // Get returns the Glass with the given Glass ID.
@@ -50,14 +47,11 @@ func (gs *GlassService) Get(id int) (g Glass, err error) {
 		return
 	}
 
-	glassResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Glass
 		Message string
 	}{}
-
-	if err = gs.c.Do(req, &glassResponse); err != nil {
-		return
-	}
-	return glassResponse.Data, nil
+	err = gs.c.Do(req, &resp)
+	return resp.Data, err
 }

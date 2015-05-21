@@ -30,6 +30,11 @@ func TestEventGet(t *testing.T) {
 	if e.ID != id {
 		t.Fatalf("Event ID = %v, want %v", e.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.Get(id)
+		return err
+	})
 }
 
 func TestEventList(t *testing.T) {
@@ -61,6 +66,11 @@ func TestEventList(t *testing.T) {
 			t.Fatalf("Event ID len = %d, wanted %d", len(e.ID), l)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.List(&EventListRequest{Year: year})
+		return err
+	})
 }
 
 func makeTestEvent() *Event {
@@ -144,6 +154,11 @@ func TestEventAdd(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.Add(event)
+		return err
+	})
 }
 
 func TestEventUpdate(t *testing.T) {
@@ -190,6 +205,10 @@ func TestEventUpdate(t *testing.T) {
 	if client.Event.Update(event.ID, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.Update(event.ID, event)
+	})
 }
 
 func makeTestAwardCategory() *AwardCategory {
@@ -235,6 +254,10 @@ func TestEventAddAwardCategory(t *testing.T) {
 	if client.Event.AddAwardCategory(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.AddAwardCategory(id, category)
+	})
 }
 
 func TestEventUpdateAwardCategory(t *testing.T) {
@@ -274,6 +297,10 @@ func TestEventUpdateAwardCategory(t *testing.T) {
 	if client.Event.UpdateAwardCategory(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.UpdateAwardCategory(id, category)
+	})
 }
 
 func makeTestAwardPlace() *AwardPlace {
@@ -318,6 +345,10 @@ func TestEventAddAwardPlace(t *testing.T) {
 	if client.Event.AddAwardPlace(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.AddAwardPlace(id, place)
+	})
 }
 
 func TestEventUpdateAwardPlace(t *testing.T) {
@@ -356,6 +387,10 @@ func TestEventUpdateAwardPlace(t *testing.T) {
 	if client.Event.UpdateAwardPlace(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.UpdateAwardPlace(id, place)
+	})
 }
 
 func makeTestEventChangeBeerRequest() *EventChangeBeerRequest {
@@ -406,6 +441,10 @@ func TestEventAddBeer(t *testing.T) {
 	if err := client.Event.AddBeer(eventID, beerID, nil); err != nil {
 		t.Fatal(err)
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.AddBeer(eventID, beerID, change)
+	})
 }
 
 func TestEventUpdateBeer(t *testing.T) {
@@ -450,6 +489,10 @@ func TestEventUpdateBeer(t *testing.T) {
 	if err := client.Event.UpdateBeer(eventID, beerID, nil); err != nil {
 		t.Fatal(err)
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.UpdateBeer(eventID, beerID, change)
+	})
 }
 
 func makeTestEventChangeBreweryRequest() *EventChangeBreweryRequest {
@@ -497,6 +540,10 @@ func TestEventAddBrewery(t *testing.T) {
 	if err := client.Event.AddBrewery(eventID, breweryID, nil); err != nil {
 		t.Fatal(err)
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.AddBrewery(eventID, breweryID, change)
+	})
 }
 
 func TestEventUpdateBrewery(t *testing.T) {
@@ -540,6 +587,10 @@ func TestEventUpdateBrewery(t *testing.T) {
 	if err := client.Event.UpdateBrewery(eventID, breweryID, nil); err != nil {
 		t.Fatal(err)
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.UpdateBrewery(eventID, breweryID, change)
+	})
 }
 
 func TestEventDelete(t *testing.T) {
@@ -565,6 +616,10 @@ func TestEventDelete(t *testing.T) {
 	if err := client.Event.Delete("******"); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.Delete(id)
+	})
 }
 
 func TestEventDeleteBeer(t *testing.T) {
@@ -600,6 +655,10 @@ func TestEventDeleteBeer(t *testing.T) {
 	if err := client.Event.DeleteBeer(eventID, "~~~~~~"); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.DeleteBeer(eventID, beerID)
+	})
 }
 
 func TestEventDeleteBrewery(t *testing.T) {
@@ -635,6 +694,10 @@ func TestEventDeleteBrewery(t *testing.T) {
 	if err := client.Event.DeleteBrewery(eventID, "~~~~~~"); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.DeleteBrewery(eventID, breweryID)
+	})
 }
 
 func TestEventDeleteAwardCategory(t *testing.T) {
@@ -670,6 +733,10 @@ func TestEventDeleteAwardCategory(t *testing.T) {
 	if err := client.Event.DeleteAwardCategory(eventID, -1); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.DeleteAwardCategory(eventID, awardCategoryID)
+	})
 }
 
 func TestEventDeleteAwardPlace(t *testing.T) {
@@ -705,6 +772,10 @@ func TestEventDeleteAwardPlace(t *testing.T) {
 	if err := client.Event.DeleteAwardPlace(eventID, -1); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.DeleteAwardPlace(eventID, awardPlaceID)
+	})
 }
 
 func TestEventAddSocialAccount(t *testing.T) {
@@ -750,6 +821,10 @@ func TestEventAddSocialAccount(t *testing.T) {
 	if client.Event.AddSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.AddSocialAccount(id, account)
+	})
 }
 
 func TestEventUpdateSocialAccount(t *testing.T) {
@@ -801,6 +876,10 @@ func TestEventUpdateSocialAccount(t *testing.T) {
 	if client.Event.UpdateSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.UpdateSocialAccount(id, account)
+	})
 }
 
 func TestEventDeleteAwardSocialAccount(t *testing.T) {
@@ -836,4 +915,8 @@ func TestEventDeleteAwardSocialAccount(t *testing.T) {
 	if err := client.Event.DeleteSocialAccount(eventID, -1); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Event.DeleteSocialAccount(eventID, socialID)
+	})
 }

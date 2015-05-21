@@ -28,6 +28,11 @@ func TestStyleGet(t *testing.T) {
 	if s.ID != id {
 		t.Fatalf("Style ID = %v, want %v", s.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Style.Get(id)
+		return err
+	})
 }
 
 func TestStyleList(t *testing.T) {
@@ -60,4 +65,9 @@ func TestStyleList(t *testing.T) {
 			t.Fatal("Expected non-empty style name")
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Style.List(page)
+		return err
+	})
 }

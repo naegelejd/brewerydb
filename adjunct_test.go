@@ -28,6 +28,11 @@ func TestAdjunctGet(t *testing.T) {
 	if a.ID != id {
 		t.Fatalf("Adjunct ID = %v, want %v", a.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Adjunct.Get(id)
+		return err
+	})
 }
 
 func TestAdjunctList(t *testing.T) {
@@ -58,4 +63,9 @@ func TestAdjunctList(t *testing.T) {
 			t.Fatalf("Adjunct Category = %s, wanted %s", a.Category, c)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Adjunct.List(1)
+		return err
+	})
 }

@@ -39,6 +39,11 @@ func TestSearchBeer(t *testing.T) {
 			t.Fatalf("Beer ID len = %d, want %d", len(b.ID), l)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Search.Beer(query, &SearchRequest{Page: page})
+		return err
+	})
 }
 
 func TestSearchBrewery(t *testing.T) {
@@ -74,6 +79,11 @@ func TestSearchBrewery(t *testing.T) {
 			t.Fatalf("Brewery ID len = %d, want %d", len(b.ID), l)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Search.Brewery(query, &SearchRequest{Page: page})
+		return err
+	})
 }
 
 func TestSearchEvent(t *testing.T) {
@@ -109,6 +119,11 @@ func TestSearchEvent(t *testing.T) {
 			t.Fatalf("Event ID len = %d, want %d", len(b.ID), l)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Search.Event(query, &SearchRequest{Page: page})
+		return err
+	})
 }
 
 func TestSearchGuild(t *testing.T) {
@@ -144,4 +159,9 @@ func TestSearchGuild(t *testing.T) {
 			t.Fatalf("Guild ID len = %d, want %d", len(b.ID), l)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Search.Guild(query, &SearchRequest{Page: page})
+		return err
+	})
 }

@@ -51,12 +51,11 @@ func (is *IngredientService) Get(id int) (ing Ingredient, err error) {
 		return
 	}
 
-	ingredientResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Ingredient
 		Message string
 	}{}
-
-	err = is.c.Do(req, &ingredientResponse)
-	return ingredientResponse.Data, err
+	err = is.c.Do(req, &resp)
+	return resp.Data, err
 }

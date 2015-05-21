@@ -62,11 +62,11 @@ func (ss *StyleService) Get(id int) (s Style, err error) {
 		return
 	}
 
-	styleResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Style
 		Message string
 	}{}
-	err = ss.c.Do(req, &styleResponse)
-	return styleResponse.Data, err
+	err = ss.c.Do(req, &resp)
+	return resp.Data, err
 }

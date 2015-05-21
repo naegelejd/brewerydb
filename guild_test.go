@@ -30,6 +30,11 @@ func TestGuildGet(t *testing.T) {
 	if g.ID != id {
 		t.Fatalf("Guild ID = %v, want %v", g.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Guild.Get(id)
+		return err
+	})
 }
 
 func TestGuildList(t *testing.T) {
@@ -66,6 +71,11 @@ func TestGuildList(t *testing.T) {
 			t.Fatalf("Guild ID len = %d, wanted %d", len(g.ID), l)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Guild.List(&GuildListRequest{Page: page, Name: name})
+		return err
+	})
 }
 
 func makeTestGuild() *Guild {
@@ -121,6 +131,11 @@ func TestGuildAdd(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Guild.Add(guild)
+		return err
+	})
 }
 
 func TestGuildUpdate(t *testing.T) {
@@ -154,6 +169,10 @@ func TestGuildUpdate(t *testing.T) {
 	if client.Guild.Update(guild.ID, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Guild.Update(guild.ID, guild)
+	})
 }
 
 func TestGuildDelete(t *testing.T) {
@@ -170,7 +189,6 @@ func TestGuildDelete(t *testing.T) {
 		if split[2] != id {
 			http.Error(w, "invalid Guild ID", http.StatusNotFound)
 		}
-
 	})
 
 	if err := client.Guild.Delete(id); err != nil {
@@ -180,6 +198,10 @@ func TestGuildDelete(t *testing.T) {
 	if err := client.Guild.Delete("******"); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Guild.Delete(id)
+	})
 }
 
 func TestGuildAddSocialAccount(t *testing.T) {
@@ -225,6 +247,10 @@ func TestGuildAddSocialAccount(t *testing.T) {
 	if client.Guild.AddSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Guild.AddSocialAccount(id, account)
+	})
 }
 
 func TestGuildUpdateSocialAccount(t *testing.T) {
@@ -273,6 +299,10 @@ func TestGuildUpdateSocialAccount(t *testing.T) {
 	if client.Guild.UpdateSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Guild.UpdateSocialAccount(id, account)
+	})
 }
 
 func TestGuildDeleteSocialAccount(t *testing.T) {
@@ -308,4 +338,8 @@ func TestGuildDeleteSocialAccount(t *testing.T) {
 	if err := client.Guild.DeleteSocialAccount(guildID, -1); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Guild.DeleteSocialAccount(guildID, socialID)
+	})
 }

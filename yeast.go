@@ -73,11 +73,11 @@ func (ys *YeastService) Get(id int) (y Yeast, err error) {
 		return
 	}
 
-	yeastResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Yeast
 		Message string
 	}{}
-	err = ys.c.Do(req, &yeastResponse)
-	return yeastResponse.Data, err
+	err = ys.c.Do(req, &resp)
+	return resp.Data, err
 }

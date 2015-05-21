@@ -33,6 +33,11 @@ func TestFeatureGet(t *testing.T) {
 	if beerID := "79SG11"; f.BeerID != beerID {
 		t.Fatalf("Feature BeerID = %v, want %v", f.BeerID, beerID)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Feature.Get()
+		return err
+	})
 }
 
 func TestFeatureList(t *testing.T) {
@@ -72,6 +77,11 @@ func TestFeatureList(t *testing.T) {
 			t.Fatalf("Features Brewery.ID len = %d, wanted %d", len(f.Brewery.ID), l)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Feature.List(nil)
+		return err
+	})
 }
 
 func TestFeatureByWeek(t *testing.T) {
@@ -104,4 +114,9 @@ func TestFeatureByWeek(t *testing.T) {
 	if beerID := "fA0O8C"; f.BeerID != beerID {
 		t.Fatalf("Feature BeerID = %v, want %v", f.BeerID, beerID)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Feature.ByWeek(year, week)
+		return err
+	})
 }

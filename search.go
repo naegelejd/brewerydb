@@ -143,14 +143,14 @@ func (ss *SearchService) Style(query string, withDescriptions bool) ([]Style, er
 		return nil, err
 	}
 
-	styleResponse := struct {
+	resp := struct {
 		NumberOfPages int
 		CurrentPage   int
 		TotalResults  int
 		Data          []Style
 	}{}
-	err = ss.c.Do(req, &styleResponse)
-	return styleResponse.Data, err
+	err = ss.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // UPC retrieves one or more Beers matching the given Universal Product Code.
@@ -165,12 +165,12 @@ func (ss *SearchService) UPC(code uint64) ([]Beer, error) {
 		return nil, err
 	}
 
-	upcResponse := struct {
+	resp := struct {
 		NumberOfPages int
 		CurrentPage   int
 		TotalResults  int
 		Data          []Beer
 	}{}
-	err = ss.c.Do(req, &upcResponse)
-	return upcResponse.Data, err
+	err = ss.c.Do(req, &resp)
+	return resp.Data, err
 }

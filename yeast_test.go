@@ -28,6 +28,11 @@ func TestYeastGet(t *testing.T) {
 	if y.ID != id {
 		t.Fatalf("Yeast ID = %v, want %v", y.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Yeast.Get(id)
+		return err
+	})
 }
 
 func TestYeastList(t *testing.T) {
@@ -59,4 +64,9 @@ func TestYeastList(t *testing.T) {
 			t.Fatal("Expected non-empty yeast name")
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Yeast.List(page)
+		return err
+	})
 }

@@ -32,6 +32,11 @@ func TestBreweryGet(t *testing.T) {
 	if b.ID != id {
 		t.Fatalf("Brewery ID = %v, want %v", b.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.Get(id)
+		return err
+	})
 }
 
 func TestBreweryList(t *testing.T) {
@@ -64,6 +69,11 @@ func TestBreweryList(t *testing.T) {
 			t.Fatalf("Brewery ID len = %d, wanted %d", len(b.ID), l)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.List(&BreweryListRequest{Established: established})
+		return err
+	})
 }
 
 func makeTestBrewery() *Brewery {
@@ -120,6 +130,11 @@ func TestBreweryAdd(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		_, err = client.Brewery.Add(brewery)
+		return err
+	})
 }
 
 func TestBreweryUpdate(t *testing.T) {
@@ -155,6 +170,39 @@ func TestBreweryUpdate(t *testing.T) {
 	if client.Brewery.Update(brewery.ID, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Brewery.Update(brewery.ID, brewery)
+	})
+}
+
+func TestBreweryDelete(t *testing.T) {
+	setup()
+	defer teardown()
+
+	const id = "jmGoBA"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "DELETE")
+		split := strings.Split(r.URL.Path, "/")
+		if split[1] != "brewery" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId\"")
+		}
+		if split[2] != id {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+	})
+
+	if err := client.Brewery.Delete(id); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := client.Brewery.Delete("******"); err == nil {
+		t.Fatal("expected HTTP 404")
+	}
+
+	testBadURL(t, func() error {
+		return client.Brewery.Delete(id)
+	})
 }
 
 func TestBreweryAddSocialAccount(t *testing.T) {
@@ -200,6 +248,10 @@ func TestBreweryAddSocialAccount(t *testing.T) {
 	if client.Brewery.AddSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Brewery.AddSocialAccount(id, account)
+	})
 }
 
 func TestBreweryUpdateSocialAccount(t *testing.T) {
@@ -251,31 +303,10 @@ func TestBreweryUpdateSocialAccount(t *testing.T) {
 	if client.Brewery.UpdateSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
-}
 
-func TestBreweryDelete(t *testing.T) {
-	setup()
-	defer teardown()
-
-	const id = "jmGoBA"
-	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
-		checkMethod(t, r, "DELETE")
-		split := strings.Split(r.URL.Path, "/")
-		if split[1] != "brewery" {
-			t.Fatal("bad URL, expected \"/brewery/:breweryId\"")
-		}
-		if split[2] != id {
-			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
-		}
+	testBadURL(t, func() error {
+		return client.Brewery.UpdateSocialAccount(id, account)
 	})
-
-	if err := client.Brewery.Delete(id); err != nil {
-		t.Fatal(err)
-	}
-
-	if err := client.Brewery.Delete("******"); err == nil {
-		t.Fatal("expected HTTP 404")
-	}
 }
 
 func TestAddAlternateName(t *testing.T) {
@@ -314,6 +345,11 @@ func TestAddAlternateName(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.AddAlternateName(breweryID, altName)
+		return err
+	})
 }
 
 func TestBreweryDeleteAlternatName(t *testing.T) {
@@ -349,6 +385,10 @@ func TestBreweryDeleteAlternatName(t *testing.T) {
 	if err := client.Brewery.DeleteAlternateName(breweryID, -1); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Brewery.DeleteAlternateName(breweryID, altID)
+	})
 }
 
 func TestBreweryAddGuild(t *testing.T) {
@@ -389,6 +429,10 @@ func TestBreweryAddGuild(t *testing.T) {
 	if err := client.Brewery.AddGuild(breweryID, guildID, nil); err != nil {
 		t.Fatal(err)
 	}
+
+	testBadURL(t, func() error {
+		return client.Brewery.AddGuild(breweryID, guildID, &discount)
+	})
 }
 
 func TestBreweryDeleteGuild(t *testing.T) {
@@ -424,6 +468,10 @@ func TestBreweryDeleteGuild(t *testing.T) {
 	if err := client.Brewery.DeleteGuild(breweryID, "~~~~~~"); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Brewery.DeleteGuild(breweryID, guildID)
+	})
 }
 
 func TestBreweryAddLocation(t *testing.T) {
@@ -495,6 +543,11 @@ func TestBreweryAddLocation(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.AddLocation(breweryID, location)
+		return err
+	})
 }
 
 func TestBreweryDeleteSocialAccount(t *testing.T) {
@@ -530,6 +583,10 @@ func TestBreweryDeleteSocialAccount(t *testing.T) {
 	if err := client.Brewery.DeleteSocialAccount(breweryID, -1); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Brewery.DeleteSocialAccount(breweryID, socialID)
+	})
 }
 
 func ExampleBreweryService_List() {

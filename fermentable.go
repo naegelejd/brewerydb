@@ -83,14 +83,11 @@ func (fs *FermentableService) Get(id int) (f Fermentable, err error) {
 		return
 	}
 
-	fermentableResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Fermentable
 		Message string
 	}{}
-	if err = fs.c.Do(req, &fermentableResponse); err != nil {
-		return
-	}
-
-	return fermentableResponse.Data, nil
+	err = fs.c.Do(req, &resp)
+	return resp.Data, err
 }

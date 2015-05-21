@@ -40,7 +40,7 @@ func (cs *ConvertIDService) ConvertIDs(t ConvertType, oldIDs ...int) (map[int]st
 		return nil, err
 	}
 
-	convertidResponse := struct {
+	resp := struct {
 		Status string
 		Data   []struct {
 			OldID int
@@ -48,12 +48,12 @@ func (cs *ConvertIDService) ConvertIDs(t ConvertType, oldIDs ...int) (map[int]st
 		}
 		Message string
 	}{}
-	if err := cs.c.Do(req, &convertidResponse); err != nil {
+	if err := cs.c.Do(req, &resp); err != nil {
 		return nil, err
 	}
 
 	m := make(map[int]string)
-	for _, d := range convertidResponse.Data {
+	for _, d := range resp.Data {
 		m[d.OldID] = d.NewID
 	}
 

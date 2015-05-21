@@ -40,16 +40,13 @@ func (fs *FluidsizeService) List() (fl []Fluidsize, err error) {
 		return
 	}
 
-	fluidsizesResponse := struct {
+	resp := struct {
 		Status  string
 		Data    []Fluidsize
 		Message string
 	}{}
-	if err = fs.c.Do(req, &fluidsizesResponse); err != nil {
-		return
-	}
-
-	return fluidsizesResponse.Data, nil
+	err = fs.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // Get returns the Fluidsize with the given Fluidsize ID.
@@ -61,15 +58,11 @@ func (fs *FluidsizeService) Get(id int) (f Fluidsize, err error) {
 		return
 	}
 
-	fluidsizeResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Fluidsize
 		Message string
 	}{}
-
-	if err = fs.c.Do(req, &fluidsizeResponse); err != nil {
-		return
-	}
-
-	return fluidsizeResponse.Data, nil
+	err = fs.c.Do(req, &resp)
+	return resp.Data, err
 }

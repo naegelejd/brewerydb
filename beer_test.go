@@ -32,6 +32,11 @@ func TestBeerGet(t *testing.T) {
 	if b.ID != id {
 		t.Fatalf("Beer ID = %v, want %v", b.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Beer.Get(id)
+		return err
+	})
 }
 
 func TestBeerList(t *testing.T) {
@@ -63,6 +68,11 @@ func TestBeerList(t *testing.T) {
 			t.Fatalf("Beer ID len = %d, wanted %d", len(b.ID), l)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Beer.List(&BeerListRequest{ABV: abv})
+		return err
+	})
 }
 
 func makeTestBeer() *Beer {
@@ -144,6 +154,11 @@ func TestBeerAdd(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		_, err = client.Beer.Add(beer)
+		return err
+	})
 }
 
 func TestBeerUpdate(t *testing.T) {
@@ -186,6 +201,10 @@ func TestBeerUpdate(t *testing.T) {
 	if client.Beer.Update(beer.ID, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Beer.Update(beer.ID, beer)
+	})
 }
 
 func TestBeerDelete(t *testing.T) {
@@ -221,6 +240,10 @@ func TestBeerDelete(t *testing.T) {
 	if err := client.Beer.Delete(id1); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Beer.Delete(id0)
+	})
 }
 
 func TestBeerDeleteBrewery(t *testing.T) {
@@ -270,6 +293,10 @@ func TestBeerDeleteBrewery(t *testing.T) {
 	if client.Beer.DeleteBrewery(beerID1, breweryID0, nil) == nil {
 		t.Fatal("expected HTTP 404 error")
 	}
+
+	testBadURL(t, func() error {
+		return client.Beer.DeleteBrewery(beerID0, breweryID0, delReq)
+	})
 }
 
 type beerDeleter func(string, int) error
@@ -304,6 +331,10 @@ func testBeerDeleteHelper(t *testing.T, name string, otherID int, del beerDelete
 	if del("*~*~*~", otherID) == nil {
 		t.Fatal("expected HTTP 404 error")
 	}
+
+	testBadURL(t, func() error {
+		return del(beerID, otherID)
+	})
 }
 
 func TestBeerDeleteAdjunct(t *testing.T) {
@@ -358,6 +389,10 @@ func testBeerAddHelper(t *testing.T, name string, otherID int, add beerAdder) {
 	if add("******", otherID) == nil {
 		t.Fatal("expected HTTP error")
 	}
+
+	testBadURL(t, func() error {
+		return add(beerID, otherID)
+	})
 }
 
 func TestBeerAddAdjunct(t *testing.T) {
@@ -409,6 +444,10 @@ func TestBeerAddBrewery(t *testing.T) {
 	if client.Beer.AddBrewery("******", breweryID, nil) == nil {
 		t.Fatal("expected HTTP 404 error")
 	}
+
+	testBadURL(t, func() error {
+		return client.Beer.AddBrewery(beerID, breweryID, &BeerBreweryRequest{locationID})
+	})
 }
 
 func TestBeerAddFermentable(t *testing.T) {
@@ -464,6 +503,10 @@ func TestBeerAddSocialAccount(t *testing.T) {
 	if client.Beer.AddSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Beer.AddSocialAccount(id, account)
+	})
 }
 
 func TestBeerUpdateSocialAccount(t *testing.T) {
@@ -515,6 +558,10 @@ func TestBeerUpdateSocialAccount(t *testing.T) {
 	if client.Beer.UpdateSocialAccount(id, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Beer.UpdateSocialAccount(id, account)
+	})
 }
 
 func TestBeerAddUPC(t *testing.T) {
@@ -560,6 +607,10 @@ func TestBeerAddUPC(t *testing.T) {
 	if client.Beer.AddUPC("******", upc, nil) == nil {
 		t.Fatal("expected HTTP 404 error")
 	}
+
+	testBadURL(t, func() error {
+		return client.Beer.AddUPC(beerID, upc, &fluidsizeID)
+	})
 }
 
 func TestBeerAddYeast(t *testing.T) {
@@ -594,6 +645,11 @@ func TestBeerRandom(t *testing.T) {
 	if len(b.ID) <= 0 {
 		t.Fatal("Expected non-empty beer ID")
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Beer.GetRandom(&RandomBeerRequest{ABV: "8"})
+		return err
+	})
 }
 
 func ExampleBeerService_List() {

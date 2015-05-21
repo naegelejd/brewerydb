@@ -28,6 +28,11 @@ func TestCategoryGet(t *testing.T) {
 	if c.ID != id {
 		t.Fatalf("Category ID = %v, want %v", c.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Category.Get(id)
+		return err
+	})
 }
 
 func TestCategorylist(t *testing.T) {
@@ -57,4 +62,9 @@ func TestCategorylist(t *testing.T) {
 			t.Fatal("Expected non-empty category name")
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Category.List()
+		return err
+	})
 }

@@ -28,6 +28,11 @@ func TestFluidsizeGet(t *testing.T) {
 	if f.ID != id {
 		t.Fatalf("Fluidsize ID = %v, want %v", f.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Fluidsize.Get(id)
+		return err
+	})
 }
 
 func TestFluidsizeList(t *testing.T) {
@@ -55,4 +60,9 @@ func TestFluidsizeList(t *testing.T) {
 			t.Fatalf("Expected non-zero ID")
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Fluidsize.List()
+		return err
+	})
 }

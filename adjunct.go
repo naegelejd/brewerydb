@@ -51,14 +51,11 @@ func (as *AdjunctService) Get(id int) (a Adjunct, err error) {
 		return
 	}
 
-	adjunctReponse := struct {
+	resp := struct {
 		Status  string
 		Data    Adjunct
 		Message string
 	}{}
-	if err = as.c.Do(req, &adjunctReponse); err != nil {
-		return
-	}
-
-	return adjunctReponse.Data, nil
+	err = as.c.Do(req, &resp)
+	return resp.Data, err
 }

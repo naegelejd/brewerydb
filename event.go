@@ -101,6 +101,7 @@ type EventListRequest struct {
 }
 
 // List returns an EventList containing a "page" of Events.
+// For non-premium members, one of Year, Name, Type, Locality or Region must be set.
 func (es *EventService) List(q *EventListRequest) (el EventList, err error) {
 	// GET: /events
 	var req *http.Request
@@ -122,17 +123,14 @@ func (es *EventService) Get(eventID string) (e Event, err error) {
 		return
 	}
 
-	eventResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Event
 		Message string
 	}{}
 
-	if err = es.c.Do(req, &eventResponse); err != nil {
-		return
-	}
-
-	return eventResponse.Data, nil
+	err = es.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // Add adds an Event to the BreweryDB and returns its new ID.

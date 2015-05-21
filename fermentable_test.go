@@ -28,6 +28,11 @@ func TestFermentableGet(t *testing.T) {
 	if f.ID != id {
 		t.Fatalf("Fermentable ID = %v, want %v", f.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Fermentable.Get(id)
+		return err
+	})
 }
 
 func TestFermentableList(t *testing.T) {
@@ -59,4 +64,9 @@ func TestFermentableList(t *testing.T) {
 			t.Fatal("Expected non-empty fermentable name")
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Fermentable.List(page)
+		return err
+	})
 }

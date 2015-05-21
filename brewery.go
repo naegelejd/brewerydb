@@ -55,21 +55,25 @@ type Brewery struct {
 // BreweryListRequest contains all the required and optional fields
 // used for querying for a list of Breweries.
 type BreweryListRequest struct {
-	Page        int          `url:"p"`
-	Name        string       `url:"name,omitempty"`
-	IDs         string       `url:"ids,omitempty"`
-	Established string       `url:"established,omitempty"`
-	IsOrganic   string       `url:"isOrganic,omitempty"`
-	HasImages   string       `url:"hasImages,omitempty"`
-	Since       string       `url:"since,omitempty"`
-	Status      string       `url:"status,omitempty"`
-	Order       BreweryOrder `url:"order,omitempty"` // TODO: enumerate
-	Sort        string       `url:"sort,omitempty"`  // TODO: enumerate
-	RandomCount string       `url:"randomCount,omitempty"`
-	// TODO: premium account parameters
+	Page               int          `url:"p"`
+	Name               string       `url:"name,omitempty"`
+	IDs                string       `url:"ids,omitempty"`
+	Established        string       `url:"established,omitempty"`
+	IsOrganic          string       `url:"isOrganic,omitempty"`
+	HasImages          string       `url:"hasImages,omitempty"`
+	Since              string       `url:"since,omitempty"`
+	Status             string       `url:"status,omitempty"`
+	Order              BreweryOrder `url:"order,omitempty"` // TODO: enumerate
+	Sort               string       `url:"sort,omitempty"`  // TODO: enumerate
+	RandomCount        string       `url:"randomCount,omitempty"`
+	WithSocialAccounts string       `url:"withSocialAccounts,omitempty"` // Y/N
+	WithGuilds         string       `url:"withGuilds,omitempty"`         // Y/N
+	WithLocations      string       `url:"withLocations,omitempty"`      // Y/N
+	WithAlternateNames string       `url:"withAlternateNames,omitempty"` // Y/N
 }
 
 // List returns all Breweries on the page specified in the given BreweryListRequest.
+// For non-premium members, one of Name or Established must be set.
 func (bs *BreweryService) List(q *BreweryListRequest) (bl BreweryList, err error) {
 	// GET: /breweries
 	var req *http.Request

@@ -28,15 +28,13 @@ func (cs *CategoryService) List() ([]Category, error) {
 		return nil, err
 	}
 
-	categoriesResponse := struct {
+	resp := struct {
 		Status  string
 		Data    []Category
 		Message string
 	}{}
-	if err := cs.c.Do(req, &categoriesResponse); err != nil {
-		return nil, err
-	}
-	return categoriesResponse.Data, nil
+	err = cs.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // Get obtains the Category with the given Category ID.
@@ -48,13 +46,11 @@ func (cs *CategoryService) Get(id int) (cat Category, err error) {
 		return
 	}
 
-	categoryResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Category
 		Message string
 	}{}
-	if err = cs.c.Do(req, &categoryResponse); err != nil {
-		return
-	}
-	return categoryResponse.Data, nil
+	err = cs.c.Do(req, &resp)
+	return resp.Data, err
 }

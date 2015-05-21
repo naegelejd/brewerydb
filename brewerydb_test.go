@@ -77,3 +77,13 @@ func checkPostFormDNE(t *testing.T, r *http.Request, keys ...string) {
 		}
 	}
 }
+
+// Executes fn, expecting it to return an error
+func testBadURL(t *testing.T, fn func() error) {
+	origURL := apiURL
+	apiURL = "http://%api.brewerydb.com/v2"
+	if err := fn(); err == nil {
+		t.Fatal("expected HTTP Request URL error")
+	}
+	apiURL = origURL
+}

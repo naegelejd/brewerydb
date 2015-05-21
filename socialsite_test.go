@@ -28,6 +28,11 @@ func TestSocialSiteGet(t *testing.T) {
 	if s.ID != id {
 		t.Fatalf("Socialsite ID = %v, want %v", s.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.SocialSite.Get(id)
+		return err
+	})
 }
 
 func TestSocialSiteList(t *testing.T) {
@@ -57,4 +62,9 @@ func TestSocialSiteList(t *testing.T) {
 			t.Fatal("Expected non-empty socialsite Website")
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.SocialSite.List()
+		return err
+	})
 }

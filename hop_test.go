@@ -31,6 +31,11 @@ func TestHopGet(t *testing.T) {
 	if h.ID != id {
 		t.Fatalf("Hop ID = %v, want %v", h.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Hop.Get(id)
+		return err
+	})
 }
 
 func TestHopList(t *testing.T) {
@@ -61,6 +66,11 @@ func TestHopList(t *testing.T) {
 			t.Fatalf("Hop Category = %s, wanted %s", h.Category, c)
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Hop.List(page)
+		return err
+	})
 }
 
 func ExampleHopService_List() {

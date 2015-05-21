@@ -125,6 +125,7 @@ type Beer struct {
 }
 
 // List returns all Beers on the page specified in the given BeerListRequest.
+// For non-premium members, one of Name, ABV, IBU, SrmID, AvailabilityID, StyleID must be set.
 func (bs *BeerService) List(q *BeerListRequest) (bl BeerList, err error) {
 	// GET: /beers
 	var req *http.Request
@@ -148,15 +149,13 @@ func (bs *BeerService) Get(id string) (beer Beer, err error) {
 		return
 	}
 
-	beerResp := struct {
+	resp := struct {
 		Message string
 		Data    Beer
 		Status  string
 	}{}
-	if err = bs.c.Do(req, &beerResp); err != nil {
-		return
-	}
-	return beerResp.Data, nil
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // Add adds a new Beer to the BreweryDB and returns its new ID.

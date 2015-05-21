@@ -59,6 +59,7 @@ type GuildList struct {
 }
 
 // List returns an GuildList containing a "page" of Guilds.
+// For non-premium members, Name must be set.
 func (gs *GuildService) List(q *GuildListRequest) (gl GuildList, err error) {
 	// GET: /guilds
 	var req *http.Request
@@ -80,13 +81,13 @@ func (gs *GuildService) Get(guildID string) (g Guild, err error) {
 		return
 	}
 
-	guildResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Guild
 		Message string
 	}{}
-	err = gs.c.Do(req, &guildResponse)
-	return guildResponse.Data, err
+	err = gs.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // Add adds a Guild to the BreweryDB and returns its new ID.

@@ -29,6 +29,11 @@ func TestLocationGet(t *testing.T) {
 	if l.ID != id {
 		t.Fatalf("Location ID = %v, want %v", l.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Location.Get(id)
+		return err
+	})
 }
 
 func TestLocationList(t *testing.T) {
@@ -71,6 +76,11 @@ func TestLocationList(t *testing.T) {
 			t.Fatal("Expected non-zero longitude")
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Location.List(&LocationListRequest{Page: page, Region: region})
+		return err
+	})
 }
 
 func makeTestLocation() *Location {
@@ -153,6 +163,10 @@ func TestLocationUpdate(t *testing.T) {
 	if client.Location.Update(location.ID, nil) == nil {
 		t.Fatal("expected error regarding nil parameter")
 	}
+
+	testBadURL(t, func() error {
+		return client.Location.Update(location.ID, location)
+	})
 }
 
 func TestLocationDelete(t *testing.T) {
@@ -179,4 +193,8 @@ func TestLocationDelete(t *testing.T) {
 	if err := client.Location.Delete("******"); err == nil {
 		t.Fatal("expected HTTP 404")
 	}
+
+	testBadURL(t, func() error {
+		return client.Location.Delete(id)
+	})
 }

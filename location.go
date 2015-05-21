@@ -119,11 +119,7 @@ type LocationList struct {
 }
 
 // List retrieves a list of Locations matching the given request.
-// Non-premium users must set one of the following:
-//
-// - Locality
-// - PostalCode
-// - Region
+// For non-premium users, one of Locality, PostalCode, Region must be set.
 func (ls *LocationService) List(q *LocationListRequest) (ll LocationList, err error) {
 	// GET: /locations
 	var req *http.Request
@@ -145,14 +141,13 @@ func (ls *LocationService) Get(locID string) (l Location, err error) {
 		return
 	}
 
-	locationResponse := struct {
+	resp := struct {
 		Status  string
 		Data    Location
 		Message string
 	}{}
-
-	err = ls.c.Do(req, &locationResponse)
-	return locationResponse.Data, err
+	err = ls.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // Update updates the Location having the given ID to match the given Location.

@@ -28,6 +28,11 @@ func TestGlassGet(t *testing.T) {
 	if g.ID != id {
 		t.Fatalf("Glass ID = %v, want %v", g.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Glass.Get(id)
+		return err
+	})
 }
 
 func TestGlassList(t *testing.T) {
@@ -58,4 +63,9 @@ func TestGlassList(t *testing.T) {
 			t.Fatal("Expected non-empty Glass Name")
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Glass.List()
+		return err
+	})
 }

@@ -28,6 +28,11 @@ func TestIngredientGet(t *testing.T) {
 	if i.ID != id {
 		t.Fatalf("Ingredient ID = %v, want %v", i.ID, id)
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Ingredient.Get(id)
+		return err
+	})
 }
 
 func TestIngredientList(t *testing.T) {
@@ -60,4 +65,9 @@ func TestIngredientList(t *testing.T) {
 			t.Fatal("Expected non-empty ingredient Category")
 		}
 	}
+
+	testBadURL(t, func() error {
+		_, err := client.Ingredient.List(page)
+		return err
+	})
 }
