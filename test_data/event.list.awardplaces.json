@@ -1,0 +1,44 @@
+{
+	"currentPage": 1,
+	"numberOfPages": 1,
+	"totalResults": 6,
+	"data": [
+		{
+			"id": 1,
+			"eventId": "cJio9R",
+			"name": "Gold",
+			"createDate": "2012-01-03 20:02:55"
+		},
+		{
+			"id": 2,
+			"eventId": "cJio9R",
+			"name": "Bronze",
+			"createDate": "2012-01-03 20:03:05"
+		},
+		{
+			"id": 3,
+			"eventId": "cJio9R",
+			"name": "Silver",
+			"createDate": "2012-01-03 20:03:15"
+		},
+		{
+			"id": 4,
+			"eventId": "cJio9R",
+			"name": "First Place",
+			"createDate": "2012-01-03 20:03:51"
+		},
+		{
+			"id": 5,
+			"eventId": "cJio9R",
+			"name": "Second Place",
+			"createDate": "2012-01-03 20:04:02"
+		},
+		{
+			"id": 6,
+			"eventId": "cJio9R",
+			"name": "Third Place",
+			"createDate": "2012-01-03 20:04:14"
+		}
+	],
+	"status": "success"
+}

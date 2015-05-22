@@ -1,7 +1,9 @@
 package brewerydb
 
 import (
+	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -93,4 +95,50 @@ func testBadURL(t *testing.T, fn func() error) {
 		t.Fatal("expected HTTP Request URL error")
 	}
 	apiURL = origURL
+}
+
+func TestNewRequest(t *testing.T) {
+	setup()
+	defer teardown()
+
+	// `data` parameter should be a struct, not a string
+	_, err := client.NewRequest("GET", "/heartbeat", "hello, world")
+	if err == nil {
+		t.Fatal("Expected query encoding error")
+	}
+
+	_, err = client.NewRequest("FOO", "/hearbeat", nil)
+	if err == nil {
+		t.Fatal("Expected HTTP method error")
+	}
+}
+
+// for testing client.Do error handling
+type testTransport struct{}
+
+func (t testTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+	return nil, fmt.Errorf("fake round-trip error")
+}
+
+func TestDo(t *testing.T) {
+	setup()
+	defer teardown()
+
+	client.JSONWriter = ioutil.Discard
+
+	const beerID = "o9TSOv"
+	mux.HandleFunc("/beer/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, "{}")
+	})
+
+	_, err := client.Beer.Get(beerID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	client.client.Transport = testTransport{}
+	_, err = client.Beer.Get(beerID)
+	if err == nil {
+		t.Fatal("Expected net/http Do error")
+	}
 }

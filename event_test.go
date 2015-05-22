@@ -212,22 +212,22 @@ func TestEventUpdate(t *testing.T) {
 }
 
 func TestEventGetAwardCategory(t *testing.T) {
-	t.Skip("need valid test data")
 	setup()
 	defer teardown()
 
-	data := loadTestData("awardcategory.get.json", t)
+	data := loadTestData("event.get.awardcategory.json", t)
 	defer data.Close()
 
 	const (
-		eventID         = "k2jMtH"
-		awardCategoryID = 2
+		eventID           = "cJio9R"
+		awardCategoryID   = 87
+		awardCategoryName = "American IPA"
 	)
 	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		split := strings.Split(r.URL.Path, "/")
-		if split[3] != "awardCategory" {
-			t.Fatal("bad URL, expected \"/event/:eventId/awardCategory/:awardCategoryId\"")
+		if split[3] != "awardcategory" {
+			t.Fatal("bad URL, expected \"/event/:eventId/awardcategory/:awardcategoryId\"")
 		}
 		if split[2] != eventID {
 			http.Error(w, "invalid Event ID", http.StatusNotFound)
@@ -239,13 +239,16 @@ func TestEventGetAwardCategory(t *testing.T) {
 
 	})
 
-	b, err := client.Event.GetAwardCategory(eventID, awardCategoryID)
+	a, err := client.Event.GetAwardCategory(eventID, awardCategoryID)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	if b.ID != awardCategoryID {
-		t.Fatalf("AwardCategory ID = %v, want %v", b.ID, awardCategoryID)
+	if a.ID != awardCategoryID {
+		t.Fatalf("AwardCategory ID = %v, want %v", a.ID, awardCategoryID)
+	}
+	if a.Name != awardCategoryName {
+		t.Fatalf("AwardCategory Name = %v, want %v", a.Name, awardCategoryName)
 	}
 
 	testBadURL(t, func() error {
@@ -255,19 +258,18 @@ func TestEventGetAwardCategory(t *testing.T) {
 }
 
 func TestEventListAwardCategory(t *testing.T) {
-	t.Skip("need valid test data")
 	setup()
 	defer teardown()
 
-	data := loadTestData("awardcategory.list.json", t)
+	data := loadTestData("event.list.awardcategories.json", t)
 	defer data.Close()
 
-	const eventID = "k2jMtH"
+	const eventID = "cJio9R"
 	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		split := strings.Split(r.URL.Path, "/")
-		if split[3] != "awardCategories" {
-			t.Fatal("bad URL, expected \"/event/:eventId/awardCategories\"")
+		if split[3] != "awardcategories" {
+			t.Fatal("bad URL, expected \"/event/:eventId/awardcategories\"")
 		}
 		if split[2] != eventID {
 			http.Error(w, "invalid Event ID", http.StatusNotFound)
@@ -286,8 +288,8 @@ func TestEventListAwardCategory(t *testing.T) {
 	}
 
 	for _, a := range al {
-		if a.ID <= 0 {
-			t.Fatal("Expected ID >0")
+		if len(a.Name) <= 0 {
+			t.Fatal("Expected non-empty AwardCategory Name")
 		}
 	}
 
@@ -390,22 +392,22 @@ func TestEventUpdateAwardCategory(t *testing.T) {
 }
 
 func TestEventGetAwardPlace(t *testing.T) {
-	t.Skip("need valid test data")
 	setup()
 	defer teardown()
 
-	data := loadTestData("awardplace.get.json", t)
+	data := loadTestData("event.get.awardplace.json", t)
 	defer data.Close()
 
 	const (
-		eventID      = "k2jMtH"
-		awardPlaceID = 2
+		eventID        = "cJio9R"
+		awardPlaceID   = 3
+		awardPlaceName = "Silver"
 	)
 	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		split := strings.Split(r.URL.Path, "/")
-		if split[3] != "awardPlace" {
-			t.Fatal("bad URL, expected \"/event/:eventId/awardPlace/:awardPlaceId\"")
+		if split[3] != "awardplace" {
+			t.Fatal("bad URL, expected \"/event/:eventId/awardplace/:awardplaceId\"")
 		}
 		if split[2] != eventID {
 			http.Error(w, "invalid Event ID", http.StatusNotFound)
@@ -417,13 +419,16 @@ func TestEventGetAwardPlace(t *testing.T) {
 
 	})
 
-	b, err := client.Event.GetAwardPlace(eventID, awardPlaceID)
+	a, err := client.Event.GetAwardPlace(eventID, awardPlaceID)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	if b.ID != awardPlaceID {
-		t.Fatalf("AwardPlace ID = %v, want %v", b.ID, awardPlaceID)
+	if a.ID != awardPlaceID {
+		t.Fatalf("AwardPlace ID = %v, want %v", a.ID, awardPlaceID)
+	}
+	if a.Name != awardPlaceName {
+		t.Fatalf("AwardPlace Name = %v, want %v", a.Name, awardPlaceName)
 	}
 
 	testBadURL(t, func() error {
@@ -433,19 +438,18 @@ func TestEventGetAwardPlace(t *testing.T) {
 }
 
 func TestEventListAwardPlace(t *testing.T) {
-	t.Skip("need valid test data")
 	setup()
 	defer teardown()
 
-	data := loadTestData("awardplace.list.json", t)
+	data := loadTestData("event.list.awardplaces.json", t)
 	defer data.Close()
 
-	const eventID = "k2jMtH"
+	const eventID = "cJio9R"
 	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		split := strings.Split(r.URL.Path, "/")
-		if split[3] != "awardPlaces" {
-			t.Fatal("bad URL, expected \"/event/:eventId/awardPlaces\"")
+		if split[3] != "awardplaces" {
+			t.Fatal("bad URL, expected \"/event/:eventId/awardplaces\"")
 		}
 		if split[2] != eventID {
 			http.Error(w, "invalid Event ID", http.StatusNotFound)
@@ -464,8 +468,8 @@ func TestEventListAwardPlace(t *testing.T) {
 	}
 
 	for _, a := range al {
-		if a.ID <= 0 {
-			t.Fatal("Expected ID >0")
+		if len(a.Name) <= 0 {
+			t.Fatal("Expected non-empty AwardPlace Name")
 		}
 	}
 
@@ -1138,16 +1142,16 @@ func TestEventDeleteAwardPlace(t *testing.T) {
 }
 
 func TestEventGetSocialAccount(t *testing.T) {
-	t.Skip("need valid test data")
 	setup()
 	defer teardown()
 
-	data := loadTestData("socialaccount.get.json", t)
+	// TODO: acquire socialaccounts for Events
+	data := loadTestData("beer.get.socialaccount.json", t)
 	defer data.Close()
 
 	const (
 		eventID         = "k2jMtH"
-		socialAccountID = 2
+		socialAccountID = 1
 	)
 	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
@@ -1181,11 +1185,11 @@ func TestEventGetSocialAccount(t *testing.T) {
 }
 
 func TestEventListSocialAccount(t *testing.T) {
-	t.Skip("need valid test data")
 	setup()
 	defer teardown()
 
-	data := loadTestData("socialaccount.list.json", t)
+	// TODO: acquire socialaccounts for Events
+	data := loadTestData("beer.list.socialaccounts.json", t)
 	defer data.Close()
 
 	const eventID = "k2jMtH"

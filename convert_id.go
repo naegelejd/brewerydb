@@ -31,8 +31,8 @@ func (cs *ConvertIDService) ConvertIDs(t ConvertType, oldIDs ...int) (map[int]st
 	}
 
 	q := struct {
-		Type string `json:"type"`
-		IDs  string `json:"ids"`
+		Type string `url:"type"`
+		IDs  string `url:"ids"`
 	}{string(t), strings.Join(ids, ",")}
 
 	req, err := cs.c.NewRequest("POST", "/convertid", &q)

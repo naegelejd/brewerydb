@@ -43,6 +43,10 @@ func main() {
 		"category.list.json":               categoryList,
 		"event.get.json":                   eventGet,
 		"event.list.json":                  eventList,
+		"event.get.awardcategory.json":     eventGetAwardCategory,
+		"event.list.awardcategories.json":  eventListAwardCategories,
+		"event.get.awardplace.json":        eventGetAwardPlace,
+		"event.list.awardplaces.json":      eventListAwardPlaces,
 		"feature.get.json":                 featureGet,
 		"feature.list.json":                featureList,
 		"feature.byweek.json":              featureByWeek,
@@ -221,6 +225,26 @@ func eventGet(c *brewerydb.Client) error {
 
 func eventList(c *brewerydb.Client) error {
 	_, err := c.Event.List(&brewerydb.EventListRequest{Page: 1, Year: 2015})
+	return err
+}
+
+func eventGetAwardCategory(c *brewerydb.Client) error {
+	_, err := c.Event.GetAwardCategory("cJio9R", 87)
+	return err
+}
+
+func eventListAwardCategories(c *brewerydb.Client) error {
+	_, err := c.Event.ListAwardCategories("cJio9R")
+	return err
+}
+
+func eventGetAwardPlace(c *brewerydb.Client) error {
+	_, err := c.Event.GetAwardPlace("cJio9R", 3)
+	return err
+}
+
+func eventListAwardPlaces(c *brewerydb.Client) error {
+	_, err := c.Event.ListAwardPlaces("cJio9R")
 	return err
 }
 

@@ -257,14 +257,18 @@ func TestSearchUPC(t *testing.T) {
 	const (
 		code = 606905008303
 	)
+	firstTest := true
 	mux.HandleFunc("/search/", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkURLSuffix(t, r, "upc")
 
 		checkFormValue(t, r, "code", fmt.Sprintf("%d", code))
-		// TODO: check more form values
 
-		io.Copy(w, data)
+		if firstTest {
+			io.Copy(w, data)
+		} else {
+			fmt.Fprint(w, `{"status":"success", "data":[]}`)
+		}
 	})
 
 	bl, err := client.Search.UPC(code)
@@ -280,8 +284,32 @@ func TestSearchUPC(t *testing.T) {
 		}
 	}
 
+	firstTest = false
+	bl, _ = client.Search.UPC(code)
+	if bl != nil {
+		t.Fatal("Expected nil []Beer")
+	}
+
 	testBadURL(t, func() error {
 		_, err := client.Search.UPC(code)
 		return err
 	})
+}
+
+func TestMakeActualSearchRequest(t *testing.T) {
+	const (
+		p  = 0
+		q  = "good beer"
+		tp = searchBeer
+	)
+	req := makeActualSearchRequest(nil, q, tp)
+	if req.Page != p {
+		t.Fatalf("Page = %v, want %v", req.Page, p)
+	}
+	if req.Query != q {
+		t.Fatalf("Query = %v, want %v", req.Query, q)
+	}
+	if req.Type != tp {
+		t.Fatalf("Type = %v, want %v", req.Type, tp)
+	}
 }
