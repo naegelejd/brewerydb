@@ -63,18 +63,11 @@ func (ms *MenuService) SRM() ([]SRM, error) {
 
 	res := struct {
 		Status  string
-		Data    map[string]SRM
+		Data    []SRM
 		Message string
 	}{}
-	if err := ms.c.Do(req, &res); err != nil {
-		return nil, err
-	}
-
-	srm := make([]SRM, 0, len(res.Data))
-	for _, v := range res.Data {
-		srm = append(srm, v)
-	}
-	return srm, nil
+	err = ms.c.Do(req, &res)
+	return res.Data, err
 }
 
 // BeerAvailability provides a listing of all possible Availability states.
@@ -84,20 +77,13 @@ func (ms *MenuService) BeerAvailability() ([]Availability, error) {
 		return nil, err
 	}
 
-	res := struct {
+	resp := struct {
 		Status  string
-		Data    map[string]Availability
+		Data    []Availability
 		Message string
 	}{}
-	if err := ms.c.Do(req, &res); err != nil {
-		return nil, err
-	}
-
-	avail := make([]Availability, 0, len(res.Data))
-	for _, v := range res.Data {
-		avail = append(avail, v)
-	}
-	return avail, nil
+	err = ms.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // Fluidsize provides a listing of all fluidsizes.

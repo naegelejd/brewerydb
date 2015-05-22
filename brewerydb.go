@@ -153,7 +153,7 @@ func (c *Client) Do(req *http.Request, data interface{}) error {
 		return fmt.Errorf("HTTP Error %d", resp.StatusCode)
 	}
 
-	c.NumRequests += 1
+	c.NumRequests++
 
 	if data != nil {
 		var body io.Reader

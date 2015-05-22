@@ -1,0 +1,16 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"micro": "Micro Brewery",
+		"macro": "Macro Brewery",
+		"nano": "Nano Brewery",
+		"brewpub": "Brewpub",
+		"production": "Production Facility",
+		"office": "Office",
+		"tasting": "Tasting Room",
+		"restaurant": "Restaurant\/Ale House",
+		"cidery": "Cidery",
+		"meadery": "Meadery"
+	},
+	"status": "success"
+}

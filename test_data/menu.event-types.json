@@ -1,0 +1,14 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"festival": "Beer Festival",
+		"competition": "Beer Competition",
+		"festival_competition": "Combo Festival\/Competition",
+		"tasting": "Tasting",
+		"beer_release": "Beer Release",
+		"seminar": "Seminar\/Lecture",
+		"meetup": "Meetup",
+		"other": "Other Event"
+	},
+	"status": "success"
+}

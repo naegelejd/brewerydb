@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"time"
 
 	"github.com/naegelejd/brewerydb"
 )
@@ -61,10 +62,25 @@ func main() {
 		"ingredient.list.json":             ingredientList,
 		"location.get.json":                locationGet,
 		"location.list.json":               locationList,
+		"menu.beer-availability.json":      menuBeerAvailability,
+		"menu.glassware.json":              menuGlassware,
+		"menu.fluidsize.json":              menuFluidsize,
+		"menu.beer-temperature.json":       menuBeerTemperature,
+		"menu.countries.json":              menuCountries,
+		"menu.styles.json":                 menuStyles,
+		"menu.location-types.json":         menuLocationTypes,
+		"menu.fluidsize-volume.json":       menuFluidsizeVolume,
+		"menu.event-types.json":            menuEventTypes,
+		"menu.ingredients.json":            menuIngredients,
+		"menu.categories.json":             menuCategories,
+		"menu.srm.json":                    menuSRM,
 		"search.beer.json":                 searchBeer,
 		"search.brewery.json":              searchBrewery,
 		"search.event.json":                searchEvent,
 		"search.guild.json":                searchGuild,
+		"search.style.json":                searchStyle,
+		"search.geopoint.json":             searchGeoPoint,
+		"search.upc.json":                  searchUPC,
 		"socialsite.get.json":              socialsiteGet,
 		"socialsite.list.json":             socialsiteList,
 		"style.get.json":                   styleGet,
@@ -102,11 +118,13 @@ func getTestData(c *brewerydb.Client, filename string, action func(c *brewerydb.
 		return err
 	}
 
+	log.Println("Sleeping...")
+	time.Sleep(200 * time.Millisecond)
+
 	f, err := os.Create(filename)
 	if err != nil {
 		return err
 	}
-
 	defer func() {
 		f.Close()
 		c.JSONWriter = nil
@@ -301,6 +319,55 @@ func locationList(c *brewerydb.Client) error {
 	return err
 }
 
+func menuBeerAvailability(c *brewerydb.Client) error {
+	_, err := c.Menu.BeerAvailability()
+	return err
+}
+func menuGlassware(c *brewerydb.Client) error {
+	_, err := c.Menu.Glassware()
+	return err
+}
+func menuFluidsize(c *brewerydb.Client) error {
+	_, err := c.Menu.Fluidsize()
+	return err
+}
+func menuBeerTemperature(c *brewerydb.Client) error {
+	_, err := c.Menu.BeerTemperature()
+	return err
+}
+func menuCountries(c *brewerydb.Client) error {
+	_, err := c.Menu.Countries()
+	return err
+}
+func menuStyles(c *brewerydb.Client) error {
+	_, err := c.Menu.Styles()
+	return err
+}
+func menuLocationTypes(c *brewerydb.Client) error {
+	_, err := c.Menu.LocationTypes()
+	return err
+}
+func menuFluidsizeVolume(c *brewerydb.Client) error {
+	_, err := c.Menu.FluidsizeVolume()
+	return err
+}
+func menuEventTypes(c *brewerydb.Client) error {
+	_, err := c.Menu.EventTypes()
+	return err
+}
+func menuIngredients(c *brewerydb.Client) error {
+	_, err := c.Menu.Ingredients()
+	return err
+}
+func menuCategories(c *brewerydb.Client) error {
+	_, err := c.Menu.Categories()
+	return err
+}
+func menuSRM(c *brewerydb.Client) error {
+	_, err := c.Menu.SRM()
+	return err
+}
+
 func searchBeer(c *brewerydb.Client) error {
 	_, err := c.Search.Beer("flying", &brewerydb.SearchRequest{Page: 1})
 	return err
@@ -318,6 +385,19 @@ func searchEvent(c *brewerydb.Client) error {
 
 func searchGuild(c *brewerydb.Client) error {
 	_, err := c.Search.Guild("maryland", &brewerydb.SearchRequest{Page: 1})
+	return err
+}
+
+func searchStyle(c *brewerydb.Client) error {
+	_, err := c.Search.Style("Pale Ale", true)
+	return err
+}
+func searchGeoPoint(c *brewerydb.Client) error {
+	_, err := c.Search.GeoPoint(&brewerydb.GeoPointRequest{Latitude: 35.772096, Longitude: -78.638614})
+	return err
+}
+func searchUPC(c *brewerydb.Client) error {
+	_, err := c.Search.UPC(606905008303)
 	return err
 }
 

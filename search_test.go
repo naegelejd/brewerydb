@@ -1,8 +1,10 @@
 package brewerydb
 
 import (
+	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"testing"
 )
 
@@ -20,9 +22,7 @@ func TestSearchBeer(t *testing.T) {
 	mux.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
-		if q := r.FormValue("q"); q != query {
-			t.Fatalf("Request.FormValue q = %v, want %v", q, query)
-		}
+		checkFormValue(t, r, "q", query)
 		// TODO: check more request query values
 		io.Copy(w, data)
 	})
@@ -60,9 +60,7 @@ func TestSearchBrewery(t *testing.T) {
 	mux.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
-		if q := r.FormValue("q"); q != query {
-			t.Fatalf("Request.FormValue q = %v, want %v", q, query)
-		}
+		checkFormValue(t, r, "q", query)
 		// TODO: check more request query values
 		io.Copy(w, data)
 	})
@@ -100,9 +98,8 @@ func TestSearchEvent(t *testing.T) {
 	mux.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
-		if q := r.FormValue("q"); q != query {
-			t.Fatalf("Request.FormValue q = %v, want %v", q, query)
-		}
+
+		checkFormValue(t, r, "q", query)
 		// TODO: check more request query values
 		io.Copy(w, data)
 	})
@@ -140,10 +137,10 @@ func TestSearchGuild(t *testing.T) {
 	mux.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		checkMethod(t, r, "GET")
 		checkPage(t, r, page)
-		if q := r.FormValue("q"); q != query {
-			t.Fatalf("Request.FormValue q = %v, want %v", q, query)
-		}
+
+		checkFormValue(t, r, "q", query)
 		// TODO: check more request query values
+
 		io.Copy(w, data)
 	})
 
@@ -162,6 +159,129 @@ func TestSearchGuild(t *testing.T) {
 
 	testBadURL(t, func() error {
 		_, err := client.Search.Guild(query, &SearchRequest{Page: page})
+		return err
+	})
+}
+
+func TestSearchStyle(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("search.style.json", t)
+	defer data.Close()
+
+	const (
+		query = "Pale Ale"
+	)
+	mux.HandleFunc("/search/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, "style")
+
+		checkFormValue(t, r, "q", "Pale Ale")
+		checkFormValue(t, r, "withDescriptions", "Y")
+
+		io.Copy(w, data)
+	})
+
+	sl, err := client.Search.Style(query, true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(sl) <= 0 {
+		t.Fatal("Expected >0 styles")
+	}
+	for _, s := range sl {
+		if s.ID <= 0 {
+			t.Fatal("Expected ID >0")
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Search.Style(query, true)
+		return err
+	})
+}
+
+func TestSearchGeoPoint(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("search.geopoint.json", t)
+	defer data.Close()
+
+	const (
+		latitude  = 35.772096
+		longitude = -78.638614
+	)
+	mux.HandleFunc("/search/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[2] != "geo" || split[3] != "point" {
+			t.Fatal("bad URL, expected \"/search/geo/point\"")
+		}
+
+		checkFormValue(t, r, "lat", fmt.Sprintf("%f", latitude))
+		checkFormValue(t, r, "lng", fmt.Sprintf("%f", longitude))
+		// TODO: check more form values
+
+		io.Copy(w, data)
+	})
+
+	req := &GeoPointRequest{Latitude: latitude, Longitude: longitude}
+	ll, err := client.Search.GeoPoint(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ll) <= 0 {
+		t.Fatal("Expected >0 Locations")
+	}
+	for _, l := range ll {
+		if len(l.ID) != 6 {
+			t.Fatal("Expected ID len to be 6")
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Search.GeoPoint(req)
+		return err
+	})
+}
+
+func TestSearchUPC(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("search.upc.json", t)
+	defer data.Close()
+
+	const (
+		code = 606905008303
+	)
+	mux.HandleFunc("/search/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkURLSuffix(t, r, "upc")
+
+		checkFormValue(t, r, "code", fmt.Sprintf("%d", code))
+		// TODO: check more form values
+
+		io.Copy(w, data)
+	})
+
+	bl, err := client.Search.UPC(code)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(bl) <= 0 {
+		t.Fatal("Expected >0 Beers")
+	}
+	for _, b := range bl {
+		if len(b.ID) != 6 {
+			t.Fatal("Expected ID len to be 6")
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Search.UPC(code)
 		return err
 	})
 }

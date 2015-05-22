@@ -1,0 +1,12 @@
+{
+	"message": "Request Successful",
+	"data": {
+		"very_cold": "Very Cold - (0-4C\/32-39F)",
+		"cold": "Cold - (4-7C\/39-45F)",
+		"cool": "Cool - (8-12C\/45-54F)",
+		"cellar": "Cellar - (12-14C\/54-57F)",
+		"warm": "Warm - (14-16C\/57-61F)",
+		"hot": "Hot - (70C\/158F)"
+	},
+	"status": "success"
+}

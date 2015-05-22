@@ -1,0 +1,46 @@
+{
+	"message": "Request Successful",
+	"data": [
+		{
+			"id": 1,
+			"name": "Year Round",
+			"description": "Available year round as a staple beer."
+		},
+		{
+			"id": 2,
+			"name": "Limited",
+			"description": "Limited availability."
+		},
+		{
+			"id": 3,
+			"name": "Not Available",
+			"description": "Beer is not available."
+		},
+		{
+			"id": 4,
+			"name": "Seasonal",
+			"description": "Available at the same time of year, every year."
+		},
+		{
+			"id": 5,
+			"name": "Spring",
+			"description": "Available during the spring months."
+		},
+		{
+			"id": 6,
+			"name": "Summer",
+			"description": "Available during the summer months."
+		},
+		{
+			"id": 7,
+			"name": "Fall",
+			"description": "Available during the fall months."
+		},
+		{
+			"id": 8,
+			"name": "Winter",
+			"description": "Available during the winter months."
+		}
+	],
+	"status": "success"
+}

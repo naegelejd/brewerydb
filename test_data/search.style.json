@@ -1,0 +1,1012 @@
+{
+	"currentPage": 1,
+	"numberOfPages": 2,
+	"totalResults": 64,
+	"data": [
+		{
+			"id": 30,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "American-Style India Pale Ale",
+			"shortName": "American-Style India Pale Ale",
+			"description": "American-style India pale ales are perceived to have medium-high to intense hop bitterness, flavor and aroma with medium-high alcohol content. The style is further characterized by floral, fruity, citrus-like, piney, resinous, or sulfur-like American-variety hop character. Note that one or more of these American-variety hop characters is the perceived end, but the hop characters may be a result of the skillful use of hops of other national origins. The use of water with high mineral content results in a crisp, dry beer. This pale gold to deep copper-colored ale has a full, flowery hop aroma and may have a strong hop flavor (in addition to the perception of hop bitterness). India pale ales possess medium maltiness which contributes to a medium body. Fruity-ester flavors and aromas are moderate to very strong. Diacetyl can be absent or may be perceived at very low levels. Chill and\/or hop haze is allowable at cold temperatures. (English and citrus-like American hops are considered enough of a distinction justifying separate American-style IPA and English-style IPA categories or subcategories. Hops of other origins may be used for bitterness or approximating traditional American or English character. See English-style India Pale Ale",
+			"ibuMin": "50",
+			"ibuMax": "70",
+			"abvMin": "6.3",
+			"abvMax": "7.5",
+			"srmMin": "6",
+			"srmMax": "14",
+			"ogMin": "1.06",
+			"fgMin": "1.012",
+			"fgMax": "1.018",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 74,
+			"categoryId": 6,
+			"category": {
+				"id": 6,
+				"name": "International Ale Styles",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Australasian-Style Pale Ale",
+			"shortName": "Australasian-Style Pale Ale",
+			"description": "This style is a mild, pale, light-bodied ale with a color varying from light to amber. Hop bitterness and flavor range from very low to low. Hop aroma is often absent. A fruity or estery aroma should be perceived. Diacetyl should be very low. DMS and chill haze should not present.",
+			"ibuMin": "20",
+			"ibuMax": "40",
+			"abvMin": "4.2",
+			"abvMax": "6.2",
+			"srmMin": "5",
+			"srmMax": "14",
+			"ogMin": "1.04",
+			"fgMin": "1.006",
+			"fgMax": "1.012",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 112,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Light American Wheat Ale or Lager with Yeast",
+			"shortName": "Light American Wheat Ale or Lager with Yeast",
+			"description": "This beer can be made using either ale or lager yeast. It can be brewed with 30 to 75 percent wheat malt, and hop rates may be low to medium. Hop characters may be light to moderate in bitterness, flavor and aroma. Fruity-estery aroma and flavor are typical but at low levels however, phenolic, clove-like characteristics should not be perceived. Color is usually straw to light amber, and the body should be light to medium in character. Diacetyl should not be perceived. Because this style is served with yeast the character should portray a full yeasty mouthfeel and appear hazy to very cloudy. Chill haze is also acceptable. Yeast flavor and aroma should be low to medium but not overpowering the balance and character of malt and hops. These beers are typically served with the yeast in the bottle, and are cloudy when served.",
+			"ibuMin": "10",
+			"ibuMax": "35",
+			"abvMin": "3.5",
+			"abvMax": "5.5",
+			"srmMin": "4",
+			"srmMax": "10",
+			"ogMin": "1.036",
+			"fgMin": "1.006",
+			"fgMax": "1.018",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 62,
+			"categoryId": 5,
+			"category": {
+				"id": 5,
+				"name": "Belgian And French Origin Ales",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Belgian-Style Pale Ale",
+			"shortName": "Belgian-Style Pale Ale",
+			"description": "Belgian-style pale ales are characterized by low but noticeable hop bitterness, flavor, and aroma. Light to medium body and low malt aroma are typical. They are light amber to deep amber in color. Noble-type hops are commonly used. Low to medium fruity esters are evident in aroma and flavor. Low levels of phenolic spiciness from yeast byproducts may be perceived. Low caramel or toasted malt flavor is okay. Diacetyl should not be perceived. Chill haze is allowable at cold temperatures.",
+			"ibuMin": "20",
+			"ibuMax": "30",
+			"abvMin": "4",
+			"abvMax": "6",
+			"srmMin": "6",
+			"srmMax": "12",
+			"ogMin": "1.044",
+			"fgMin": "1.008",
+			"fgMax": "1.014",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 25,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "American-Style Pale Ale",
+			"shortName": "American-Style Pale Ale",
+			"description": "American pale ales range from deep golden to copper in color. The style is characterized by fruity, floral and citrus-like American-variety hop character producing medium to medium-high hop bitterness, flavor, and aroma. Note that the \"traditional\" style of this beer has its origins with certain floral, fruity, citrus-like, piney, resinous, or sulfur-like American hop varietals. One or more of these hop characters is the perceived end, but the perceived hop characters may be a result of the skillful use of hops of other national origins. American pale ales have medium body and low to medium maltiness. Low caramel character is allowable. Fruity-ester flavor and aroma should be moderate to strong. Diacetyl should be absent or present at very low levels. Chill haze is allowable at cold temperatures.",
+			"ibuMin": "30",
+			"ibuMax": "42",
+			"abvMin": "4.5",
+			"abvMax": "5.6",
+			"srmMin": "6",
+			"srmMax": "14",
+			"ogMin": "1.044",
+			"fgMin": "1.008",
+			"fgMax": "1.014",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 1,
+			"categoryId": 1,
+			"category": {
+				"id": 1,
+				"name": "British Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Classic English-Style Pale Ale",
+			"shortName": "Classic English-Style Pale Ale",
+			"description": "Classic English pale ales are golden to copper colored and display earthy, herbal English-variety hop character. Note that \"earthy, herbal English-variety hop character\" is the perceived end, but may be a result of the skillful use of hops of other national origins. Medium to high hop bitterness, flavor, and aroma should be evident. This medium-bodied pale ale has low to medium malt flavor and aroma. Low caramel character is allowable. Fruity-ester flavors and aromas are moderate to strong. Chill haze may be in evidence only at very cold temperatures. The absence of diacetyl is desirable, though, diacetyl (butterscotch character) is acceptable and characteristic when at very low levels.",
+			"ibuMin": "20",
+			"ibuMax": "40",
+			"abvMin": "4.5",
+			"abvMax": "5.5",
+			"srmMin": "5",
+			"srmMax": "5",
+			"ogMin": "1.04",
+			"fgMin": "1.008",
+			"fgMax": "1.016",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 73,
+			"categoryId": 6,
+			"category": {
+				"id": 6,
+				"name": "International Ale Styles",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "International-Style Pale Ale",
+			"shortName": "International-Style Pale Ale",
+			"description": "International-style pale ales range from deep golden to copper in color. The style is characterized by wide range of hop characters unlike fruity, floral and citrus-like American-variety hop character and unlike earthy, herbal English-variety hop character. Moderate to high hop bitterness, flavor, and aroma is evident. International pale ales have medium body and low to medium maltiness. Low caramel character is allowable. Fruity-ester flavor and aroma should be moderate to strong. Diacetyl should be absent or present at very low levels. Chill haze is allowable at cold temperatures.",
+			"ibuMin": "30",
+			"ibuMax": "42",
+			"abvMin": "4.5",
+			"abvMax": "5.5",
+			"srmMin": "6",
+			"srmMax": "14",
+			"ogMin": "1.044",
+			"fgMin": "1.008",
+			"fgMax": "1.014",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 113,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Light American Wheat Ale or Lager without Yeast",
+			"shortName": "Light American Wheat Ale or Lager without Yeast",
+			"description": "This beer can be made using either ale or lager yeast. It can be brewed with 30 to 75 percent wheat malt, and hop rates may be low to medium. Hop characters may be light to moderate in bitterness, flavor and aroma. A fruity-estery aroma and flavor are typical but at low levels however, phenolic, clove-like characteristics should not be perceived. Appearance can be clear or with chill haze, golden to light amber, and the body should be light to medium in character. Diacetyl should not be perceived. Because this style is packaged and served without yeast, no yeast characters should be evident in mouthfeel, flavor, or aroma.",
+			"ibuMin": "10",
+			"ibuMax": "35",
+			"abvMin": "3.8",
+			"abvMax": "5",
+			"srmMin": "2",
+			"srmMax": "10",
+			"ogMin": "1.036",
+			"fgMin": "1.004",
+			"fgMax": "1.016",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 2,
+			"categoryId": 1,
+			"category": {
+				"id": 1,
+				"name": "British Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "English-Style India Pale Ale",
+			"shortName": "English-Style India Pale Ale",
+			"description": "Most traditional interpretations of English-style India pale ales are characterized by medium-high hop bitterness with a medium to medium-high alcohol content. Hops from a variety of origins may be used to contribute to a high hopping rate. Earthy and herbal English-variety hop character is the perceived end, but may be a result of the skillful use of hops of other national origins. The use of water with high mineral content results in a crisp, dry beer, sometimes with subtle and balanced character of sulfur compounds. This pale gold to deep copper-colored ale has a medium to high, flowery hop aroma and may have a medium to strong hop flavor (in addition to the hop bitterness). English-style India pale ales possess medium maltiness and body. Fruity-ester flavors and aromas are moderate to very strong. Diacetyl can be absent or may be perceived at very low levels. Chill haze is allowable at cold temperatures. Hops of other origins may be used for bitterness or approximating traditional English character.",
+			"ibuMin": "35",
+			"ibuMax": "63",
+			"abvMin": "5",
+			"abvMax": "7",
+			"srmMin": "6",
+			"srmMax": "14",
+			"ogMin": "1.05",
+			"fgMin": "1.012",
+			"fgMax": "1.018",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 41,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "American-Style Black Ale",
+			"shortName": "American-Style Black Ale",
+			"description": "American-style Black Ales are very dark to black and perceived to have medium high to high hop bitterness, flavor and aroma with medium-high alcohol content, balanced with a medium body. Fruity, floral and herbal character from hops of all origins may contribute character. The style is further characterized by a balanced and moderate degree of caramel malt and dark roasted malt flavor and aroma. High astringency and high degree of burnt roast malt character should be absent.",
+			"ibuMin": "50",
+			"ibuMax": "70",
+			"abvMin": "6",
+			"abvMax": "7.5",
+			"srmMin": "35",
+			"srmMax": "35",
+			"ogMin": "1.056",
+			"fgMin": "1.012",
+			"fgMax": "1.018",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 10,
+			"categoryId": 1,
+			"category": {
+				"id": 1,
+				"name": "British Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "English-Style Pale Mild Ale",
+			"shortName": "English-Style Pale Mild Ale",
+			"description": "English pale mild ales range from golden to amber in color. Malt flavor dominates the flavor profile with little hop bitterness or flavor. Hop aroma can be light. Very low diacetyl flavors may be appropriate in this low-alcohol beer. Fruity-ester level is very low. Chill haze is allowable at cold temperatures.",
+			"ibuMin": "10",
+			"ibuMax": "20",
+			"abvMin": "3.2",
+			"abvMax": "4",
+			"srmMin": "8",
+			"srmMax": "17",
+			"ogMin": "1.03",
+			"fgMin": "1.004",
+			"fgMax": "1.008",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 29,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "American-Style Strong Pale Ale",
+			"shortName": "American-Style Strong Pale Ale",
+			"description": "American strong pale ales range from deep golden to copper in color. The style is characterized by floral and citrus-like American-variety hops used to produce high hop bitterness, flavor, and aroma. Note that floral, fruity, citrus-like, piney, resinous, or sulfur-like American-variety hop character is the perceived end, but may be a result of the skillful use of hops of other national origins. American strong pale ales have medium body and low to medium maltiness. Low caramel character is allowable. Fruityester flavor and aroma should be moderate to strong. Diacetyl should be absent or present at very low levels. Chill haze is allowable at cold temperatures.",
+			"ibuMin": "40",
+			"ibuMax": "50",
+			"abvMin": "5.5",
+			"abvMax": "6.3",
+			"srmMin": "6",
+			"srmMax": "14",
+			"ogMin": "1.05",
+			"fgMin": "1.008",
+			"fgMax": "1.016",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 31,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Imperial or Double India Pale Ale",
+			"shortName": "Imperial or Double India Pale Ale",
+			"description": "Imperial or Double India Pale Ales have intense hop bitterness, flavor and aroma. Alcohol content is medium-high to high and notably evident. They range from deep golden to medium copper in color. The style may use any variety of hops. Though the hop character is intense it's balanced with complex alcohol flavors, moderate to high fruity esters and medium to high malt character. Hop character should be fresh and lively and should not be harsh in quality. The use of large amounts of hops may cause a degree of appropriate hop haze. Imperial or Double India Pale Ales have medium-high to full body. Diacetyl should not be perceived. The intention of this style of beer is to exhibit the fresh and bright character of hops. Oxidative character and aged character should not be present.",
+			"ibuMin": "65",
+			"ibuMax": "100",
+			"abvMin": "7.5",
+			"abvMax": "10.5",
+			"srmMin": "5",
+			"srmMax": "13",
+			"ogMin": "1.075",
+			"fgMin": "1.012",
+			"fgMax": "1.02",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 27,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Pale American-Belgo-Style Ale",
+			"shortName": "Pale American-Belgo-Style Ale",
+			"description": "These beers must portray the unique characters imparted by yeasts typically used in fruity and big Belgian-Style ales - These beers are not traditional Belgian styles which are already defined. They are unique beers unto themselves. Notes of banana, berry, apple, sometimes coriander spice-like and\/or smoky-phenolic characters should be portrayed with balance of hops and malt character when fermented with such yeast. Hop aroma, flavor and bitterness not usually found in the base style, can be medium to very high and must show the characters of American hop varieties. Color falls in the blonde to amber range. Esters should be at medium to high levels. Diacetyl should not be evident. Chill haze may be evident. Sulfur-like yeast character should be absent.. No Brettanomyces character should be present. An ale which exhibits Brettanomyces character would be classified as \"American-style Brett Ale.\" A statement by the brewer that could include information such as style being elaborated upon, and other information about the entry with regard to flavor, aroma or appearance, is essential for fair assessment in competitions. Beers with Brettanomyces may be subcategorized under this category.",
+			"srmMin": "5",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 63,
+			"categoryId": 5,
+			"category": {
+				"id": 5,
+				"name": "Belgian And French Origin Ales",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Belgian-Style Pale Strong Ale",
+			"shortName": "Belgian-Style Pale Strong Ale",
+			"description": "Belgian pale strong ales are pale to golden in color with relatively light body for a beer of its alcoholic strength. Often brewed with light colored Belgian \"candy\" sugar, these beers are well attenuated. The perception of hop bitterness is medium-low to medium -high, with hop flavor and aroma also in this range. These beers are highly attenuated and have a perceptively deceiving high alcoholic character-being light to medium bodied rather than full bodied. The intensity of malt character should be low to medium, often surviving along with a complex fruitiness. Very little or no diacetyl is perceived. Herbs and spices are sometimes used to delicately flavor these strong ales. Low levels of phenolic spiciness from yeast byproducts may also be perceived. Chill haze is allowable at cold temperatures.",
+			"ibuMin": "20",
+			"ibuMax": "50",
+			"abvMin": "7",
+			"abvMax": "11",
+			"srmMin": "4",
+			"srmMax": "10",
+			"ogMin": "1.064",
+			"fgMin": "1.012",
+			"fgMax": "1.024",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 8,
+			"categoryId": 1,
+			"category": {
+				"id": 1,
+				"name": "British Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Scottish-Style Heavy Ale",
+			"shortName": "Scottish-Style Heavy Ale",
+			"description": "Scottish heavy ale is moderate in strength and dominated by a smooth, sweet maltiness balanced with low, but perceptible, hop bitterness. Hop flavor or aroma should not be perceived. Scottish heavy ale will have a medium degree of malty, caramel-like, soft and chewy character in flavor and mouthfeel. It has medium body, and fruity esters are very low, if evident. Yeast characters such as diacetyl (butterscotch) and sulfuriness are acceptable at very low levels. The color will range from golden amber to deep brown. Bottled versions of this traditional draft beer may contain higher amounts of carbon dioxide than is typical for mildly carbonated draft versions. Chill haze is acceptable at low temperatures. Though there is little evidence suggesting that traditionally made Scottish-style heavy ales exhibited peat smoke character, the current marketplace offers many Scottish-style heavy ales with peat or smoke character present at low to medium levels. Thus a peaty\/smoky character may be evident at low to medium levels (ales with medium-high or higher smoke character would be considered a smoke flavored beer and considered in another category). Scottish-style heavy ales may be split into two subcategories: Traditional (no smoke character) and Peated (low level of peat smoke character).",
+			"ibuMin": "12",
+			"ibuMax": "20",
+			"abvMin": "3.5",
+			"abvMax": "4",
+			"srmMin": "10",
+			"srmMax": "19",
+			"ogMin": "1.035",
+			"fgMin": "1.01",
+			"fgMax": "1.014",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 109,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "American-Style Cream Ale or Lager",
+			"shortName": "American-Style Cream Ale or Lager",
+			"description": "Mild, pale, light-bodied ale, made using a warm fermentation (top or bottom) and cold lagering. Hop bitterness and flavor range from very low to low. Hop aroma is often absent. Sometimes referred to as cream ales, these beers are crisp and refreshing. Pale malt character predominates. Caramelized malt character should be absent. A fruity or estery aroma may be perceived. Diacetyl and chill haze should not be perceived. Sulfur character and\/or sweet corn-like dimethylsulfide (DMS) should be extremely low or absent from this style of beer.",
+			"ibuMin": "10",
+			"ibuMax": "22",
+			"abvMin": "4.2",
+			"abvMax": "5.6",
+			"srmMin": "2",
+			"srmMax": "5",
+			"ogMin": "1.044",
+			"fgMin": "1.004",
+			"fgMax": "1.01",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 13,
+			"categoryId": 1,
+			"category": {
+				"id": 1,
+				"name": "British Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Old Ale",
+			"shortName": "Old Ale",
+			"description": "Dark amber to brown in color, old ales are medium to full bodied with a malty sweetness. Hop aroma should be minimal and flavor can vary from none to medium in character intensity. Fruity-ester flavors and aromas can contribute to the character of this ale. Bitterness should be minimal but evident and balanced with malt and\/or caramel-like sweetness. Alcohol types can be varied and complex. A distinctive quality of these ales is that they undergo an aging process (often for years) on their yeast either in bulk storage or through conditioning in the bottle, which contributes to a rich, wine-like and often sweet oxidation character. Complex estery characters may also emerge. Some very low diacetyl character may be evident and acceptable. Wood aged characters such as vanillin and other woody characters are acceptable. Horsey, goaty, leathery and phenolic character evolved from Brettanomyces organisms and acidity may be present but should be at low levels and balanced with other flavors Residual flavors that come from liquids previously aged in a barrel such as bourbon or sherry should not be present. Chill haze is acceptable at low temperatures. (This style may often be split into two categories, strong and very strong. Brettanomyces organisms and acidic characters reflect historical character. Competition organizers may choose to distinguish these types of old ale from modern versions.)",
+			"ibuMin": "30",
+			"ibuMax": "65",
+			"abvMin": "6",
+			"abvMax": "9",
+			"srmMin": "12",
+			"srmMax": "30",
+			"ogMin": "1.058",
+			"fgMin": "1.014",
+			"fgMax": "1.03",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 28,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Dark American-Belgo-Style Ale",
+			"shortName": "Dark American-Belgo-Style Ale",
+			"description": "These beers must portray the unique characters imparted by yeasts typically used in fruity and big Belgian-Style ales - These beers are not traditional Belgian styles which are already defined. They are unique beers unto themselves. Notes of banana, berry, apple, sometimes coriander spice-like and\/or smoky-phenolic characters should be portrayed with balance of hops and malt character when fermented with such yeast. Hop aroma, flavor and bitterness not usually found in the base style, can be medium to very high and must show the characters of American hop varieties. Dark color falls in the deep amber\/brown to black range. Roasted malts or barley may have a range of character from subtle to robust, and should be reflected in the overall character and balance of the beer. Esters should be at medium to high levels. Diacetyl should not be evident. Chill haze may be evident. Sulfurlike yeast character should be absent. No Brettanomyces character should be present. An ale which exhibits Brettanomyces character would be classified as \"American-style Brett Ale.\"A statement by the brewer that could include information such as style being elaborated upon, and other information about the entry with regard to flavor, aroma or appearance, is essential for fair assessment in competitions. Beers with Brettanomyces may be subcategorized under this category",
+			"srmMin": "16",
+			"srmMax": "16",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 131,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Out of Category - Traditionally Brewed Beer",
+			"shortName": "Out of Category - Traditionally Brewed Beer",
+			"description": "There are many excellent and popular beers that are brewed with predominantly traditional ingredients and processes yet their character may distinctively vary from styles currently defined or included in these guidelines. For example a brewer may formulate a dark stout but may use lager yeast rather than ale yeast and dry hop with hops more typically used for German-style pilsener. Or perhaps a beer falls distinctively out of the color, alcohol or bitterness range of defined styles. This category recognizes distinctively undefined beers. They may be light or dark, strong or weak, hoppy or not hoppy. Beers brewed with non-traditional hops, malt, yeast or other ingredient that still closely approximate an existing classical category should be entered into the classical category. A short statement by the brewer whether explanatory or poetic often accompanies these beers. For competition purposes, these beers could be grouped as a subcategory of experimental beers",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 97,
+			"categoryId": 8,
+			"category": {
+				"id": 8,
+				"name": "North American Lager",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "American-Style Premium Lager",
+			"shortName": "American-Style Premium Lager",
+			"description": "This style has low malt (and adjunct) sweetness, is medium bodied, and should contain no or a low percentage (less than 25%) of adjuncts. Color may be light straw to golden. Alcohol content and bitterness may also be greater. Hop aroma and flavor is low or negligible. Light fruity esters are acceptable. Chill haze and diacetyl should be absent. Note: Some beers marketed as \"premium\" (based on price) may not fit this definition.",
+			"ibuMin": "6",
+			"ibuMax": "15",
+			"abvMin": "4.3",
+			"abvMax": "5",
+			"srmMin": "2",
+			"srmMax": "6",
+			"ogMin": "1.044",
+			"fgMin": "1.01",
+			"fgMax": "1.014",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 36,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Golden or Blonde Ale",
+			"shortName": "Golden or Blonde Ale",
+			"description": "Golden or Blonde ales are straw to golden blonde in color. They have a crisp, dry palate, light to medium body, and light malt sweetness. Low to medium hop aroma may be present but does not dominate. Bitterness is low to medium. Fruity esters may be perceived but do not predominate. Diacetyl should not be perceived. Chill haze should be absent.",
+			"ibuMin": "15",
+			"ibuMax": "25",
+			"abvMin": "4",
+			"abvMax": "5",
+			"srmMin": "3",
+			"srmMax": "7",
+			"ogMin": "1.045",
+			"fgMin": "1.008",
+			"fgMax": "1.016",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 22,
+			"categoryId": 2,
+			"category": {
+				"id": 2,
+				"name": "Irish Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Irish-Style Red Ale",
+			"shortName": "Irish-Style Red Ale",
+			"description": "Irish-style red ales range from light red-amber-copper to light brown in color. These ales have a medium hop bitterness and flavor. They often don't have hop aroma. Irish-style red ales have low to medium candy-like caramel malt sweetness and may have a balanced subtle degree of roast barley or roast malt character and complexity.  Irish-style Red Ales have a medium body. The style may have low levels of fruity-ester flavor and aroma. Diacetyl should be absent or at very low levels. Chill haze is allowable at cold temperatures. Slight yeast haze is acceptable for bottle-conditioned products.",
+			"ibuMin": "20",
+			"ibuMax": "28",
+			"abvMin": "4",
+			"abvMax": "4.5",
+			"srmMin": "11",
+			"srmMax": "18",
+			"ogMin": "1.04",
+			"fgMin": "1.01",
+			"fgMax": "1.014",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 40,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "American-Style Sour Ale",
+			"shortName": "American-Style Sour Ale",
+			"description": "American sour ales can be very light to black or take on the color of added fruits or other ingredients. There is no Brettanomyces character in this style of beer. Wood- and barrel-aged sour ales are classified elsewhere. If acidity is present it is usually in the form of lactic, acetic and other organic acids naturally developed with acidified malt in the mash or in fermentation by the use of various microorganisms including certain bacteria and yeasts. Acidic character can be a complex balance of several types of acid and characteristics of age. The evolution of natural acidity develops balanced complexity. Residual flavors that come from liquids previously aged in a barrel such as bourbon or sherry should not be present. Wood vessels may be used during the fermentation and aging process, but wood-derived flavors such as vanillin must not be present. In darker versions, roasted malt, caramel-like and chocolate-like characters should be subtle in both flavor and aroma. American sour may have evident full range of hop aroma and hop bitterness with a full range of body. Estery and fruity-ester characters are evident, sometimes moderate and sometimes intense, yet balanced. Diacetyl and sweet corn-like dimethylsulfide (DMS) should not be perceived. Chill haze, bacteria and yeast-induced haze are allowable at low to medium levels at any temperature. Fruited American-Style Sour Ales will exhibit fruit flavors in harmonious balance with other characters.",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 14,
+			"categoryId": 1,
+			"category": {
+				"id": 1,
+				"name": "British Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Strong Ale",
+			"shortName": "Strong Ale",
+			"description": "Light amber to mid-range brown in color, strong ales are medium to full bodied with a malty sweetness and may have low levels of roast malt character. Hop aroma should be minimal and flavor can vary from none to medium in character intensity. Fruity-ester flavors and aromas can contribute to the character of this ale. Bitterness should be minimal but evident and balanced with malt and\/or caramel-like sweetness. Alcohol types can be varied and complex. A rich, often sweet and complex estery character may be evident. Very low levels of diacetyl are acceptable. Chill haze is acceptable at low temperatures. (This style may often be split into two categories, strong and very strong.)",
+			"ibuMin": "30",
+			"ibuMax": "65",
+			"abvMin": "7",
+			"abvMax": "11",
+			"srmMin": "8",
+			"srmMax": "21",
+			"ogMin": "1.06",
+			"fgMin": "1.014",
+			"fgMax": "1.04",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 12,
+			"categoryId": 1,
+			"category": {
+				"id": 1,
+				"name": "British Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "English-Style Brown Ale",
+			"shortName": "English-Style Brown Ale",
+			"description": "English brown ales range from copper to brown in color. They have medium body and range from dry to sweet maltiness with very little hop flavor or aroma. Roast malt tones may sometimes contribute to the flavor and aroma profile. Low to medium-low levels of fruity-ester flavors are appropriate. Diacetyl should be very low, if evident. Chill haze is allowable at cold temperatures.",
+			"ibuMin": "15",
+			"ibuMax": "25",
+			"abvMin": "4",
+			"abvMax": "5.5",
+			"srmMin": "13",
+			"srmMax": "25",
+			"ogMin": "1.04",
+			"fgMin": "1.008",
+			"fgMax": "1.014",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 37,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "American-Style Brown Ale",
+			"shortName": "American-Style Brown Ale",
+			"description": "American brown ales range from deep copper to brown in color. Roasted malt caramel-like and chocolate-like characters should be of medium intensity in both flavor and aroma. American brown ales have evident low to medium hop flavor and aroma, medium to high hop bitterness, and a medium body. Estery and fruity-ester characters should be subdued. Diacetyl should not be perceived. Chill haze is allowable at cold temperatures.",
+			"ibuMin": "25",
+			"ibuMax": "45",
+			"abvMin": "4",
+			"abvMax": "6.4",
+			"srmMin": "15",
+			"srmMax": "26",
+			"ogMin": "1.04",
+			"fgMin": "1.01",
+			"fgMax": "1.018",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 39,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "American-Style Brett Ale",
+			"shortName": "American-Style Brett Ale",
+			"description": "American Brett ales can be very light to black or take on the color of added fruits or other ingredients. Wood- and barrel- aged sour ales are classified elsewhere. The evolution of natural acidity develops balanced complexity. Horsey, goaty, leathery, phenolic and light to moderate and\/or fruity acidic character evolved from Brettanomyces organisms may be evident, yet in balance with other character. Acidity may also be contributed to by bacteria, but may or may not dominate.  Residual flavors that come from liquids previously aged in a barrel such as bourbon or sherry should not be present. Wood vessels may be used during the fermentation and aging process, but wood-derived flavors such as vanillin must not be present. In darker versions, roasted malt, caramel-like and chocolate-like characters should be subtle in both flavor and aroma. American Brett ales may have evident full range of hop aroma and hop bitterness with a full range of body. Estery and fruity-ester characters are evident, sometimes moderate and sometimes intense, yet balanced. Diacetyl and sweet corn-like dimethylsulfide (DMS) should not be perceived. Chill haze, bacteria and yeast-induced haze are allowable at low to medium levels at any temperature. Fruited American-Style Brett Ales will exhibit fruit flavors in harmonious balance with other characters.",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 116,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Dark American Wheat Ale or Lager without Yeast",
+			"shortName": "Dark American Wheat Ale or Lager without Yeast",
+			"description": "This beer can be made using either ale or lager yeast. It can be brewed with 30 to 75 percent malted wheat, and hop rates may be low to medium. A fruity-estery aroma and flavor are typical but at low levels; however, phenolic, clove-like characteristics should not be perceived. Color is dark amber to dark brown, and the body should be light to medium in character. Roasted malts are optionally evident in aroma and flavor with a low level of roast malt astringency acceptable when appropriately balanced with malt sweetness. Roast malts may be evident as a cocoa\/chocolate or caramel character. Aromatic toffee-like, caramel, or biscuit-like characters may be part of the overall flavor\/aroma profile. Diacetyl should not be perceived. Because this style is packaged and served without yeast, no yeast characters should be evident in mouthfeel, flavor, or aroma. Chill haze is also acceptable.",
+			"ibuMin": "10",
+			"ibuMax": "25",
+			"abvMin": "3.8",
+			"abvMax": "5",
+			"srmMin": "9",
+			"srmMax": "22",
+			"ogMin": "1.036",
+			"fgMin": "1.004",
+			"fgMax": "1.016",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 121,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Pumpkin Beer",
+			"shortName": "Pumpkin Beer",
+			"description": "Pumpkin beers are any beers using pumpkins (Cucurbito pepo) as an adjunct in either mash, kettle, primary or secondary fermentation, providing obvious (ranging from subtle to intense), yet harmonious, qualities. Pumpkin qualities should not be overpowered by hop character. These may or may not be spiced or flavored with other things. A statement by the brewer explaining the nature of the beer is essential for fair assessment in competitions. If this beer is a classic style with pumpkin, the brewer should also specify the classic style.",
+			"ibuMin": "5",
+			"ibuMax": "70",
+			"abvMin": "2.5",
+			"abvMax": "12",
+			"srmMin": "5",
+			"srmMax": "50",
+			"ogMin": "1.03",
+			"fgMin": "1.006",
+			"fgMax": "1.03",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 9,
+			"categoryId": 1,
+			"category": {
+				"id": 1,
+				"name": "British Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Scottish-Style Export Ale",
+			"shortName": "Scottish-Style Export Ale",
+			"description": "The overriding character of Scottish export ale is sweet, caramel-like, and malty. Its bitterness is perceived as low to medium. Hop flavor or aroma should not be perceived. It has medium body. Fruity-ester character may be apparent. Yeast characters such as diacetyl (butterscotch) and sulfuriness are acceptable at very low levels. The color will range from golden amber to deep brown. Bottled versions of this traditional draft beer may contain higher amounts of carbon dioxide than is typical for mildly carbonated draft versions. Chill haze is acceptable at low temperatures. Though there is little evidence suggesting that traditionally made Scottish-style export ales exhibited peat smoke character, the current marketplace offers many Scottish-style export ales with peat or smoke character present at low to medium levels. Thus a peaty\/smoky character may be evident at low to medium levels (ales with medium-high or higher smoke character would be considered a smoke flavored beer and considered in another category). Scottish-style export ales may be split into two subcategories: Traditional (no smoke character) and Peated (low level of peat smoke character).",
+			"ibuMin": "15",
+			"ibuMax": "25",
+			"abvMin": "4",
+			"abvMax": "5.3",
+			"srmMin": "10",
+			"srmMax": "19",
+			"ogMin": "1.04",
+			"fgMin": "1.01",
+			"fgMax": "1.018",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 11,
+			"categoryId": 1,
+			"category": {
+				"id": 1,
+				"name": "British Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "English-Style Dark Mild Ale",
+			"shortName": "English-Style Dark Mild Ale",
+			"description": "English dark mild ales range from deep copper to dark brown (often with a red tint) in color. Malt flavor and caramel are part of the flavor and aroma profile while, licorice and roast malt tones may sometimes contribute to the flavor and aroma profile. Body should be low-medium to medium. These beers have very little hop flavor or aroma. Very low diacetyl flavors may be appropriate in this low-alcohol beer. Fruity-ester level is very low.",
+			"ibuMin": "10",
+			"ibuMax": "24",
+			"abvMin": "3.2",
+			"abvMax": "4",
+			"srmMin": "17",
+			"srmMax": "34",
+			"ogMin": "1.03",
+			"fgMin": "1.004",
+			"fgMax": "1.008",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 72,
+			"categoryId": 5,
+			"category": {
+				"id": 5,
+				"name": "Belgian And French Origin Ales",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "French & Belgian-Style Saison",
+			"shortName": "French & Belgian-Style Saison",
+			"description": "Beers in this category are golden to deep amber in color. There may be quite a variety of characters within this style. Generally: They are light to medium in body. Malt aroma is low to medium-low. Esters are medium to high in  aroma, while, complex alcohols, herbs, spices, low Brettanomyces character and even clove and smoke-like phenolics may or may not be evident in the overall balanced beer. Hop aroma and flavor may be at low to medium levels. Malt flavor is low but provides foundation for the overall balance. Hop bitterness is moderate to moderately assertive. Herb and\/or spice flavors, including black pepper-like notes, may or may not be evident. Fruitiness from fermentation is generally in character. A balanced small amount of sour or acidic flavors is acceptable when in balance with other components. Earthy, cellar-like, musty aromas are okay. Diacetyl should not be perceived. Chill or slight yeast haze is okay. Often bottle conditioned with some yeast character and high carbonation. French & Belgian-Style Saison may have Brettanomyces characters that are slightly acidity, fruity, horsey, goaty and\/or leather-like.",
+			"ibuMin": "20",
+			"ibuMax": "40",
+			"abvMin": "4.5",
+			"abvMax": "8.5",
+			"srmMin": "4",
+			"srmMax": "14",
+			"ogMin": "1.055",
+			"fgMin": "1.004",
+			"fgMax": "1.016",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 33,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Imperial or Double Red Ale",
+			"shortName": "Imperial or Double Red Ale",
+			"description": "Imperial or Double Red Ales have intense hop bitterness, flavor and aroma. Alcohol content is also very high and of notable character. They range from deep amber to dark copper in color and may exhibit a small amount of chill haze at cold temperatures The style may use any variety of hops. Though the hop character is intense it's balanced with complex alcohol flavors, moderate to high fruity esters and medium to high caramel malt character. Imperial or Double Red Ales have a full body. Diacetyl should not be perceived.",
+			"ibuMin": "55",
+			"ibuMax": "85",
+			"abvMin": "7.9",
+			"abvMax": "10.5",
+			"srmMin": "10",
+			"srmMax": "15",
+			"ogMin": "1.08",
+			"fgMin": "1.02",
+			"fgMax": "1.028",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 32,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "American-Style Amber\/Red Ale",
+			"shortName": "American-Style Amber\/Red Ale",
+			"description": "American amber\/red ales range from light copper to light brown in color. They are characterized by American-variety hops used to produce the perception of medium hop bitterness, flavor, and medium aroma. Amber ales have medium-high to high maltiness with medium to low caramel character. They should have medium to medium-high body. The style may have low levels of fruityester flavor and aroma. Diacetyl can be either absent or barely perceived at very low levels. Chill haze is allowable at cold temperatures. Slight yeast haze is acceptable for bottle-conditioned products.",
+			"ibuMin": "30",
+			"ibuMax": "40",
+			"abvMin": "4.5",
+			"abvMax": "6",
+			"srmMin": "11",
+			"srmMax": "18",
+			"ogMin": "1.048",
+			"fgMin": "1.012",
+			"fgMax": "1.018",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 57,
+			"categoryId": 5,
+			"category": {
+				"id": 5,
+				"name": "Belgian And French Origin Ales",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Belgian-Style Flanders Oud Bruin or Oud Red Ales",
+			"shortName": "Belgian-Style Flanders Oud Bruin or Oud Red Ales",
+			"description": "This light- to medium-bodied deep copper to brown ale is characterized by a slight to strong lactic sourness, and with \"Reds\" sometimes a balanced degree of acetic acid. Brettanomyces produced flavors and aromas are not part of character. A fruity-estery character which is often cherry-like is apparent with no hop flavor or aroma. Flanders brown ales have low to medium bitterness and a cocoa-like character from roast malt. Roasted malt character in aroma and flavor is acceptable at low levels. A very low degree of malt sweetness may be present and in balance with the acidity produced by Lactobacillus activity. Oak-like or woody characters may be pleasantly integrated into overall palate. Chill haze is acceptable at low serving temperatures. Some versions may be more highly carbonated and, when bottle conditioned, may appear cloudy (yeast) when served. These final beers are often blended old with new before packaging in order to create the brewer's intended balance of characters.",
+			"ibuMin": "15",
+			"ibuMax": "25",
+			"abvMin": "4.8",
+			"abvMax": "6.5",
+			"srmMin": "12",
+			"srmMax": "20",
+			"ogMin": "1.044",
+			"fgMin": "1.008",
+			"fgMax": "1.016",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 64,
+			"categoryId": 5,
+			"category": {
+				"id": 5,
+				"name": "Belgian And French Origin Ales",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Belgian-Style Dark Strong Ale",
+			"shortName": "Belgian-Style Dark Strong Ale",
+			"description": "Belgian dark strong ales are amber to dark brown in color. Often, though not always, brewed with dark Belgian \"candy\" sugar, these beers can be well attenuated, ranging from medium to full-bodied. The perception of hop bitterness is low to medium, with hop flavor and aroma also in this range. Fruity complexity along with the soft flavors of roasted malts add distinct character. The alcohol strength of these beers can often be deceiving to the senses. The intensity of malt character can be rich, creamy, and sweet with intensities ranging from medium to high. Very little or no diacetyl is perceived. Herbs and spices are sometimes used to delicately flavor these strong ales. Low levels of phenolic spiciness from yeast byproducts may also be perceived. Chill haze is allowable at cold temperatures.",
+			"ibuMin": "20",
+			"ibuMax": "50",
+			"abvMin": "7",
+			"abvMax": "11",
+			"srmMin": "9",
+			"srmMax": "35",
+			"ogMin": "1.064",
+			"fgMin": "1.012",
+			"fgMax": "1.024",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 15,
+			"categoryId": 1,
+			"category": {
+				"id": 1,
+				"name": "British Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Scotch Ale",
+			"shortName": "Scotch Ale",
+			"description": "Scotch ales are overwhelmingly malty and full-bodied. Perception of hop bitterness is very low. Hop flavor and aroma are very low or nonexistent. Color ranges from deep copper to brown. The clean alcohol flavor balances the rich and dominant sweet maltiness in flavor and aroma. A caramel character is often a part of the profile. Dark roasted malt flavors and aroma may be evident at low levels. If present, fruity esters are generally at low aromatic and flavor levels. Low diacetyl levels are acceptable. Chill haze is allowable at cold temperatures. Though there is little evidence suggesting that traditionally made strong Scotch ales exhibited peat smoke character, the current marketplace offers many Scotch Ales with peat or smoke character present at low to medium levels. Thus a peaty\/smoky character may be evident at low levels (ales with medium or higher smoke character would be considered a smoke flavored beer and considered in another category). Scotch Ales may be split into two subcategories: Traditional (no smoke character) and Peated (low level of peat smoke character).",
+			"ibuMin": "25",
+			"ibuMax": "35",
+			"abvMin": "6.2",
+			"abvMax": "8",
+			"srmMin": "15",
+			"srmMax": "30",
+			"ogMin": "1.072",
+			"fgMin": "1.016",
+			"fgMax": "1.028",
+			"createDate": "2012-03-21 20:06:45"
+		},
+		{
+			"id": 93,
+			"categoryId": 8,
+			"category": {
+				"id": 8,
+				"name": "North American Lager",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "American-Style Lager",
+			"shortName": "American-Style Lager",
+			"description": "Light in body and very light to straw in color, American lagers are very clean and crisp and aggressively carbonated. Flavor components should b e subtle and complex, with no one ingredient dominating the others. Malt sweetness is light to mild. Corn, rice, or other grain or sugar adjuncts are often used. Hop bitterness, flavor and aroma are negligible to very light. Light fruity esters are acceptable. Chill haze and diacetyl should be absent.",
+			"ibuMin": "5",
+			"ibuMax": "13",
+			"abvMin": "3.8",
+			"abvMax": "5",
+			"srmMin": "2",
+			"srmMax": "4",
+			"ogMin": "1.04",
+			"fgMin": "1.006",
+			"fgMax": "1.01",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 77,
+			"categoryId": 7,
+			"category": {
+				"id": 7,
+				"name": "European-germanic Lager",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "European Low-Alcohol Lager \/ German Leicht(bier)",
+			"shortName": "European Low-Alcohol Lager \/ German Leicht(bier)",
+			"description": "These beers are very light in body and color. Malt sweetness is perceived at low to medium levels, while hop bitterness character is perceived at medium levels. Hop flavor and aroma may be low to medium. These beers should be clean with no perceived fruity esters or diacetyl. Very low levels of sulfur related compounds acceptable. Chill haze is not acceptable.",
+			"ibuMin": "16",
+			"ibuMax": "24",
+			"abvMin": "2.5",
+			"abvMax": "3.6",
+			"srmMin": "2",
+			"srmMax": "4",
+			"ogMin": "1.026",
+			"fgMin": "1.006",
+			"fgMax": "1.01",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 98,
+			"categoryId": 8,
+			"category": {
+				"id": 8,
+				"name": "North American Lager",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "American-Style Pilsener",
+			"shortName": "American-Style Pilsener",
+			"description": "This classic and unique pre-Prohibition American-style Pilsener is straw to deep gold in color. Hop bitterness, flavor and aroma are medium to high, and use of noble-type hops for flavor and aroma is preferred. Up to 25 percent corn and\/or rice in the grist should be used. Malt flavor and aroma are medium. This is a light-medium to medium-bodied beer. Sweet corn-like dimethylsulfide (DMS), fruity esters and American hop-derived citrus flavors or aromas should not be perceived. Diacetyl is not acceptable. There should be no chill haze. Competition organizers may wish to subcategorize this style into rice and corn subcategories.",
+			"ibuMin": "25",
+			"ibuMax": "40",
+			"abvMin": "5",
+			"abvMax": "6",
+			"srmMin": "3",
+			"srmMax": "6",
+			"ogMin": "1.045",
+			"fgMin": "1.012",
+			"fgMax": "1.018",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 124,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Herb and Spice Beer",
+			"shortName": "Herb and Spice Beer",
+			"description": "Herb beers use herbs or spices (derived from roots, seeds, fruits, vegetable, flowers, etc.) other than or in addition to hops to create a distinct (ranging from subtle to intense) character, though individual characters of herbs and\/or spices used may not always be identifiable. Under hopping often, but not always, allows the spice or herb to contribute to the flavor profile. Positive evaluations are significantly based on perceived balance of flavors. Note: Chili-flavored beers that emphasize heat rather than chili flavor should be entered as a \"spiced\" beer.  A statement by the brewer explaining what herbs or spices are used is essential in order for fair assessment in competitions. Specifying a style upon which the beer is based may help evaluation. If this beer is a classic style with an herb or spice, the brewer should specify the classic style. If no Chocolate or Coffee category exists in a competition, then chocolate and coffee beers should be entered in this category.",
+			"ibuMin": "5",
+			"ibuMax": "70",
+			"abvMin": "2.5",
+			"abvMax": "12",
+			"srmMin": "5",
+			"srmMax": "50",
+			"ogMin": "1.03",
+			"fgMin": "1.006",
+			"fgMax": "1.03",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 125,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Specialty Beer",
+			"shortName": "Specialty Beer",
+			"description": "These beers are brewed using unusual fermentable sugars, grains and starches that contribute to alcohol content other than, or in addition to, malted barley. Nuts generally have some degree of fermentables, thus beers brewed with nuts would appropriately be entered in this category. The distinctive characters of these special ingredients should be evident either in the aroma, flavor or overall balance of the beer, but not necessarily in overpowering quantities. For example, maple syrup or potatoes would be considered unusual. Rice, corn, or wheat are not considered unusual. Special ingredients must be listed when competing. A statement by the brewer explaining the special nature of the beer, ingredient(s) and achieved character is essential in order for fair assessment in competitions. If this beer is a classic style with some specialty ingredient(s), the brewer should also specify the classic style. Guidelines for competing: Spiced beers using unusual fermentables should be entered in the experimental category. Fruit beers using unusual fermentables should be entered in the fruit beer category.",
+			"ibuMax": "100",
+			"abvMin": "2.5",
+			"abvMax": "25",
+			"srmMin": "1",
+			"srmMax": "100",
+			"ogMin": "1.03",
+			"fgMin": "1.006",
+			"fgMax": "1.03",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 26,
+			"categoryId": 3,
+			"category": {
+				"id": 3,
+				"name": "North American Origin Ales",
+				"createDate": "2012-03-21 20:06:45"
+			},
+			"name": "Fresh \"Wet\" Hop Ale",
+			"shortName": "Fresh \"Wet\" Hop Ale",
+			"description": "Any style of ale can be made into a fresh hop or wet hop version. These ales are hopped predominantly with fresh (newly harvested and kilned) and\/or undried (\u201cwet\u201d) hops. These beers will exhibit especially aromas and flavors of green, almost chlorophyll-like or other fresh hop characters, in harmony with the characters of the base style of the beer. These beers may be aged and enjoyed after the initial \u201cfresh-hop\u201d character diminishes. Unique character from \u201caged\u201d fresh hop beers may emerge, but they have yet to be defined.",
+			"createDate": "2012-03-21 20:06:45",
+			"updateDate": "2013-08-10 12:40:40"
+		},
+		{
+			"id": 61,
+			"categoryId": 5,
+			"category": {
+				"id": 5,
+				"name": "Belgian And French Origin Ales",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Belgian-Style Blonde Ale",
+			"shortName": "Belgian-Style Blonde Ale",
+			"description": "Belgian-style blond ales are characterized by low yet evident hop bitterness, flavor, and sometimes aroma. Light to medium body and low malt aroma with a sweet, spiced and a low to medium fruity-ester character orchestrated in flavor and aroma. Sugar may be used to lighten perceived body. They are blonde to golden in color. Noble-type hops are commonly used. Low levels of phenolic spiciness from yeast byproducts may be perceived. Diacetyl should not be perceived. Acidic character should not be present. Chill haze is allowable at cold temperatures.",
+			"ibuMin": "15",
+			"ibuMax": "30",
+			"abvMin": "6",
+			"abvMax": "7.8",
+			"srmMin": "4",
+			"srmMax": "7",
+			"ogMin": "1.054",
+			"fgMin": "1.008",
+			"fgMax": "1.014",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 70,
+			"categoryId": 5,
+			"category": {
+				"id": 5,
+				"name": "Belgian And French Origin Ales",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Other Belgian-Style Ales",
+			"shortName": "Other Belgian-Style Ales",
+			"description": "Recognizing the uniqueness and traditions of several other styles of Belgian Ales, the beers entered in this category will be assessed on the merits that they do not fit existing style guidelines and information that the brewer provides explaining the history and tradition of the style. Balance of character is a key component when assessing these beers. Barrel or wood-aged entries in competitions may be directed to other categories by competition director. In competitions the brewer must provide the historical or regional tradition of the style, or his interpretation of the style, in order to be assessed properly by the judges.",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 128,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Indigenous Beer (Lager or Ale)",
+			"shortName": "Indigenous Beer (Lager or Ale)",
+			"description": "This beer style is unusual in that its impetus is to commemorate combinations of ingredients and\/or techniques adopted by or unique to a particular region. At least one regional combination of ingredients and\/or techniques must be unique and differentiated from ingredients and\/or techniques commonly used by brewers throughout the world.  There are many excellent and popular beers that are brewed with either non-traditional or traditional ingredients and\/or processes yet their character may distinctively vary from all other styles currently defined or included in these guidelines. These grain-based beers are brewed reflecting local beer culture (process, ingredients, climate, etc.). This category recognizes uniquely local or regional beer types and beers distinctively not defined in any recognized style in these guidelines. They may be light or dark, strong or weak, hoppy or not hoppy. They may have characters which are unique to yeast, fermentation techniques, aging conditions, carbonation level - or higher or lower levels of profound characters normally associated with other beer types. Examples of indigenous beers might include current day versions of highly regional and\/or historic styles which are not represented elsewhere in these guidelines, such as Finnish-style sahti, S American chicha, African sorghum based beers, and others. Other examples might include beers made wholly unique by use of multiple local ingredients and\/or techniques, with the resulting beer being highly representative of location, as well as differentiated from traditional beer style categories. Beers brewed with non-traditional hop varieties, grains, malt, yeast or other ingredient that still closely approximate an existing classical category would be more appropriately entered into the classical category. New and innovative beers that do not represent locally adopted techniques or grown ingredients would be more appropriately entered into the experimental category. Proper evaluation of entries in this category requires the need to provide  judges with additional information about the beer.  A written summary illustrating the intent, background, history, design and\/or development of the beer as well as  describing any regional and\/or stylistic context, choice of ingredients, process and any other unique information, helps establish a basis for comparison between highly diverse entries. Entering brewers must provide a statement of 100 words or less illustrating the above and why it is an indigenous beer without revealing the company's identity. This statement should be carefully crafted and will be evaluated by judges and carry significant weight in their decisions. Statements that contain information which might identify or otherwise create bias towards the entry will be modified by the Competition Manager. Entries not accompanied by this information will be at a profound disadvantage during judging.",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 129,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Smoke Beer (Lager or Ale)",
+			"shortName": "Smoke Beer (Lager or Ale)",
+			"description": "Any style of beer can be smoked; the goal is to reach a balance between the style's character and the smoky properties. Type of wood or other sources of smoke should be specified as well as the style the beer is based upon.",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 130,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Experimental Beer (Lager or Ale)",
+			"shortName": "Experimental Beer (Lager or Ale)",
+			"description": "An experimental beer is any beer (lager, ale or other) that is primarily grain-based and employs unusual techniques and\/or ingredients. A minimum 51% of the fermentable carbohydrates must be derived from malted grains. The overall uniqueness of the process, ingredients used and creativity should be considered. Beers such as garden (vegetable), fruit, chocolate, coffee, spice, specialty or other beers that match existing categories should not be entered into this category. Beers not easily matched to existing style categories in a competition would often be entered into this category. Beers that are a combination of other categories (spice, smoke, specialty, porter, etc.) could also be entered into this category. A statement by the brewer explaining the experimental or other nature of the beer is essential in order for fair assessment in competitions. Generally, a 25-word statement would suffice in explaining the experimental nature of the beer.",
+			"createDate": "2012-03-21 20:06:46"
+		},
+		{
+			"id": 137,
+			"categoryId": 11,
+			"category": {
+				"id": 11,
+				"name": "Hybrid\/mixed Beer",
+				"createDate": "2012-03-21 20:06:46"
+			},
+			"name": "Aged Beer (Ale or Lager)",
+			"shortName": "Aged Beer (Ale or Lager)",
+			"description": "Beers aged for over one year. Generally beers with high hopping rates, roast malt content, high alcohol content, complex herbal, smoke or fruit content (Wood aging, Brettanomyces characters and acidic beers must be classified or entered into other categories if that option is available), A brewer may brew any type of beer of any strength and enhance its character with extended and creative aging conditions. Beers in this category may be aged in bottles or any type of food grade vessel. In competition brewers may be required to state age of beer. Competition organizer may develop guidelines in which aged beers are subcategorized by aging time, vessel, styles, etc. Brewers should provide a statement describing the nature or style of the beer. This statement could include classic or other style, special ingredients, length of aging time, etc.",
+			"createDate": "2012-03-21 20:06:46"
+		}
+	],
+	"status": "success"
+}

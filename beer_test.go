@@ -562,7 +562,7 @@ func TestBeerListVariations(t *testing.T) {
 
 	for _, a := range al {
 		if l := 6; len(a.ID) != l {
-			t.Fatal("Variation ID len = %v, want %v", len(a.ID), l)
+			t.Fatalf("Variation ID len = %v, want %v", len(a.ID), l)
 		}
 	}
 

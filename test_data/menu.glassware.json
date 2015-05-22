@@ -1,0 +1,66 @@
+{
+	"message": "Request Successful",
+	"data": [
+		{
+			"id": 1,
+			"name": "Flute",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 2,
+			"name": "Goblet",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 3,
+			"name": "Mug",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 4,
+			"name": "Pilsner",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 5,
+			"name": "Pint",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 6,
+			"name": "Snifter",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 7,
+			"name": "Stange",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 8,
+			"name": "Tulip",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 9,
+			"name": "Weizen",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 10,
+			"name": "Oversized Wine Glass",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 13,
+			"name": "Willi",
+			"createDate": "2012-01-03 02:41:33"
+		},
+		{
+			"id": 14,
+			"name": "Thistle",
+			"createDate": "2012-01-03 02:41:33"
+		}
+	],
+	"status": "success"
+}

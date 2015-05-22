@@ -155,6 +155,8 @@ func (ss *SearchService) Style(query string, withDescriptions bool) ([]Style, er
 
 // UPC retrieves one or more Beers matching the given Universal Product Code.
 // TODO: pagination??
+// TODO: the API doc example shows "data" as being an array of arrays,
+// see: http://www.brewerydb.com/developers/docs-endpoint/search_upc
 func (ss *SearchService) UPC(code uint64) ([]Beer, error) {
 	q := struct {
 		Code uint64 `url:"code"`
@@ -169,8 +171,11 @@ func (ss *SearchService) UPC(code uint64) ([]Beer, error) {
 		NumberOfPages int
 		CurrentPage   int
 		TotalResults  int
-		Data          []Beer
+		Data          [][]Beer
 	}{}
 	err = ss.c.Do(req, &resp)
-	return resp.Data, err
+	if len(resp.Data) <= 0 {
+		return nil, nil
+	}
+	return resp.Data[0], err
 }
