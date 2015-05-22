@@ -211,6 +211,92 @@ func TestEventUpdate(t *testing.T) {
 	})
 }
 
+func TestEventGetAwardCategory(t *testing.T) {
+	t.Skip("need valid test data")
+	setup()
+	defer teardown()
+
+	data := loadTestData("awardcategory.get.json", t)
+	defer data.Close()
+
+	const (
+		eventID         = "k2jMtH"
+		awardCategoryID = 2
+	)
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "awardCategory" {
+			t.Fatal("bad URL, expected \"/event/:eventId/awardCategory/:awardCategoryId\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(awardCategoryID) {
+			http.Error(w, "invalid AwardCategory ID", http.StatusNotFound)
+		}
+		io.Copy(w, data)
+
+	})
+
+	b, err := client.Event.GetAwardCategory(eventID, awardCategoryID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if b.ID != awardCategoryID {
+		t.Fatalf("AwardCategory ID = %v, want %v", b.ID, awardCategoryID)
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.GetAwardCategory(eventID, awardCategoryID)
+		return err
+	})
+}
+
+func TestEventListAwardCategory(t *testing.T) {
+	t.Skip("need valid test data")
+	setup()
+	defer teardown()
+
+	data := loadTestData("awardcategory.list.json", t)
+	defer data.Close()
+
+	const eventID = "k2jMtH"
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "awardCategories" {
+			t.Fatal("bad URL, expected \"/event/:eventId/awardCategories\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+
+		io.Copy(w, data)
+	})
+
+	al, err := client.Event.ListAwardCategories(eventID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(al) <= 0 {
+		t.Fatal("Expected >0 AwardCategories")
+	}
+
+	for _, a := range al {
+		if a.ID <= 0 {
+			t.Fatal("Expected ID >0")
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.ListAwardCategories(eventID)
+		return err
+	})
+}
+
 func makeTestAwardCategory() *AwardCategory {
 	return &AwardCategory{
 		ID:          1,
@@ -303,6 +389,92 @@ func TestEventUpdateAwardCategory(t *testing.T) {
 	})
 }
 
+func TestEventGetAwardPlace(t *testing.T) {
+	t.Skip("need valid test data")
+	setup()
+	defer teardown()
+
+	data := loadTestData("awardplace.get.json", t)
+	defer data.Close()
+
+	const (
+		eventID      = "k2jMtH"
+		awardPlaceID = 2
+	)
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "awardPlace" {
+			t.Fatal("bad URL, expected \"/event/:eventId/awardPlace/:awardPlaceId\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(awardPlaceID) {
+			http.Error(w, "invalid AwardPlace ID", http.StatusNotFound)
+		}
+		io.Copy(w, data)
+
+	})
+
+	b, err := client.Event.GetAwardPlace(eventID, awardPlaceID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if b.ID != awardPlaceID {
+		t.Fatalf("AwardPlace ID = %v, want %v", b.ID, awardPlaceID)
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.GetAwardPlace(eventID, awardPlaceID)
+		return err
+	})
+}
+
+func TestEventListAwardPlace(t *testing.T) {
+	t.Skip("need valid test data")
+	setup()
+	defer teardown()
+
+	data := loadTestData("awardplace.list.json", t)
+	defer data.Close()
+
+	const eventID = "k2jMtH"
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "awardPlaces" {
+			t.Fatal("bad URL, expected \"/event/:eventId/awardPlaces\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+
+		io.Copy(w, data)
+	})
+
+	al, err := client.Event.ListAwardPlaces(eventID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(al) <= 0 {
+		t.Fatal("Expected >0 AwardPlaces")
+	}
+
+	for _, a := range al {
+		if a.ID <= 0 {
+			t.Fatal("Expected ID >0")
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.ListAwardPlaces(eventID)
+		return err
+	})
+}
+
 func makeTestAwardPlace() *AwardPlace {
 	return &AwardPlace{
 		ID:          1,
@@ -390,6 +562,100 @@ func TestEventUpdateAwardPlace(t *testing.T) {
 
 	testBadURL(t, func() error {
 		return client.Event.UpdateAwardPlace(id, place)
+	})
+}
+
+func TestEventGetBeer(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("beer.get.json", t)
+	defer data.Close()
+
+	const (
+		eventID = "k2jMtH"
+		beerID  = "o9TSOv"
+	)
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "beer" {
+			t.Fatal("bad URL, expected \"/event/:eventId/beer/:beerId\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+		if split[4] != beerID {
+			http.Error(w, "invalid Beer ID", http.StatusNotFound)
+		}
+		io.Copy(w, data)
+
+	})
+
+	b, err := client.Event.GetBeer(eventID, beerID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if b.ID != beerID {
+		t.Fatalf("Beer ID = %v, want %v", b.ID, beerID)
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.GetBeer(eventID, beerID)
+		return err
+	})
+}
+
+func TestEventListBeer(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("beer.list.json", t)
+	defer data.Close()
+
+	const (
+		eventID = "k2jMtH"
+		page    = 3
+	)
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkPage(t, r, page)
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "beers" {
+			t.Fatal("bad URL, expected \"/event/:eventId/beers\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+
+		checkFormValue(t, r, "onlyWinners", "Y")
+		checkFormValue(t, r, "awardcategoryId", "2")
+		checkFormValue(t, r, "awardplaceId", "3")
+
+		io.Copy(w, data)
+
+	})
+
+	req := &EventBeersRequest{Page: page, OnlyWinners: "Y", AwardPlaceID: 3, AwardCategoryID: 2}
+	bl, err := client.Event.ListBeers(eventID, req)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(bl.Beers) <= 0 {
+		t.Fatal("Expected >0 Beers")
+	}
+
+	for _, b := range bl.Beers {
+		if l := 6; l != len(b.ID) {
+			t.Fatalf("Beer ID len = %d, wanted %d", len(b.ID), l)
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.ListBeers(eventID, req)
+		return err
 	})
 }
 
@@ -492,6 +758,99 @@ func TestEventUpdateBeer(t *testing.T) {
 
 	testBadURL(t, func() error {
 		return client.Event.UpdateBeer(eventID, beerID, change)
+	})
+}
+
+func TestEventGetBrewery(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("brewery.get.json", t)
+	defer data.Close()
+
+	const (
+		eventID   = "k2jMtH"
+		breweryID = "jmGoBA"
+	)
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "brewery" {
+			t.Fatal("bad URL, expected \"/event/:eventId/brewery/:breweryId\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+		if split[4] != breweryID {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+		io.Copy(w, data)
+
+	})
+
+	b, err := client.Event.GetBrewery(eventID, breweryID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if b.ID != breweryID {
+		t.Fatalf("Brewery ID = %v, want %v", b.ID, breweryID)
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.GetBrewery(eventID, breweryID)
+		return err
+	})
+}
+
+func TestEventListBreweries(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("brewery.list.json", t)
+	defer data.Close()
+
+	const (
+		eventID = "k2jMtH"
+		page    = 3
+	)
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		checkPage(t, r, page)
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "breweries" {
+			t.Fatal("bad URL, expected \"/event/:eventId/breweries\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+
+		checkFormValue(t, r, "onlyWinners", "Y")
+		checkFormValue(t, r, "awardcategoryId", "3")
+		checkFormValue(t, r, "awardplaceId", "2")
+
+		io.Copy(w, data)
+	})
+
+	req := &EventBreweriesRequest{Page: page, OnlyWinners: "Y", AwardCategoryID: 3, AwardPlaceID: 2}
+	bl, err := client.Event.ListBreweries(eventID, req)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(bl.Breweries) <= 0 {
+		t.Fatal("Expected >0 Breweries")
+	}
+
+	for _, b := range bl.Breweries {
+		if l := 6; l != len(b.ID) {
+			t.Fatalf("Brewery ID len = %d, wanted %d", len(b.ID), l)
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.ListBreweries(eventID, req)
+		return err
 	})
 }
 
@@ -778,6 +1137,92 @@ func TestEventDeleteAwardPlace(t *testing.T) {
 	})
 }
 
+func TestEventGetSocialAccount(t *testing.T) {
+	t.Skip("need valid test data")
+	setup()
+	defer teardown()
+
+	data := loadTestData("socialaccount.get.json", t)
+	defer data.Close()
+
+	const (
+		eventID         = "k2jMtH"
+		socialAccountID = 2
+	)
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccount" {
+			t.Fatal("bad URL, expected \"/event/:eventId/socialaccount/:socialaccountId\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(socialAccountID) {
+			http.Error(w, "invalid SocialAccount ID", http.StatusNotFound)
+		}
+		io.Copy(w, data)
+
+	})
+
+	a, err := client.Event.GetSocialAccount(eventID, socialAccountID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if a.ID != socialAccountID {
+		t.Fatalf("SocialAccount ID = %v, want %v", a.ID, socialAccountID)
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.GetSocialAccount(eventID, socialAccountID)
+		return err
+	})
+}
+
+func TestEventListSocialAccount(t *testing.T) {
+	t.Skip("need valid test data")
+	setup()
+	defer teardown()
+
+	data := loadTestData("socialaccount.list.json", t)
+	defer data.Close()
+
+	const eventID = "k2jMtH"
+	mux.HandleFunc("/event/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccounts" {
+			t.Fatal("bad URL, expected \"/event/:eventId/socialaccounts\"")
+		}
+		if split[2] != eventID {
+			http.Error(w, "invalid Event ID", http.StatusNotFound)
+		}
+
+		io.Copy(w, data)
+	})
+
+	al, err := client.Event.ListSocialAccounts(eventID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(al) <= 0 {
+		t.Fatal("Expected >0 SocialAccounts")
+	}
+
+	for _, a := range al {
+		if a.ID <= 0 {
+			t.Fatal("Expected ID >0")
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Event.ListSocialAccounts(eventID)
+		return err
+	})
+}
+
 func TestEventAddSocialAccount(t *testing.T) {
 	setup()
 	defer teardown()
@@ -882,7 +1327,7 @@ func TestEventUpdateSocialAccount(t *testing.T) {
 	})
 }
 
-func TestEventDeleteAwardSocialAccount(t *testing.T) {
+func TestEventDeleteSocialAccount(t *testing.T) {
 	setup()
 	defer teardown()
 

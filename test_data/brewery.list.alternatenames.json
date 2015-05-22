@@ -1,0 +1,29 @@
+{
+	"message": "Request Successful",
+	"data": [
+		{
+			"id": 8,
+			"altName": "Schlafly Beer",
+			"createDate": "2012-01-27 12:57:13",
+			"breweryId": "tNDKBY",
+			"brewery": {
+				"id": "tNDKBY",
+				"name": "The Saint Louis Brewery",
+				"description": "Schlafly is the brand name of beers produced by the Saint Louis Brewery, Inc. Currently, all beers produced by this brewery are under the Schlafly brand. Located in St. Louis, Missouri, it is widely available in Eastern Missouri and Southern Illinois. Schlafly brand beers are distributed to the following states: Missouri, Kansas, Illinois, Indiana, Kentucky, Tennessee, North Western Mississippi, North Virgina, and Washington, DC.\r\n\r\nThe Saint Louis Brewery, Inc. was incorporated in 1989. It was founded by Dan Kopman and Tom Schlafly,[1] a lawyer and nephew of political activist Phyllis Schlafly, although she is not involved with the brewery in any way. Their goal was to create quality local microbrew beer.",
+				"website": "http:\/\/www.schlafly.com\/",
+				"established": "1989",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/tNDKBY\/upload_q7mlD4-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/tNDKBY\/upload_q7mlD4-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/tNDKBY\/upload_q7mlD4-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:10",
+				"updateDate": "2014-04-28 11:10:42"
+			}
+		}
+	],
+	"status": "success"
+}

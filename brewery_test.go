@@ -205,6 +205,90 @@ func TestBreweryDelete(t *testing.T) {
 	})
 }
 
+func TestBreweryGetSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("brewery.get.socialaccount.json", t)
+	defer data.Close()
+
+	const (
+		breweryID       = "jmGoBA"
+		socialAccountID = 16
+	)
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccount" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/socialaccount/:socialaccountId\"")
+		}
+		if split[2] != breweryID {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(socialAccountID) {
+			http.Error(w, "invalid SocialAccount ID", http.StatusNotFound)
+		}
+		io.Copy(w, data)
+
+	})
+
+	a, err := client.Brewery.GetSocialAccount(breweryID, socialAccountID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if a.ID != socialAccountID {
+		t.Fatalf("SocialAccount ID = %v, want %v", a.ID, socialAccountID)
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.GetSocialAccount(breweryID, socialAccountID)
+		return err
+	})
+}
+
+func TestBreweryListSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("brewery.list.socialaccounts.json", t)
+	defer data.Close()
+
+	const breweryID = "jmGoBA"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccounts" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/socialaccounts\"")
+		}
+		if split[2] != breweryID {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+
+		io.Copy(w, data)
+	})
+
+	al, err := client.Brewery.ListSocialAccounts(breweryID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(al) <= 0 {
+		t.Fatal("Expected >0 SocialAccounts")
+	}
+
+	for _, a := range al {
+		if a.ID <= 0 {
+			t.Fatal("Expected ID >0")
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.ListSocialAccounts(breweryID)
+		return err
+	})
+}
+
 func TestBreweryAddSocialAccount(t *testing.T) {
 	setup()
 	defer teardown()
@@ -589,6 +673,268 @@ func TestBreweryDeleteSocialAccount(t *testing.T) {
 	})
 }
 
+func TestBreweryListEvents(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("event.list.json", t)
+	defer data.Close()
+
+	const breweryID = "jmGoBA"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "events" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/events\"")
+		}
+		if split[2] != breweryID {
+			http.Error(w, "invalid brewery ID", http.StatusNotFound)
+		}
+
+		checkFormValue(t, r, "onlyWinners", "Y")
+
+		io.Copy(w, data)
+
+	})
+
+	el, err := client.Brewery.ListEvents(breweryID, true)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(el) <= 0 {
+		t.Fatal("Expected >0 Events")
+	}
+
+	for _, e := range el {
+		if l := 6; l != len(e.ID) {
+			t.Fatalf("Event ID len = %d, wanted %d", len(e.ID), l)
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.ListEvents(breweryID, false)
+		return err
+	})
+}
+
+func TestBreweryListBeers(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("beer.list.json", t)
+	defer data.Close()
+
+	const breweryID = "o9TSOv"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "beers" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/beers\"")
+		}
+		if split[2] != breweryID {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+
+		checkFormValue(t, r, "withBreweries", "Y")
+		checkFormValue(t, r, "withSocialAccounts", "Y")
+		checkFormValue(t, r, "withIngredients", "Y")
+
+		io.Copy(w, data)
+	})
+
+	req := &BreweryBeersRequest{
+		WithBreweries:      "Y",
+		WithSocialAccounts: "Y",
+		WithIngredients:    "Y",
+	}
+	bl, err := client.Brewery.ListBeers(breweryID, req)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(bl) <= 0 {
+		t.Fatal("Expected >0 Beers")
+	}
+
+	for _, b := range bl {
+		if l := 6; l != len(b.ID) {
+			t.Fatalf("Brewery ID len = %d, wanted %d", len(b.ID), l)
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.ListBeers(breweryID, req)
+		return err
+	})
+}
+
+func TestBreweryListGuilds(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("guild.list.json", t)
+	defer data.Close()
+
+	const breweryID = "o9TSOv"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "guilds" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/guilds\"")
+		}
+		if split[2] != breweryID {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+
+		io.Copy(w, data)
+	})
+
+	ll, err := client.Brewery.ListGuilds(breweryID)
+	if err != nil {
+		t.Fatal(err)
+		t.Fatal(err)
+	}
+
+	if len(ll) <= 0 {
+		t.Fatal("Expected >0 Guilds")
+	}
+
+	for _, loc := range ll {
+		if l := 6; l != len(loc.ID) {
+			t.Fatalf("Brewery ID len = %d, wanted %d", len(loc.ID), l)
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.ListGuilds(breweryID)
+		return err
+	})
+}
+
+func TestBreweryListLocations(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("location.list.json", t)
+	defer data.Close()
+
+	const breweryID = "o9TSOv"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "locations" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/locations\"")
+		}
+		if split[2] != breweryID {
+			http.Error(w, "invalid Brewery ID", http.StatusNotFound)
+		}
+
+		io.Copy(w, data)
+	})
+
+	ll, err := client.Brewery.ListLocations(breweryID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(ll) <= 0 {
+		t.Fatal("Expected >0 Locations")
+	}
+
+	for _, loc := range ll {
+		if l := 6; l != len(loc.ID) {
+			t.Fatalf("Brewery ID len = %d, wanted %d", len(loc.ID), l)
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.ListLocations(breweryID)
+		return err
+	})
+}
+
+func TestBreweryListAlternateNames(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("brewery.list.alternatenames.json", t)
+	defer data.Close()
+
+	const breweryID = "tNDKBY"
+	mux.HandleFunc("/brewery/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "alternatenames" {
+			t.Fatal("bad URL, expected \"/brewery/:breweryId/alternatenames\"")
+		}
+		if split[2] != breweryID {
+			http.Error(w, "invalid brewery ID", http.StatusNotFound)
+		}
+
+		io.Copy(w, data)
+
+	})
+
+	al, err := client.Brewery.ListAlternateNames(breweryID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(al) <= 0 {
+		t.Fatal("Expected >0 AlternateNames")
+	}
+
+	for _, alt := range al {
+		if alt.ID <= 0 {
+			t.Fatalf("Expected ID >0")
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.ListAlternateNames(breweryID)
+		return err
+	})
+}
+
+func TestBreweryGetRandom(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data, err := os.Open("test_data/brewery.get.random.json")
+	if err != nil {
+		t.Fatal("Failed to open test data file")
+	}
+	defer data.Close()
+
+	mux.HandleFunc("/brewery/random", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+
+		// TODO: check more request query values
+		checkFormValue(t, r, "established", "1983")
+
+		io.Copy(w, data)
+	})
+
+	b, err := client.Brewery.GetRandom(&RandomBreweryRequest{Established: "1983"})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Can't really verify specific information since it's a random brewery
+	if len(b.Name) <= 0 {
+		t.Fatal("Expected non-empty brewery name")
+	}
+	if len(b.ID) <= 0 {
+		t.Fatal("Expected non-empty brewery ID")
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Brewery.GetRandom(&RandomBreweryRequest{Established: "1983"})
+		return err
+	})
+}
+
 func ExampleBreweryService_List() {
 	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
@@ -608,5 +954,4 @@ func ExampleBreweryService_List() {
 	}
 	fmt.Println(b.Name)
 	fmt.Println(b.Description)
-	fmt.Println(b.Website)
 }

@@ -264,11 +264,8 @@ func (bs *BeerService) ListBreweries(id string) ([]Brewery, error) {
 		Data    []Brewery
 		Message string
 	}{}
-	if err := bs.c.Do(req, &resp); err != nil {
-		return nil, err
-	}
-
-	return resp.Data, nil
+	err = bs.c.Do(req, &resp)
+	return resp.Data, err
 }
 
 // BeerBreweryRequest allows for specifying locations for a given Brewery, e.g.

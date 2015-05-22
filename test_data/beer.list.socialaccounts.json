@@ -1,0 +1,144 @@
+{
+	"message": "Request Successful",
+	"data": [
+		{
+			"id": 1,
+			"socialMediaId": 4,
+			"socialMedia": {
+				"id": 4,
+				"name": "Untappd",
+				"website": "http:\/\/www.untappd.com",
+				"createDate": "2012-01-03 02:41:41"
+			},
+			"handle": "29096",
+			"createDate": "2012-01-03 15:16:24",
+			"link": "http:\/\/untappd.com\/beer\/29096",
+			"beerId": "MwSypd",
+			"beer": {
+				"id": "MwSypd",
+				"name": "Essential Pale Ale",
+				"nameDisplay": "Essential Pale Ale",
+				"description": "Essential Pale Ale is a deep golden color with hop aroma reminiscent of fresh fruit. The pleasing bitter taste from American hops is balanced with English and German malts, and offers a complex full flavored character that is smooth and refreshing.",
+				"abv": "5.5",
+				"ibu": "35",
+				"glasswareId": 5,
+				"availableId": 1,
+				"styleId": 25,
+				"isOrganic": "N",
+				"labels": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/MwSypd\/upload_y937GO-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/MwSypd\/upload_y937GO-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/MwSypd\/upload_y937GO-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"originalGravity": "1.053",
+				"createDate": "2012-01-03 02:43:10",
+				"updateDate": "2012-09-08 17:41:44",
+				"glass": {
+					"id": 5,
+					"name": "Pint",
+					"createDate": "2012-01-03 02:41:33"
+				},
+				"available": {
+					"id": 1,
+					"name": "Year Round",
+					"description": "Available year round as a staple beer."
+				},
+				"style": {
+					"id": 25,
+					"categoryId": 3,
+					"category": {
+						"id": 3,
+						"name": "North American Origin Ales",
+						"createDate": "2012-03-21 20:06:45"
+					},
+					"name": "American-Style Pale Ale",
+					"shortName": "American Pale",
+					"description": "American pale ales range from deep golden to copper in color. The style is characterized by fruity, floral and citrus-like American-variety hop character producing medium to medium-high hop bitterness, flavor, and aroma. Note that the \"traditional\" style of this beer has its origins with certain floral, fruity, citrus-like, piney, resinous, or sulfur-like American hop varietals. One or more of these hop characters is the perceived end, but the perceived hop characters may be a result of the skillful use of hops of other national origins. American pale ales have medium body and low to medium maltiness. Low caramel character is allowable. Fruity-ester flavor and aroma should be moderate to strong. Diacetyl should be absent or present at very low levels. Chill haze is allowable at cold temperatures.",
+					"ibuMin": "30",
+					"ibuMax": "42",
+					"abvMin": "4.5",
+					"abvMax": "5.6",
+					"srmMin": "6",
+					"srmMax": "14",
+					"ogMin": "1.044",
+					"fgMin": "1.008",
+					"fgMax": "1.014",
+					"createDate": "2012-03-21 20:06:45",
+					"updateDate": "2015-04-07 15:25:18"
+				}
+			}
+		},
+		{
+			"id": 2,
+			"socialMediaId": 5,
+			"socialMedia": {
+				"id": 5,
+				"name": "RateBeer",
+				"website": "http:\/\/www.ratebeer.com",
+				"createDate": "2012-01-03 02:41:41"
+			},
+			"handle": "138564",
+			"createDate": "2012-01-03 15:16:33",
+			"link": "http:\/\/ratebeer.com\/beer\/details\/138564\/",
+			"beerId": "MwSypd",
+			"beer": {
+				"id": "MwSypd",
+				"name": "Essential Pale Ale",
+				"nameDisplay": "Essential Pale Ale",
+				"description": "Essential Pale Ale is a deep golden color with hop aroma reminiscent of fresh fruit. The pleasing bitter taste from American hops is balanced with English and German malts, and offers a complex full flavored character that is smooth and refreshing.",
+				"abv": "5.5",
+				"ibu": "35",
+				"glasswareId": 5,
+				"availableId": 1,
+				"styleId": 25,
+				"isOrganic": "N",
+				"labels": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/MwSypd\/upload_y937GO-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/MwSypd\/upload_y937GO-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/beer\/MwSypd\/upload_y937GO-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"originalGravity": "1.053",
+				"createDate": "2012-01-03 02:43:10",
+				"updateDate": "2012-09-08 17:41:44",
+				"glass": {
+					"id": 5,
+					"name": "Pint",
+					"createDate": "2012-01-03 02:41:33"
+				},
+				"available": {
+					"id": 1,
+					"name": "Year Round",
+					"description": "Available year round as a staple beer."
+				},
+				"style": {
+					"id": 25,
+					"categoryId": 3,
+					"category": {
+						"id": 3,
+						"name": "North American Origin Ales",
+						"createDate": "2012-03-21 20:06:45"
+					},
+					"name": "American-Style Pale Ale",
+					"shortName": "American Pale",
+					"description": "American pale ales range from deep golden to copper in color. The style is characterized by fruity, floral and citrus-like American-variety hop character producing medium to medium-high hop bitterness, flavor, and aroma. Note that the \"traditional\" style of this beer has its origins with certain floral, fruity, citrus-like, piney, resinous, or sulfur-like American hop varietals. One or more of these hop characters is the perceived end, but the perceived hop characters may be a result of the skillful use of hops of other national origins. American pale ales have medium body and low to medium maltiness. Low caramel character is allowable. Fruity-ester flavor and aroma should be moderate to strong. Diacetyl should be absent or present at very low levels. Chill haze is allowable at cold temperatures.",
+					"ibuMin": "30",
+					"ibuMax": "42",
+					"abvMin": "4.5",
+					"abvMax": "5.6",
+					"srmMin": "6",
+					"srmMax": "14",
+					"ogMin": "1.044",
+					"fgMin": "1.008",
+					"fgMax": "1.014",
+					"createDate": "2012-03-21 20:06:45",
+					"updateDate": "2015-04-07 15:25:18"
+				}
+			}
+		}
+	],
+	"status": "success"
+}

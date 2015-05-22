@@ -65,6 +65,13 @@ func checkPostFormValue(t *testing.T, r *http.Request, name, value string) {
 	}
 }
 
+// Checks that the Request's URL query string contains name url-encoded with value=value.
+func checkFormValue(t *testing.T, r *http.Request, name, value string) {
+	if v := r.FormValue(name); v != value {
+		t.Fatalf("%s = %v, want %v", name, v, value)
+	}
+}
+
 // Checks that each key is NOT url-encoded in the Request's Body
 func checkPostFormDNE(t *testing.T, r *http.Request, keys ...string) {
 	if err := r.ParseForm(); err != nil {

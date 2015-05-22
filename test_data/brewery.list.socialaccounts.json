@@ -1,0 +1,293 @@
+{
+	"message": "Request Successful",
+	"data": [
+		{
+			"id": 16,
+			"socialMediaId": 2,
+			"socialMedia": {
+				"id": 2,
+				"name": "Twitter",
+				"website": "http:\/\/www.twitter.com",
+				"createDate": "2012-01-03 02:41:41"
+			},
+			"handle": "loneriderbeer",
+			"createDate": "2012-01-03 15:52:16",
+			"link": "http:\/\/twitter.com\/loneriderbeer",
+			"breweryId": "d25euF",
+			"brewery": {
+				"id": "d25euF",
+				"name": "Lonerider Brewing Company",
+				"description": "We opened our doors on January 23rd, 2009 and since then we have been impressed with the enthusiasm of craft beer aficionados we meet daily. The craft brewing industry is booming and you can find a tremendous variety out there. North Carolina has undoubtedly become the Southern State for beer with Asheville reigning supreme and Raleigh\/Durham\/CH not far behind. We hope you continue to support the variety and encourage new brewers to experiment with and craft new styles for everybody\u2019s pleasure.\r\n\r\n\"Effect change; don't be an audience. Walk your own path, and instead of thinking outside the box, imagine if there was no box.\"",
+				"website": "http:\/\/www.loneriderbeer.com\/",
+				"established": "2009",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:00",
+				"updateDate": "2015-03-02 19:35:22"
+			}
+		},
+		{
+			"id": 17,
+			"locationId": "CKJPHO",
+			"location": {
+				"id": "CKJPHO",
+				"name": "Main Brewery",
+				"streetAddress": "8816 Gulf Ct",
+				"extendedAddress": "Suite #100",
+				"locality": "Raleigh",
+				"region": "North Carolina",
+				"postalCode": "27617",
+				"phone": "919-442-8004",
+				"website": "http:\/\/www.loneriderbeer.com\/",
+				"hoursOfOperation": "Mon:  2:00pm - 10:00pm\nTue:  2:00pm - 10:00pm\nWed:  2:00pm - 10:00pm\nThu:  2:00pm - 10:00pm\nFri:  2:00pm - 11:00pm\nSat:  2:00pm - 11:00pm\nSun:  2:00pm - 7:00pm\n\n",
+				"latitude": 35.903672,
+				"longitude": -78.762493,
+				"isPrimary": "Y",
+				"inPlanning": "N",
+				"isClosed": "N",
+				"openToPublic": "Y",
+				"locationType": "micro",
+				"locationTypeDisplay": "Micro Brewery",
+				"countryIsoCode": "US",
+				"yearOpened": "2009",
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:00",
+				"updateDate": "2014-08-31 13:50:20",
+				"country": {
+					"isoCode": "US",
+					"name": "UNITED STATES",
+					"displayName": "United States",
+					"isoThree": "USA",
+					"numberCode": 840,
+					"createDate": "2012-01-03 02:41:33"
+				}
+			},
+			"socialMediaId": 3,
+			"socialMedia": {
+				"id": 3,
+				"name": "Foursquare",
+				"website": "http:\/\/www.foursquare.com",
+				"createDate": "2012-01-03 02:41:41"
+			},
+			"handle": "4b2e661af964a5207adf24e3",
+			"createDate": "2012-01-03 15:52:28",
+			"link": "https:\/\/foursquare.com\/v\/4b2e661af964a5207adf24e3",
+			"breweryId": "d25euF",
+			"brewery": {
+				"id": "d25euF",
+				"name": "Lonerider Brewing Company",
+				"description": "We opened our doors on January 23rd, 2009 and since then we have been impressed with the enthusiasm of craft beer aficionados we meet daily. The craft brewing industry is booming and you can find a tremendous variety out there. North Carolina has undoubtedly become the Southern State for beer with Asheville reigning supreme and Raleigh\/Durham\/CH not far behind. We hope you continue to support the variety and encourage new brewers to experiment with and craft new styles for everybody\u2019s pleasure.\r\n\r\n\"Effect change; don't be an audience. Walk your own path, and instead of thinking outside the box, imagine if there was no box.\"",
+				"website": "http:\/\/www.loneriderbeer.com\/",
+				"established": "2009",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:00",
+				"updateDate": "2015-03-02 19:35:22"
+			}
+		},
+		{
+			"id": 18,
+			"socialMediaId": 4,
+			"socialMedia": {
+				"id": 4,
+				"name": "Untappd",
+				"website": "http:\/\/www.untappd.com",
+				"createDate": "2012-01-03 02:41:41"
+			},
+			"handle": "1831",
+			"createDate": "2012-01-03 15:52:37",
+			"link": "http:\/\/untappd.com\/brewery\/1831",
+			"breweryId": "d25euF",
+			"brewery": {
+				"id": "d25euF",
+				"name": "Lonerider Brewing Company",
+				"description": "We opened our doors on January 23rd, 2009 and since then we have been impressed with the enthusiasm of craft beer aficionados we meet daily. The craft brewing industry is booming and you can find a tremendous variety out there. North Carolina has undoubtedly become the Southern State for beer with Asheville reigning supreme and Raleigh\/Durham\/CH not far behind. We hope you continue to support the variety and encourage new brewers to experiment with and craft new styles for everybody\u2019s pleasure.\r\n\r\n\"Effect change; don't be an audience. Walk your own path, and instead of thinking outside the box, imagine if there was no box.\"",
+				"website": "http:\/\/www.loneriderbeer.com\/",
+				"established": "2009",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:00",
+				"updateDate": "2015-03-02 19:35:22"
+			}
+		},
+		{
+			"id": 229,
+			"socialMediaId": 1,
+			"socialMedia": {
+				"id": 1,
+				"name": "Facebook Fan Page",
+				"website": "http:\/\/www.facebook.com",
+				"createDate": "2012-01-03 02:41:41",
+				"updateDate": "2012-01-05 18:36:11"
+			},
+			"handle": "165976261003",
+			"createDate": "2012-01-20 22:01:00",
+			"link": "http:\/\/facebook.com\/165976261003",
+			"breweryId": "d25euF",
+			"brewery": {
+				"id": "d25euF",
+				"name": "Lonerider Brewing Company",
+				"description": "We opened our doors on January 23rd, 2009 and since then we have been impressed with the enthusiasm of craft beer aficionados we meet daily. The craft brewing industry is booming and you can find a tremendous variety out there. North Carolina has undoubtedly become the Southern State for beer with Asheville reigning supreme and Raleigh\/Durham\/CH not far behind. We hope you continue to support the variety and encourage new brewers to experiment with and craft new styles for everybody\u2019s pleasure.\r\n\r\n\"Effect change; don't be an audience. Walk your own path, and instead of thinking outside the box, imagine if there was no box.\"",
+				"website": "http:\/\/www.loneriderbeer.com\/",
+				"established": "2009",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:00",
+				"updateDate": "2015-03-02 19:35:22"
+			}
+		},
+		{
+			"id": 456,
+			"socialMediaId": 12,
+			"socialMedia": {
+				"id": 12,
+				"name": "Feed",
+				"website": "http:\/\/en.wikipedia.org\/wiki\/RSS",
+				"handleDescription": "Full url (with http:\/\/) of an RSS or Atom feed for news",
+				"createDate": "2012-03-09 19:42:02"
+			},
+			"handle": "http:\/\/www.loneriderbeer.com\/feed\/",
+			"createDate": "2012-03-09 19:42:46",
+			"link": "http:\/\/www.loneriderbeer.com\/feed\/",
+			"breweryId": "d25euF",
+			"brewery": {
+				"id": "d25euF",
+				"name": "Lonerider Brewing Company",
+				"description": "We opened our doors on January 23rd, 2009 and since then we have been impressed with the enthusiasm of craft beer aficionados we meet daily. The craft brewing industry is booming and you can find a tremendous variety out there. North Carolina has undoubtedly become the Southern State for beer with Asheville reigning supreme and Raleigh\/Durham\/CH not far behind. We hope you continue to support the variety and encourage new brewers to experiment with and craft new styles for everybody\u2019s pleasure.\r\n\r\n\"Effect change; don't be an audience. Walk your own path, and instead of thinking outside the box, imagine if there was no box.\"",
+				"website": "http:\/\/www.loneriderbeer.com\/",
+				"established": "2009",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:00",
+				"updateDate": "2015-03-02 19:35:22"
+			}
+		},
+		{
+			"id": 1902,
+			"socialMediaId": 6,
+			"socialMedia": {
+				"id": 6,
+				"name": "BeerAdvocate",
+				"website": "http:\/\/www.beeradvocate.com",
+				"createDate": "2012-01-03 02:41:41"
+			},
+			"handle": "19126",
+			"createDate": "2012-10-11 21:54:44",
+			"link": "http:\/\/www.beeradvocate.com\/beer\/profile\/19126\/",
+			"breweryId": "d25euF",
+			"brewery": {
+				"id": "d25euF",
+				"name": "Lonerider Brewing Company",
+				"description": "We opened our doors on January 23rd, 2009 and since then we have been impressed with the enthusiasm of craft beer aficionados we meet daily. The craft brewing industry is booming and you can find a tremendous variety out there. North Carolina has undoubtedly become the Southern State for beer with Asheville reigning supreme and Raleigh\/Durham\/CH not far behind. We hope you continue to support the variety and encourage new brewers to experiment with and craft new styles for everybody\u2019s pleasure.\r\n\r\n\"Effect change; don't be an audience. Walk your own path, and instead of thinking outside the box, imagine if there was no box.\"",
+				"website": "http:\/\/www.loneriderbeer.com\/",
+				"established": "2009",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:00",
+				"updateDate": "2015-03-02 19:35:22"
+			}
+		},
+		{
+			"id": 3372,
+			"socialMediaId": 14,
+			"socialMedia": {
+				"id": 14,
+				"name": "Instagram",
+				"website": "http:\/\/instagram.com",
+				"handleDescription": "Handle should be username for Instagram",
+				"createDate": "2013-03-22 12:22:05"
+			},
+			"handle": "loneriderbeer",
+			"createDate": "2013-04-30 14:08:14",
+			"link": "http:\/\/www.instagram.com\/loneriderbeer",
+			"breweryId": "d25euF",
+			"brewery": {
+				"id": "d25euF",
+				"name": "Lonerider Brewing Company",
+				"description": "We opened our doors on January 23rd, 2009 and since then we have been impressed with the enthusiasm of craft beer aficionados we meet daily. The craft brewing industry is booming and you can find a tremendous variety out there. North Carolina has undoubtedly become the Southern State for beer with Asheville reigning supreme and Raleigh\/Durham\/CH not far behind. We hope you continue to support the variety and encourage new brewers to experiment with and craft new styles for everybody\u2019s pleasure.\r\n\r\n\"Effect change; don't be an audience. Walk your own path, and instead of thinking outside the box, imagine if there was no box.\"",
+				"website": "http:\/\/www.loneriderbeer.com\/",
+				"established": "2009",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:00",
+				"updateDate": "2015-03-02 19:35:22"
+			}
+		},
+		{
+			"id": 7511,
+			"socialMediaId": 15,
+			"socialMedia": {
+				"id": 15,
+				"name": "Yelp",
+				"website": "http:\/\/www.yelp.com",
+				"handleDescription": "The handle should be the slug for the brewery.",
+				"createDate": "2013-05-04 02:27:53"
+			},
+			"handle": "lonerider-brewing-company-raleigh",
+			"createDate": "2015-03-02 19:35:22",
+			"link": "http:\/\/www.yelp.com\/biz\/lonerider-brewing-company-raleigh",
+			"breweryId": "d25euF",
+			"brewery": {
+				"id": "d25euF",
+				"name": "Lonerider Brewing Company",
+				"description": "We opened our doors on January 23rd, 2009 and since then we have been impressed with the enthusiasm of craft beer aficionados we meet daily. The craft brewing industry is booming and you can find a tremendous variety out there. North Carolina has undoubtedly become the Southern State for beer with Asheville reigning supreme and Raleigh\/Durham\/CH not far behind. We hope you continue to support the variety and encourage new brewers to experiment with and craft new styles for everybody\u2019s pleasure.\r\n\r\n\"Effect change; don't be an audience. Walk your own path, and instead of thinking outside the box, imagine if there was no box.\"",
+				"website": "http:\/\/www.loneriderbeer.com\/",
+				"established": "2009",
+				"isOrganic": "N",
+				"images": {
+					"icon": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-icon.png",
+					"medium": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-medium.png",
+					"large": "https:\/\/s3.amazonaws.com\/brewerydbapi\/brewery\/d25euF\/upload_4OAxrZ-large.png"
+				},
+				"status": "verified",
+				"statusDisplay": "Verified",
+				"createDate": "2012-01-03 02:42:00",
+				"updateDate": "2015-03-02 19:35:22"
+			}
+		}
+	],
+	"status": "success"
+}

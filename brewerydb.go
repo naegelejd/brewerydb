@@ -37,6 +37,7 @@ type Images struct {
 type Client struct {
 	client      http.Client
 	apiKey      string
+	NumRequests int
 	JSONWriter  io.Writer
 	Adjunct     *AdjunctService
 	Beer        *BeerService
@@ -151,6 +152,8 @@ func (c *Client) Do(req *http.Request, data interface{}) error {
 		// TODO: return a more useful error message
 		return fmt.Errorf("HTTP Error %d", resp.StatusCode)
 	}
+
+	c.NumRequests += 1
 
 	if data != nil {
 		var body io.Reader

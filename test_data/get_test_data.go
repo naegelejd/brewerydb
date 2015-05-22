@@ -25,44 +25,52 @@ func main() {
 	c := brewerydb.NewClient(key)
 
 	var test_data = map[string]TestDataGetter{
-		"adjunct.get.json":      adjunctGet,
-		"adjunct.list.json":     adjunctList,
-		"beer.get.json":         beerGet,
-		"beer.list.json":        beerList,
-		"beer.getrandom.json":   beerGetRandom,
-		"brewery.get.json":      breweryGet,
-		"brewery.list.json":     breweryList,
-		"category.get.json":     categoryGet,
-		"category.list.json":    categoryList,
-		"event.get.json":        eventGet,
-		"event.list.json":       eventList,
-		"feature.get.json":      featureGet,
-		"feature.list.json":     featureList,
-		"feature.byweek.json":   featureByWeek,
-		"fluidsize.get.json":    fluidsizeGet,
-		"fluidsize.list.json":   fluidsizeList,
-		"fermentable.get.json":  fermentableGet,
-		"fermentable.list.json": fermentableList,
-		"glass.get.json":        glassGet,
-		"glass.list.json":       glassList,
-		"guild.get.json":        guildGet,
-		"guild.list.json":       guildList,
-		"hop.get.json":          hopGet,
-		"hop.list.json":         hopList,
-		"ingredient.get.json":   ingredientGet,
-		"ingredient.list.json":  ingredientList,
-		"location.get.json":     locationGet,
-		"location.list.json":    locationList,
-		"search.beer.json":      searchBeer,
-		"search.brewery.json":   searchBrewery,
-		"search.event.json":     searchEvent,
-		"search.guild.json":     searchGuild,
-		"socialsite.get.json":   socialsiteGet,
-		"socialsite.list.json":  socialsiteList,
-		"style.get.json":        styleGet,
-		"style.list.json":       styleList,
-		"yeast.get.json":        yeastGet,
-		"yeast.list.json":       yeastList,
+		"adjunct.get.json":                 adjunctGet,
+		"adjunct.list.json":                adjunctList,
+		"beer.get.json":                    beerGet,
+		"beer.list.json":                   beerList,
+		"beer.list.socialaccounts.json":    beerListSocialAccounts,
+		"beer.get.socialaccount.json":      beerGetSocialAccount,
+		"beer.get.random.json":             beerGetRandom,
+		"brewery.get.json":                 breweryGet,
+		"brewery.list.json":                breweryList,
+		"brewery.list.alternatenames.json": breweryListAlternateNames,
+		"brewery.list.socialaccounts.json": breweryListSocialAccounts,
+		"brewery.get.socialaccount.json":   breweryGetSocialAccount,
+		"brewery.get.random.json":          breweryGetRandom,
+		"category.get.json":                categoryGet,
+		"category.list.json":               categoryList,
+		"event.get.json":                   eventGet,
+		"event.list.json":                  eventList,
+		"feature.get.json":                 featureGet,
+		"feature.list.json":                featureList,
+		"feature.byweek.json":              featureByWeek,
+		"fluidsize.get.json":               fluidsizeGet,
+		"fluidsize.list.json":              fluidsizeList,
+		"fermentable.get.json":             fermentableGet,
+		"fermentable.list.json":            fermentableList,
+		"glass.get.json":                   glassGet,
+		"glass.list.json":                  glassList,
+		"guild.get.json":                   guildGet,
+		"guild.list.json":                  guildList,
+		"guild.list.socialaccounts.json":   guildListSocialAccounts,
+		"guild.get.socialaccount.json":     guildGetSocialAccount,
+		"hop.get.json":                     hopGet,
+		"hop.list.json":                    hopList,
+		"ingredient.get.json":              ingredientGet,
+		"ingredient.list.json":             ingredientList,
+		"location.get.json":                locationGet,
+		"location.list.json":               locationList,
+		"search.beer.json":                 searchBeer,
+		"search.brewery.json":              searchBrewery,
+		"search.event.json":                searchEvent,
+		"search.guild.json":                searchGuild,
+		"socialsite.get.json":              socialsiteGet,
+		"socialsite.list.json":             socialsiteList,
+		"style.get.json":                   styleGet,
+		"style.list.json":                  styleList,
+		"yeast.get.json":                   yeastGet,
+		"yeast.list.json":                  yeastList,
 	}
 
 	for filename, action := range test_data {
@@ -133,6 +141,16 @@ func beerList(c *brewerydb.Client) error {
 	return err
 }
 
+func beerGetSocialAccount(c *brewerydb.Client) error {
+	_, err := c.Beer.GetSocialAccount("MwSypd", 1)
+	return err
+}
+
+func beerListSocialAccounts(c *brewerydb.Client) error {
+	_, err := c.Beer.ListSocialAccounts("MwSypd")
+	return err
+}
+
 func beerGetRandom(c *brewerydb.Client) error {
 	_, err := c.Beer.GetRandom(&brewerydb.RandomBeerRequest{ABV: "8"})
 	return err
@@ -145,6 +163,26 @@ func breweryGet(c *brewerydb.Client) error {
 
 func breweryList(c *brewerydb.Client) error {
 	_, err := c.Brewery.List(&brewerydb.BreweryListRequest{Page: 1, Established: "1988"})
+	return err
+}
+
+func breweryListAlternateNames(c *brewerydb.Client) error {
+	_, err := c.Brewery.ListAlternateNames("tNDKBY")
+	return err
+}
+
+func breweryGetSocialAccount(c *brewerydb.Client) error {
+	_, err := c.Brewery.GetSocialAccount("d25euF", 16)
+	return err
+}
+
+func breweryListSocialAccounts(c *brewerydb.Client) error {
+	_, err := c.Brewery.ListSocialAccounts("d25euF")
+	return err
+}
+
+func breweryGetRandom(c *brewerydb.Client) error {
+	_, err := c.Brewery.GetRandom(&brewerydb.RandomBreweryRequest{Established: "1983"})
 	return err
 }
 
@@ -220,6 +258,16 @@ func guildGet(c *brewerydb.Client) error {
 
 func guildList(c *brewerydb.Client) error {
 	_, err := c.Guild.List(&brewerydb.GuildListRequest{Page: 1, Name: "Brewers Association of Maryland"})
+	return err
+}
+
+func guildListSocialAccounts(c *brewerydb.Client) error {
+	_, err := c.Guild.ListSocialAccounts("cJio9R")
+	return err
+}
+
+func guildGetSocialAccount(c *brewerydb.Client) error {
+	_, err := c.Guild.GetSocialAccount("cJio9R", 4)
 	return err
 }
 

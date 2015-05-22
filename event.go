@@ -362,7 +362,7 @@ func (es *EventService) DeleteAwardPlace(eventID string, awardPlaceID int) error
 // Beers for a given Event.
 type EventBeersRequest struct {
 	Page            int    `url:"p, omitempty"`
-	OnlyWinnders    string `url:"onlyWinners,omitempty"` // Y/N
+	OnlyWinners     string `url:"onlyWinners,omitempty"` // Y/N
 	AwardCategoryID int    `url:"awardcategoryId,omitempty"`
 	AwardPlaceID    int    `url:"awardplaceId,omitempty"`
 }

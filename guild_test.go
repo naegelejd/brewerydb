@@ -204,6 +204,90 @@ func TestGuildDelete(t *testing.T) {
 	})
 }
 
+func TestGuildGetSocialAccount(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("guild.get.socialaccount.json", t)
+	defer data.Close()
+
+	const (
+		guildID         = "cJio9R"
+		socialAccountID = 4
+	)
+	mux.HandleFunc("/guild/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccount" {
+			t.Fatal("bad URL, expected \"/guild/:guildId/socialaccount/:socialaccountId\"")
+		}
+		if split[2] != guildID {
+			http.Error(w, "invalid Guild ID", http.StatusNotFound)
+		}
+		if split[4] != strconv.Itoa(socialAccountID) {
+			http.Error(w, "invalid SocialAccount ID", http.StatusNotFound)
+		}
+		io.Copy(w, data)
+
+	})
+
+	a, err := client.Guild.GetSocialAccount(guildID, socialAccountID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if a.ID != socialAccountID {
+		t.Fatalf("SocialAccount ID = %v, want %v", a.ID, socialAccountID)
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Guild.GetSocialAccount(guildID, socialAccountID)
+		return err
+	})
+}
+
+func TestGuildListSocialAccounts(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("guild.list.socialaccounts.json", t)
+	defer data.Close()
+
+	const guildID = "cJio9R"
+	mux.HandleFunc("/guild/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "socialaccounts" {
+			t.Fatal("bad URL, expected \"/guild/:guildId/socialaccounts\"")
+		}
+		if split[2] != guildID {
+			http.Error(w, "invalid Guild ID", http.StatusNotFound)
+		}
+
+		io.Copy(w, data)
+	})
+
+	al, err := client.Guild.ListSocialAccounts(guildID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(al) <= 0 {
+		t.Fatal("Expected >0 SocialAccounts")
+	}
+
+	for _, a := range al {
+		if a.ID <= 0 {
+			t.Fatal("Expected ID >0")
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Guild.ListSocialAccounts(guildID)
+		return err
+	})
+}
+
 func TestGuildAddSocialAccount(t *testing.T) {
 	setup()
 	defer teardown()
@@ -341,5 +425,47 @@ func TestGuildDeleteSocialAccount(t *testing.T) {
 
 	testBadURL(t, func() error {
 		return client.Guild.DeleteSocialAccount(guildID, socialID)
+	})
+}
+
+func TestGuildListBreweries(t *testing.T) {
+	setup()
+	defer teardown()
+
+	data := loadTestData("brewery.list.json", t)
+	defer data.Close()
+
+	const guildID = "k2jMtH"
+	mux.HandleFunc("/guild/", func(w http.ResponseWriter, r *http.Request) {
+		checkMethod(t, r, "GET")
+		split := strings.Split(r.URL.Path, "/")
+		if split[3] != "breweries" {
+			t.Fatal("bad URL, expected \"/guild/:guildId/breweries\"")
+		}
+		if split[2] != guildID {
+			http.Error(w, "invalid Guild ID", http.StatusNotFound)
+		}
+
+		io.Copy(w, data)
+	})
+
+	bl, err := client.Guild.ListBreweries(guildID)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(bl) <= 0 {
+		t.Fatal("Expected >0 Breweries")
+	}
+
+	for _, b := range bl {
+		if l := 6; l != len(b.ID) {
+			t.Fatalf("Brewery ID len = %d, wanted %d", len(b.ID), l)
+		}
+	}
+
+	testBadURL(t, func() error {
+		_, err := client.Guild.ListBreweries(guildID)
+		return err
 	})
 }
