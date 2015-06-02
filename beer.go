@@ -63,17 +63,17 @@ type BeerListRequest struct {
 	SrmID              int       `url:"srmId,omitempty"`
 	AvailableID        int       `url:"availableId,omitempty"`
 	StyleID            int       `url:"styleId,omitempty"`
-	IsOrganic          string    `url:"isOrganic,omitempty"` // Y/N
-	HasLabels          string    `url:"hasLabels,omitempty"` // Y/N
-	Year               int       `url:"year,omitempty"`      // YYYY
-	Since              string    `url:"since,omitempty"`     // UNIX timestamp format. Max 30 days
+	IsOrganic          YesNo     `url:"isOrganic,omitempty"`
+	HasLabels          YesNo     `url:"hasLabels,omitempty"`
+	Year               int       `url:"year,omitempty"`  // YYYY
+	Since              string    `url:"since,omitempty"` // UNIX timestamp format. Max 30 days
 	Status             string    `url:"status,omitempty"`
 	Order              BeerOrder `url:"order,omitempty"`
 	Sort               ListSort  `url:"sort,omitempty"`
-	RandomCount        string    `url:"randomCount,omitempty"`        // how many random beers to return. Max 10
-	WithBreweries      string    `url:"withBreweries,omitempty"`      // Y/N
-	WithSocialAccounts string    `url:"withSocialAccounts,omitempty"` // Premium. Y/N
-	WithIngredients    string    `url:"withIngredients,omitempty"`    // Premium. Y/N
+	RandomCount        string    `url:"randomCount,omitempty"` // how many random beers to return. Max 10
+	WithBreweries      YesNo     `url:"withBreweries,omitempty"`
+	WithSocialAccounts YesNo     `url:"withSocialAccounts,omitempty"` // Premium
+	WithIngredients    YesNo     `url:"withIngredients,omitempty"`    // Premium
 }
 
 // Availability contains information on a Beer's availability.
@@ -103,7 +103,7 @@ type Beer struct {
 	Glass                     Glass           `url:"-"`
 	StyleID                   int             `url:"styleId"` // Required
 	Style                     Style           `url:"-"`
-	IsOrganic                 string          `url:"isOrganic,omitempty"`
+	IsOrganic                 YesNo           `url:"isOrganic,omitempty"`
 	Labels                    Images          `url:"-"`
 	Label                     string          `url:"label,omitempty"`   // base64. Only used for adding/updating Beers.
 	Brewery                   []string        `url:"brewery,omitempty"` // breweryID list. Only used for adding/updating Beers.
@@ -311,12 +311,9 @@ func (bs *BeerService) DeleteBrewery(beerID, breweryID string, q *BeerBreweryReq
 // or has won awards.
 func (bs *BeerService) ListEvents(beerID string, onlyWinners bool) (el []Event, err error) {
 	// GET: /beer/:beerId/events
-	var q struct {
-		OnlyWinners string `url:"onlyWinners,omitempty"`
-	}
-	if onlyWinners {
-		q.OnlyWinners = "Y"
-	}
+	q := struct {
+		OnlyWinners YesNo `url:"onlyWinners,omitempty"`
+	}{YesNo(onlyWinners)}
 
 	var req *http.Request
 	req, err = bs.c.NewRequest("GET", "/beer/"+beerID+"/events", &q)
@@ -442,12 +439,12 @@ type RandomBeerRequest struct {
 	SrmID              int    `url:"srmID,omitempty"`
 	AvailableID        int    `url:"availableId,omitempty"`
 	StyleID            int    `url:"styleId,omitempty"`
-	IsOrganic          bool   `url:"isOrganic,omitempty"` // Y/N
-	Labels             bool   `url:"labels,omitempty"`
+	IsOrganic          YesNo  `url:"isOrganic,omitempty"`
+	Labels             YesNo  `url:"labels,omitempty"`
 	Year               int    `url:"year,omitempty"`
-	WithBreweries      string `url:"withBreweries,omitempty"`      // Y/N
-	WithSocialAccounts string `url:"withSocialAccounts,omitempty"` // Y/N
-	WithIngredients    string `url:"withIngredients,omitempty"`    // Y/N
+	WithBreweries      YesNo  `url:"withBreweries,omitempty"`
+	WithSocialAccounts YesNo  `url:"withSocialAccounts,omitempty"`
+	WithIngredients    YesNo  `url:"withIngredients,omitempty"`
 }
 
 // GetRandom returns a random Beer.

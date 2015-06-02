@@ -18,24 +18,24 @@ const (
 // SearchRequest contains options for narrowing a Search.
 type SearchRequest struct {
 	Page               int
-	WithBreweries      string
-	WithSocialAccounts string
-	WithGuilds         string
-	WithLocations      string
-	WithAlternateNames string
-	WithIngredients    string
+	WithBreweries      bool
+	WithSocialAccounts bool
+	WithGuilds         bool
+	WithLocations      bool
+	WithAlternateNames bool
+	WithIngredients    bool
 }
 
 type actualSearchRequest struct {
 	Page               int        `url:"p,omitempty"`
 	Query              string     `url:"q"` // required
 	Type               searchType `url:"type"`
-	WithBreweries      string     `url:"withBreweries,omitempty"`
-	WithSocialAccounts string     `url:"withSocialAccounts,omitempty"`
-	WithGuilds         string     `url:"withGuilds,omitempty"`
-	WithLocations      string     `url:"withLocations,omitempty"`
-	WithAlternateNames string     `url:"withAlternateNames,omitempty"`
-	WithIngredients    string     `url:"withIngredients,omitempty"`
+	WithBreweries      YesNo      `url:"withBreweries,omitempty"`
+	WithSocialAccounts YesNo      `url:"withSocialAccounts,omitempty"`
+	WithGuilds         YesNo      `url:"withGuilds,omitempty"`
+	WithLocations      YesNo      `url:"withLocations,omitempty"`
+	WithAlternateNames YesNo      `url:"withAlternateNames,omitempty"`
+	WithIngredients    YesNo      `url:"withIngredients,omitempty"`
 }
 
 func makeActualSearchRequest(req *SearchRequest, query string, tp searchType) *actualSearchRequest {
@@ -46,11 +46,11 @@ func makeActualSearchRequest(req *SearchRequest, query string, tp searchType) *a
 		Page:               req.Page,
 		Query:              query,
 		Type:               tp,
-		WithBreweries:      req.WithBreweries,
-		WithGuilds:         req.WithGuilds,
-		WithLocations:      req.WithLocations,
-		WithAlternateNames: req.WithAlternateNames,
-		WithIngredients:    req.WithIngredients,
+		WithBreweries:      YesNo(req.WithBreweries),
+		WithGuilds:         YesNo(req.WithGuilds),
+		WithLocations:      YesNo(req.WithLocations),
+		WithAlternateNames: YesNo(req.WithAlternateNames),
+		WithIngredients:    YesNo(req.WithIngredients),
 	}
 
 }
@@ -102,10 +102,10 @@ type GeoPointRequest struct {
 	Latitude           float64      `url:"lat"` // Required
 	Longitude          float64      `url:"lng"` // Required
 	Radius             float64      `url:"radius,omitempty"`
-	Unit               GeoPointUnit `url:"unit,omitempty"`               // Default: mi
-	WithSocialAccounts string       `url:"withSocialAccounts,omitempty"` // Y/N
-	WithGuilds         string       `url:"withGuilds,omitempty"`         // Y/N
-	WithAlternateNames string       `url:"withAlternateNames,omitempty"` // Y/N
+	Unit               GeoPointUnit `url:"unit,omitempty"` // Default: mi
+	WithSocialAccounts YesNo        `url:"withSocialAccounts,omitempty"`
+	WithGuilds         YesNo        `url:"withGuilds,omitempty"`
+	WithAlternateNames YesNo        `url:"withAlternateNames,omitempty"`
 }
 
 // GeoPoint searches for Locations near the geographic coordinate specified in the GeoPointRequest.
@@ -132,11 +132,8 @@ func (ss *SearchService) GeoPoint(q *GeoPointRequest) ([]Location, error) {
 func (ss *SearchService) Style(query string, withDescriptions bool) ([]Style, error) {
 	q := struct {
 		Query            string `url:"q"`
-		WithDescriptions string `url:"withDescriptions,omitempty"`
-	}{Query: query}
-	if withDescriptions {
-		q.WithDescriptions = "Y"
-	}
+		WithDescriptions YesNo  `url:"withDescriptions,omitempty"`
+	}{query, YesNo(withDescriptions)}
 
 	req, err := ss.c.NewRequest("GET", "/search/style", &q)
 	if err != nil {

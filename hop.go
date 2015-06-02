@@ -38,10 +38,10 @@ type Hop struct {
 	MyrceneMax       float64
 	FarneseneMin     float64
 	FarneseneMax     float64
-	IsNoble          string
-	ForBittering     string
-	ForFlavor        string
-	ForAroma         string
+	IsNoble          YesNo
+	ForBittering     YesNo
+	ForFlavor        YesNo
+	ForAroma         YesNo
 	Category         string
 	CategoryDisplay  string
 	CreateDate       string

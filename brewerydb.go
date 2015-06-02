@@ -33,6 +33,35 @@ type Images struct {
 	Large  string `url:"-"`
 }
 
+// YesNo is just a bool that is url-encoded into either "Y" or "S".
+type YesNo bool
+
+// EncodeValues adds the value "Y" or "N" to the given url.Values
+// for the given key if the YesNo value is true or false, respectively.
+func (yn YesNo) EncodeValues(key string, v *url.Values) error {
+	if yn {
+		v.Set(key, "Y")
+	} else {
+		v.Set(key, "N")
+	}
+	return nil
+}
+
+// UnmarshalJSON decodes the JSON value "Y" or "N" into a boolean
+// true or false, respectively.
+func (yn *YesNo) UnmarshalJSON(data []byte) error {
+	// expect a single-rune string containing either 'Y' or 'N'
+	yes, no := []byte{'"', 'Y', '"'}, []byte{'"', 'N', '"'}
+	if bytes.Equal(data, yes) {
+		*yn = true
+	} else if bytes.Equal(data, no) {
+		*yn = false
+	} else {
+		return fmt.Errorf("invalid JSON value for YesNo (%v)", string(data))
+	}
+	return nil
+}
+
 // Client serves as the interface to the BreweryDB API.
 type Client struct {
 	client      http.Client

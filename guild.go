@@ -45,7 +45,7 @@ type GuildListRequest struct {
 	Established int        `url:"established,omitempty"` // Year
 	Since       int        `url:"since,omitempty"`
 	Status      string     `url:"status,omitempty"`
-	HasImages   string     `url:"hasImages,omitempty"` // Y/N
+	HasImages   YesNo      `url:"hasImages,omitempty"`
 	Order       GuildOrder `url:"order,omitempty"`
 	Sort        ListSort   `url:"sort,omitempty"`
 }

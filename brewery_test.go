@@ -84,7 +84,7 @@ func makeTestBrewery() *Brewery {
 		MailingListURL: "boss@flyingdogales.com",
 		Image:          "https://s3.amazonaws.com/brewerydbapi/brewery/jmGoBA/upload_0z9L4W-large.png",
 		Established:    "1983",
-		IsOrganic:      "N",
+		IsOrganic:      true,
 		Website:        "http://www.flyingdogales.com",
 		Status:         "verified",
 	}
@@ -109,7 +109,7 @@ func TestBreweryAdd(t *testing.T) {
 		checkPostFormValue(t, r, "mailingListUrl", brewery.MailingListURL)
 		checkPostFormValue(t, r, "image", brewery.Image)
 		checkPostFormValue(t, r, "established", brewery.Established)
-		checkPostFormValue(t, r, "isOrganic", brewery.IsOrganic)
+		checkPostFormValue(t, r, "isOrganic", "Y")
 		checkPostFormValue(t, r, "website", brewery.Website)
 
 		// Check that fields tagged with "-" or "omitempty" are NOT encoded
@@ -156,7 +156,7 @@ func TestBreweryUpdate(t *testing.T) {
 		checkPostFormValue(t, r, "mailingListUrl", brewery.MailingListURL)
 		checkPostFormValue(t, r, "image", brewery.Image)
 		checkPostFormValue(t, r, "established", brewery.Established)
-		checkPostFormValue(t, r, "isOrganic", brewery.IsOrganic)
+		checkPostFormValue(t, r, "isOrganic", "Y")
 		checkPostFormValue(t, r, "website", brewery.Website)
 
 		// Check that fields tagged with "-" or "omitempty" are NOT encoded
@@ -593,10 +593,8 @@ func TestBreweryAddLocation(t *testing.T) {
 		checkPostFormValue(t, r, "hoursOfOperationExplicit", location.HoursOfOperationExplicit[0])
 		checkPostFormValue(t, r, "latitude", fmt.Sprintf("%f", location.Latitude))
 		checkPostFormValue(t, r, "longitude", fmt.Sprintf("%f", location.Longitude))
-		checkPostFormValue(t, r, "isPrimary", location.IsPrimary)
-		checkPostFormValue(t, r, "inPlanning", location.InPlanning)
-		checkPostFormValue(t, r, "isClosed", location.IsClosed)
-		checkPostFormValue(t, r, "openToPublic", location.OpenToPublic)
+		checkPostFormValue(t, r, "isPrimary", "Y")
+		checkPostFormValue(t, r, "openToPublic", "Y")
 		checkPostFormValue(t, r, "locationType", string(location.LocationType))
 		checkPostFormValue(t, r, "countryIsoCode", location.CountryISOCode)
 
@@ -605,7 +603,7 @@ func TestBreweryAddLocation(t *testing.T) {
 			"ExtendedAddress", "hoursOfOperation", "hoursOfOperationNotes", "tourInfo",
 			"LocationTypeDisplay", "country", "Country", "yearClosed",
 			"breweryID", "BreweryID", "brewery", "Brewery",
-			"status", "Status")
+			"status", "Status", "inPlanning", "isClosed")
 
 		fmt.Fprintf(w, `{"status":"...", "data":{"guid":"%s"}, "message":"..."}`, newID)
 	})
@@ -744,9 +742,9 @@ func TestBreweryListBeers(t *testing.T) {
 	})
 
 	req := &BreweryBeersRequest{
-		WithBreweries:      "Y",
-		WithSocialAccounts: "Y",
-		WithIngredients:    "Y",
+		WithBreweries:      true,
+		WithSocialAccounts: true,
+		WithIngredients:    true,
 	}
 	bl, err := client.Brewery.ListBeers(breweryID, req)
 	if err != nil {

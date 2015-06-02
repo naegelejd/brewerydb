@@ -95,7 +95,7 @@ type EventListRequest struct {
 	CountryISOCode string     `url:"countryIsoCode,omitempty"`
 	Since          int        `url:"since,omitempty"` // Unix timestamp
 	Status         string     `url:"status,omitempty"`
-	HasImages      string     `url:"hasImages,omitempty"` // Y/N
+	HasImages      YesNo      `url:"hasImages,omitempty"`
 	Order          EventOrder `url:"order,omitempty"`
 	Sort           ListSort   `url:"sort,omitempty"`
 }
@@ -361,10 +361,10 @@ func (es *EventService) DeleteAwardPlace(eventID string, awardPlaceID int) error
 // EventBeersRequest contains parameters for specifying desired
 // Beers for a given Event.
 type EventBeersRequest struct {
-	Page            int    `url:"p, omitempty"`
-	OnlyWinners     string `url:"onlyWinners,omitempty"` // Y/N
-	AwardCategoryID int    `url:"awardcategoryId,omitempty"`
-	AwardPlaceID    int    `url:"awardplaceId,omitempty"`
+	Page            int   `url:"p, omitempty"`
+	OnlyWinners     YesNo `url:"onlyWinners,omitempty"`
+	AwardCategoryID int   `url:"awardcategoryId,omitempty"`
+	AwardPlaceID    int   `url:"awardplaceId,omitempty"`
 }
 
 // ListBeers returns a page of Beers for the given Event.
@@ -401,9 +401,9 @@ func (es *EventService) GetBeer(eventID, beerID string) (b Beer, err error) {
 // EventChangeBeerRequest contains parameters for changing or adding
 // a new Beer to an Event.
 type EventChangeBeerRequest struct {
-	IsPouring       string `url:"isPouring,omitempty"`
-	AwardCategoryID int    `url:"awardcategoryId,omitempty"`
-	AwardPlaceID    int    `url:"awardplaceId,omitempty"`
+	IsPouring       YesNo `url:"isPouring,omitempty"`
+	AwardCategoryID int   `url:"awardcategoryId,omitempty"`
+	AwardPlaceID    int   `url:"awardplaceId,omitempty"`
 }
 
 type eventAddBeerRequest struct {
@@ -453,10 +453,10 @@ func (es *EventService) DeleteBeer(eventID, beerID string) error {
 // EventBreweriesRequest contains parameters for specifying desired
 // Breweries for a given Event.
 type EventBreweriesRequest struct {
-	Page            int    `url:"p,omitempty"`
-	OnlyWinners     string `url:"onlyWinners,omitempty"` // Y/N
-	AwardCategoryID int    `url:"awardcategoryId,omitempty"`
-	AwardPlaceID    int    `url:"awardplaceId,omitempty"`
+	Page            int   `url:"p,omitempty"`
+	OnlyWinners     YesNo `url:"onlyWinners,omitempty"`
+	AwardCategoryID int   `url:"awardcategoryId,omitempty"`
+	AwardPlaceID    int   `url:"awardplaceId,omitempty"`
 }
 
 // ListBreweries returns a page of Breweries for the given Event.

@@ -96,10 +96,10 @@ func makeTestLocation() *Location {
 		HoursOfOperationExplicit: []string{"Sunday - Thursday: 11am - 1am", "Friday - Saturday: 11am - 2am"},
 		Latitude:                 38.988988,
 		Longitude:                -77.097413,
-		IsPrimary:                "N",
-		InPlanning:               "N",
-		IsClosed:                 "N",
-		OpenToPublic:             "Y",
+		IsPrimary:                true,
+		InPlanning:               false,
+		IsClosed:                 false,
+		OpenToPublic:             true,
 		LocationType:             "brewpub",
 		LocationTypeDisplay:      "Brewpub",
 		CountryISOCode:           "US",
@@ -141,10 +141,8 @@ func TestLocationUpdate(t *testing.T) {
 		checkPostFormValue(t, r, "hoursOfOperationExplicit", location.HoursOfOperationExplicit[0])
 		checkPostFormValue(t, r, "latitude", fmt.Sprintf("%f", location.Latitude))
 		checkPostFormValue(t, r, "longitude", fmt.Sprintf("%f", location.Longitude))
-		checkPostFormValue(t, r, "isPrimary", location.IsPrimary)
-		checkPostFormValue(t, r, "inPlanning", location.InPlanning)
-		checkPostFormValue(t, r, "isClosed", location.IsClosed)
-		checkPostFormValue(t, r, "openToPublic", location.OpenToPublic)
+		checkPostFormValue(t, r, "isPrimary", "Y")
+		checkPostFormValue(t, r, "openToPublic", "Y")
 		checkPostFormValue(t, r, "locationType", string(location.LocationType))
 		checkPostFormValue(t, r, "countryIsoCode", location.CountryISOCode)
 
@@ -153,7 +151,7 @@ func TestLocationUpdate(t *testing.T) {
 			"ExtendedAddress", "hoursOfOperation", "hoursOfOperationNotes", "tourInfo",
 			"LocationTypeDisplay", "country", "Country", "yearClosed",
 			"breweryID", "BreweryID", "brewery", "Brewery",
-			"status", "Status")
+			"status", "Status", "inPlanning", "isClosed")
 	})
 
 	if err := client.Location.Update(location.ID, location); err != nil {

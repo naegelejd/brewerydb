@@ -1,6 +1,7 @@
 package brewerydb
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -140,5 +141,40 @@ func TestDo(t *testing.T) {
 	_, err = client.Beer.Get(beerID)
 	if err == nil {
 		t.Fatal("Expected net/http Do error")
+	}
+}
+
+func TestYesNoUnmarshalJSON(t *testing.T) {
+	q := struct {
+		IsPrimary YesNo `url:"isPrimary"`
+		IsClosed  YesNo `url:"isClosed,omitempty"`
+	}{}
+
+	js0 := []byte(`{"isPrimary":"Y"}`)
+
+	if err := json.Unmarshal(js0, &q); err != nil {
+		t.Error(err)
+	}
+	if v := YesNo(true); q.IsPrimary != v {
+		t.Errorf("q.IsPrimary = %v, want %v", q.IsPrimary, v)
+	}
+	if v := YesNo(false); q.IsClosed != v {
+		t.Errorf("q.IsClosed = %v, want %v", q.IsClosed, v)
+	}
+
+	js1 := []byte(`{"isPrimary":"N", "isClosed":"Y"}`)
+	if err := json.Unmarshal(js1, &q); err != nil {
+		t.Error(err)
+	}
+	if v := YesNo(false); q.IsPrimary != v {
+		t.Errorf("q.IsPrimary = %v, want %v", q.IsPrimary, v)
+	}
+	if v := YesNo(true); q.IsClosed != v {
+		t.Errorf("q.IsClosed = %v, want %v", q.IsClosed, v)
+	}
+
+	js2 := []byte(`{"isPrimary":"y", "isClosed":true}`)
+	if err := json.Unmarshal(js2, &q); err == nil {
+		t.Errorf(`Expected unmarshal error (only "Y" or "N" are valid YesNo JSON)`)
 	}
 }

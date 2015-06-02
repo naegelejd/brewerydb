@@ -641,7 +641,7 @@ func TestEventListBeer(t *testing.T) {
 
 	})
 
-	req := &EventBeersRequest{Page: page, OnlyWinners: "Y", AwardPlaceID: 3, AwardCategoryID: 2}
+	req := &EventBeersRequest{Page: page, OnlyWinners: true, AwardPlaceID: 3, AwardCategoryID: 2}
 	bl, err := client.Event.ListBeers(eventID, req)
 	if err != nil {
 		t.Fatal(err)
@@ -665,7 +665,7 @@ func TestEventListBeer(t *testing.T) {
 
 func makeTestEventChangeBeerRequest() *EventChangeBeerRequest {
 	return &EventChangeBeerRequest{
-		IsPouring:       "Y",
+		IsPouring:       true,
 		AwardCategoryID: 2,
 		AwardPlaceID:    3,
 	}
@@ -696,7 +696,7 @@ func TestEventAddBeer(t *testing.T) {
 		}
 
 		if firstTest {
-			checkPostFormValue(t, r, "isPouring", change.IsPouring)
+			checkPostFormValue(t, r, "isPouring", "Y")
 			checkPostFormValue(t, r, "awardcategoryId", strconv.Itoa(change.AwardCategoryID))
 			checkPostFormValue(t, r, "awardplaceId", strconv.Itoa(change.AwardPlaceID))
 		}
@@ -744,7 +744,7 @@ func TestEventUpdateBeer(t *testing.T) {
 		}
 
 		if firstTest {
-			checkPostFormValue(t, r, "isPouring", change.IsPouring)
+			checkPostFormValue(t, r, "isPouring", "Y")
 			checkPostFormValue(t, r, "awardcategoryId", strconv.Itoa(change.AwardCategoryID))
 			checkPostFormValue(t, r, "awardplaceId", strconv.Itoa(change.AwardPlaceID))
 		}
@@ -836,7 +836,7 @@ func TestEventListBreweries(t *testing.T) {
 		io.Copy(w, data)
 	})
 
-	req := &EventBreweriesRequest{Page: page, OnlyWinners: "Y", AwardCategoryID: 3, AwardPlaceID: 2}
+	req := &EventBreweriesRequest{Page: page, OnlyWinners: true, AwardCategoryID: 3, AwardPlaceID: 2}
 	bl, err := client.Event.ListBreweries(eventID, req)
 	if err != nil {
 		t.Fatal(err)

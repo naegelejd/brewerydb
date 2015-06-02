@@ -39,10 +39,10 @@ type Location struct {
 	TimezoneID               string       `url:"timezoneId,omitempty"`
 	Latitude                 float64      `url:"latitude,omitempty"`
 	Longitude                float64      `url:"longitude,omitempty"`
-	IsPrimary                string       `url:"isPrimary,omitempty"`    // Y/N
-	InPlanning               string       `url:"inPlanning,omitempty"`   // Y/N
-	IsClosed                 string       `url:"isClosed,omitempty"`     // Y/N
-	OpenToPublic             string       `url:"openToPublic,omitempty"` // Y/N
+	IsPrimary                YesNo        `url:"isPrimary,omitempty"`
+	InPlanning               YesNo        `url:"inPlanning,omitempty"`
+	IsClosed                 YesNo        `url:"isClosed,omitempty"`
+	OpenToPublic             YesNo        `url:"openToPublic,omitempty"`
 	LocationType             LocationType `url:"locationType,omitempty"`
 	LocationTypeDisplay      string       `url:"-"`
 	CountryISOCode           string       `url:"countryIsoCode"` // Required for UpdateLocation
@@ -99,9 +99,9 @@ type LocationListRequest struct {
 	Locality       string        `url:"locality,omitempty"`
 	Region         string        `url:"region,omitempty"`
 	PostalCode     string        `url:"postalCode,omitempty"`
-	IsPrimary      string        `url:"isPrimary,omitempty"`
-	InPlanning     string        `url:"inPlanning,omitempty"`
-	IsClosed       string        `url:"isClosed,omitempty"`
+	IsPrimary      YesNo         `url:"isPrimary,omitempty"`
+	InPlanning     YesNo         `url:"inPlanning,omitempty"`
+	IsClosed       YesNo         `url:"isClosed,omitempty"`
 	LocationType   LocationType  `url:"locationType,omitempty"`
 	CountryISOCode string        `url:"countryIsoCode,omitempty"`
 	Since          int           `url:"since,omitempty"`

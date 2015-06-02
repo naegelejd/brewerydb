@@ -36,7 +36,7 @@ type Fermentable struct {
 	Protein              float64
 	SolubleNitrogenRatio float64
 	MaxInBatch           float64
-	RequiresMashing      string // Y or N
+	RequiresMashing      YesNo
 	Category             string // This will always be set to "malt"
 	CategoryDisplay      string // This will always be set to "Malts, Grains, & Fermentables"
 	CreateDate           string

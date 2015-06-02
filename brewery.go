@@ -44,7 +44,7 @@ type Brewery struct {
 	Images         Images `url:"-"`
 	Image          string `url:"image,omitempty"` // only used for adding/update Breweries
 	Established    string `url:"established,omitempty"`
-	IsOrganic      string `url:"isOrganic,omitempty"`
+	IsOrganic      YesNo  `url:"isOrganic,omitempty"`
 	Website        string `url:"website,omitempty"`
 	Status         string `url:"-"`
 	StatusDisplay  string `url:"-"`
@@ -59,17 +59,17 @@ type BreweryListRequest struct {
 	Name               string       `url:"name,omitempty"`
 	IDs                string       `url:"ids,omitempty"`
 	Established        string       `url:"established,omitempty"`
-	IsOrganic          string       `url:"isOrganic,omitempty"`
-	HasImages          string       `url:"hasImages,omitempty"`
+	IsOrganic          YesNo        `url:"isOrganic,omitempty"`
+	HasImages          YesNo        `url:"hasImages,omitempty"`
 	Since              string       `url:"since,omitempty"`
 	Status             string       `url:"status,omitempty"`
 	Order              BreweryOrder `url:"order,omitempty"` // TODO: enumerate
 	Sort               string       `url:"sort,omitempty"`  // TODO: enumerate
 	RandomCount        string       `url:"randomCount,omitempty"`
-	WithSocialAccounts string       `url:"withSocialAccounts,omitempty"` // Y/N
-	WithGuilds         string       `url:"withGuilds,omitempty"`         // Y/N
-	WithLocations      string       `url:"withLocations,omitempty"`      // Y/N
-	WithAlternateNames string       `url:"withAlternateNames,omitempty"` // Y/N
+	WithSocialAccounts YesNo        `url:"withSocialAccounts,omitempty"`
+	WithGuilds         YesNo        `url:"withGuilds,omitempty"`
+	WithLocations      YesNo        `url:"withLocations,omitempty"`
+	WithAlternateNames YesNo        `url:"withAlternateNames,omitempty"`
 }
 
 // List returns all Breweries on the page specified in the given BreweryListRequest.
@@ -220,9 +220,9 @@ func (bs *BreweryService) DeleteAlternateName(breweryID string, alternateNameID 
 
 // BreweryBeersRequest contains options for querying for all Beers from a Brewery.
 type BreweryBeersRequest struct {
-	WithBreweries      string `url:"withBreweries"`      // Y/N
-	WithSocialAccounts string `url:"withSocialAccounts"` // Y/N
-	WithIngredients    string `url:"withIngredients"`    // Y/N
+	WithBreweries      YesNo `url:"withBreweries,omitempty"`
+	WithSocialAccounts YesNo `url:"withSocialAccounts,omitempty"`
+	WithIngredients    YesNo `url:"withIngredients,omitempty"`
 }
 
 // ListBeers returns a slice of all Beers offered by the Brewery with the given ID.
@@ -247,12 +247,9 @@ func (bs *BreweryService) ListBeers(breweryID string, q *BreweryBeersRequest) (b
 // or has won awards.
 func (bs *BreweryService) ListEvents(breweryID string, onlyWinners bool) (el []Event, err error) {
 	// GET: /brewery/:breweryId/events
-	var q struct {
-		OnlyWinners string `url:"onlyWinners,omitempty"`
-	}
-	if onlyWinners {
-		q.OnlyWinners = "Y"
-	}
+	q := struct {
+		OnlyWinners YesNo `url:"onlyWinners,omitempty"`
+	}{YesNo(onlyWinners)}
 
 	var req *http.Request
 	req, err = bs.c.NewRequest("GET", "/brewery/"+breweryID+"/events", &q)
@@ -363,12 +360,12 @@ func (bs *BreweryService) AddLocation(breweryID string, loc *Location) (id strin
 
 // RandomBreweryRequest contains options for retrieving a random Brewery.
 type RandomBreweryRequest struct {
-	Established        string `url:"established"`        // YYYY
-	IsOrganic          string `url:"isOrganic"`          // Y/N
-	WithSocialAccounts string `url:"withSocialAccounts"` // Y/N
-	WithGuilds         string `url:"withGuilds"`         // Y/N
-	WithLocations      string `url:"withLocations"`      // Y/N
-	WithAlternateNames string `url:"withAlternateNames"` // Y/N
+	Established        string `url:"established"` // YYYY
+	IsOrganic          YesNo  `url:"isOrganic"`
+	WithSocialAccounts YesNo  `url:"withSocialAccounts"`
+	WithGuilds         YesNo  `url:"withGuilds"`
+	WithLocations      YesNo  `url:"withLocations"`
+	WithAlternateNames YesNo  `url:"withAlternateNames"`
 }
 
 // GetRandom returns a random active Brewery.

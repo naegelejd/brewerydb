@@ -87,7 +87,7 @@ func makeTestBeer() *Beer {
 		GlasswareID:     5,
 		Glass:           Glass{ID: 5, Name: "Pint"},
 		StyleID:         31,
-		IsOrganic:       "N",
+		IsOrganic:       true,
 		Labels: Images{
 			"https://s3.amazonaws.com/brewerydbapi/beer/o9TSOv/upload_nIhalb-icon.png",
 			"https://s3.amazonaws.com/brewerydbapi/beer/o9TSOv/upload_nIhalb-medium.png",
@@ -128,7 +128,7 @@ func TestBeerAdd(t *testing.T) {
 		checkPostFormValue(t, r, "ibu", beer.IBU)
 		checkPostFormValue(t, r, "glasswareId", strconv.Itoa(beer.GlasswareID))
 		checkPostFormValue(t, r, "styleId", strconv.Itoa(beer.StyleID))
-		checkPostFormValue(t, r, "isOrganic", beer.IsOrganic)
+		checkPostFormValue(t, r, "isOrganic", "Y")
 		checkPostFormValue(t, r, "label", beer.Label)
 		checkPostFormValue(t, r, "brewery", beer.Brewery[0])
 		checkPostFormValue(t, r, "servingTemperature", string(beer.ServingTemperature))
@@ -182,7 +182,7 @@ func TestBeerUpdate(t *testing.T) {
 		checkPostFormValue(t, r, "ibu", beer.IBU)
 		checkPostFormValue(t, r, "glasswareId", strconv.Itoa(beer.GlasswareID))
 		checkPostFormValue(t, r, "styleId", strconv.Itoa(beer.StyleID))
-		checkPostFormValue(t, r, "isOrganic", beer.IsOrganic)
+		checkPostFormValue(t, r, "isOrganic", "Y")
 		checkPostFormValue(t, r, "label", beer.Label)
 		checkPostFormValue(t, r, "brewery", beer.Brewery[0])
 		checkPostFormValue(t, r, "servingTemperature", string(beer.ServingTemperature))
