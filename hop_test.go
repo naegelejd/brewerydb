@@ -3,7 +3,6 @@ package brewerydb
 import (
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -73,20 +72,24 @@ func TestHopList(t *testing.T) {
 	})
 }
 
+// Get a specific variety of hop with a given ID
+func ExampleHopService_Get() {
+	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
+
+	h, err := c.Hop.Get(84)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%+v\n", h)
+}
+
+// Get all types of hops
 func ExampleHopService_List() {
 	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
-	// Get a specific variety of hop with a given ID
-	h, err := c.Hop.Get(84)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("%+v\n", h)
-
-	// Get all types of hops
 	hl, err := c.Hop.List(1)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	for _, h := range hl.Hops {
 		fmt.Println(h.Name)

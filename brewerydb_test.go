@@ -178,3 +178,76 @@ func TestYesNoUnmarshalJSON(t *testing.T) {
 		t.Errorf(`Expected unmarshal error (only "Y" or "N" are valid YesNo JSON)`)
 	}
 }
+
+// "What is Doppelbock?"
+func Example_doppelbock() {
+	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
+
+	styles, err := c.Menu.Styles()
+	if err != nil {
+		panic(err)
+	}
+	for _, style := range styles {
+		if style.ShortName == "Doppelbock" {
+			fmt.Println("Doppelbock: \n", style.Description)
+		}
+	}
+}
+
+// "What is in Dragon's Milk?"
+func Example_dragonsmilk() {
+	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
+
+	bl, err := c.Search.Beer("Dragon's Milk", nil)
+	if err != nil {
+		panic(err)
+	}
+
+	var beerID string
+	for _, beer := range bl.Beers {
+		if beer.Name == "Dragon's Milk" {
+			beerID = beer.ID
+		}
+	}
+	if beerID == "" {
+		panic("Dragon's Milk not found")
+	}
+
+	ingredients, err := c.Beer.ListIngredients(beerID)
+	if err != nil {
+		panic(err)
+	}
+
+	adjuncts, err := c.Beer.ListAdjuncts(beerID)
+	if err != nil {
+		panic(err)
+	}
+
+	hops, err := c.Beer.ListHops(beerID)
+	if err != nil {
+		panic(err)
+	}
+
+	yeasts, err := c.Beer.ListYeasts(beerID)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Dragon's Milk:")
+	fmt.Println("  Ingredients:")
+	for _, ingredient := range ingredients {
+		fmt.Println("    " + ingredient.Name)
+	}
+	fmt.Println("  Adjuncts:")
+	for _, adjunct := range adjuncts {
+		fmt.Println("    " + adjunct.Name)
+	}
+	fmt.Println("  Hops:")
+	for _, hop := range hops {
+		fmt.Println("    " + hop.Name)
+	}
+	fmt.Println("  Yeasts:")
+	for _, yeast := range yeasts {
+		fmt.Println("    " + yeast.Name)
+	}
+}

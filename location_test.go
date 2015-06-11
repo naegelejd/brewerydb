@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"strings"
 	"testing"
 )
@@ -195,4 +196,24 @@ func TestLocationDelete(t *testing.T) {
 	testBadURL(t, func() error {
 		return client.Location.Delete(id)
 	})
+}
+
+// List all brewpubs in Boston
+func ExampleLocationService_List() {
+	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
+
+	req := &LocationListRequest{
+		Locality:     "Boston",
+		Region:       "Massachusetts",
+		LocationType: LocationBrewpub,
+	}
+
+	for l, err := c.Location.List(req); l.CurrentPage < l.NumberOfPages; req.Page++ {
+		if err != nil {
+			panic(err)
+		}
+		for _, loc := range l.Locations {
+			fmt.Println(loc.Name)
+		}
+	}
 }

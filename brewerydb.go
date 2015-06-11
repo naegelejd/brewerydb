@@ -172,6 +172,7 @@ func (c *Client) NewRequest(method string, endpoint string, data interface{}) (r
 // Do performs the given http.Request and optionally
 // decodes the JSON response into the given data struct.
 func (c *Client) Do(req *http.Request, data interface{}) error {
+	// TODO: [DEBUGGING] fmt.Println(req.Method, req.URL)
 	resp, err := c.client.Do(req)
 	if err != nil {
 		return err

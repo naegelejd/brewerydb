@@ -3,7 +3,6 @@ package brewerydb
 import (
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -933,22 +932,26 @@ func TestBreweryGetRandom(t *testing.T) {
 	})
 }
 
+// Get all breweries established in 1983
 func ExampleBreweryService_List() {
 	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
-	// Get all breweries established in 1983
 	bl, err := c.Brewery.List(&BreweryListRequest{Established: "1983"})
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	for _, b := range bl.Breweries {
 		fmt.Println(b.Name, b.ID)
 	}
+}
 
-	// Get all information about brewery with given ID (Flying Dog)
+// Get all information about brewery with given ID (Flying Dog)
+func ExampleBreweryService_Get() {
+	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
+
 	b, err := c.Brewery.Get("jmGoBA")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	fmt.Println(b.Name)
 	fmt.Println(b.Description)

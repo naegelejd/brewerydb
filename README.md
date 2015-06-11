@@ -38,9 +38,49 @@ for _, b := range bs {
 }
 ```
 
+or
+
+```go
+// "What is in Dragon's Milk?"
+bl, _ := client.Search.Beer("Dragon's Milk", nil)
+
+var beerID string
+for _, beer := range bl.Beers {
+    if beer.Name == "Dragon's Milk" {
+        beerID = beer.ID
+    }
+}
+if beerID == "" {
+        panic("Dragon's Milk not found")
+}
+
+ingredients, _ := client.Beer.ListIngredients(beerID)
+adjuncts, _ := client.Beer.ListAdjuncts(beerID)
+hops, _ := client.Beer.ListHops(beerID)
+yeasts, _ := client.Beer.ListYeasts(beerID)
+
+fmt.Println("Dragon's Milk:")
+fmt.Println("  Ingredients:")
+for _, ingredient := range ingredients {
+        fmt.Println("    " + ingredient.Name)
+}
+fmt.Println("  Adjuncts:")
+for _, adjunct := range adjuncts {
+        fmt.Println("    " + adjunct.Name)
+}
+fmt.Println("  Hops:")
+for _, hop := range hops {
+        fmt.Println("    " + hop.Name)
+}
+fmt.Println("  Yeasts:")
+for _, yeast := range yeasts {
+        fmt.Println("    " + yeast.Name)
+}
+```
+
 ## status
 
-This library is under heavy development. Please feel free to suggest design changes or report issues.
+This library is under development. Please feel free to suggest design changes or report issues.
 
 ## license
 

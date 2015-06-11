@@ -3,7 +3,6 @@ package brewerydb
 import (
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -321,7 +320,7 @@ func testBeerDeleteHelper(t *testing.T, name string, otherID int, del beerDelete
 	})
 
 	if err := del(beerID, otherID); err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
 	if del(beerID, -1) == nil {
@@ -1079,26 +1078,26 @@ func TestBeerListEvents(t *testing.T) {
 	})
 }
 
+// Get first ~40 beers with an ABV between 8.0 and 9.0, descending, alphabetical
 func ExampleBeerService_List() {
 	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
-	// Get first 40 beers with an ABV between 8.0 and 9.0, descending, alphabetical
 	bl, err := c.Beer.List(&BeerListRequest{ABV: "8", Sort: SortDescending})
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	for _, b := range bl.Beers {
 		fmt.Println(b.Name, b.ID)
 	}
 }
 
+// List breweries for a given beer
 func ExampleBeerService_Breweries() {
 	c := NewClient(os.Getenv("BREWERYDB_API_KEY"))
 
-	// Get breweries for a given beer
 	breweries, err := c.Beer.ListBreweries("jmGoBA")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	for _, b := range breweries {
 		fmt.Println(b.Name)
@@ -1114,7 +1113,7 @@ func ExampleBeerService_Random() {
 	}
 	b, err := c.Beer.GetRandom(req)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 	fmt.Println(b.Name)
 	fmt.Println(b.Style.Name)
