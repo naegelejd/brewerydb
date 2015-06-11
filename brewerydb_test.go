@@ -223,6 +223,11 @@ func Example_dragonsmilk() {
 		panic(err)
 	}
 
+	fermentables, err := c.Beer.ListFermentables(beerID)
+	if err != nil {
+		panic(err)
+	}
+
 	hops, err := c.Beer.ListHops(beerID)
 	if err != nil {
 		panic(err)
@@ -238,9 +243,13 @@ func Example_dragonsmilk() {
 	for _, ingredient := range ingredients {
 		fmt.Println("    " + ingredient.Name)
 	}
-	fmt.Println("  Adjuncts:")
+	fmt.Println("\n  Adjuncts:")
 	for _, adjunct := range adjuncts {
 		fmt.Println("    " + adjunct.Name)
+	}
+	fmt.Println("  Fermentables:")
+	for _, fermentable := range fermentables {
+		fmt.Println("    " + fermentable.Name)
 	}
 	fmt.Println("  Hops:")
 	for _, hop := range hops {

@@ -51,30 +51,35 @@ for _, beer := range bl.Beers {
     }
 }
 if beerID == "" {
-        panic("Dragon's Milk not found")
+    panic("Dragon's Milk not found")
 }
 
 ingredients, _ := client.Beer.ListIngredients(beerID)
 adjuncts, _ := client.Beer.ListAdjuncts(beerID)
+fermentables, _ := client.Beer.ListFermentables(beerID)
 hops, _ := client.Beer.ListHops(beerID)
 yeasts, _ := client.Beer.ListYeasts(beerID)
 
 fmt.Println("Dragon's Milk:")
 fmt.Println("  Ingredients:")
 for _, ingredient := range ingredients {
-        fmt.Println("    " + ingredient.Name)
+    fmt.Println("    " + ingredient.Name)
 }
-fmt.Println("  Adjuncts:")
+fmt.Println("\n  Adjuncts:")
 for _, adjunct := range adjuncts {
-        fmt.Println("    " + adjunct.Name)
+    fmt.Println("    " + adjunct.Name)
+}
+fmt.Println("  Fermentables:")
+for _, fermentable := range fermentables {
+    fmt.Println("    " + fermentable.Name)
 }
 fmt.Println("  Hops:")
 for _, hop := range hops {
-        fmt.Println("    " + hop.Name)
+    fmt.Println("    " + hop.Name)
 }
 fmt.Println("  Yeasts:")
 for _, yeast := range yeasts {
-        fmt.Println("    " + yeast.Name)
+    fmt.Println("    " + yeast.Name)
 }
 ```
 
