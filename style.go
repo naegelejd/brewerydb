@@ -6,6 +6,8 @@ import (
 )
 
 // StyleService provides access to the BreweryDB Style API. Use Client.Style.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/style_index
 type StyleService struct {
 	c *Client
 }
@@ -41,6 +43,8 @@ type StyleList struct {
 }
 
 // List returns all Styles on the given page.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/style_index#1
 func (ss *StyleService) List(page int) (sl StyleList, err error) {
 	// GET: /styles
 	var req *http.Request
@@ -54,6 +58,8 @@ func (ss *StyleService) List(page int) (sl StyleList, err error) {
 }
 
 // Get obtains the Style with the given Style ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/style_index#2
 func (ss *StyleService) Get(id int) (s Style, err error) {
 	// GET: /style/:styleID
 	var req *http.Request
