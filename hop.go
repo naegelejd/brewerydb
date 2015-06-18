@@ -6,6 +6,8 @@ import (
 )
 
 // HopService provides access to the BreweryDB Hop API. Use Client.Hop.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/hop_index
 type HopService struct {
 	c *Client
 }
@@ -57,6 +59,8 @@ type Hop struct {
 }
 
 // List returns all Hops on the given page.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/hop_index#1
 func (hs *HopService) List(page int) (hl HopList, err error) {
 	var req *http.Request
 	req, err = hs.c.NewRequest("GET", "/hops", &Page{page})
@@ -69,6 +73,8 @@ func (hs *HopService) List(page int) (hl HopList, err error) {
 }
 
 // Get queries for a single Hop with the given Hop ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/hop_index#2
 func (hs *HopService) Get(id int) (hop Hop, err error) {
 	// GET: /hop/:hopId
 	var req *http.Request
