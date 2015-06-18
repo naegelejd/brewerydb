@@ -6,6 +6,8 @@ import (
 )
 
 // CategoryService provides access to the BreweryDB Category API. Use Client.Category.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/category_index
 type CategoryService struct {
 	c *Client
 }
@@ -21,6 +23,8 @@ type Category struct {
 }
 
 // List returns all possible Beer Categories.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/category_index#1
 func (cs *CategoryService) List() ([]Category, error) {
 	// GET: /categories
 	req, err := cs.c.NewRequest("GET", "/categories", nil)
@@ -38,6 +42,8 @@ func (cs *CategoryService) List() ([]Category, error) {
 }
 
 // Get obtains the Category with the given Category ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/category_index#2
 func (cs *CategoryService) Get(id int) (cat Category, err error) {
 	// GET: /category/:categoryId
 	var req *http.Request
