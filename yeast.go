@@ -6,6 +6,8 @@ import (
 )
 
 // YeastService provides access to the BreweryDB Yeast API. Use Client.Yeast.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/yeast_index
 type YeastService struct {
 	c *Client
 }
@@ -52,6 +54,8 @@ type YeastList struct {
 }
 
 // List returns all Yeasts on the given page.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/yeast_index#1
 func (ys *YeastService) List(page int) (yl YeastList, err error) {
 	// GET: /yeasts
 	var req *http.Request
@@ -65,6 +69,8 @@ func (ys *YeastService) List(page int) (yl YeastList, err error) {
 }
 
 // Get obtains the Yeast with the given Yeast ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/yeast_index#2
 func (ys *YeastService) Get(id int) (y Yeast, err error) {
 	// GET: /yeast/:yeastID
 	var req *http.Request

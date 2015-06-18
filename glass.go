@@ -7,6 +7,8 @@ import (
 
 // GlassService provides access to the BreweryDB Glassware API.
 // Use Client.Glass.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/glass_index
 type GlassService struct {
 	c *Client
 }
@@ -21,6 +23,8 @@ type Glass struct {
 }
 
 // List returns a list of Glasses.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/glass_index#1
 func (gs *GlassService) List() (gl []Glass, err error) {
 	// GET: /glassware
 	var req *http.Request
@@ -39,6 +43,8 @@ func (gs *GlassService) List() (gl []Glass, err error) {
 }
 
 // Get returns the Glass with the given Glass ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/glass_index#2
 func (gs *GlassService) Get(id int) (g Glass, err error) {
 	// GET: /glass/:glassId
 	var req *http.Request

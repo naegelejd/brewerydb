@@ -126,6 +126,8 @@ type Beer struct {
 
 // List returns all Beers on the page specified in the given BeerListRequest.
 // For non-premium members, one of Name, ABV, IBU, SrmID, AvailabilityID, StyleID must be set.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_index#1
 func (bs *BeerService) List(q *BeerListRequest) (bl BeerList, err error) {
 	// GET: /beers
 	var req *http.Request
@@ -141,6 +143,8 @@ func (bs *BeerService) List(q *BeerListRequest) (bl BeerList, err error) {
 // Get queries for a single Beer with the given Beer ID.
 //
 // TODO: add withBreweries, withSocialAccounts, withIngredients request parameters
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_index#2
 func (bs *BeerService) Get(id string) (beer Beer, err error) {
 	// GET: /beer/:beerId
 	var req *http.Request
@@ -159,6 +163,8 @@ func (bs *BeerService) Get(id string) (beer Beer, err error) {
 }
 
 // Add adds a new Beer to the BreweryDB and returns its new ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_index#3
 func (bs *BeerService) Add(b *Beer) (id string, err error) {
 	// POST: /beers
 	if b == nil {
@@ -183,6 +189,8 @@ func (bs *BeerService) Add(b *Beer) (id string, err error) {
 }
 
 // Update changes an existing Beer in the BreweryDB.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_index#4
 func (bs *BeerService) Update(id string, b *Beer) error {
 	// PUT: /beer/:beerId
 	if b == nil {
@@ -198,6 +206,8 @@ func (bs *BeerService) Update(id string, b *Beer) error {
 }
 
 // Delete removes the Beer with the given ID from the BreweryDB.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_index#5
 func (bs *BeerService) Delete(id string) error {
 	// DELETE: /beer/:beerId
 	req, err := bs.c.NewRequest("DELETE", "/beer/"+id, nil)
@@ -210,6 +220,8 @@ func (bs *BeerService) Delete(id string) error {
 }
 
 // ListAdjuncts returns a slice of all Adjuncts in the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_adjunct#1
 func (bs *BeerService) ListAdjuncts(beerID string) (al []Adjunct, err error) {
 	// GET: /beer/:beerId/adjuncts
 	var req *http.Request
@@ -228,6 +240,8 @@ func (bs *BeerService) ListAdjuncts(beerID string) (al []Adjunct, err error) {
 }
 
 // AddAdjunct adds the Adjunct with the given ID to the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_adjunct#2
 func (bs *BeerService) AddAdjunct(beerID string, adjunctID int) error {
 	// POST: /beer/:beerId/adjuncts
 	q := struct {
@@ -242,6 +256,8 @@ func (bs *BeerService) AddAdjunct(beerID string, adjunctID int) error {
 }
 
 // DeleteAdjunct removes the Adjunct with the given ID from the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_adjunct#3
 func (bs *BeerService) DeleteAdjunct(beerID string, adjunctID int) error {
 	// DELETE: /beer/:beerId/adjunct/:adjunctId
 	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/beer/%s/adjunct/%d", beerID, adjunctID), nil)
@@ -252,6 +268,8 @@ func (bs *BeerService) DeleteAdjunct(beerID string, adjunctID int) error {
 }
 
 // ListBreweries queries for all Breweries associated with the Beer having the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_brewery#1
 func (bs *BeerService) ListBreweries(id string) ([]Brewery, error) {
 	// GET: /beer/:beerId/breweries
 	req, err := bs.c.NewRequest("GET", "/beer/"+id+"/breweries", nil)
@@ -276,6 +294,8 @@ type BeerBreweryRequest struct {
 
 // AddBrewery adds the Brewery with the given Brewery ID to the Beer
 // with the given Beer ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_brewery#2
 func (bs *BeerService) AddBrewery(beerID, breweryID string, q *BeerBreweryRequest) error {
 	// POST: /beer/:beerId/brewery/:breweryId
 	params := struct {
@@ -297,6 +317,8 @@ func (bs *BeerService) AddBrewery(beerID, breweryID string, q *BeerBreweryReques
 
 // DeleteBrewery removes the Brewery with the given Brewery ID from the Beer
 // with the given Beer ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_brewery#3
 func (bs *BeerService) DeleteBrewery(beerID, breweryID string, q *BeerBreweryRequest) error {
 	// DELETE: /beer/:beerId/brewery/:breweryId
 	req, err := bs.c.NewRequest("DELETE", "/beer/"+beerID+"/brewery/"+breweryID, q)
@@ -309,6 +331,8 @@ func (bs *BeerService) DeleteBrewery(beerID, breweryID string, q *BeerBreweryReq
 
 // ListEvents returns a slice of Events where the given Beer is/was present
 // or has won awards.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_event#1
 func (bs *BeerService) ListEvents(beerID string, onlyWinners bool) (el []Event, err error) {
 	// GET: /beer/:beerId/events
 	q := struct {
@@ -331,6 +355,8 @@ func (bs *BeerService) ListEvents(beerID string, onlyWinners bool) (el []Event, 
 }
 
 // ListFermentables returns a slice of all Fermentables in the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_fermentable#1
 func (bs *BeerService) ListFermentables(beerID string) (fl []Fermentable, err error) {
 	// GET: /beer/:beerId/fermentables
 	var req *http.Request
@@ -349,6 +375,8 @@ func (bs *BeerService) ListFermentables(beerID string) (fl []Fermentable, err er
 }
 
 // AddFermentable adds the Fermentable with the given ID to the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_fermentable#2
 func (bs *BeerService) AddFermentable(beerID string, fermentableID int) error {
 	// POST: /beer/:beerId/fermentables
 	q := struct {
@@ -362,6 +390,8 @@ func (bs *BeerService) AddFermentable(beerID string, fermentableID int) error {
 }
 
 // DeleteFermentable removes the Fermentable with the given ID from the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_fermentable#3
 func (bs *BeerService) DeleteFermentable(beerID string, fermentableID int) error {
 	// DELETE: /beer/:beerId/fermentable/:fermentableId
 	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/beer/%s/fermentable/%d", beerID, fermentableID), nil)
@@ -372,6 +402,8 @@ func (bs *BeerService) DeleteFermentable(beerID string, fermentableID int) error
 }
 
 // ListHops returns a slice of all Hops in the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_hop#1
 func (bs *BeerService) ListHops(beerID string) (al []Hop, err error) {
 	// GET: /beer/:beerId/hops
 	var req *http.Request
@@ -390,6 +422,8 @@ func (bs *BeerService) ListHops(beerID string) (al []Hop, err error) {
 }
 
 // AddHop adds the Hop with the given ID to the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_hop#2
 func (bs *BeerService) AddHop(beerID string, hopID int) error {
 	// POST: /beer/:beerId/hops
 	q := struct {
@@ -404,6 +438,8 @@ func (bs *BeerService) AddHop(beerID string, hopID int) error {
 }
 
 // DeleteHop removes the Hop with the given ID from the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_hop#3
 func (bs *BeerService) DeleteHop(beerID string, hopID int) error {
 	// DELETE: /beer/:beerId/hop/:hopId
 	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/beer/%s/hop/%d", beerID, hopID), nil)
@@ -414,6 +450,8 @@ func (bs *BeerService) DeleteHop(beerID string, hopID int) error {
 }
 
 // ListIngredients returns a slice of Ingredients found in the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_ingredient#1
 func (bs *BeerService) ListIngredients(beerID string) (el []Ingredient, err error) {
 	// GET: /beer/:beerId/ingredients
 	var req *http.Request
@@ -448,6 +486,8 @@ type RandomBeerRequest struct {
 }
 
 // GetRandom returns a random Beer.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_random#1
 func (bs *BeerService) GetRandom(q *RandomBeerRequest) (b Beer, err error) {
 	// GET: /beer/random
 
@@ -467,6 +507,8 @@ func (bs *BeerService) GetRandom(q *RandomBeerRequest) (b Beer, err error) {
 }
 
 // ListSocialAccounts returns a slice of all social media accounts associated with the given Beer.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_socialaccount#1
 func (bs *BeerService) ListSocialAccounts(beerID string) (sl []SocialAccount, err error) {
 	// GET: /beer/:beerId/socialaccounts
 	var req *http.Request
@@ -485,6 +527,8 @@ func (bs *BeerService) ListSocialAccounts(beerID string) (sl []SocialAccount, er
 }
 
 // GetSocialAccount retrieves the SocialAccount with the given ID for the given Beer.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_socialaccount#2
 func (bs *BeerService) GetSocialAccount(beerID string, socialAccountID int) (s SocialAccount, err error) {
 	// GET: /beer/:beerId/socialaccount/:socialaccountId
 	var req *http.Request
@@ -503,6 +547,8 @@ func (bs *BeerService) GetSocialAccount(beerID string, socialAccountID int) (s S
 }
 
 // AddSocialAccount adds a new SocialAccount to the given Beer.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_socialaccount#3
 func (bs *BeerService) AddSocialAccount(beerID string, s *SocialAccount) error {
 	// POST: /beer/:beerId/socialaccounts
 	if s == nil {
@@ -517,6 +563,8 @@ func (bs *BeerService) AddSocialAccount(beerID string, s *SocialAccount) error {
 }
 
 // UpdateSocialAccount updates a SocialAccount for the given Beer.
+//
+// See: TODO (API docs seem wrong)
 func (bs *BeerService) UpdateSocialAccount(beerID string, s *SocialAccount) error {
 	// PUT: /beer/:beerId/socialaccount/:socialaccountId
 	if s == nil {
@@ -531,6 +579,8 @@ func (bs *BeerService) UpdateSocialAccount(beerID string, s *SocialAccount) erro
 }
 
 // DeleteSocialAccount removes a SocialAccount from the given Beer.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_socialaccount#4
 func (bs *BeerService) DeleteSocialAccount(beerID string, socialAccountID int) error {
 	// DELETE: /beer/:beerId/socialaccount/:socialaccountId
 	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/beer/%s/socialaccount/%d", beerID, socialAccountID), nil)
@@ -543,7 +593,8 @@ func (bs *BeerService) DeleteSocialAccount(beerID string, socialAccountID int) e
 // AddUPC assigns a Universal Product Code to the Beer with the given ID.
 // fluidsizeID is optional.
 // NOTE: fluidsizeID is encoded as "fluidSizeId" with a capital S.
-// see: http://www.brewerydb.com/developers/docs-endpoint/beer_upc
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_upc#1
 func (bs *BeerService) AddUPC(beerID string, code uint64, fluidsizeID *int) error {
 	// POST: /beer/:beerId/upcs
 	q := struct {
@@ -564,6 +615,8 @@ func (bs *BeerService) AddUPC(beerID string, code uint64, fluidsizeID *int) erro
 
 // ListVariations returns a slice of all Beers that are variations of the
 // Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_variation#1
 func (bs *BeerService) ListVariations(beerID string) (bl []Beer, err error) {
 	// GET: /beer/:beerId/variations
 	var req *http.Request
@@ -582,6 +635,8 @@ func (bs *BeerService) ListVariations(beerID string) (bl []Beer, err error) {
 }
 
 // ListYeasts returns a slice of all Yeasts in the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_yeast#1
 func (bs *BeerService) ListYeasts(beerID string) (al []Yeast, err error) {
 	// GET: /beer/:beerId/yeasts
 	var req *http.Request
@@ -600,6 +655,8 @@ func (bs *BeerService) ListYeasts(beerID string) (al []Yeast, err error) {
 }
 
 // AddYeast adds the Yeast with the given ID to the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_yeast#2
 func (bs *BeerService) AddYeast(beerID string, yeastID int) error {
 	// POST: /beer/:beerId/yeasts
 	q := struct {
@@ -614,6 +671,8 @@ func (bs *BeerService) AddYeast(beerID string, yeastID int) error {
 }
 
 // DeleteYeast removes the Yeast with the given ID from the Beer with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/beer_yeast#3
 func (bs *BeerService) DeleteYeast(beerID string, yeastID int) error {
 	// DELETE: /beer/:beerId/yeast/:yeastId
 	req, err := bs.c.NewRequest("DELETE", fmt.Sprintf("/beer/%s/yeast/%d", beerID, yeastID), nil)

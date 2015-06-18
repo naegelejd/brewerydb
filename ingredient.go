@@ -7,6 +7,8 @@ import (
 
 // IngredientService provides access to the BreweryDB Ingredient API.
 // Use Client.Ingredient.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/ingredient_index
 type IngredientService struct {
 	c *Client
 }
@@ -30,6 +32,8 @@ type IngredientList struct {
 }
 
 // List returns all Ingredients on the given page.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/ingredient_index#1
 func (is *IngredientService) List(page int) (il IngredientList, err error) {
 	// GET: /ingredients
 	var req *http.Request
@@ -43,6 +47,8 @@ func (is *IngredientService) List(page int) (il IngredientList, err error) {
 }
 
 // Get returns the Ingredient with the given Ingredient ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/ingredient_index#2
 func (is *IngredientService) Get(id int) (ing Ingredient, err error) {
 	// GET: /ingredient/:ingredientId
 	var req *http.Request

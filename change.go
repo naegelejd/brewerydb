@@ -4,6 +4,8 @@ import "net/http"
 
 // ChangeService provides access to the BreweryDB Change API.
 // Use Client.Change.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/change_index
 type ChangeService struct {
 	c *Client
 }
@@ -65,6 +67,8 @@ type ChangeList struct {
 
 // List retrieves (by default) a paginated list of all Changes to BreweryDB
 // in the last 30 days.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/change_index#1
 func (cs *ChangeService) List(q *ChangeListRequest) (cl ChangeList, err error) {
 	// GET: /changes
 	var req *http.Request

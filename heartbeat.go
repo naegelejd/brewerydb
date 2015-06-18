@@ -2,6 +2,8 @@ package brewerydb
 
 // HeartbeatService provides access to the BreweryDB Heartbeat API.
 // Use Client.Heartbeat.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/heartbeat_index
 type HeartbeatService struct {
 	c *Client
 }
@@ -21,6 +23,8 @@ type HeartbeatResponse struct {
 
 // Heartbeat checks whether the BreweryDB API is currently active. It
 // returns nil if the API is available and an error otherwise.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/heartbeat_index#1
 func (hs *HeartbeatService) Heartbeat() error {
 	req, err := hs.c.NewRequest("GET", "/heartbeat", nil)
 	if err != nil {

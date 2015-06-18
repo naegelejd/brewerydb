@@ -7,6 +7,8 @@ import (
 
 // SocialSiteService provides access to the BreweryDB Social Site API.
 // Use Client.SocialSite.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/socialsite_index
 type SocialSiteService struct {
 	c *Client
 }
@@ -31,6 +33,8 @@ type SocialAccount struct {
 }
 
 // List returns a slice of all SocialSites in the BreweryDB.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/socialsite_index#1
 func (ss *SocialSiteService) List() (sl []SocialSite, err error) {
 	// GET: /socialsites
 	var req *http.Request
@@ -49,6 +53,8 @@ func (ss *SocialSiteService) List() (sl []SocialSite, err error) {
 }
 
 // Get retrieves the SocialSite having the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/socialsite_index#2
 func (ss *SocialSiteService) Get(id int) (s SocialSite, err error) {
 	// GET: /socialsite/:socialsiteId
 	var req *http.Request

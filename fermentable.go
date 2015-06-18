@@ -7,6 +7,8 @@ import (
 
 // FermentableService provides access to the BreweryDB Fermentable API.
 // Use Client.Fermentable.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/fermentable_index
 type FermentableService struct {
 	c *Client
 }
@@ -62,6 +64,8 @@ type FermentableList struct {
 }
 
 // List returns a list of Fermentable Beer ingredients.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/fermentable_index#1
 func (fs *FermentableService) List(page int) (fl FermentableList, err error) {
 	// GET: /fermentables
 	var req *http.Request
@@ -75,6 +79,8 @@ func (fs *FermentableService) List(page int) (fl FermentableList, err error) {
 }
 
 // Get returns the Fermentable with the given Fermentable ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/fermentable_index#2
 func (fs *FermentableService) Get(id int) (f Fermentable, err error) {
 	// GET: /fermentable/:fermentableID
 	var req *http.Request

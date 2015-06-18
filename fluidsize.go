@@ -7,6 +7,8 @@ import (
 
 // FluidsizeService provides access to the BreweryDB Fluidsize API.
 // Use Client.Fluidsize.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/fluidsize_index
 type FluidsizeService struct {
 	c *Client
 }
@@ -32,6 +34,8 @@ type Fluidsize struct {
 }
 
 // List returns a list of Fluidsizes.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/fluidsize_index#1
 func (fs *FluidsizeService) List() (fl []Fluidsize, err error) {
 	// GET: /fluidsizes
 	var req *http.Request
@@ -50,6 +54,8 @@ func (fs *FluidsizeService) List() (fl []Fluidsize, err error) {
 }
 
 // Get returns the Fluidsize with the given Fluidsize ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/fluidsize_index#2
 func (fs *FluidsizeService) Get(id int) (f Fluidsize, err error) {
 	// GET: /fluidsize/:fluidsizeId
 	var req *http.Request
