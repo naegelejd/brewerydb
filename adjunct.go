@@ -6,7 +6,8 @@ import (
 )
 
 // AdjunctService provides access to the BreweryDB Adjunct API. Use Client.Adjunct.
-// Reference: http://www.brewerydb.com/developers/docs-endpoint/beer_adjunct
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/adjunct_index
 type AdjunctService struct {
 	c *Client
 }
