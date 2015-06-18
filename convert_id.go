@@ -7,6 +7,8 @@ import (
 
 // ConvertIDService provides access to the BreweryDB ID Conversion API.
 // Use Client.ConvertID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/convertid_index
 type ConvertIDService struct {
 	c *Client
 }
@@ -22,6 +24,8 @@ const (
 
 // ConvertIDs converts a series of "old" Beer or Brewery IDs to the "new" format
 // (BreweryDB v1 to v2)
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/convertid_index#1
 func (cs *ConvertIDService) ConvertIDs(t ConvertType, oldIDs ...int) (map[int]string, error) {
 	// POST: /convertid
 
