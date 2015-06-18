@@ -31,6 +31,8 @@ type AdjunctList struct {
 }
 
 // List returns all Adjuncts on the given page.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/adjunct_index#1
 func (as *AdjunctService) List(page int) (al AdjunctList, err error) {
 	// GET: /adjuncts
 
@@ -45,6 +47,8 @@ func (as *AdjunctService) List(page int) (al AdjunctList, err error) {
 }
 
 // Get obtains the Adjunct with the given Adjunct ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/adjunct_index#2
 func (as *AdjunctService) Get(id int) (a Adjunct, err error) {
 	// GET: /adjunct/:adjunctID
 	var req *http.Request
