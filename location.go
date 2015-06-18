@@ -5,6 +5,8 @@ import "net/http"
 
 // LocationService provides access to the BreweryDB Location API.
 // Use Client.Location.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/location_index
 type LocationService struct {
 	c *Client
 }
@@ -120,6 +122,8 @@ type LocationList struct {
 
 // List retrieves a list of Locations matching the given request.
 // For non-premium users, one of Locality, PostalCode, Region must be set.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/location_index#1
 func (ls *LocationService) List(q *LocationListRequest) (ll LocationList, err error) {
 	// GET: /locations
 	var req *http.Request
@@ -133,6 +137,8 @@ func (ls *LocationService) List(q *LocationListRequest) (ll LocationList, err er
 }
 
 // Get retrieves the Location with the given ID.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/location_index#2
 func (ls *LocationService) Get(locID string) (l Location, err error) {
 	// GET: /location/:locationID
 	var req *http.Request
@@ -152,6 +158,8 @@ func (ls *LocationService) Get(locID string) (l Location, err error) {
 
 // Update updates the Location having the given ID to match the given Location.
 // The CountryISOCode of the given Location *must* be set.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/location_index#3
 func (ls *LocationService) Update(locID string, l *Location) error {
 	// PUT: /location/:locationID
 	if l == nil {
@@ -167,6 +175,8 @@ func (ls *LocationService) Update(locID string, l *Location) error {
 }
 
 // Delete removes the Location with the given ID from the BreweryDB.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/location_index#4
 func (ls *LocationService) Delete(locID string) error {
 	// DELETE: /location/:locationID
 	req, err := ls.c.NewRequest("DELETE", "/location/"+locID, nil)
