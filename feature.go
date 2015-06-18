@@ -6,13 +6,14 @@ import (
 )
 
 // FeatureService provides access to the BreweryDB Feature API. Use Client.Feature.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/feature_index
 type FeatureService struct {
 	c *Client
 }
 
 // Feature represents a combined Featured Beer and Brewery.
 // TODO: the Brewery in a Feature should ALSO contain its locations:
-// see: http://www.brewerydb.com/developers/docs-endpoint/feature_index#1
 type Feature struct {
 	ID        int
 	Year      int
@@ -24,6 +25,8 @@ type Feature struct {
 }
 
 // Get returns this week's Featured Beer and Brewery.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/feature_index#1
 func (fs *FeatureService) Get() (f Feature, err error) {
 	// GET: /featured
 	var req *http.Request
@@ -58,6 +61,8 @@ type FeatureList struct {
 }
 
 // List returns all Featured Beers and Breweries.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/feature_index#2
 func (fs *FeatureService) List(q *FeatureListRequest) (fl FeatureList, err error) {
 	// GET: /features
 	var req *http.Request
@@ -72,6 +77,8 @@ func (fs *FeatureService) List(q *FeatureListRequest) (fl FeatureList, err error
 
 // ByWeek returns the Featured Beer and Brewery for the given
 // year and week number.
+//
+// See: http://www.brewerydb.com/developers/docs-endpoint/feature_index#3
 func (fs *FeatureService) ByWeek(year, week int) (f Feature, err error) {
 	// GET: /feature/:year-week
 	var req *http.Request
