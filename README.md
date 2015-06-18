@@ -1,6 +1,6 @@
 # brewerydb
 
-brewerydb is a golang library for accessing the [BreweryDB API](http://www.brewerydb.com)
+brewerydb is a Go library for accessing the [BreweryDB API](http://www.brewerydb.com)
 
 [![GoDoc](https://godoc.org/github.com/naegelejd/brewerydb?status.svg)](https://godoc.org/github.com/naegelejd/brewerydb) [![Build Status](https://travis-ci.org/naegelejd/brewerydb.svg)](https://travis-ci.org/naegelejd/brewerydb)[![Coverage Status](https://coveralls.io/repos/naegelejd/brewerydb/badge.svg?branch=master)](https://coveralls.io/r/naegelejd/brewerydb?branch=master)
 
